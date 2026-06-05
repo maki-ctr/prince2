@@ -217,6 +217,34 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
 .table-scroll table{margin:0}
 
+/* ---- diagrams ---- */
+.diagram{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;margin:20px 0;box-shadow:var(--shadow);overflow-x:auto}
+.diagram svg{width:100%;height:auto;min-width:520px;display:block}
+.dg-lane{font-size:12px;font-weight:700;fill:var(--gold);text-transform:uppercase;letter-spacing:1px}
+.dg-phase{font-size:11px;font-weight:600;fill:var(--ink-soft);text-transform:uppercase;letter-spacing:1.5px;text-anchor:middle}
+.dg-box{fill:var(--paper-2);stroke:var(--line);stroke-width:1.5;transition:all .15s}
+.dg-box.sel{stroke:var(--gold);stroke-width:3;fill:var(--card)}
+.dg-box.dp{fill:#e7eef5;stroke:var(--navy-2)}
+.dg-box.su{fill:#e7eef5}.dg-box.ip{fill:#e3ecdf}.dg-box.cs{fill:#f0e7d4}
+.dg-box.mp{fill:#efe2dd}.dg-box.sb{fill:#e9e3f0}.dg-box.cp{fill:#dfe8ee}
+.dg-box.corp{fill:#e9e3f0}.dg-box.exec{fill:#e7eef5}.dg-box.pm{fill:#f0e7d4}
+.dg-box.assure{fill:#f3e9d6;stroke:var(--gold)}.dg-box.support{fill:#eee}.dg-box.tm{fill:#e3ecdf}
+.dg-box.plan{fill:#f0e7d4}.dg-box.quality{fill:#e3ecdf}.dg-box.risk{fill:#efe2dd}
+.dg-lbl{font-size:13px;font-weight:600;fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
+.dg-lbl2{font-size:12px;font-weight:600;fill:var(--ink);text-anchor:middle}
+.dg-sub{font-size:10.5px;fill:var(--ink-soft);text-anchor:middle}
+.dg-sub2{font-size:10px;fill:var(--ink-soft);text-anchor:middle}
+.dg-step{font-size:15px;font-weight:800;fill:var(--gold);font-family:'Fraunces',serif}
+.dg-mini{font-size:10px;fill:var(--ink-soft)}
+.dg-hint{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:10px;font-style:italic}
+.dg-detail{margin-top:12px}
+.dg-card{background:var(--paper-2);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:14px 18px;animation:fade .3s}
+.dg-card-h{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--navy)}
+.dg-card-t{font-size:12px;color:var(--gold);font-weight:600;margin:2px 0 8px}
+.dg-card p{margin:0 0 8px;font-size:14px}
+.dg-card-o{font-size:13px;color:var(--ink-soft)}
+@media(prefers-reduced-motion:reduce){.dg-card{animation:none}}
+
 .scrim{position:fixed;inset:0;background:rgba(20,30,40,.45);z-index:45;display:none}
 .scrim.show{display:block}
 
@@ -578,6 +606,282 @@ const CARDS = [
 
 </script>
 <script>
+/* ============ DIAGRAMS (theme-matched SVG) ============ */
+/* All use CSS vars so they match the active theme. Functions return SVG strings. */
+
+const SVGNS='xmlns="http://www.w3.org/2000/svg"';
+
+/* ---- 1. Interactive process lifecycle ---- */
+function diagLifecycle(){
+  // boxes with data; click reveals detail panel below (wired in renderer)
+  return `
+  <div class="diagram">
+    <svg viewBox="0 0 760 340" ${SVGNS} role="img" aria-label="PRINCE2 process lifecycle">
+      <defs>
+        <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="var(--navy-2)"/></marker>
+      </defs>
+      <!-- swimlane labels -->
+      <text x="12" y="30" class="dg-lane">Direct</text>
+      <text x="12" y="150" class="dg-lane">Manage</text>
+      <text x="12" y="250" class="dg-lane">Deliver</text>
+      <line x1="120" y1="42" x2="120" y2="300" stroke="var(--line)" stroke-dasharray="4 4"/>
+      <!-- stage phase headers -->
+      <text x="200" y="20" class="dg-phase">Pre-project</text>
+      <text x="360" y="20" class="dg-phase">Initiation</text>
+      <text x="560" y="20" class="dg-phase">Delivery stage(s)</text>
+
+      <!-- DP spans the top -->
+      <rect class="dg-box dp" x="200" y="32" width="520" height="42" rx="9" data-proc="DP"/>
+      <text x="460" y="58" class="dg-lbl">DP · Directing a Project (whole project)</text>
+
+      <!-- SU -->
+      <rect class="dg-box su" x="130" y="120" width="120" height="56" rx="9" data-proc="SU"/>
+      <text x="190" y="145" class="dg-lbl">SU</text><text x="190" y="162" class="dg-sub">Starting up</text>
+
+      <!-- IP -->
+      <rect class="dg-box ip" x="300" y="120" width="120" height="56" rx="9" data-proc="IP"/>
+      <text x="360" y="145" class="dg-lbl">IP</text><text x="360" y="162" class="dg-sub">Initiating</text>
+
+      <!-- CS -->
+      <rect class="dg-box cs" x="490" y="120" width="120" height="56" rx="9" data-proc="CS"/>
+      <text x="550" y="145" class="dg-lbl">CS</text><text x="550" y="162" class="dg-sub">Controlling a Stage</text>
+
+      <!-- SB (between/after stages) -->
+      <rect class="dg-box sb" x="640" y="120" width="100" height="56" rx="9" data-proc="SB"/>
+      <text x="690" y="145" class="dg-lbl">SB</text><text x="690" y="162" class="dg-sub">Stage Boundary</text>
+
+      <!-- MP -->
+      <rect class="dg-box mp" x="490" y="220" width="120" height="56" rx="9" data-proc="MP"/>
+      <text x="550" y="245" class="dg-lbl">MP</text><text x="550" y="262" class="dg-sub">Product Delivery</text>
+
+      <!-- CP -->
+      <rect class="dg-box cp" x="640" y="220" width="100" height="56" rx="9" data-proc="CP"/>
+      <text x="690" y="245" class="dg-lbl">CP</text><text x="690" y="262" class="dg-sub">Closing</text>
+
+      <!-- flow arrows -->
+      <line x1="250" y1="148" x2="298" y2="148" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="420" y1="148" x2="488" y2="148" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="610" y1="148" x2="638" y2="148" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="550" y1="176" x2="550" y2="218" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="610" y1="248" x2="638" y2="248" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#arr)"/>
+    </svg>
+    <div class="dg-hint">Tap a process for its purpose, trigger and output.</div>
+    <div id="lcDetail" class="dg-detail"></div>
+  </div>`;
+}
+const LC_DETAIL={
+  DP:{n:'Directing a Project',t:'Trigger: runs end of SU → end of CP',p:'The Board makes the 5 key decisions (authorise initiation, authorise project, authorise stage/exception plan, ad hoc direction, authorise closure).',o:'Board authorisations & direction'},
+  SU:{n:'Starting up a Project',t:'Trigger: the project mandate',p:'"Do we have a viable, worthwhile project?" Appoint Exec + PM, capture lessons, outline Business Case.',o:'Project Brief · Initiation Stage Plan'},
+  IP:{n:'Initiating a Project',t:'Trigger: Board authorises initiation',p:'Build solid foundations: detailed Business Case, the four approaches, Project Plan.',o:'PID (the master baseline)'},
+  CS:{n:'Controlling a Stage',t:'Repeats through every delivery stage',p:"The PM's day-to-day: authorise Work Packages, handle issues/risks, take corrective action.",o:'Highlight Reports · escalations'},
+  MP:{n:'Managing Product Delivery',t:'Runs in parallel with CS',p:'The PM↔Team Manager interface: accept, execute, deliver a Work Package.',o:'Checkpoint Reports · completed products'},
+  SB:{n:'Managing a Stage Boundary',t:'Trigger: near stage end OR an exception',p:'Plan the next stage, update Project Plan + Business Case, report stage end.',o:'Next Stage Plan (or Exception Plan) · End Stage Report'},
+  CP:{n:'Closing a Project',t:'Trigger: near end of final stage (or premature)',p:'Confirm acceptance, hand over products, evaluate the project.',o:'End Project Report · Lessons Report'}
+};
+
+/* ---- 2. Interactive org chart (four levels) ---- */
+function diagOrg(){
+  return `
+  <div class="diagram">
+    <svg viewBox="0 0 720 380" ${SVGNS} role="img" aria-label="PRINCE2 organisation structure">
+      <!-- level brackets -->
+      <text x="10" y="44" class="dg-lane">Corporate</text>
+      <text x="10" y="138" class="dg-lane">Directing</text>
+      <text x="10" y="244" class="dg-lane">Managing</text>
+      <text x="10" y="340" class="dg-lane">Delivering</text>
+
+      <!-- corporate -->
+      <rect class="dg-box corp" x="270" y="20" width="200" height="46" rx="9" data-role="CORP"/>
+      <text x="370" y="48" class="dg-lbl">Corporate / Programme / Customer</text>
+
+      <!-- board container -->
+      <rect x="160" y="96" width="420" height="74" rx="12" fill="none" stroke="var(--gold)" stroke-dasharray="5 4"/>
+      <text x="370" y="112" class="dg-phase" fill="var(--gold)">PROJECT BOARD · 3 interests</text>
+      <rect class="dg-box exec" x="175" y="120" width="120" height="40" rx="8" data-role="EXEC"/>
+      <text x="235" y="145" class="dg-lbl">Executive</text>
+      <rect class="dg-box su" x="305" y="120" width="120" height="40" rx="8" data-role="SU"/>
+      <text x="365" y="145" class="dg-lbl">Senior User</text>
+      <rect class="dg-box cp" x="435" y="120" width="130" height="40" rx="8" data-role="SS"/>
+      <text x="500" y="145" class="dg-lbl">Senior Supplier</text>
+
+      <!-- assurance (side, dashed to board) -->
+      <rect class="dg-box assure" x="590" y="120" width="115" height="40" rx="8" data-role="ASSURE"/>
+      <text x="647" y="138" class="dg-lbl">Project</text><text x="647" y="152" class="dg-lbl">Assurance</text>
+
+      <!-- PM -->
+      <rect class="dg-box pm" x="300" y="210" width="130" height="46" rx="9" data-role="PM"/>
+      <text x="365" y="238" class="dg-lbl">Project Manager</text>
+      <!-- support (side of PM) -->
+      <rect class="dg-box support" x="450" y="210" width="120" height="46" rx="9" data-role="SUPPORT"/>
+      <text x="510" y="232" class="dg-lbl">Project</text><text x="510" y="248" class="dg-lbl">Support</text>
+
+      <!-- team managers -->
+      <rect class="dg-box tm" x="240" y="306" width="120" height="44" rx="9" data-role="TM"/>
+      <text x="300" y="333" class="dg-lbl">Team Manager</text>
+      <rect class="dg-box tm" x="380" y="306" width="120" height="44" rx="9" data-role="TM"/>
+      <text x="440" y="333" class="dg-lbl">Team Manager</text>
+
+      <!-- connectors -->
+      <line x1="370" y1="66" x2="370" y2="94" stroke="var(--navy-2)" stroke-width="2"/>
+      <line x1="370" y1="170" x2="365" y2="208" stroke="var(--navy-2)" stroke-width="2"/>
+      <line x1="647" y1="120" x2="647" y2="110" stroke="var(--gold)" stroke-dasharray="3 3"/>
+      <line x1="580" y1="140" x2="590" y2="140" stroke="var(--gold)" stroke-dasharray="3 3"/>
+      <line x1="430" y1="233" x2="450" y2="233" stroke="var(--navy-2)" stroke-dasharray="3 3"/>
+      <line x1="365" y1="256" x2="300" y2="304" stroke="var(--navy-2)" stroke-width="2"/>
+      <line x1="365" y1="256" x2="440" y2="304" stroke="var(--navy-2)" stroke-width="2"/>
+    </svg>
+    <div class="dg-hint">Tap a role for its accountability and combination rules.</div>
+    <div id="orgDetail" class="dg-detail"></div>
+  </div>`;
+}
+const ORG_DETAIL={
+  CORP:{n:'Corporate / Programme / Customer',d:'Sits above the project. Issues the mandate, sets overall tolerances. Not part of the project team.'},
+  EXEC:{n:'Executive (business interest)',d:'Ultimately accountable. Owns the Business Case, chairs the Board. CANNOT be the Project Manager. Provides continuity.'},
+  SU:{n:'Senior User (user interest)',d:'Represents users; owns the Project Product Description; accountable for realising benefits AFTER the project.'},
+  SS:{n:'Senior Supplier (supplier interest)',d:'Represents those who design/build/deliver; accountable for the quality of supplier products.'},
+  ASSURE:{n:'Project Assurance',d:'Independent oversight FOR the Board — three strands mirroring the three interests. CANNOT be the Project Manager.'},
+  PM:{n:'Project Manager',d:'Day-to-day management for the Board. CANNOT be the Executive or Project Assurance. May double as Team Manager / Project Support on small projects.'},
+  SUPPORT:{n:'Project Support',d:'Admin + configuration management (logs, document control). May be combined with the PM.'},
+  TM:{n:'Team Manager',d:'Delivers Work Packages; reports to the PM via Checkpoint Reports. Optional — members can report directly to the PM.'}
+};
+
+/* ---- 3. Product-based planning flow (static) ---- */
+function diagPlanning(){
+  return `<div class="diagram"><svg viewBox="0 0 720 130" ${SVGNS} role="img" aria-label="Product-based planning steps">
+    <defs><marker id="arr2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--gold)"/></marker></defs>
+    ${[['1','Project Product\nDescription','what the whole\nproject delivers'],
+       ['2','Product Breakdown\nStructure','decompose into\na hierarchy'],
+       ['3','Product\nDescriptions','per product:\nquality criteria'],
+       ['4','Product Flow\nDiagram','sequence &\ndependencies']]
+      .map((s,i)=>{const x=20+i*180;return `
+      <rect class="dg-box plan" x="${x}" y="30" width="150" height="66" rx="10"/>
+      <text x="${x+12}" y="50" class="dg-step">${s[0]}</text>
+      <text x="${x+75}" y="52" class="dg-lbl2">${s[1].split('\n').map((l,j)=>`<tspan x="${x+75}" dy="${j?13:0}">${l}</tspan>`).join('')}</text>
+      <text x="${x+75}" y="84" class="dg-sub2">${s[2].split('\n').map((l,j)=>`<tspan x="${x+75}" dy="${j?11:0}">${l}</tspan>`).join('')}</text>
+      ${i<3?`<line x1="${x+150}" y1="63" x2="${x+178}" y2="63" stroke="var(--gold)" stroke-width="2.5" marker-end="url(#arr2)"/>`:''}`;}).join('')}
+  </svg><div class="dg-hint">Products first, activities second — the heart of "focus on products".</div></div>`;
+}
+
+/* ---- 4. Tolerance cascade (static) ---- */
+function diagTolerance(){
+  return `<div class="diagram"><svg viewBox="0 0 560 250" ${SVGNS} role="img" aria-label="Tolerance cascade">
+    <defs>
+      <marker id="dn" markerWidth="9" markerHeight="9" refX="3" refY="7" orient="auto"><path d="M0,0 L6,0 L3,7 Z" fill="var(--navy-2)"/></marker>
+      <marker id="up" markerWidth="9" markerHeight="9" refX="3" refY="0" orient="auto"><path d="M3,0 L6,7 L0,7 Z" fill="var(--red)"/></marker>
+    </defs>
+    <rect class="dg-box corp" x="150" y="14" width="260" height="44" rx="9"/>
+    <text x="280" y="33" class="dg-lbl">Corporate / Programme</text><text x="280" y="49" class="dg-sub">sets project tolerances</text>
+    <rect class="dg-box exec" x="150" y="92" width="260" height="44" rx="9"/>
+    <text x="280" y="111" class="dg-lbl">Project Board</text><text x="280" y="127" class="dg-sub">sets stage tolerances → PM</text>
+    <rect class="dg-box pm" x="150" y="170" width="260" height="44" rx="9"/>
+    <text x="280" y="189" class="dg-lbl">Project Manager</text><text x="280" y="205" class="dg-sub">sets Work Package tolerances → TM</text>
+    <!-- down arrows (authority) -->
+    <line x1="200" y1="58" x2="200" y2="90" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#dn)"/>
+    <line x1="200" y1="136" x2="200" y2="168" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#dn)"/>
+    <!-- up arrows (escalation) -->
+    <line x1="360" y1="168" x2="360" y2="138" stroke="var(--red)" stroke-width="2" marker-end="url(#up)"/>
+    <line x1="360" y1="90" x2="360" y2="60" stroke="var(--red)" stroke-width="2" marker-end="url(#up)"/>
+    <text x="120" y="78" class="dg-mini" fill="var(--navy-2)">authority ↓</text>
+    <text x="420" y="78" class="dg-mini" fill="var(--red)">exception ↑</text>
+  </svg><div class="dg-hint">Authority cascades down; a forecast breach escalates up one level.</div></div>`;
+}
+
+/* ---- 5. Issue / change decision path (static) ---- */
+function diagChange(){
+  return `<div class="diagram"><svg viewBox="0 0 720 210" ${SVGNS} role="img" aria-label="Change control procedure">
+    <defs><marker id="arr3" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--navy-2)"/></marker></defs>
+    ${['Capture','Assess','Propose','Decide','Implement'].map((s,i)=>{const x=20+i*140;return `
+      <rect class="dg-box cs" x="${x}" y="80" width="118" height="48" rx="10"/>
+      <text x="${x+59}" y="109" class="dg-lbl">${s}</text>
+      ${i<4?`<line x1="${x+118}" y1="104" x2="${x+138}" y2="104" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#arr3)"/>`:''}`;}).join('')}
+    <text x="360" y="36" class="dg-phase">An ISSUE has happened →</text>
+    <text x="125" y="165" class="dg-mini">log it</text>
+    <text x="265" y="165" class="dg-mini">impact on objectives,</text><text x="265" y="178" class="dg-mini">Business Case, risk</text>
+    <text x="405" y="165" class="dg-mini">options +</text><text x="405" y="178" class="dg-mini">recommendation</text>
+    <text x="545" y="165" class="dg-mini">PM / Change Authority</text><text x="545" y="178" class="dg-mini">/ Board (per limits)</text>
+  </svg><div class="dg-hint">Three issue types feed this path: request for change · off-specification · problem/concern.</div></div>`;
+}
+
+/* ---- 6. Quality audit trail (static) ---- */
+function diagQuality(){
+  return `<div class="diagram"><svg viewBox="0 0 720 160" ${SVGNS} role="img" aria-label="Quality audit trail">
+    <defs><marker id="arr4" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--green)"/></marker></defs>
+    ${[["Customer's quality","expectations","general statement"],
+       ["Acceptance","criteria","prioritised, measurable"],
+       ["Quality","criteria","per product"],
+       ["Quality","Register","activities log"],
+       ["Quality","records","evidence met"]]
+      .map((s,i)=>{const x=12+i*143;return `
+      <rect class="dg-box quality" x="${x}" y="40" width="125" height="58" rx="10"/>
+      <text x="${x+62}" y="62" class="dg-lbl">${s[0]}</text>
+      <text x="${x+62}" y="78" class="dg-lbl">${s[1]}</text>
+      <text x="${x+62}" y="113" class="dg-sub2">${s[2]}</text>
+      ${i<4?`<line x1="${x+125}" y1="69" x2="${x+143}" y2="69" stroke="var(--green)" stroke-width="2.5" marker-end="url(#arr4)"/>`:''}`;}).join('')}
+  </svg><div class="dg-hint">Expectations (general) narrow to records (evidence) — left to right.</div></div>`;
+}
+
+/* ---- 7. Value chain (static, compact) ---- */
+function diagValueChain(){
+  return `<div class="diagram"><svg viewBox="0 0 600 140" ${SVGNS} role="img" aria-label="Output outcome benefit value chain">
+    <defs><marker id="arr5" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--gold)"/></marker></defs>
+    ${[['Output','the product\nthe project builds','ip'],
+       ['Outcome','the change from\nusing the output','cs'],
+       ['Benefit','measurable\nimprovement','plan']]
+      .map((s,i)=>{const x=30+i*190;return `
+      <rect class="dg-box ${s[2]}" x="${x}" y="30" width="150" height="64" rx="11"/>
+      <text x="${x+75}" y="56" class="dg-lbl">${s[0]}</text>
+      <text x="${x+75}" y="76" class="dg-sub2">${s[1].split('\n').map((l,j)=>`<tspan x="${x+75}" dy="${j?12:0}">${l}</tspan>`).join('')}</text>
+      ${i<2?`<line x1="${x+150}" y1="62" x2="${x+218}" y2="62" stroke="var(--gold)" stroke-width="2.5" marker-end="url(#arr5)"/>`:''}`;}).join('')}
+    <text x="300" y="125" class="dg-mini" text-anchor="middle">A foreseeable negative outcome = a dis-benefit (accepted, not uncertain)</text>
+  </svg></div>`;
+}
+
+/* ---- 8. Risk procedure (static loop) ---- */
+function diagRisk(){
+  return `<div class="diagram"><svg viewBox="0 0 720 150" ${SVGNS} role="img" aria-label="Risk management procedure">
+    <defs><marker id="arr6" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--red)"/></marker></defs>
+    ${[['Identify','context + risks'],['Assess','probability,\nimpact, proximity'],['Plan','choose responses'],['Implement','owner + actionee']]
+      .map((s,i)=>{const x=20+i*150;return `
+      <rect class="dg-box risk" x="${x}" y="34" width="130" height="58" rx="10"/>
+      <text x="${x+65}" y="60" class="dg-lbl">${s[0]}</text>
+      <text x="${x+65}" y="78" class="dg-sub2">${s[1].split('\n').map((l,j)=>`<tspan x="${x+65}" dy="${j?11:0}">${l}</tspan>`).join('')}</text>
+      ${i<3?`<line x1="${x+130}" y1="63" x2="${x+148}" y2="63" stroke="var(--red)" stroke-width="2.5" marker-end="url(#arr6)"/>`:''}`;}).join('')}
+    <text x="360" y="125" class="dg-mini" text-anchor="middle">Communicate runs throughout all four steps — not just at the end.</text>
+  </svg></div>`;
+}
+
+/* click handlers for the two interactive diagrams */
+function lcPick(code){
+  const d=LC_DETAIL[code]; const el=document.getElementById('lcDetail'); if(!d||!el)return;
+  document.querySelectorAll('#lcDetail').forEach(()=>{});
+  el.innerHTML=`<div class="dg-card"><div class="dg-card-h">${d.n}</div>
+    <div class="dg-card-t">${d.t}</div><p>${d.p}</p>
+    <div class="dg-card-o"><strong>Output:</strong> ${d.o}</div></div>`;
+  // highlight selected box
+  const svg=el.closest('.diagram').querySelector('svg');
+  svg.querySelectorAll('.dg-box').forEach(b=>b.classList.toggle('sel', b.getAttribute('data-proc')===code));
+}
+function orgPick(code){
+  const d=ORG_DETAIL[code]; const el=document.getElementById('orgDetail'); if(!d||!el)return;
+  el.innerHTML=`<div class="dg-card"><div class="dg-card-h">${d.n}</div><p>${d.d}</p></div>`;
+  const svg=el.closest('.diagram').querySelector('svg');
+  svg.querySelectorAll('.dg-box').forEach(b=>b.classList.toggle('sel', b.getAttribute('data-role')===code));
+}
+/* attach delegated clicks after a diagram renders */
+function wireDiagrams(container){
+  if(!container||!container.querySelectorAll)return;
+  container.querySelectorAll('svg [data-proc]').forEach(el=>{
+    el.style.cursor='pointer';
+    el.addEventListener('click',()=>lcPick(el.getAttribute('data-proc')));
+  });
+  container.querySelectorAll('svg [data-role]').forEach(el=>{
+    el.style.cursor='pointer';
+    el.addEventListener('click',()=>orgPick(el.getAttribute('data-role')));
+  });
+}
+
+
 /* ============ PRINCE2 Foundation app ============ */
 const LS = 'p2f_state_v1';
 const STATE_VERSION = 2;
@@ -668,6 +972,7 @@ function go(id){
     });
   }
   if(c.focus)try{c.focus();}catch(e){}
+  if(typeof wireDiagrams==='function')wireDiagrams(c);
   closeNav();
 }
 function openNav(){document.getElementById('sidebar').classList.add('open');document.getElementById('scrim').classList.add('show');}
@@ -762,6 +1067,7 @@ RENDER.principles = (c)=>courseShell(c,'principles','Part 1','The 7 Principles',
     ${pblock(7,'Tailor to suit the project','Adapt to environment, size, complexity, importance, capability and risk. Mandatory — but principles cannot be tailored away, and tailoring is documented in the PID.','"tailoring is mandatory"; "principles cannot be tailored"; "recorded in the PID".')}
   </div>
   <div class="callout"><div class="tag">The six tolerances</div><strong>Time · Cost · Scope · Quality · Benefits · Risk.</strong> Memorise these six — they recur across "manage by exception" and the Progress practice. "Reputation" and "resource" are common distractors.</div>
+  ${diagTolerance()}
   <div class="callout trap"><div class="tag">Classic trap</div>The minimum is <strong>two management stages</strong>, not three. Closure ("Closing a Project") and start-up ("Starting up a Project") are <em>processes</em>, not stages. Only <strong>initiation + delivery</strong> count as stages.</div>`,
   `<div class="recall"><div class="tag">Recall check</div><ol>
     <li>Name the 7 principles in order.</li>
@@ -793,13 +1099,7 @@ RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
 
 RENDER.processes = (c)=>courseShell(c,'processes','Part 3','The 7 Processes',
   'What you do, in what order, across the lifecycle. Each has a purpose, a trigger, key activities and outputs.',
-  `<div class="lifecycle">Pre-project        Initiation Stage     Delivery Stage(s)              Final Stage
------------        ----------------     ----------------------         -----------
-<b>SU</b>                                                                    <b>CP</b>
-                   <b>IP</b>                   <b>SB</b> → <b>SB</b> → ... → <b>SB</b>
-                                        <b>CS</b> → <b>CS</b> → ... → <b>CS</b>
-                                        <b>MP</b> runs throughout delivery
-<b>DP</b> runs across the whole project, from end of SU to end of CP</div>
+  `${diagLifecycle()}
   <div class="card">
     ${pblock('SU','Starting up a Project','"Do we have a viable, worthwhile project?" Triggered by the <b>project mandate</b>. Appoints Executive + PM, captures prior lessons, builds the <b>Project Brief</b> and Initiation Stage Plan. Starts Daily Log + Lessons Log.','pre-project; produces the <em>Project Brief</em> (not the PID).')}
     ${pblock('DP','Directing a Project','The Project Board\'s accountability process — spans end of SU to end of CP. Five decision points: authorise initiation · authorise the project · authorise a Stage/Exception Plan · give ad hoc direction · authorise closure.','the 5 decision points; DP runs throughout; ad hoc direction.')}
@@ -877,7 +1177,8 @@ RENDER.products = (c)=>courseShell(c,'products','Part 4','Management Products',
 
 RENDER.roles = (c)=>courseShell(c,'roles','Part 5','Roles & Responsibilities',
   'A fixed role structure. Know what each role does and which roles can — and cannot — be combined.',
-  `<h3 class="sub">The Project Board — three interests, one board</h3>
+  `${diagOrg()}
+  <h3 class="sub">The Project Board — three interests, one board</h3>
   <table><tr><th>Role</th><th>Interest</th><th>Key points</th></tr>
     <tr><td>Executive</td><td>Business</td><td>Ultimately accountable; owns the Business Case; chairs the Board. <strong>Cannot be the PM.</strong></td></tr>
     <tr><td>Senior User</td><td>User</td><td>Represents users; owns the Project Product Description; accountable for realising benefits after the project.</td></tr>
@@ -1382,6 +1683,7 @@ RENDER.practices_deep = (c)=>{
       purpose:'Establish mechanisms to judge whether the project is desirable, viable and achievable — and to keep judging it.',
       body:`
       <h4 class="sub" style="font-size:16px">The value chain — learn it as a sentence</h4>
+      ${diagValueChain()}
       <p>A project produces <strong>outputs</strong> (the products). Using those outputs creates <strong>outcomes</strong> (a change in how things work). Outcomes deliver <strong>benefits</strong> (measurable improvements that justify the investment). A foreseeable negative is a <strong>dis-benefit</strong> — not a risk (a dis-benefit is a planned, accepted downside; a risk is uncertain).</p>
       <div class="callout"><div class="tag">Worked example</div>Output: a new mobile banking app. Outcome: customers self-serve instead of visiting branches. Benefit: €X/year saved in branch costs + measurable rise in retention. Dis-benefit: some older customers disengage — accepted, quantified, managed.</div>
       <h4 class="sub" style="font-size:16px">The development path</h4>
@@ -1407,6 +1709,7 @@ RENDER.practices_deep = (c)=>{
       body:`
       <h4 class="sub" style="font-size:16px">The product-based planning technique — 4 steps</h4>
       <p>This is the heart of "focus on products" made operational:</p>
+      ${diagPlanning()}
       <p><strong>1. Write the Project Product Description</strong> — what the project as a whole must deliver, and its acceptance criteria.<br>
       <strong>2. Create the Product Breakdown Structure (PBS)</strong> — decompose the project into a hierarchy of products.<br>
       <strong>3. Write Product Descriptions</strong> — for each significant product: purpose, composition, derivation, quality criteria, quality method.<br>
@@ -1422,6 +1725,7 @@ RENDER.practices_deep = (c)=>{
       body:`
       <h4 class="sub" style="font-size:16px">The quality audit trail — a five-link chain</h4>
       <p>This sequence is exam gold; learn it end to end:</p>
+      ${diagQuality()}
       <p><strong>1. Customer's quality expectations</strong> — a general statement of the quality wanted (captured early, in the Project Product Description / Project Brief).<br>
       <strong>2. Acceptance criteria</strong> — a <em>prioritised, measurable</em> list defining what makes the final product acceptable (also in the Project Product Description, owned by the Senior User).<br>
       <strong>3. Quality criteria</strong> — specific, per-product standards (in each Product Description).<br>
@@ -1436,6 +1740,7 @@ RENDER.practices_deep = (c)=>{
       purpose:'Identify, assess and control uncertainty, improving the project\u2019s chance of success.',
       body:`
       <h4 class="sub" style="font-size:16px">The risk management procedure — 5 steps</h4>
+      ${diagRisk()}
       <p><strong>1. Identify</strong> — context first (the Risk Management Approach), then the risks themselves; write each as cause → event → effect.<br>
       <strong>2. Assess</strong> — estimate each risk's probability, impact and proximity (when), then evaluate the net effect of all risks together.<br>
       <strong>3. Plan</strong> — choose responses.<br>
@@ -1459,6 +1764,7 @@ RENDER.practices_deep = (c)=>{
       <strong>2. Off-specification</strong> — a product that should be delivered (to standard) won't be, or hasn't been. Includes a missing product or one that fails its criteria.<br>
       <strong>3. Problem/concern</strong> — anything else the PM must resolve or escalate.</p>
       <h4 class="sub" style="font-size:16px">The change control procedure — 5 steps</h4>
+      ${diagChange()}
       <p><strong>Capture</strong> (log it) → <strong>Assess</strong> (impact on objectives, Business Case, risk) → <strong>Propose</strong> (options and recommendation) → <strong>Decide</strong> (PM, Change Authority, or Board per the limits) → <strong>Implement</strong>.</p>
       <div class="callout"><div class="tag">Daily Log vs Issue Register</div>Minor issues the PM handles informally go in the <strong>Daily Log</strong>. Anything formally managed through change control goes in the <strong>Issue Register</strong>, with an <strong>Issue Report</strong> for the detail.</div>
       <div class="callout key"><div class="tag">Composition: Change Control Approach</div>How issues and changes are handled: the procedure, roles (incl. Change Authority and its limits), any change budget, tools, and how the Issue Register is used. Produced in IP.</div>`})}

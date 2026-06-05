@@ -480,6 +480,56 @@ const QUESTIONS_EXT = [
 {s:"tailoring",q:"Which best completes: 'Principles are __, practices are __, processes are __.'",o:["why / what / when","what / when / why","when / why / what","who / what / when"],a:0,e:"Principles = why, practices = what, processes = when (the four-layer model)."}
 ];
 
+// Deeper drill questions — procedures, product composition, 7th edition
+// Tagged into existing sections so they appear in the right drills and exams.
+const QUESTIONS_DEEP = [
+// ----- value chain / Business Case composition (practices) -----
+{s:"practices",q:"In the value chain, an 'output' becomes a 'benefit' only via a/an:",o:["Dis-benefit","Outcome","Tolerance","Acceptance criterion"],a:1,e:"Output → outcome (the change from using outputs) → benefit (measurable improvement)."},
+{s:"practices",q:"Which business option is always the comparison baseline in a Business Case?",o:["Do something","Do the maximum","Do nothing","Do minimum"],a:2,e:"'Do nothing' is the baseline against which 'do minimum' and 'do something' are compared."},
+{s:"practices",q:"A planned, accepted negative result of the project is a:",o:["Risk","Issue","Dis-benefit","Off-specification"],a:2,e:"A dis-benefit is a foreseeable, accepted negative outcome — distinct from an uncertain risk."},
+{s:"practices",q:"The investment appraisal is found in the:",o:["Quality Register","Business Case","Risk Register","Communication Management Approach"],a:1,e:"Costs, benefits and investment appraisal sit in the Business Case."},
+// ----- product-based planning (practices) -----
+{s:"practices",q:"The correct order of product-based planning is:",o:["Activities → products → schedule","Project Product Description → Product Breakdown Structure → Product Descriptions → Product Flow Diagram","Schedule → estimates → products","Product Flow Diagram → activities → PBS"],a:1,e:"Define the whole-project product, decompose (PBS), describe each product, then sequence (Product Flow Diagram)."},
+{s:"practices",q:"Which is produced FIRST in product-based planning?",o:["Product Flow Diagram","Product Breakdown Structure","Project Product Description","Stage Plan"],a:2,e:"The Project Product Description (what the whole project must deliver) comes first."},
+{s:"practices",q:"The Product Flow Diagram shows:",o:["The cost of each product","The sequence and dependencies of products","Who owns each product","Quality criteria"],a:1,e:"It shows the order and dependencies in which products are created."},
+{s:"practices",q:"Which is NOT typically part of a Product Description?",o:["Purpose","Quality criteria","Composition","Investment appraisal"],a:3,e:"Investment appraisal belongs to the Business Case, not a Product Description."},
+// ----- quality audit trail (practices) -----
+{s:"practices",q:"The correct quality audit trail order is:",o:["Quality criteria → expectations → acceptance criteria","Customer's quality expectations → acceptance criteria → quality criteria → Quality Register","Acceptance criteria → expectations → records","Quality Register → expectations → criteria"],a:1,e:"Expectations (general) → acceptance criteria (whole-product, measurable) → quality criteria (per product) → Quality Register → records."},
+{s:"practices",q:"In a PRINCE2 quality review, who runs the review?",o:["Presenter","Chair","Reviewer","Administrator"],a:1,e:"The Chair runs the review; Presenter represents producers, Reviewer checks, Administrator records."},
+{s:"practices",q:"Customer's quality expectations differ from acceptance criteria because expectations are:",o:["Prioritised and measurable","A general statement of the quality wanted","Per individual product","Owned by the supplier"],a:1,e:"Expectations are general; acceptance criteria are the prioritised, measurable list."},
+{s:"practices",q:"The Quality Management Approach is produced in which process?",o:["Starting up a Project","Initiating a Project","Controlling a Stage","Managing a Stage Boundary"],a:1,e:"All four management approaches, including Quality, are produced in IP."},
+// ----- risk procedure (practices) -----
+{s:"practices",q:"The PRINCE2 risk management procedure is:",o:["Identify → assess → plan → implement → communicate","Assess → identify → implement","Plan → identify → close","Identify → transfer → accept"],a:0,e:"Identify, assess, plan, implement, communicate (communicate runs throughout)."},
+{s:"practices",q:"Estimating a risk's probability, impact and proximity happens in which step?",o:["Identify","Assess","Plan","Implement"],a:1,e:"Assessment estimates probability, impact and proximity, then evaluates net effect."},
+{s:"practices",q:"'Proximity' of a risk refers to:",o:["Its likely cost","When it is likely to occur","Who owns it","Its category"],a:1,e:"Proximity is timing — when the risk might materialise."},
+{s:"practices",q:"Which response appears in BOTH the threat and opportunity lists?",o:["Avoid","Reduce","Share","Enhance"],a:2,e:"Share (and Accept) apply to both threats and opportunities."},
+{s:"practices",q:"The Risk Budget is:",o:["Part of the Stage Plan only","Money set aside to fund risk responses, approved by the Board","The cost of the Risk Register","Owned by the Team Manager"],a:1,e:"It funds responses and is approved by the Project Board."},
+// ----- issues / change control (practices) -----
+{s:"practices",q:"The change control procedure order is:",o:["Decide → capture → implement","Capture → assess → propose → decide → implement","Propose → implement → review","Assess → implement → capture"],a:1,e:"Capture, assess, propose, decide, implement."},
+{s:"practices",q:"A risk that has now materialised should be handled as:",o:["A new risk","An issue","A dis-benefit","A tolerance"],a:1,e:"Once it has happened it is an issue, not a risk."},
+{s:"practices",q:"Which document defines the Change Authority's delegated limits?",o:["Risk Management Approach","Change Control Approach","Quality Register","Daily Log"],a:1,e:"The Change Control Approach sets out roles, limits and the change procedure."},
+// ----- progress / control (practices) -----
+{s:"practices",q:"Work Package tolerances are set by the:",o:["Corporate level","Project Board","Project Manager","Team Manager"],a:2,e:"The PM sets Work Package tolerances for the Team Manager; the Board sets stage tolerances for the PM."},
+{s:"practices",q:"A Checkpoint Report sent every Friday is an example of a:",o:["Event-driven control","Time-driven control","Exception","Baseline"],a:1,e:"A regular cadence makes it time-driven."},
+{s:"practices",q:"An End Stage Report is best classified as a/an:",o:["Time-driven control","Event-driven control","Tolerance","Baseline"],a:1,e:"It is triggered by the event of reaching a stage boundary — event-driven."},
+// ----- product composition (products) -----
+{s:"products",q:"The Communication Management Approach contains:",o:["Quality criteria per product","Stakeholder information needs, methods and frequency","The risk budget","Acceptance records"],a:1,e:"It defines who needs what information, how and when."},
+{s:"products",q:"The Risk Management Approach includes all EXCEPT:",o:["Risk categories and scales","Risk tolerance and budget","The detailed Business Case","Roles and the risk procedure"],a:2,e:"The Business Case is a separate product; the Approach defines how risk is managed."},
+{s:"products",q:"Which is part of a Plan's composition?",o:["Tolerances and controls","Acceptance records","The Daily Log","Checkpoint Reports"],a:0,e:"A Plan includes prerequisites, products, schedule, tolerances and controls."},
+{s:"products",q:"How is the PID best characterised in terms of its make-up?",o:["A single static contract","A composite baseline assembled from several products","A report to corporate","The same as the Project Brief"],a:1,e:"The PID bundles the project definition, approaches, plans and controls into one baseline."},
+{s:"products",q:"Acceptance criteria are documented in the:",o:["Quality Register","Project Product Description","Risk Register","Highlight Report"],a:1,e:"The Project Product Description carries acceptance criteria (Senior User owns it)."},
+{s:"products",q:"The Quality Management Approach describes:",o:["Each product's quality criteria","How quality is managed across the whole project","The benefits schedule","Stakeholder communications"],a:1,e:"It is the project-level approach; per-product criteria live in Product Descriptions."},
+// ----- 7th edition (tailoring section so they surface in that drill) -----
+{s:"tailoring",q:"In PRINCE2 7th edition, the seven 'themes' are now called:",o:["Processes","Practices","Principles","Aspects"],a:1,e:"Themes were renamed practices in the 7th edition (2023)."},
+{s:"tailoring",q:"Which is a new performance target introduced in PRINCE2 7th edition?",o:["Reputation","Sustainability","Morale","Innovation"],a:1,e:"Sustainability is added as a performance target in the 7th edition."},
+{s:"tailoring",q:"Which aspect did 7th edition give explicit new emphasis to?",o:["Documents","People","Gantt charts","Vendors"],a:1,e:"7th edition foregrounds 'people' alongside principles, practices and processes."},
+{s:"tailoring",q:"How many principles and processes does the 7th edition have, vs the 6th?",o:["Fewer principles","More processes","The same: 7 principles, 7 processes","8 principles"],a:2,e:"Principles (7) and processes (7) are unchanged between editions."},
+{s:"tailoring",q:"The six tolerance areas in PRINCE2 are:",o:["Time, cost, scope, quality, benefits, risk","Time, cost, scope, quality, benefits, sustainability","Time, cost, scope, quality, risk, reputation","Time, cost, quality, benefits, risk, people"],a:0,e:"The tolerance set remains time, cost, scope, quality, benefits, risk. Sustainability is a performance target, not one of the six tolerances."},
+{s:"tailoring",q:"In 7th edition, management products are framed as:",o:["Mandatory paper documents","Information sets that may live in digital tools","Optional for all projects","Owned only by corporate"],a:1,e:"7th edition treats them as information that can be held in tools, reinforcing tailoring."},
+{s:"tailoring",q:"Which best states what 7th edition did NOT change?",o:["The number of principles and processes","The names of the themes","The emphasis on people","The performance targets"],a:0,e:"Principles (7) and processes (7) are unchanged; themes were renamed and sustainability/people emphasis were added."},
+{s:"tailoring",q:"The integrated elements emphasised in 7th edition are:",o:["Principles, people, practices, processes (in a project context)","Inputs, tools, outputs","Plan, do, check, act","Scope, time, cost"],a:0,e:"Principles, people, practices and processes, applied in a project context."}
+];
+
 </script>
 <script>
 // Spaced-repetition flashcards (recall checks from the course)
@@ -509,7 +559,21 @@ const CARDS = [
 {deck:"Products",front:"Baseline vs Record vs Report — quick test?",back:"Baselines = plans & approaches (PID, Business Case, Plans). Records = logs & registers (Daily Log, Risk/Issue/Quality Register). Reports = snapshots named 'Report'. Trap: Daily Log & Lessons Log behave like records despite the name."},
 {deck:"Products",front:"Who owns: Business Case / Project Product Description / Benefits Mgmt Approach?",back:"Business Case → Executive. Project Product Description → Senior User. Benefits Management Approach → Executive."},
 {deck:"Roles",front:"The 'cannot combine' rules?",back:"Executive ≠ Project Manager. Project Manager ≠ Project Assurance. Board roles can't be delegated to the PM. PM CAN be Team Manager or Project Support on small projects."},
-{deck:"Roles",front:"Who is ultimately accountable for the project?",back:"The Executive (the Project Board is collectively responsible, but the Executive is ultimately accountable and chairs the Board)."}
+{deck:"Roles",front:"Who is ultimately accountable for the project?",back:"The Executive (the Project Board is collectively responsible, but the Executive is ultimately accountable and chairs the Board)."},
+{deck:"Procedures",front:"Product-based planning — the 4 steps in order?",back:"1. Project Product Description (whole-project deliverable + acceptance criteria)\n2. Product Breakdown Structure (decompose)\n3. Product Descriptions (per product)\n4. Product Flow Diagram (sequence + dependencies)"},
+{deck:"Procedures",front:"The quality audit trail — five links?",back:"Customer's quality expectations → acceptance criteria (prioritised, measurable) → quality criteria (per product) → Quality Register (activities log) → quality/acceptance records (evidence)."},
+{deck:"Procedures",front:"The risk management procedure — 5 steps?",back:"Identify → Assess (probability, impact, proximity) → Plan (responses) → Implement (owner + actionee) → Communicate (throughout)."},
+{deck:"Procedures",front:"The change control procedure — 5 steps?",back:"Capture → Assess → Propose → Decide → Implement."},
+{deck:"Procedures",front:"The value chain (Business Case)?",back:"Output (product) → Outcome (change from using it) → Benefit (measurable improvement). A foreseeable negative is a dis-benefit (accepted, not uncertain)."},
+{deck:"Procedures",front:"Threat responses vs opportunity responses?",back:"Threats: Avoid, Reduce, Transfer, Share, Accept (+ contingent plans). Opportunities: Exploit, Enhance, Share, Accept, Reject. Share & Accept are in both."},
+{deck:"Procedures",front:"Tolerance cascade — who sets for whom?",back:"Corporate → project tolerances. Project Board → stage tolerances (for PM). PM → Work Package tolerances (for Team Manager). Forecast breach escalates up one level."},
+{deck:"Composition",front:"What's in any Approach (Risk/Quality/Comms/Change)?",back:"Same skeleton: procedure · tools & techniques · roles/responsibilities · timing · how the related register/record is used. All produced in IP."},
+{deck:"Composition",front:"What's in a Product Description?",back:"Purpose · composition · derivation · format · quality criteria · quality method · quality responsibilities. (No investment appraisal — that's the Business Case.)"},
+{deck:"Composition",front:"What's in the Business Case?",back:"Reasons · business options (do nothing/minimum/something) · benefits & dis-benefits · costs · timescale · investment appraisal · major risks. Owned by the Executive."},
+{deck:"v7 Edition",front:"PRINCE2 7 — what were 'themes' renamed to?",back:"Practices. (Organization → Organizing.) The set: Business Case, Organizing, Plans, Quality, Risk, Issues, Progress."},
+{deck:"v7 Edition",front:"PRINCE2 7 — the headline new performance target?",back:"Sustainability. It's a performance TARGET, not one of the six tolerances. The six tolerances remain: time, cost, scope, quality, benefits, risk."},
+{deck:"v7 Edition",front:"PRINCE2 7 — integrated elements + new emphasis?",back:"Principles, people, practices, processes — applied in a project context. 'People' is the newly foregrounded element vs the 6th edition."},
+{deck:"v7 Edition",front:"PRINCE2 7 — what did NOT change?",back:"7 principles (number + intent), 7 processes, and the role structure. Most learning transfers directly."}
 ];
 
 </script>
@@ -558,10 +622,12 @@ const VIEWS = [
   {id:'dashboard', label:'Dashboard', ico:'◆', group:'main'},
   {id:'principles', label:'The 7 Principles', ico:'①', group:'main'},
   {id:'practices', label:'The 7 Practices', ico:'②', group:'main'},
+  {id:'practices_deep', label:'Practices — In Depth', ico:'▸', group:'main'},
   {id:'processes', label:'The 7 Processes', ico:'③', group:'main'},
   {id:'products', label:'Management Products', ico:'④', group:'main'},
   {id:'roles', label:'Roles', ico:'⑤', group:'main'},
   {id:'tailoring', label:'Tailoring', ico:'⑥', group:'main'},
+  {id:'edition', label:"What's New in v7", ico:'✺', group:'main'},
   {id:'practitioner', label:'Practitioner Intro', ico:'✦', group:'main'},
   {id:'schedule', label:'3-Week Schedule', ico:'▦', group:'main'},
   {id:'flashcards', label:'Flashcards', ico:'⊞', group:'practice'},
@@ -722,7 +788,8 @@ RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
     <li>Acceptance criteria vs quality criteria — what's the difference and who owns each artefact?</li>
     <li>Five threat responses and four opportunity responses.</li>
     <li>The three issue types.</li>
-  </ol></div>`);
+  </ol></div>
+  <div class="callout key"><div class="tag">Go deeper</div>This page is for recognition. For the full procedures, worked examples, and document contents the harder questions test, see <strong>Practices — In Depth</strong> in the sidebar.</div>`);
 
 RENDER.processes = (c)=>courseShell(c,'processes','Part 3','The 7 Processes',
   'What you do, in what order, across the lifecycle. Each has a purpose, a trigger, key activities and outputs.',
@@ -785,7 +852,23 @@ RENDER.products = (c)=>courseShell(c,'products','Part 4','Management Products',
     <tr><td>Product Status Account</td><td>as needed</td><td>Project Support → PM</td></tr>
   </table>
   <div class="callout key"><div class="tag">5-second classifier</div><strong>Baselines</strong> = plans &amp; approaches. <strong>Records</strong> = logs &amp; registers. <strong>Reports</strong> = snapshots named "Report". The only confusing ones: the <strong>Daily Log</strong> and <strong>Lessons Log</strong> behave like records despite being called "Log".</div>
-  <div class="callout"><div class="tag">Who makes what</div>The PM creates almost everything. <strong>Executive</strong> owns the Business Case. <strong>Senior User</strong> owns the Project Product Description. <strong>Team Manager</strong> creates the Checkpoint Report (and possibly Team Plans).</div>`,
+  <div class="callout"><div class="tag">Who makes what</div>The PM creates almost everything. <strong>Executive</strong> owns the Business Case. <strong>Senior User</strong> owns the Project Product Description. <strong>Team Manager</strong> creates the Checkpoint Report (and possibly Team Plans).</div>
+  <h3 class="sub">What's inside the core products (composition)</h3>
+  <p>The harder questions ask what a product <em>contains</em>, not just when it's made. The essentials:</p>
+  <table><tr><th>Product</th><th>Key contents</th></tr>
+    <tr><td>Business Case</td><td>Reasons · business options (do nothing/minimum/something) · benefits &amp; dis-benefits · costs · timescale · investment appraisal · major risks</td></tr>
+    <tr><td>PID</td><td>Project definition · approach · detailed Business Case · team structure &amp; roles · the four approaches · Project Plan · controls · tailoring</td></tr>
+    <tr><td>Project Brief</td><td>Project definition · outline Business Case · Project Product Description · approach · team structure</td></tr>
+    <tr><td>Project Product Description</td><td>Overall purpose · composition · acceptance criteria · acceptance method · customer's quality expectations</td></tr>
+    <tr><td>Product Description</td><td>Purpose · composition · derivation · format · quality criteria · quality method · quality responsibilities</td></tr>
+    <tr><td>Plan (any level)</td><td>Plan description · prerequisites · external dependencies · assumptions · lessons · the products · schedule · tolerances · controls</td></tr>
+    <tr><td>Work Package</td><td>Authorisation · the Product Description(s) · techniques/standards · constraints · reporting &amp; escalation requirements · tolerances</td></tr>
+    <tr><td>The four Approaches</td><td>Each defines: the procedure · tools &amp; techniques · roles/responsibilities · timing · how the related register/record is used</td></tr>
+    <tr><td>Highlight Report</td><td>Period covered · status · products this period &amp; next · tolerance status · key issues/risks · requests to the Board</td></tr>
+    <tr><td>End Stage Report</td><td>Stage performance vs plan · products delivered · Business Case &amp; risk review · lessons · forecast for next stage</td></tr>
+    <tr><td>End Project Report</td><td>Project performance vs PID · benefits achieved to date · residual benefits (to Benefits Approach) · lessons · follow-on actions</td></tr>
+  </table>
+  <div class="callout key"><div class="tag">Pattern that saves memorising</div>Every <strong>Approach</strong> follows the same skeleton (procedure, tools, roles, timing, register). Every <strong>Description</strong> covers purpose + composition + quality. Learn the two skeletons and you can reconstruct most composition answers.</div>`,
   `<div class="recall"><div class="tag">Recall check</div><ol>
     <li>Classify each as baseline / record / report: PID, Risk Register, Highlight Report, Daily Log.</li>
     <li>Who owns: Business Case, Project Product Description, Benefits Management Approach?</li>
@@ -1274,6 +1357,188 @@ function resetProgress(){
   }
 }
 
+/* ============ DEEP-DIVE CONTENT (proficiency + exam) ============ */
+
+/* small helper for a taught practice block */
+function deepPractice(o){
+  return `<div class="card" id="dp-${o.id}">
+    <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:4px">
+      <span class="serif" style="font-size:26px;font-weight:800;color:var(--gold)">${o.num}</span>
+      <h3 class="sub" style="margin:0">${o.name}</h3>
+    </div>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:14px"><strong>Purpose:</strong> ${o.purpose}</p>
+    ${o.body}
+  </div>`;
+}
+
+RENDER.practices_deep = (c)=>{
+  markRead('practices_deep');
+  c.innerHTML = `
+    <div class="eyebrow">Part 2 · In Depth</div>
+    <h1 class="page">The 7 Practices — Taught<span class="small">procedures · reasoning · composition</span></h1>
+    <p class="lede">The summary page is for recognition. This page is for understanding — each practice as a reasoning chain you can reconstruct, with the procedures and document contents the harder questions test.</p>
+
+    ${deepPractice({id:'bc',num:'1',name:'Business Case',
+      purpose:'Establish mechanisms to judge whether the project is desirable, viable and achievable — and to keep judging it.',
+      body:`
+      <h4 class="sub" style="font-size:16px">The value chain — learn it as a sentence</h4>
+      <p>A project produces <strong>outputs</strong> (the products). Using those outputs creates <strong>outcomes</strong> (a change in how things work). Outcomes deliver <strong>benefits</strong> (measurable improvements that justify the investment). A foreseeable negative is a <strong>dis-benefit</strong> — not a risk (a dis-benefit is a planned, accepted downside; a risk is uncertain).</p>
+      <div class="callout"><div class="tag">Worked example</div>Output: a new mobile banking app. Outcome: customers self-serve instead of visiting branches. Benefit: €X/year saved in branch costs + measurable rise in retention. Dis-benefit: some older customers disengage — accepted, quantified, managed.</div>
+      <h4 class="sub" style="font-size:16px">The development path</h4>
+      <p>Outline Business Case is written in <strong>Starting up a Project</strong> (enough to justify initiating). It becomes the <strong>detailed</strong> Business Case in <strong>Initiating a Project</strong>. It is then <strong>reviewed and updated at every stage boundary</strong> (in Managing a Stage Boundary) and <strong>verified at closure</strong>. The <strong>Executive owns it throughout.</strong></p>
+      <h4 class="sub" style="font-size:16px">What's in the Business Case</h4>
+      <p>Executive summary · reasons · business options (do nothing / do minimum / do something) · expected benefits and dis-benefits · timescale · costs · investment appraisal · major risks. <strong>The three business options are a frequent exam item</strong> — and "do nothing" is always the baseline you compare against.</p>
+      <div class="callout key"><div class="tag">Benefits are measured AFTER the project</div>Most benefits only appear once outputs are in use. They are measured per the <strong>Benefits Management Approach</strong>, often after closure — which is why the Senior User (accountable for benefits) carries that responsibility beyond the project's end.</div>`})}
+
+    ${deepPractice({id:'org',num:'2',name:'Organising',
+      purpose:'Define an organisation structure with clear accountabilities, engaging business, user and supplier interests.',
+      body:`
+      <h4 class="sub" style="font-size:16px">Four levels of organisation</h4>
+      <p><strong>1. Corporate/programme/customer</strong> — sits above the project, issues the mandate, sets overall tolerances. <strong>2. Directing</strong> — the Project Board. <strong>3. Managing</strong> — the Project Manager. <strong>4. Delivering</strong> — Team Managers (or team members directly).</p>
+      <p>Authority and tolerance <em>cascade down</em>; exceptions <em>escalate up</em>. That single sentence ties Organising to Progress and to "manage by exception".</p>
+      <h4 class="sub" style="font-size:16px">The three interests — why three</h4>
+      <p>Every project balances what the <strong>business</strong> will fund (Executive), what <strong>users</strong> need from the outputs (Senior User), and what <strong>suppliers</strong> can build (Senior Supplier). All three must be represented on the Board so decisions aren't made blind to one side.</p>
+      <h4 class="sub" style="font-size:16px">Assurance vs Support vs Change Authority</h4>
+      <p><strong>Project Assurance</strong> — the Board's independent check that the project is being run properly; three strands mirroring the three interests; <em>cannot</em> be the PM. <strong>Project Support</strong> — admin, configuration management, tool/standard guidance; <em>can</em> be the PM on a small project. <strong>Change Authority</strong> — a delegated decision-maker for changes within limits the Board sets.</p>
+      <div class="callout"><div class="tag">Composition: Communication Management Approach</div>How and when the project communicates with stakeholders: stakeholder analysis, information needs, methods, frequency, roles. Produced in IP.</div>`})}
+
+    ${deepPractice({id:'plans',num:'3',name:'Plans',
+      purpose:'Facilitate communication and control by defining how, when and at what cost products are delivered.',
+      body:`
+      <h4 class="sub" style="font-size:16px">The product-based planning technique — 4 steps</h4>
+      <p>This is the heart of "focus on products" made operational:</p>
+      <p><strong>1. Write the Project Product Description</strong> — what the project as a whole must deliver, and its acceptance criteria.<br>
+      <strong>2. Create the Product Breakdown Structure (PBS)</strong> — decompose the project into a hierarchy of products.<br>
+      <strong>3. Write Product Descriptions</strong> — for each significant product: purpose, composition, derivation, quality criteria, quality method.<br>
+      <strong>4. Create the Product Flow Diagram</strong> — the sequence and dependencies in which products are produced.</p>
+      <div class="callout key"><div class="tag">Order matters on the exam</div>Products first (what), <em>then</em> activities and dependencies (how), <em>then</em> estimates and schedule. A question that puts "identify activities" before "define products" is describing activity-based planning — the wrong answer.</div>
+      <h4 class="sub" style="font-size:16px">Three levels + the exception</h4>
+      <p><strong>Project Plan</strong> (whole project, in the PID, Board approves) · <strong>Stage Plan</strong> (next stage in detail, made near the end of the current stage) · <strong>Team Plan</strong> (optional, by a Team Manager). An <strong>Exception Plan</strong> replaces a Stage Plan or Project Plan after a tolerance breach — it covers from the present to the end of the plan it replaces, and needs the same approval as the original.</p>
+      <h4 class="sub" style="font-size:16px">What's in a Plan</h4>
+      <p>Plan description · prerequisites · external dependencies · planning assumptions · lessons incorporated · monitoring/control · the products (Product Descriptions) · schedule · tolerances · controls.</p>`})}
+
+    ${deepPractice({id:'quality',num:'4',name:'Quality',
+      purpose:'Define and implement the means by which the project verifies products are fit for purpose.',
+      body:`
+      <h4 class="sub" style="font-size:16px">The quality audit trail — a five-link chain</h4>
+      <p>This sequence is exam gold; learn it end to end:</p>
+      <p><strong>1. Customer's quality expectations</strong> — a general statement of the quality wanted (captured early, in the Project Product Description / Project Brief).<br>
+      <strong>2. Acceptance criteria</strong> — a <em>prioritised, measurable</em> list defining what makes the final product acceptable (also in the Project Product Description, owned by the Senior User).<br>
+      <strong>3. Quality criteria</strong> — specific, per-product standards (in each Product Description).<br>
+      <strong>4. Quality Register</strong> — the running log of planned and completed quality activities (who, when, result).<br>
+      <strong>5. Quality records / acceptance records</strong> — the evidence that criteria were met.</p>
+      <h4 class="sub" style="font-size:16px">Three quality words that get confused</h4>
+      <p><strong>Quality planning</strong> — defining what "fit for purpose" means (the criteria). <strong>Quality control</strong> — checking products against those criteria as they're built (reviews, tests). <strong>Quality assurance</strong> — an <em>independent, organisation-level</em> check that the project's quality processes are sound. QA sits <strong>outside</strong> the project (corporate/programme governance), which is what distinguishes it from <strong>Project Assurance</strong> (inside, for the Board).</p>
+      <div class="callout"><div class="tag">Quality review technique — the roles</div>PRINCE2's structured review uses defined roles: <strong>Chair</strong> (runs it), <strong>Presenter</strong> (represents the producers), <strong>Reviewer</strong> (checks against criteria), <strong>Administrator</strong> (records actions). Outcomes: complete / conditionally complete / incomplete.</div>
+      <div class="callout key"><div class="tag">Composition: Quality Management Approach</div>How quality will be managed on this project: standards, responsibilities, the quality-control and assurance arrangements, tools, and how the Quality Register will be used. Produced in IP.</div>`})}
+
+    ${deepPractice({id:'risk',num:'5',name:'Risk',
+      purpose:'Identify, assess and control uncertainty, improving the project\u2019s chance of success.',
+      body:`
+      <h4 class="sub" style="font-size:16px">The risk management procedure — 5 steps</h4>
+      <p><strong>1. Identify</strong> — context first (the Risk Management Approach), then the risks themselves; write each as cause → event → effect.<br>
+      <strong>2. Assess</strong> — estimate each risk's probability, impact and proximity (when), then evaluate the net effect of all risks together.<br>
+      <strong>3. Plan</strong> — choose responses.<br>
+      <strong>4. Implement</strong> — assign owners and actionees; carry out responses.<br>
+      <strong>5. Communicate</strong> — runs throughout (Highlight, End Stage, End Project reports), not just at the end.</p>
+      <h4 class="sub" style="font-size:16px">Responses — memorise by category</h4>
+      <p><strong>Threats:</strong> Avoid · Reduce (likelihood/impact) · Transfer (e.g. insurance) · Share · Accept · Prepare contingent plans.<br>
+      <strong>Opportunities:</strong> Exploit · Enhance · Share · Accept · Reject.<br>
+      <em>Share</em> and <em>Accept</em> appear in both lists — a common trap.</p>
+      <h4 class="sub" style="font-size:16px">Owner vs actionee, and the budget</h4>
+      <p>The <strong>risk owner</strong> is accountable for managing a specific risk. The <strong>risk actionee</strong> carries out a specific response action (may be a different person). The <strong>Risk Budget</strong> is money set aside specifically for funding responses — the <strong>Project Board approves it</strong>.</p>
+      <div class="callout key"><div class="tag">Composition: Risk Management Approach</div>How risk is managed here: procedure, tools, roles/responsibilities, risk categories, scales for probability/impact/proximity, risk tolerance, the Risk Budget, and how the Risk Register is maintained. Produced in IP.</div>`})}
+
+    ${deepPractice({id:'issues',num:'6',name:'Issues',
+      purpose:'Identify, assess and control any unplanned events that may affect the project.',
+      body:`
+      <h4 class="sub" style="font-size:16px">Risk vs issue — the one-word test</h4>
+      <p>A <strong>risk</strong> <em>might</em> happen (future, uncertain). An <strong>issue</strong> <em>has</em> happened (now, real). When a risk materialises, it becomes an issue.</p>
+      <h4 class="sub" style="font-size:16px">The three issue types</h4>
+      <p><strong>1. Request for change</strong> — someone wants to alter an approved baseline (a product or its spec).<br>
+      <strong>2. Off-specification</strong> — a product that should be delivered (to standard) won't be, or hasn't been. Includes a missing product or one that fails its criteria.<br>
+      <strong>3. Problem/concern</strong> — anything else the PM must resolve or escalate.</p>
+      <h4 class="sub" style="font-size:16px">The change control procedure — 5 steps</h4>
+      <p><strong>Capture</strong> (log it) → <strong>Assess</strong> (impact on objectives, Business Case, risk) → <strong>Propose</strong> (options and recommendation) → <strong>Decide</strong> (PM, Change Authority, or Board per the limits) → <strong>Implement</strong>.</p>
+      <div class="callout"><div class="tag">Daily Log vs Issue Register</div>Minor issues the PM handles informally go in the <strong>Daily Log</strong>. Anything formally managed through change control goes in the <strong>Issue Register</strong>, with an <strong>Issue Report</strong> for the detail.</div>
+      <div class="callout key"><div class="tag">Composition: Change Control Approach</div>How issues and changes are handled: the procedure, roles (incl. Change Authority and its limits), any change budget, tools, and how the Issue Register is used. Produced in IP.</div>`})}
+
+    ${deepPractice({id:'progress',num:'7',name:'Progress',
+      purpose:'Monitor actual vs planned achievement, forecast viability, and control unacceptable deviations.',
+      body:`
+      <h4 class="sub" style="font-size:16px">Tolerances and the cascade</h4>
+      <p>Six tolerance areas: <strong>Time · Cost · Scope · Quality · Benefits · Risk.</strong> Corporate sets project-level tolerances → the Board sets stage tolerances for the PM → the PM sets Work Package tolerances for Team Managers. Each level works freely within tolerance; a <em>forecast</em> breach triggers escalation to the level above.</p>
+      <h4 class="sub" style="font-size:16px">Two kinds of control</h4>
+      <p><strong>Time-driven</strong> — happen on a regular cadence (Highlight Report, Checkpoint Report). <strong>Event-driven</strong> — triggered by something occurring (Exception Report, End Stage Report, completion of a Work Package).</p>
+      <h4 class="sub" style="font-size:16px">Who reports what to whom</h4>
+      <p><strong>Checkpoint Report</strong>: Team Manager → PM (time-driven, on a Work Package). <strong>Highlight Report</strong>: PM → Board (time-driven, during a stage). <strong>Exception Report</strong>: PM → Board (event-driven, on forecast breach). <strong>End Stage Report</strong>: PM → Board (event-driven, at SB). <strong>End Project Report</strong>: PM → Board (at CP).</p>
+      <div class="callout"><div class="tag">Baselines, registers, and the audit trail</div>Progress control relies on <strong>baselines</strong> (approved plans to measure against), <strong>registers/logs</strong> (the running record), and <strong>reviews</strong> (checkpoints, stage assessments). Configuration management — knowing the status and version of every product — underpins all of it.</div>`})}
+
+    <div class="recall"><div class="tag">Proficiency check</div><ol>
+      <li>Recite the value chain (output → outcome → benefit) with an example, and define dis-benefit.</li>
+      <li>List the four product-based planning steps in order.</li>
+      <li>Walk the five-link quality audit trail from expectations to records.</li>
+      <li>Give the five-step risk procedure and the five-step change control procedure.</li>
+      <li>Explain the tolerance cascade across the three management levels.</li>
+    </ol></div>
+
+    <div style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="go('drill')">Drill the deeper material →</button>
+      <button class="btn btn-ghost" onclick="go('practices')">Back to summary</button>
+    </div>`;
+};
+
+/* ---------------- 7th EDITION ---------------- */
+RENDER.edition = (c)=>{
+  markRead('edition');
+  c.innerHTML = `
+    <div class="eyebrow">7th Edition (2023)</div>
+    <h1 class="page">What's New in PRINCE2 7<span class="small">the recently-tested material</span></h1>
+    <p class="lede">PRINCE2 was substantially refreshed in 2023. Current exams concentrate questions in exactly the areas that changed — so these are worth knowing precisely, not just in passing.</p>
+
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">1. "Themes" are now "Practices"</h3>
+      <p>The seven <strong>themes</strong> of the 6th edition were renamed the seven <strong>practices</strong>. The substance is largely continuous, but the exam uses the new word — and one practice was relabelled: the old <strong>"Organization"</strong> theme is now <strong>"Organizing"</strong>. The set is: Business Case, Organizing, Plans, Quality, Risk, Issues, Progress.</p>
+    </div>
+
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">2. Five "people" / management elements framing</h3>
+      <p>7th edition foregrounds the integrated elements of the method working together — <strong>principles, people, practices, processes</strong>, applied in a <strong>project context</strong>. The explicit attention to <strong>people</strong> (leadership, stakeholder engagement, the human side of change) is new emphasis relative to the 6th edition's more document-centric framing.</p>
+      <div class="callout"><div class="tag">Why it's tested</div>Expect a question that lists the integrated elements, or asks what 7th edition added focus on. "People" is the answer that distinguishes 7 from 6.</div>
+    </div>
+
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">3. Sustainability as a performance target</h3>
+      <p>This is the headline addition. 7th edition adds <strong>sustainability</strong> to the set of <strong>performance targets</strong> the project is managed against. The earlier six tolerance/performance areas — <strong>time, cost, scope, quality, benefits, risk</strong> — are now joined in the 7th-edition framing by <strong>sustainability</strong> as a seventh performance aspect to plan for and measure.</p>
+      <div class="callout key"><div class="tag">Exam-critical distinction</div>Know how the question is framed. The classic <strong>six tolerances</strong> (time, cost, scope, quality, benefits, risk) remain the tolerance set you escalate against. <strong>Sustainability</strong> is the new <em>performance target / objective</em> added in 7th edition. If a question asks "which is a 7th-edition addition," the answer is sustainability; if it asks "the tolerance areas," it's still the six.</div>
+    </div>
+
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">4. Digital and data emphasis</h3>
+      <p>7th edition reflects modern delivery: explicit acknowledgement of <strong>digital tooling, data management, and how information flows</strong> through the method, rather than assuming paper documents. Management products are "information sets" that can live in tools, not necessarily standalone documents — reinforcing that <strong>tailoring</strong> applies to how products are held and formatted.</p>
+    </div>
+
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">5. What did NOT change</h3>
+      <p>The <strong>7 principles are unchanged</strong> in number and intent. The <strong>7 processes are unchanged</strong>. The role structure (Project Board, three interests, PM, Team Manager, Assurance, Support) is intact. The four-layer model still holds. So most of what you've learned transfers directly — the deltas above are the surface area where 7 differs from 6.</p>
+    </div>
+
+    <div class="callout trap"><div class="tag">Don't over-rotate</div>It's tempting to assume everything changed. It didn't. The high-yield 7th-edition facts are: <strong>themes→practices</strong>, the <strong>people</strong> emphasis, and <strong>sustainability</strong> as a performance target. Bank those three cleanly and you've covered most edition-specific questions.</div>
+
+    <div class="recall"><div class="tag">Recall check</div><ol>
+      <li>What were "themes" renamed to, and which one's spelling/label changed?</li>
+      <li>Name the integrated elements 7th edition emphasises — which is the newly foregrounded one?</li>
+      <li>Sustainability is a 7th-edition addition — a tolerance, or a performance target? How does that differ from the six tolerances?</li>
+      <li>Name three things that did NOT change from the 6th edition.</li>
+    </ol></div>
+
+    <div style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="go('drill')">Drill this →</button>
+      <button class="btn btn-ghost" onclick="go('dashboard')">Dashboard</button>
+    </div>`;
+};
+
+
 /* ---------- expose handlers (namespace + globals so all onclick styles resolve) ---------- */
 const App = { go, openNav, closeNav, startFc, flipFc, rateFc, startDrill, answerDrill,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
@@ -1285,10 +1550,9 @@ if(typeof document!=='undefined' && document.addEventListener){
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
 }
 
-/* ---------- merge the expansion question bank if present ---------- */
-if(typeof QUESTIONS_EXT!=='undefined' && Array.isArray(QUESTIONS_EXT)){
-  QUESTIONS.push(...QUESTIONS_EXT);
-}
+/* ---------- merge expansion + deep question banks if present ---------- */
+if(typeof QUESTIONS_EXT!=='undefined' && Array.isArray(QUESTIONS_EXT)){ QUESTIONS.push(...QUESTIONS_EXT); }
+if(typeof QUESTIONS_DEEP!=='undefined' && Array.isArray(QUESTIONS_DEEP)){ QUESTIONS.push(...QUESTIONS_DEEP); }
 
 buildNav();
 go(state.lastView||'dashboard');

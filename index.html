@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRINCE2 Foundation — Interactive Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,500&family=Spline+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1f24; --ink-soft:#454d56; --paper:#f4f1ea; --paper-2:#ece7dc;
+  --card:#fffdf8; --line:#d9d2c4; --line-soft:#e6e0d3;
+  --navy:#1c3b5a; --navy-2:#244c73; --gold:#b07c2b; --gold-soft:#d9a94f;
+  --green:#2f6b4f; --red:#a93b2e; --red-soft:#f3e3df; --green-soft:#e0ede6;
+  --shadow:0 1px 2px rgba(26,31,36,.04),0 8px 24px rgba(26,31,36,.06);
+  --shadow-lg:0 4px 12px rgba(26,31,36,.08),0 24px 48px rgba(26,31,36,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Spline Sans',sans-serif; background:var(--paper); color:var(--ink);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 20% 0%,rgba(28,59,90,.03),transparent 40%),radial-gradient(circle at 90% 100%,rgba(176,124,43,.04),transparent 45%);
+  background-attachment:fixed;
+}
+.serif{font-family:'Fraunces',serif}
+.mono{font-family:'Spline Sans Mono',monospace}
+
+/* ---------- Layout shell ---------- */
+.shell{display:flex;min-height:100vh}
+.sidebar{
+  width:260px;flex-shrink:0;background:var(--navy);color:#e8eef3;
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 0;
+  border-right:1px solid rgba(0,0,0,.2);
+}
+.brand{padding:0 26px 22px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
+.brand .crest{font-family:'Fraunces',serif;font-weight:800;font-size:25px;letter-spacing:-.5px;line-height:1.05}
+.brand .crest em{color:var(--gold-soft);font-style:normal}
+.brand .sub{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#9bb0c4;margin-top:6px}
+.nav{list-style:none;padding:0 14px}
+.nav li{margin:1px 0}
+.nav button{
+  width:100%;text-align:left;background:none;border:none;color:#c3d2e0;
+  font-family:'Spline Sans',sans-serif;font-size:14.5px;font-weight:500;
+  padding:10px 14px;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:11px;
+  transition:all .15s;
+}
+.nav button:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav button.active{background:var(--gold);color:#1a1206;font-weight:600}
+.nav .ico{font-size:16px;width:20px;text-align:center;opacity:.9}
+.nav-sec{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:#7c93a8;padding:18px 18px 7px}
+.sb-foot{padding:18px 26px 0;font-size:11.5px;color:#8ba0b4;line-height:1.5}
+
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{
+  display:none;background:var(--navy);color:#fff;padding:14px 18px;
+  align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40;
+}
+.topbar .crest{font-family:'Fraunces',serif;font-weight:800;font-size:19px}
+.topbar .crest em{color:var(--gold-soft);font-style:normal}
+.burger{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;padding:7px 11px;font-size:18px;cursor:pointer}
+.content{flex:1;padding:46px 52px 90px;max-width:920px;width:100%;margin:0 auto}
+
+/* ---------- Typography ---------- */
+.eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
+h1.page{font-family:'Fraunces',serif;font-weight:800;font-size:42px;line-height:1.05;letter-spacing:-1px;margin-bottom:14px}
+h1.page .small{font-size:.5em;color:var(--gold);font-weight:600;display:block;letter-spacing:0}
+.lede{font-size:18px;color:var(--ink-soft);max-width:64ch;margin-bottom:34px}
+h2.sec{font-family:'Fraunces',serif;font-weight:800;font-size:27px;margin:40px 0 14px;letter-spacing:-.5px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+h3.sub{font-family:'Fraunces',serif;font-weight:600;font-size:20px;margin:26px 0 8px;color:var(--navy)}
+p{margin-bottom:14px}
+.content a{color:var(--navy-2);text-decoration:underline;text-decoration-color:var(--gold-soft);text-underline-offset:2px}
+strong{font-weight:600;color:var(--ink)}
+
+/* ---------- Cards & callouts ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow);margin-bottom:18px}
+.callout{border-left:4px solid var(--gold);background:var(--paper-2);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
+.callout.trap{border-color:var(--red);background:var(--red-soft)}
+.callout.key{border-color:var(--green);background:var(--green-soft)}
+.callout .tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:5px;color:var(--gold)}
+.callout.trap .tag{color:var(--red)}
+.callout.key .tag{color:var(--green)}
+
+/* principle/practice/process numbered blocks */
+.pblock{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.pblock:last-child{border-bottom:none}
+.pnum{flex-shrink:0;width:42px;height:42px;border-radius:12px;background:var(--navy);color:var(--gold-soft);
+  font-family:'Fraunces',serif;font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center}
+.pbody h4{font-family:'Fraunces',serif;font-size:18px;font-weight:600;margin-bottom:4px}
+.pbody .stmt{font-size:14.5px;color:var(--ink-soft)}
+.pbody .hook{font-size:13px;margin-top:6px;color:var(--gold);font-weight:500}
+.pbody .hook b{color:var(--navy)}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+th{background:var(--navy);color:#fff;text-align:left;padding:11px 14px;font-weight:600;font-size:13px}
+td{padding:10px 14px;border-bottom:1px solid var(--line-soft)}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(0,0,0,.015)}
+
+.lifecycle{background:var(--navy);color:#dce6ef;border-radius:14px;padding:22px;font-family:'Spline Sans Mono',monospace;
+  font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;margin:18px 0}
+.lifecycle b{color:var(--gold-soft)}
+
+.recall{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#eef3f8;border-radius:14px;padding:22px 24px;margin:22px 0}
+.recall .tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:8px}
+.recall ol{margin-left:18px;font-size:14.5px}
+.recall li{margin:5px 0}
+
+/* ---------- Progress bits ---------- */
+.prog-wrap{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-soft));border-radius:99px;transition:width .5s}
+.btn{font-family:'Spline Sans',sans-serif;font-weight:600;font-size:14.5px;border:none;border-radius:11px;padding:11px 22px;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--navy-2);transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-gold{background:var(--gold);color:#1a1206}
+.btn-gold:hover{background:var(--gold-soft);transform:translateY(-1px)}
+.btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--navy);background:var(--card)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:99px;background:var(--paper-2);color:var(--ink-soft)}
+.pill.ok{background:var(--green-soft);color:var(--green)}
+
+/* ---------- Dashboard ---------- */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow)}
+.stat .n{font-family:'Fraunces',serif;font-weight:800;font-size:38px;line-height:1;color:var(--navy)}
+.stat .n .u{font-size:18px;color:var(--ink-soft)}
+.stat .l{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.checklist{list-style:none}
+.checklist li{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px}
+.checklist .box{flex-shrink:0;width:22px;height:22px;border:2px solid var(--line);border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;transition:all .15s}
+.checklist .box.done{background:var(--green);border-color:var(--green);color:#fff}
+
+/* ---------- Flashcards ---------- */
+.fc-stage{display:flex;flex-direction:column;align-items:center;gap:20px;margin-top:10px}
+.flashcard{width:100%;max-width:560px;height:min(320px,58vh);perspective:1600px;cursor:pointer}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:20px;padding:34px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow-lg)}
+.fc-front{background:var(--card);border:1px solid var(--line)}
+.fc-back{background:var(--navy);color:#eef3f8;transform:rotateY(180deg)}
+.fc-deck{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+.fc-back .fc-deck{color:var(--gold-soft)}
+.fc-text{font-family:'Fraunces',serif;font-size:21px;line-height:1.35;white-space:pre-line}
+.fc-back .fc-text{font-size:16px;font-family:'Spline Sans',sans-serif;line-height:1.55}
+.fc-hint{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:12px;color:var(--ink-soft);opacity:.7}
+.fc-back .fc-hint{color:#9bb0c4}
+.fc-rate{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+/* ---------- Quiz / drill ---------- */
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 30px;box-shadow:var(--shadow-lg);margin-bottom:18px}
+.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:13px;color:var(--ink-soft)}
+.q-sec-tag{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.q-text{font-family:'Fraunces',serif;font-size:21px;font-weight:600;line-height:1.4;margin-bottom:22px}
+.opt{display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;background:var(--paper);border:1.5px solid var(--line);
+  border-radius:13px;padding:15px 17px;margin-bottom:11px;cursor:pointer;font-size:15px;transition:all .14s;font-family:'Spline Sans',sans-serif;color:var(--ink)}
+.opt:hover:not(:disabled){border-color:var(--navy-2);background:var(--card)}
+.opt .ltr{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--card);border:1.5px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;transition:all .14s}
+.opt.correct{border-color:var(--green);background:var(--green-soft)}
+.opt.correct .ltr{background:var(--green);border-color:var(--green);color:#fff}
+.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.opt.wrong .ltr{background:var(--red);border-color:var(--red);color:#fff}
+.opt:disabled{cursor:default}
+.explain{border-radius:12px;padding:15px 18px;margin-top:6px;font-size:14.5px;line-height:1.5;display:none}
+.explain.show{display:block}
+.explain.right{background:var(--green-soft);border-left:4px solid var(--green)}
+.explain.wrong{background:var(--red-soft);border-left:4px solid var(--red)}
+.explain .v{font-weight:700;display:block;margin-bottom:3px}
+.explain.right .v{color:var(--green)}
+.explain.wrong .v{color:var(--red)}
+
+.quiz-setup{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:13px;margin:20px 0}
+.sec-choice{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:18px;cursor:pointer;transition:all .15s;text-align:left}
+.sec-choice:hover{border-color:var(--navy)}
+.sec-choice.sel{border-color:var(--gold);background:var(--paper-2)}
+.sec-choice h4{font-family:'Fraunces',serif;font-size:17px;margin-bottom:3px}
+.sec-choice .c{font-size:13px;color:var(--ink-soft)}
+.sec-choice .acc{font-size:12px;margin-top:7px;font-weight:600}
+
+.timer{font-family:'Spline Sans Mono',monospace;font-weight:500;font-size:15px;padding:5px 13px;border-radius:9px;background:var(--navy);color:#fff}
+.timer.warn{background:var(--red)}
+.exam-nav{display:flex;justify-content:space-between;gap:12px;margin-top:10px;flex-wrap:wrap}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:7px;margin:16px 0}
+.qdot{aspect-ratio:1;min-height:44px;border-radius:8px;border:1.5px solid var(--line);background:var(--card);font-size:13px;font-weight:600;cursor:pointer;color:var(--ink-soft);transition:all .12s}
+.qdot.answered{background:var(--navy);color:#fff;border-color:var(--navy)}
+.qdot.flagged{border-color:var(--gold);background:var(--gold-soft);color:#1a1206}
+.qdot.current{outline:3px solid var(--gold);outline-offset:1px}
+
+.result-ring{width:170px;height:170px;margin:0 auto 10px;position:relative}
+.result-ring svg{transform:rotate(-90deg)}
+.result-ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.result-ring .pct .n{font-family:'Fraunces',serif;font-weight:800;font-size:42px;line-height:1}
+.result-ring .pct .l{font-size:12px;color:var(--ink-soft);letter-spacing:1px}
+
+.verdict{text-align:center;font-family:'Fraunces',serif;font-size:24px;font-weight:600;margin:8px 0}
+.verdict.pass{color:var(--green)}.verdict.fail{color:var(--red)}
+
+.breakdown{margin:18px 0}
+.bd-row{display:flex;align-items:center;gap:12px;margin:9px 0;font-size:14px}
+.bd-row .nm{width:110px;font-weight:500;text-transform:capitalize}
+.bd-row .track{flex:1;height:9px;background:var(--line);border-radius:99px;overflow:hidden}
+.bd-row .fill{height:100%;border-radius:99px}
+.bd-row .sc{width:54px;text-align:right;font-family:'Spline Sans Mono',monospace;font-size:13px}
+
+.hidden{display:none!important}
+.fade{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .fc-inner{transition:none!important}
+  html{scroll-behavior:auto}
+}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-scroll table{margin:0}
+
+.scrim{position:fixed;inset:0;background:rgba(20,30,40,.45);z-index:45;display:none}
+.scrim.show{display:block}
+
+@media(max-width:880px){
+  .sidebar{position:fixed;left:0;top:0;z-index:50;transform:translateX(-100%);transition:transform .25s}
+  .sidebar.open{transform:none}
+  .topbar{display:flex}
+  .content{padding:26px 20px 80px}
+  h1.page{font-size:32px}
+  .lede{font-size:16px}
+}
+</style>
+</head>
+<body>
+<a href="#content" style="position:absolute;left:-999px;top:8px;z-index:99;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none" onfocus="this.style.left='8px'" onblur="this.style.left='-999px'">Skip to content</a>
+<div class="scrim" id="scrim" onclick="closeNav()"></div>
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="crest">PR<em>IN</em>CE2</div>
+      <div class="sub">Foundation · Self-Study</div>
+    </div>
+    <div class="nav-sec">Study</div>
+    <ul class="nav" id="navMain"></ul>
+    <div class="nav-sec">Practice</div>
+    <ul class="nav" id="navPractice"></ul>
+    <div class="sb-foot">
+      7th edition (2023). A structured first pass —<br>pair with the official manual + PeopleCert sample papers before the exam.
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="burger" onclick="openNav()">☰</button>
+      <div class="crest">PR<em>IN</em>CE2 Foundation</div>
+      <div style="width:38px"></div>
+    </div>
+    <div class="content" id="content" tabindex="-1"></div>
+  </div>
+</div>
+
+<script>
+// PRINCE2 Foundation — 100-question bank
+// section: principles | practices | processes | products | roles | tailoring
+let QUESTIONS = [
+// ---------- PRINCIPLES (1-15) ----------
+{s:"principles",q:"Which principle requires the project to stop if it is no longer justified?",o:["Manage by stages","Continued business justification","Learn from experience","Tailor to suit the project"],a:1,e:"Continued business justification: a project must remain justified throughout, and stops if justification collapses."},
+{s:"principles",q:"How many principles does PRINCE2 define?",o:["5","6","7","8"],a:2,e:"PRINCE2 defines exactly 7 principles."},
+{s:"principles",q:"Which principle requires that lessons are sought, recorded, and acted upon?",o:["Learn from experience","Continued business justification","Focus on products","Manage by exception"],a:0,e:"Learn from experience covers seeking, recording and acting on lessons throughout."},
+{s:"principles",q:"Which principle requires the project to have at least two management stages?",o:["Focus on products","Manage by stages","Defined roles and responsibilities","Tailor to suit the project"],a:1,e:"Manage by stages requires a minimum of two: initiation plus at least one delivery stage."},
+{s:"principles",q:"Which of the following is NOT a PRINCE2 principle?",o:["Manage by exception","Focus on products","Deliver on time and to budget","Tailor to suit the project"],a:2,e:"'Deliver on time and to budget' is not a principle — a distractor."},
+{s:"principles",q:"The principle 'defined roles, responsibilities and relationships' requires which three stakeholder interests are engaged?",o:["Business, project, supplier","Customer, programme, project","Business, user, supplier","Executive, manager, team"],a:2,e:"The three interests are business, user, supplier."},
+{s:"principles",q:"Which principle establishes limits of delegated authority?",o:["Continued business justification","Manage by stages","Manage by exception","Focus on products"],a:2,e:"Manage by exception sets tolerances that define delegated authority limits."},
+{s:"principles",q:"Tailoring a PRINCE2 project is:",o:["Optional, depending on the project","Mandatory","Only for large projects","Only for small projects"],a:1,e:"Tailoring is mandatory for all PRINCE2 projects."},
+{s:"principles",q:"Which principle states that PRINCE2 is product-based, not activity-based?",o:["Focus on products","Manage by stages","Continued business justification","Learn from experience"],a:0,e:"Focus on products: plan by deliverables and their quality, then derive activities."},
+{s:"principles",q:"At which point is continued business justification reviewed?",o:["Only at project start","Only at project close","At every stage boundary","Never explicitly"],a:2,e:"Reviewed at every stage boundary (and during exception handling)."},
+{s:"principles",q:"Which principle CANNOT be tailored away?",o:["Continued business justification","Manage by stages","All seven principles","Focus on products"],a:2,e:"No principle can be tailored away — all seven always apply."},
+{s:"principles",q:"The principle 'manage by exception' relates to:",o:["Issues that escalate to corporate","Tolerances and escalation paths","Risk assessment only","Quality criteria"],a:1,e:"It concerns tolerances and the escalation path when they are forecast to be exceeded."},
+{s:"principles",q:"Which principle drives the use of Product Descriptions?",o:["Continued business justification","Focus on products","Manage by stages","Defined roles and responsibilities"],a:1,e:"Focus on products drives product-based planning and Product Descriptions."},
+{s:"principles",q:"Lessons are passed forward at:",o:["The start of the project only","The end of the project only","Throughout the project, with formal handover at project close","Only when problems occur"],a:2,e:"Captured throughout, formally handed forward at close via the Lessons Report."},
+{s:"principles",q:"The 'continued' in 'continued business justification' means:",o:["Justification at every stage boundary and on demand","Continuous work without interruption","Continuing past project closure","Justification at corporate level only"],a:0,e:"Justification is re-confirmed at every stage boundary and whenever needed."},
+// ---------- PRACTICES (16-35) ----------
+{s:"practices",q:"Which document captures the customer's quality expectations?",o:["Quality Register","Project Product Description","Quality Management Approach","Acceptance Criteria"],a:1,e:"Customer's quality expectations are captured in the Project Product Description (origin: Project Brief)."},
+{s:"practices",q:"Who owns the Business Case?",o:["Project Manager","Senior User","Executive","Project Board collectively"],a:2,e:"The Executive owns the Business Case throughout."},
+{s:"practices",q:"Which is NOT a response to a threat?",o:["Avoid","Reduce","Exploit","Transfer"],a:2,e:"Exploit is an OPPORTUNITY response, not a threat response."},
+{s:"practices",q:"Which is a response to an opportunity?",o:["Reduce","Avoid","Enhance","Transfer"],a:2,e:"Enhance is an opportunity response."},
+{s:"practices",q:"The 'outline' Business Case is produced in which process?",o:["Initiating a Project","Starting up a Project","Controlling a Stage","Closing a Project"],a:1,e:"Outline Business Case is produced in Starting up a Project (SU)."},
+{s:"practices",q:"The 'detailed' Business Case is produced in which process?",o:["Initiating a Project","Starting up a Project","Directing a Project","Managing a Stage Boundary"],a:0,e:"Detailed Business Case is produced in Initiating a Project (IP)."},
+{s:"practices",q:"How many levels of plan does PRINCE2 define?",o:["2","3","4","5"],a:1,e:"Three: Project Plan, Stage Plan, Team Plan (Exception Plan replaces Stage/Project Plan)."},
+{s:"practices",q:"An Exception Plan replaces:",o:["Any plan in the hierarchy","A Stage Plan or Project Plan (not Team Plan)","Only a Stage Plan","Only the Project Plan"],a:1,e:"It replaces a Stage Plan or Project Plan — never a Team Plan."},
+{s:"practices",q:"Which is NOT a tolerance area in PRINCE2?",o:["Cost","Time","Reputation","Risk"],a:2,e:"The six are time, cost, scope, quality, benefits, risk. Reputation is not one."},
+{s:"practices",q:"How many tolerance areas does PRINCE2 define?",o:["4","5","6","7"],a:2,e:"Six: time, cost, scope, quality, benefits, risk."},
+{s:"practices",q:"Quality assurance in PRINCE2 is:",o:["Performed by the Project Manager","Performed by the Quality Manager","Independent of the project, part of corporate governance","Performed by the Project Board"],a:2,e:"Quality assurance sits OUTSIDE the project as corporate/programme governance. (Distinct from Project Assurance.)"},
+{s:"practices",q:"Which document defines how risks will be identified, assessed and controlled?",o:["Risk Register","Risk Management Approach","Risk Budget","Risk Plan"],a:1,e:"The Risk Management Approach. The Register logs the risks themselves."},
+{s:"practices",q:"A 'dis-benefit' is:",o:["A failed benefit","A negative outcome of the project","A risk that materialised","A poorly-defined benefit"],a:1,e:"A dis-benefit is a measurable negative outcome of the project."},
+{s:"practices",q:"Three types of issue in PRINCE2 are:",o:["Risk, problem, change","Request for change, off-specification, problem/concern","Internal, external, supplier","High, medium, low"],a:1,e:"Request for change, off-specification, problem/concern."},
+{s:"practices",q:"An 'off-specification' issue is:",o:["Something that should be delivered but won't be (or wasn't)","A proposed change to a baseline","A poorly-specified product","An issue raised outside the project"],a:0,e:"Off-specification: a product that should be delivered (to standard) but won't be / hasn't been."},
+{s:"practices",q:"Who can decide on changes within delegated limits?",o:["Project Manager only","Change Authority","Project Support","Senior User"],a:1,e:"The Change Authority decides on changes within limits delegated by the Project Board."},
+{s:"practices",q:"The Project Product Description is owned by:",o:["Project Manager","Executive","Senior User","Senior Supplier"],a:2,e:"Owned by the Senior User (represents the user/acceptance interest)."},
+{s:"practices",q:"Acceptance criteria are:",o:["Quality criteria for individual products","A prioritised list defining what the customer will accept","The Project Board's checklist","The project's success metrics"],a:1,e:"A prioritised, measurable list of what makes the project product acceptable."},
+{s:"practices",q:"The Risk Budget is approved by:",o:["Project Manager","Executive","Project Board","Senior Supplier"],a:2,e:"The Project Board approves the Risk Budget."},
+{s:"practices",q:"A risk 'owner' is:",o:["The person carrying out specific risk actions","The person accountable for the management of a risk","The Project Manager always","The risk's originator"],a:1,e:"The owner is accountable for managing the risk; the actionee carries out actions."},
+// ---------- PROCESSES (36-55) ----------
+{s:"processes",q:"The PRINCE2 process that runs from end of SU to end of CP is:",o:["Controlling a Stage","Managing Product Delivery","Directing a Project","Initiating a Project"],a:2,e:"Directing a Project (DP) spans the whole project for the Project Board."},
+{s:"processes",q:"The trigger for 'Starting up a Project' is:",o:["A request from the Senior User","A project mandate","The PID","An approved Business Case"],a:1,e:"Receipt of the project mandate triggers SU."},
+{s:"processes",q:"The main output of 'Starting up a Project' is:",o:["The Project Plan","The PID","The Project Brief","The End Stage Report"],a:2,e:"SU produces the Project Brief (the PID comes later, in IP)."},
+{s:"processes",q:"The main output of 'Initiating a Project' is:",o:["The Project Brief","The PID","The End Stage Report","The Project Mandate"],a:1,e:"IP produces the PID — the master baseline."},
+{s:"processes",q:"'Managing a Stage Boundary' is triggered by:",o:["Only the normal end of a stage","Only an exception","The normal end of a stage or an exception","The end of the project"],a:2,e:"Two triggers: approaching the end of a stage, or an exception requiring an Exception Plan."},
+{s:"processes",q:"Highlight Reports are produced in which process?",o:["Managing Product Delivery","Managing a Stage Boundary","Controlling a Stage","Directing a Project"],a:2,e:"Highlight Reports are produced in Controlling a Stage (PM to Board)."},
+{s:"processes",q:"Checkpoint Reports are produced in which process?",o:["Controlling a Stage","Managing Product Delivery","Managing a Stage Boundary","Closing a Project"],a:1,e:"Checkpoint Reports are produced in Managing Product Delivery (Team Manager to PM)."},
+{s:"processes",q:"The five 'Directing a Project' decision points include all EXCEPT:",o:["Authorise initiation","Authorise the project","Approve Work Packages","Authorise project closure"],a:2,e:"Work Packages are authorised in Controlling a Stage, not by the Board."},
+{s:"processes",q:"Which process focuses on the PM–Team Manager interface?",o:["Controlling a Stage","Managing Product Delivery","Managing a Stage Boundary","Initiating a Project"],a:1,e:"Managing Product Delivery formalises the PM–Team Manager link."},
+{s:"processes",q:"The Lessons Report is produced in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Closing a Project"],a:3,e:"Lessons Report is produced in Closing a Project (handed forward)."},
+{s:"processes",q:"The minimum number of management stages in a PRINCE2 project is:",o:["1","2","3","4"],a:1,e:"Minimum two: initiation stage + at least one delivery stage."},
+{s:"processes",q:"The initiation stage is always a:",o:["Delivery stage","Management stage","Pre-project activity","Both delivery and management stage"],a:1,e:"The initiation stage is a management stage."},
+{s:"processes",q:"Premature closure is handled in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Closing a Project"],a:3,e:"Premature (early) closure is handled within Closing a Project."},
+{s:"processes",q:"Which process authorises a Work Package?",o:["Initiating a Project","Controlling a Stage","Managing Product Delivery","Directing a Project"],a:1,e:"The PM authorises Work Packages in Controlling a Stage."},
+{s:"processes",q:"The End Stage Report is produced in:",o:["Controlling a Stage","Managing a Stage Boundary","Closing a Project","Directing a Project"],a:1,e:"Produced in Managing a Stage Boundary."},
+{s:"processes",q:"The Benefits Management Approach is refined in:",o:["Starting up a Project","Initiating a Project","Closing a Project","Both b and c"],a:3,e:"Created/refined in IP and again updated in CP for post-project measurement."},
+{s:"processes",q:"Ad hoc direction is part of:",o:["Controlling a Stage","Managing a Stage Boundary","Directing a Project","Initiating a Project"],a:2,e:"Ad hoc direction is one of the five DP activities."},
+{s:"processes",q:"Which process never runs during a delivery stage?",o:["Controlling a Stage","Managing Product Delivery","Managing a Stage Boundary","Initiating a Project"],a:3,e:"Initiating a Project happens in the initiation stage only, before delivery."},
+{s:"processes",q:"The Communication Management Approach is produced in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Controlling a Stage"],a:1,e:"Produced in Initiating a Project, part of the PID."},
+{s:"processes",q:"Issues are escalated in:",o:["Managing Product Delivery","Controlling a Stage","Managing a Stage Boundary","Directing a Project"],a:1,e:"Escalation happens in Controlling a Stage (when tolerance is forecast to be exceeded)."},
+// ---------- PRODUCTS (56-75) ----------
+{s:"products",q:"Which of the following is a baseline?",o:["Highlight Report","Risk Register","PID","Daily Log"],a:2,e:"The PID is a baseline. Registers/logs are records; Reports are reports."},
+{s:"products",q:"Which of the following is a record?",o:["Project Plan","Quality Register","End Stage Report","Business Case"],a:1,e:"The Quality Register is a record (a working log)."},
+{s:"products",q:"Which of the following is a report?",o:["Project Brief","Communication Management Approach","Checkpoint Report","Quality Register"],a:2,e:"The Checkpoint Report is a report (point-in-time)."},
+{s:"products",q:"The Daily Log is owned by:",o:["Executive","Project Manager","Team Manager","Project Support"],a:1,e:"The Project Manager owns the Daily Log."},
+{s:"products",q:"Which document contains the project management team structure?",o:["Project Brief","PID","Both","Neither"],a:2,e:"Both the Project Brief and PID contain the team structure (Brief first, PID refined)."},
+{s:"products",q:"The Risk Register is started in:",o:["Starting up a Project","Initiating a Project","Controlling a Stage","Directing a Project"],a:1,e:"Started in Initiating a Project."},
+{s:"products",q:"The Issue Register is started in:",o:["Starting up a Project","Initiating a Project","Controlling a Stage","Managing a Stage Boundary"],a:1,e:"Started in Initiating a Project."},
+{s:"products",q:"The Lessons Log is started in:",o:["Starting up a Project","Initiating a Project","Controlling a Stage","Closing a Project"],a:0,e:"Started in Starting up a Project (along with the Daily Log)."},
+{s:"products",q:"The Exception Report is produced by:",o:["Project Board","Project Manager","Team Manager","Executive"],a:1,e:"Produced by the Project Manager (to the Board) in Controlling a Stage."},
+{s:"products",q:"Which document defines acceptance criteria?",o:["Project Brief","Project Product Description","Quality Register","PID"],a:1,e:"Acceptance criteria live in the Project Product Description."},
+{s:"products",q:"The Product Status Account is produced by:",o:["Project Manager","Project Support","Team Manager","Project Board"],a:1,e:"Produced by Project Support (to the PM)."},
+{s:"products",q:"A Work Package contains:",o:["Only product descriptions","Authorisation, instructions, constraints and reporting requirements for work","Only quality criteria","The full Stage Plan"],a:1,e:"It bundles authorisation, instructions, constraints and reporting requirements."},
+{s:"products",q:"The Configuration Item Records are owned by:",o:["Project Manager (or Project Support)","Executive","Team Manager","Senior User"],a:0,e:"Owned by the Project Manager, often delegated to Project Support."},
+{s:"products",q:"The Benefits Management Approach is owned by:",o:["Project Manager","Senior User","Executive","Project Board"],a:2,e:"Owned by the Executive."},
+{s:"products",q:"The Project Product Description is created in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Closing a Project"],a:0,e:"Created in Starting up a Project (part of the Project Brief)."},
+{s:"products",q:"Which document is updated at every stage boundary?",o:["Project Brief","Project Plan","Project Mandate","Stage Plan only"],a:1,e:"The Project Plan is updated at each stage boundary (in SB)."},
+{s:"products",q:"Highlight Reports go from:",o:["Team Manager to Project Manager","Project Manager to Project Board","Project Board to corporate","Project Manager to Senior User"],a:1,e:"PM to Project Board."},
+{s:"products",q:"Checkpoint Reports go from:",o:["Team Manager to Project Manager","Project Manager to Project Board","Project Board to corporate","Senior User to Project Manager"],a:0,e:"Team Manager to Project Manager."},
+{s:"products",q:"End Stage Reports cover:",o:["The whole project to date","Only the current stage","Only outstanding risks","Only completed Work Packages"],a:1,e:"They report on the stage just completed."},
+{s:"products",q:"The Project Mandate is:",o:["A PRINCE2 management product","An input to PRINCE2 from corporate/programme/customer","Created in Starting up a Project","The same as the Project Brief"],a:1,e:"The mandate is an external input that triggers SU; not a PRINCE2 management product."},
+// ---------- ROLES (76-90) ----------
+{s:"roles",q:"Which role is ultimately accountable for the project's success?",o:["Project Manager","Senior User","Executive","Team Manager"],a:2,e:"The Executive is ultimately accountable (the Board is collectively responsible)."},
+{s:"roles",q:"Which role CANNOT be combined with Project Manager?",o:["Team Manager","Project Support","Project Assurance","Change Authority"],a:2,e:"Project Assurance must stay independent of management — cannot be the PM."},
+{s:"roles",q:"Which role represents users of the project's products?",o:["Executive","Senior User","Senior Supplier","Team Manager"],a:1,e:"The Senior User represents the user interest."},
+{s:"roles",q:"Which role represents those who design and deliver the project's products?",o:["Executive","Senior User","Senior Supplier","Project Manager"],a:2,e:"The Senior Supplier represents the supplier interest."},
+{s:"roles",q:"Project Assurance is independent of:",o:["The Senior User","The Project Board","The Project Manager","The Senior Supplier"],a:2,e:"Independent of the Project Manager (it assures on the Board's behalf)."},
+{s:"roles",q:"Which role chairs the Project Board?",o:["Senior User","Senior Supplier","Executive","Project Manager"],a:2,e:"The Executive chairs the Board."},
+{s:"roles",q:"Realising benefits after project closure is the responsibility of:",o:["Project Manager","Senior User","Executive","Senior Supplier"],a:1,e:"The Senior User is accountable for realising benefits post-project."},
+{s:"roles",q:"The Change Authority is appointed by:",o:["Project Manager","Senior User","Project Board","Corporate"],a:2,e:"The Project Board appoints the Change Authority and delegates limits to it."},
+{s:"roles",q:"The Project Manager reports to:",o:["Corporate directly","The Project Board","The Senior User","The Team Manager"],a:1,e:"The PM reports to the Project Board."},
+{s:"roles",q:"The Project Support role:",o:["Performs project assurance","Performs administrative and configuration management functions","Acts as a deputy Project Manager","Reports to the Senior User"],a:1,e:"Administrative / configuration management support."},
+{s:"roles",q:"Team Managers report to:",o:["The Project Board","Project Assurance","The Project Manager","Project Support"],a:2,e:"Team Managers report to the Project Manager."},
+{s:"roles",q:"The three Project Board roles represent:",o:["Business, user, supplier","Strategy, operations, delivery","Customer, vendor, partner","Past, present, future"],a:0,e:"Business (Executive), user (Senior User), supplier (Senior Supplier)."},
+{s:"roles",q:"The Executive can be combined with:",o:["The Project Manager","The Senior User in principle, but not the Project Manager","Any role","No other role"],a:1,e:"Never the PM. Some Board dual-roles possible in very small projects."},
+{s:"roles",q:"In a small project with no Team Manager:",o:["The project cannot proceed","Team members report directly to the Project Manager","The Senior User acts as Team Manager","Project Support takes the Team Manager role"],a:1,e:"Team Manager is optional; members can report directly to the PM."},
+{s:"roles",q:"Project Assurance roles typically mirror:",o:["The Project Manager's role","The three Project Board interests (business, user, supplier)","Team Manager structures","Corporate governance"],a:1,e:"Three assurance roles mirror business/user/supplier interests."},
+// ---------- TAILORING & GENERAL (91-100) ----------
+{s:"tailoring",q:"Tailoring decisions are recorded in:",o:["The Project Mandate","The Project Brief only","The PID","The Daily Log"],a:2,e:"Recorded in the PID (project approach / management approaches)."},
+{s:"tailoring",q:"Which of the following CANNOT be tailored?",o:["Processes","Management products","Principles","Roles"],a:2,e:"Principles cannot be tailored away."},
+{s:"tailoring",q:"'Embedding' PRINCE2 refers to:",o:["Applying PRINCE2 to a specific project","The host organisation adopting PRINCE2 as its standard","Including PRINCE2 in the PID","Documenting tailoring decisions"],a:1,e:"Embedding = organisation-wide adoption. Tailoring = adapting to one project."},
+{s:"tailoring",q:"PRINCE2 stands for:",o:["Projects IN Controlled Environments","Project Initiation, Networking, Control and Execution","Programme Resource and Investment Controlled Environments","Practical Initiative for Networked Controlled Environments"],a:0,e:"PRojects IN Controlled Environments."},
+{s:"tailoring",q:"Which is true of a PRINCE2 project?",o:["It must have at least one delivery stage and one initiation stage","Stages are optional for small projects","The initiation stage is not a management stage","Closure is not a separate process"],a:0,e:"Minimum: one initiation stage + at least one delivery stage."},
+{s:"tailoring",q:"The number of processes in PRINCE2 is:",o:["5","6","7","8"],a:2,e:"Seven processes."},
+{s:"tailoring",q:"The number of practices (themes) in PRINCE2 is:",o:["5","6","7","8"],a:2,e:"Seven practices."},
+{s:"tailoring",q:"The number of stakeholder interests on the Project Board is:",o:["2","3","4","5"],a:1,e:"Three: business, user, supplier."},
+{s:"tailoring",q:"Which type of control is a Highlight Report?",o:["Event-driven only","Time-driven","Exception-driven","Neither time- nor event-driven"],a:1,e:"Highlight Reports are time-driven (periodic)."},
+{s:"tailoring",q:"Which type of control is an Exception Report?",o:["Time-driven","Event-driven","Cyclical","Mandatory"],a:1,e:"Exception Reports are event-driven (triggered by forecast breach of tolerance)."}
+];
+
+// PRINCE2 Foundation — expansion bank (questions 101-200)
+const QUESTIONS_EXT = [
+// ---------- PRINCIPLES (15) ----------
+{s:"principles",q:"How many integrated elements does PRINCE2 have in total (principles, practices, processes)?",o:["3 sets of 7","7 total","21 named items across 3 categories of 7","Variable by project"],a:2,e:"7 principles + 7 practices + 7 processes = three categories of seven."},
+{s:"principles",q:"A project that cannot demonstrate continued justification should:",o:["Continue to the next stage boundary","Be stopped","Reduce its scope automatically","Escalate to corporate for funding"],a:1,e:"Loss of justification is grounds to stop the project."},
+{s:"principles",q:"The principle 'learn from experience' begins:",o:["At the first stage boundary","When a problem occurs","At project start, reviewing prior lessons","Only at project close"],a:2,e:"Lessons from previous projects are reviewed at the very start (in SU)."},
+{s:"principles",q:"Which statement about PRINCE2 principles is TRUE?",o:["They are optional guidance","They can be selectively applied","They are universal and apply to every PRINCE2 project","They only apply to large projects"],a:2,e:"The principles are universal — all seven apply to every PRINCE2 project."},
+{s:"principles",q:"'Manage by stages' supports which other principle most directly?",o:["Focus on products","Continued business justification (re-confirmed at each boundary)","Learn from experience","Tailor to suit the project"],a:1,e:"Stage boundaries are the natural review points for re-confirming justification."},
+{s:"principles",q:"Delegated authority in PRINCE2 is expressed through:",o:["Job titles","Tolerances","The Business Case","Stage Plans"],a:1,e:"Tolerances define the limits of delegated authority (manage by exception)."},
+{s:"principles",q:"Which principle would be violated if a team planned purely around tasks with no defined deliverables?",o:["Manage by stages","Focus on products","Learn from experience","Manage by exception"],a:1,e:"Focus on products requires planning around products, not activities."},
+{s:"principles",q:"The seven principles are best described as:",o:["A checklist completed once","Guiding obligations applied throughout","Documents in the PID","Roles on the Project Board"],a:1,e:"They are guiding obligations applied continuously, not a one-off checklist."},
+{s:"principles",q:"If a project applies all processes but ignores one principle, it is:",o:["Still a PRINCE2 project","Not a PRINCE2 project","A tailored PRINCE2 project","A PRINCE2 Agile project"],a:1,e:"Omitting any principle means it is not PRINCE2."},
+{s:"principles",q:"Tailoring primarily seeks to avoid:",o:["Using any documentation","Mechanistic, robotic application of the method","Stage boundaries","Project Board involvement"],a:1,e:"Tailoring avoids blind, mechanistic application; it fits the method to the project."},
+{s:"principles",q:"Which principle ensures the right people are involved in decisions?",o:["Defined roles, responsibilities and relationships","Focus on products","Manage by stages","Learn from experience"],a:0,e:"Defined roles, responsibilities and relationships ensures the right people decide."},
+{s:"principles",q:"Reviewing the Business Case throughout the project is an expression of:",o:["Manage by exception","Continued business justification","Focus on products","Tailor to suit the project"],a:1,e:"Ongoing Business Case review is continued business justification in action."},
+{s:"principles",q:"Which is NOT one of the six aspects considered when tailoring?",o:["Environment","Size and complexity","Colour of branding","Risk"],a:2,e:"The aspects are environment, size, complexity, importance, capability, risk."},
+{s:"principles",q:"The principle requiring a minimum of two management stages exists to ensure:",o:["More documentation","Decision/control points where the Board reviews viability","Faster delivery","Fewer meetings"],a:1,e:"Stages create defined control points for Board review."},
+{s:"principles",q:"Capturing a lesson during a stage and applying it in the next stage demonstrates:",o:["Focus on products","Learn from experience","Manage by exception","Defined roles"],a:1,e:"Acting on captured lessons within the project is learn from experience."},
+// ---------- PRACTICES (20) ----------
+{s:"practices",q:"The three executive-level questions the Business Case answers are whether the project is:",o:["Cheap, fast, easy","Desirable, viable, achievable","Approved, funded, staffed","Started, controlled, closed"],a:1,e:"Desirable, viable and achievable."},
+{s:"practices",q:"An 'output' in the benefits chain is:",o:["A measurable improvement","A change resulting from using a deliverable","A specialist product the project delivers","A negative consequence"],a:2,e:"Output = what the project delivers; outcome = the change; benefit = the measurable improvement."},
+{s:"practices",q:"A 'benefit' in PRINCE2 is:",o:["Any project deliverable","A measurable improvement perceived as advantageous","An approved change","A completed Work Package"],a:1,e:"A measurable improvement from an outcome, seen as an advantage by stakeholders."},
+{s:"practices",q:"Which document records how and when benefits will be measured?",o:["Business Case","Benefits Management Approach","Quality Register","End Project Report"],a:1,e:"The Benefits Management Approach defines benefit measurement, including post-project."},
+{s:"practices",q:"The four organisational levels in order (highest to lowest) are:",o:["Directing, managing, delivering, corporate","Corporate/programme/customer, directing, managing, delivering","Managing, directing, delivering, corporate","Corporate, delivering, managing, directing"],a:1,e:"Corporate/programme/customer → directing → managing → delivering."},
+{s:"practices",q:"Project Support is best described as:",o:["Independent oversight for the Board","An administrative and configuration management function","A decision-making Board role","The Team Manager's deputy"],a:1,e:"Project Support handles admin and configuration management."},
+{s:"practices",q:"A Team Plan is:",o:["Mandatory for all projects","Optional, produced by a Team Manager","Approved by corporate","Part of the PID"],a:1,e:"Team Plans are optional and produced by Team Managers."},
+{s:"practices",q:"The first step of product-based planning is to:",o:["Identify activities","Write the Project Product Description / design the plan","Estimate costs","Build the schedule"],a:1,e:"Designing the plan and defining products comes before identifying activities."},
+{s:"practices",q:"Quality control is concerned with:",o:["Defining fit-for-purpose","Checking products against quality criteria","Corporate governance","Approving the Business Case"],a:1,e:"Quality control checks products against their criteria as produced."},
+{s:"practices",q:"The customer's quality expectations are first captured in the:",o:["Quality Register","Project Brief (Project Product Description)","PID only","End Stage Report"],a:1,e:"Captured early, in the Project Product Description within the Project Brief."},
+{s:"practices",q:"The Quality Register records:",o:["Risks and issues","All planned and completed quality activities and results","The Business Case","Stakeholder contacts"],a:1,e:"It logs quality activities (reviews, tests) and their outcomes."},
+{s:"practices",q:"A risk 'actionee' is the person who:",o:["Is accountable for managing the risk","Carries out an assigned risk response action","Owns the Risk Budget","Chairs the Board"],a:1,e:"The actionee carries out specific actions; the owner is accountable."},
+{s:"practices",q:"'Transfer' as a risk response is used for:",o:["Opportunities only","Passing a threat's impact to a third party (e.g. insurance)","Eliminating a risk entirely","Accepting a risk"],a:1,e:"Transfer moves the financial impact of a threat to a third party."},
+{s:"practices",q:"'Exploit' as a risk response means:",o:["Reducing a threat","Making the most of an opportunity so it definitely happens","Sharing pain and gain","Ignoring a risk"],a:1,e:"Exploit ensures an opportunity is realised."},
+{s:"practices",q:"'Share' as a risk response applies to:",o:["Only threats","Only opportunities","Both threats and opportunities","Neither"],a:2,e:"Share (pain/gain via agreed split) applies to both threats and opportunities."},
+{s:"practices",q:"A request for change is best handled through:",o:["The Daily Log informally","Change control (capture, assess, propose, decide, implement)","Immediate implementation by the PM","The End Project Report"],a:1,e:"Requests for change follow the change control procedure."},
+{s:"practices",q:"Where are minor issues handled informally?",o:["Issue Register","Daily Log","Risk Register","Quality Register"],a:1,e:"Informally-managed issues are recorded in the Daily Log."},
+{s:"practices",q:"The Progress practice provides forecasts of:",o:["Staff morale","The project's continued viability and objectives","Marketing reach","Supplier profit"],a:1,e:"Progress forecasts viability and whether objectives will be met."},
+{s:"practices",q:"A 'time-driven' control is:",o:["Triggered by an event","Produced at regular intervals (e.g. Highlight Report)","Only used in exceptions","Optional"],a:1,e:"Time-driven controls occur on a regular cadence."},
+{s:"practices",q:"Tolerances are set for the Project Manager by:",o:["The Team Manager","The Project Board","Corporate directly","Project Support"],a:1,e:"The Board sets stage tolerances for the PM; the PM sets WP tolerances for Team Managers."},
+// ---------- PROCESSES (20) ----------
+{s:"processes",q:"Which two roles are appointed during Starting up a Project?",o:["Executive and Project Manager","Senior User and Senior Supplier","Team Manager and Project Support","Change Authority and Executive"],a:0,e:"SU appoints the Executive and the Project Manager."},
+{s:"processes",q:"Which document is NOT produced in Starting up a Project?",o:["Project Brief","Initiation Stage Plan","PID","Daily Log"],a:2,e:"The PID is produced in Initiating a Project, not SU."},
+{s:"processes",q:"The purpose of Initiating a Project is to:",o:["Decide if there is a viable project","Establish solid foundations before significant spend","Deliver the products","Close the project"],a:1,e:"IP establishes solid foundations before committing major spend."},
+{s:"processes",q:"How many activities does Managing Product Delivery contain?",o:["Two","Three (accept, execute, deliver)","Five","Seven"],a:1,e:"Accept a WP, execute a WP, deliver a WP."},
+{s:"processes",q:"Which process produces the End Project Report?",o:["Managing a Stage Boundary","Controlling a Stage","Closing a Project","Directing a Project"],a:2,e:"The End Project Report is produced in Closing a Project."},
+{s:"processes",q:"The Project Board authorises the project at the end of:",o:["Starting up a Project","Initiating a Project","The first delivery stage","Closing a Project"],a:1,e:"After IP, the Board authorises the project (decision point 2)."},
+{s:"processes",q:"Corrective action within tolerance is taken in:",o:["Directing a Project","Controlling a Stage","Managing a Stage Boundary","Closing a Project"],a:1,e:"The PM takes corrective action within tolerance in Controlling a Stage."},
+{s:"processes",q:"Which process is triggered by an Exception Plan request?",o:["Starting up a Project","Managing a Stage Boundary","Closing a Project","Managing Product Delivery"],a:1,e:"SB produces the Exception Plan when the Board requests one."},
+{s:"processes",q:"During which process does the Project Board give ad hoc direction?",o:["Initiating a Project","Directing a Project","Controlling a Stage","Closing a Project"],a:1,e:"Ad hoc direction is a Directing a Project activity."},
+{s:"processes",q:"Which process hands over the finished products to the customer?",o:["Managing a Stage Boundary","Controlling a Stage","Closing a Project","Initiating a Project"],a:2,e:"Product handover happens in Closing a Project."},
+{s:"processes",q:"The initiation stage is planned during:",o:["Starting up a Project","Initiating a Project","Directing a Project","Managing a Stage Boundary"],a:0,e:"SU produces the Initiation Stage Plan."},
+{s:"processes",q:"Which process is performed by the Project Board, not the Project Manager?",o:["Controlling a Stage","Managing Product Delivery","Directing a Project","Initiating a Project"],a:2,e:"Directing a Project is the Board's process."},
+{s:"processes",q:"A Work Package is accepted by the Team Manager in:",o:["Controlling a Stage","Managing Product Delivery","Managing a Stage Boundary","Initiating a Project"],a:1,e:"'Accept a Work Package' is the first MP activity."},
+{s:"processes",q:"Which process confirms the prerequisites for initiation are in place?",o:["Initiating a Project","Starting up a Project","Directing a Project","Controlling a Stage"],a:1,e:"SU confirms prerequisites: 'do we have a viable, worthwhile project?'"},
+{s:"processes",q:"The Project Plan is first created in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Controlling a Stage"],a:1,e:"The Project Plan is created in IP as part of the PID."},
+{s:"processes",q:"Which process is concerned with reviewing the current stage and planning the next?",o:["Controlling a Stage","Managing a Stage Boundary","Managing Product Delivery","Closing a Project"],a:1,e:"SB reviews the current stage and plans the next."},
+{s:"processes",q:"Premature closure differs from planned closure in that:",o:["It uses a different process","The project ends before all planned products are delivered","It skips the End Project Report","The Board is not involved"],a:1,e:"Premature closure (still within CP) ends the project early."},
+{s:"processes",q:"In which process are the four management approaches created?",o:["Starting up a Project","Initiating a Project","Directing a Project","Controlling a Stage"],a:1,e:"Risk, Quality, Communication and Change Control Approaches are created in IP."},
+{s:"processes",q:"The trigger that begins the whole PRINCE2 method is the:",o:["Project Brief","Project mandate","PID","Stage Plan"],a:1,e:"The project mandate (from corporate/programme/customer) triggers SU."},
+{s:"processes",q:"Which process produces Checkpoint Reports?",o:["Controlling a Stage","Managing Product Delivery","Directing a Project","Closing a Project"],a:1,e:"Checkpoint Reports are produced in MP by the Team Manager."},
+// ---------- PRODUCTS (20) ----------
+{s:"products",q:"Which of these is an 'approach' (a baseline management product)?",o:["Risk Register","Risk Management Approach","Highlight Report","Daily Log"],a:1,e:"Approaches are baselines; registers/logs are records."},
+{s:"products",q:"The PID is best described as:",o:["A working log","The master baseline defining the project at authorisation","A point-in-time report","An external input"],a:1,e:"The PID is the baseline against which the project is authorised and measured."},
+{s:"products",q:"Which record tracks the status and version of products?",o:["Daily Log","Configuration Item Records","Lessons Log","Quality Register"],a:1,e:"Configuration Item Records track product status, version and relationships."},
+{s:"products",q:"A Product Status Account is a type of:",o:["Baseline","Record","Report","Approach"],a:2,e:"It is a report on the status of products, produced by Project Support."},
+{s:"products",q:"Which is true of the Daily Log?",o:["It is a baseline","It is a report","It behaves like a record despite being called a 'Log'","It is owned by the Executive"],a:2,e:"The Daily Log is a record (the naming is the classic trap)."},
+{s:"products",q:"The Project Brief is created in SU and:",o:["Replaces the PID","Forms the basis for the PID created in IP","Is owned by the Senior User","Is a report"],a:1,e:"The Project Brief is refined and expanded into the PID during IP."},
+{s:"products",q:"Which approach defines how the project will engage stakeholders with information?",o:["Quality Management Approach","Communication Management Approach","Change Control Approach","Risk Management Approach"],a:1,e:"The Communication Management Approach covers who needs what information, when and how."},
+{s:"products",q:"The Issue Report is produced for:",o:["Every minor issue","Formally-managed issues","Risks only","Lessons"],a:1,e:"An Issue Report is created for formally-managed issues."},
+{s:"products",q:"Which product is updated and handed to corporate for post-project benefit measurement?",o:["End Project Report","Benefits Management Approach","Lessons Log","Risk Register"],a:1,e:"The Benefits Management Approach is handed forward for post-project measurement."},
+{s:"products",q:"A Stage Plan is produced:",o:["At project start for all stages","Near the end of the current stage, for the next stage","Only when an exception occurs","By the Team Manager"],a:1,e:"Each Stage Plan is produced near the end of the preceding stage (in SB)."},
+{s:"products",q:"The Exception Report recommends:",o:["Project closure","A course of action to the Project Board for a forecast tolerance breach","A new Team Plan","Quality criteria"],a:1,e:"It alerts the Board to a forecast breach and recommends options."},
+{s:"products",q:"Which product describes the project's overall output and its acceptance criteria?",o:["Product Description","Project Product Description","Work Package","Quality Register"],a:1,e:"The Project Product Description covers the whole project output and acceptance criteria."},
+{s:"products",q:"Configuration management in PRINCE2 is concerned with:",o:["Staffing","Controlling and tracking the project's products","Marketing","Risk budgets"],a:1,e:"It controls, tracks and protects the project's products."},
+{s:"products",q:"The Lessons Report is a type of:",o:["Baseline","Record","Report","Approach"],a:2,e:"It is a report, produced in Closing a Project."},
+{s:"products",q:"Which is created continuously rather than at a single point?",o:["End Stage Report","Risk Register","PID","Project Brief"],a:1,e:"The Risk Register is a record, updated continuously."},
+{s:"products",q:"Who typically maintains the Configuration Item Records day-to-day?",o:["Executive","Project Support","Senior User","Team members"],a:1,e:"Often delegated to Project Support (owned by the PM)."},
+{s:"products",q:"A baseline product is one that is:",o:["Informal and frequently changed","Approved and subject to change control","Never updated","Owned by the Team Manager"],a:1,e:"Baselines are approved and change-controlled."},
+{s:"products",q:"The Change Control Approach defines:",o:["How benefits are measured","How issues and changes will be identified, assessed and controlled","The schedule","Quality criteria"],a:1,e:"It governs how issues/changes are handled."},
+{s:"products",q:"Which two logs are started in Starting up a Project?",o:["Risk Register and Issue Register","Daily Log and Lessons Log","Quality Register and Risk Register","Issue Register and Quality Register"],a:1,e:"Daily Log and Lessons Log start in SU; the registers start in IP."},
+{s:"products",q:"The Highlight Report's audience is the:",o:["Team Manager","Project Board","Customer's customers","Suppliers"],a:1,e:"Highlight Reports go from the PM to the Project Board."},
+// ---------- ROLES (15) ----------
+{s:"roles",q:"The Executive's appointment continuity rule is that they:",o:["Rotate every stage","Should remain throughout the project","Are appointed by the PM","Are optional"],a:1,e:"For continuity, the Executive should stay throughout the project."},
+{s:"roles",q:"Who is responsible for the day-to-day management of the project?",o:["Executive","Project Manager","Senior Supplier","Project Assurance"],a:1,e:"The Project Manager runs the project day-to-day."},
+{s:"roles",q:"Project Assurance acts on behalf of:",o:["The Project Manager","The Project Board","Corporate audit","The supplier"],a:1,e:"Project Assurance provides independent oversight for the Project Board."},
+{s:"roles",q:"Which role may be delegated change decisions within limits?",o:["Project Support","Change Authority","Team Manager","Senior User"],a:1,e:"The Change Authority handles changes within delegated limits."},
+{s:"roles",q:"The Senior Supplier is accountable for:",o:["Realising benefits","The quality of products delivered by suppliers","Chairing the Board","Writing the Business Case"],a:1,e:"The Senior Supplier is accountable for supplier-side product quality."},
+{s:"roles",q:"Which combination is explicitly NOT allowed?",o:["PM and Team Manager","PM and Project Support","Executive and Project Manager","Executive and Senior User (small projects)"],a:2,e:"Executive and Project Manager can never be the same person."},
+{s:"roles",q:"On a small project, the Project Manager MAY also perform:",o:["Project Assurance","The Executive role","Project Support","Senior User"],a:2,e:"The PM may take on Project Support on small projects (not Assurance or Executive)."},
+{s:"roles",q:"The user interest on the Board is represented by the:",o:["Executive","Senior User","Senior Supplier","Change Authority"],a:1,e:"The Senior User represents the user interest."},
+{s:"roles",q:"Who specifies the needs of those who will use the project's products?",o:["Senior Supplier","Senior User","Project Support","Team Manager"],a:1,e:"The Senior User specifies user needs and validates acceptance."},
+{s:"roles",q:"The Project Board is responsible for:",o:["Doing the delivery work","Providing unified direction and key decisions","Writing Work Packages","Daily issue logging"],a:1,e:"The Board directs and decides; it does not do delivery work."},
+{s:"roles",q:"Which role is optional and may be absent on small projects?",o:["Executive","Project Manager","Team Manager","Senior User"],a:2,e:"Team Manager is optional; members may report directly to the PM."},
+{s:"roles",q:"Three project interests must be represented to avoid:",o:["Excessive cost","One interest dominating decisions","Long meetings","Documentation"],a:1,e:"Balancing business, user and supplier prevents any single interest dominating."},
+{s:"roles",q:"The person accountable for the Business Case and project success is the:",o:["Project Manager","Senior User","Executive","Senior Supplier"],a:2,e:"The Executive owns the Business Case and is ultimately accountable."},
+{s:"roles",q:"Project Support provides services such as:",o:["Independent assurance","Configuration management, document control, planning support","Board decisions","Benefit realisation"],a:1,e:"Project Support is an administrative/configuration management function."},
+{s:"roles",q:"If Project Assurance and the Project Manager were the same person, this would breach:",o:["Continued business justification","The independence of assurance from management","Focus on products","Manage by stages"],a:1,e:"Assurance must be independent of the PM it oversees."},
+// ---------- TAILORING & GENERAL (10) ----------
+{s:"tailoring",q:"Tailoring may NOT involve:",o:["Combining management products","Omitting a principle","Using organisational terminology","Applying themes with less rigour"],a:1,e:"Principles can never be omitted."},
+{s:"tailoring",q:"Merging the Daily Log and Lessons Log on a small project is an example of:",o:["Embedding","Tailoring management products","Breaking a principle","A reporting control"],a:1,e:"Combining products is permitted tailoring."},
+{s:"tailoring",q:"Who is responsible for ensuring PRINCE2 is tailored appropriately for the project?",o:["Corporate audit","The Project Manager (with Board agreement)","The Team Manager","Project Support"],a:1,e:"The PM proposes tailoring; the Board agrees it, recorded in the PID."},
+{s:"tailoring",q:"Embedding is the responsibility of:",o:["The individual project","The host organisation","The Project Board","PeopleCert"],a:1,e:"Embedding (adopting PRINCE2 as a standard) is an organisational responsibility."},
+{s:"tailoring",q:"Foundation pass mark and format:",o:["55%, 60 questions, 60 minutes, closed book","70%, 75 questions, 90 minutes","50%, 50 questions, 40 minutes","60%, 80 questions, open book"],a:0,e:"55% (33/60), 60 multiple-choice, 60 minutes, closed book."},
+{s:"tailoring",q:"PRINCE2 is best described as:",o:["A predictive-only methodology","A flexible, tailorable project management method","A software tool","A certification body"],a:1,e:"A generic, tailorable project management method."},
+{s:"tailoring",q:"Which of these is a benefit of using PRINCE2?",o:["Guarantees project success","Provides a common vocabulary and controlled approach","Removes the need for a Project Manager","Eliminates all risk"],a:1,e:"It provides common language, defined roles and a controlled, consistent approach."},
+{s:"tailoring",q:"How many management products does PRINCE2 define (approximately)?",o:["7","About 26","50","100"],a:1,e:"Around 26 management products across baselines, records and reports."},
+{s:"tailoring",q:"Tailoring decisions that are agreed must be:",o:["Kept verbal","Documented (in the PID)","Reported to PeopleCert","Approved by the Team Manager"],a:1,e:"Tailoring is documented, typically in the PID."},
+{s:"tailoring",q:"Which best completes: 'Principles are __, practices are __, processes are __.'",o:["why / what / when","what / when / why","when / why / what","who / what / when"],a:0,e:"Principles = why, practices = what, processes = when (the four-layer model)."}
+];
+
+</script>
+<script>
+// Spaced-repetition flashcards (recall checks from the course)
+const CARDS = [
+{deck:"Principles",front:"Name the 7 principles in order.",back:"1. Continued business justification\n2. Learn from experience\n3. Defined roles, responsibilities and relationships\n4. Manage by stages\n5. Manage by exception\n6. Focus on products\n7. Tailor to suit the project"},
+{deck:"Principles",front:"Continued business justification — one line + who owns it?",back:"A project must stay justified throughout; stops if justification collapses. Owned by the Executive via the Business Case, reviewed at every stage boundary."},
+{deck:"Principles",front:"Learn from experience — the three checkpoints?",back:"Start: review prior lessons. During: capture new ones. Close: pass them forward (Lessons Report)."},
+{deck:"Principles",front:"Manage by stages — minimum stages?",back:"Minimum two management stages: the initiation stage + at least one delivery stage. (Closure and SU are NOT stages.)"},
+{deck:"Principles",front:"Manage by exception — the 6 tolerances?",back:"Time, Cost, Scope, Quality, Benefits, Risk. Stay within tolerance = no escalation; forecast breach = raise an Exception to the level above."},
+{deck:"Principles",front:"Focus on products — central artefact?",back:"Product-based planning. The Product Description defines quality; the Product Breakdown Structure decomposes deliverables. Activities are derived from products, not the reverse."},
+{deck:"Principles",front:"Tailor to suit the project — three rules?",back:"1. Tailoring is mandatory. 2. Principles cannot be tailored away. 3. Tailoring is recorded in the PID."},
+{deck:"Practices",front:"Name the 7 practices (themes).",back:"1. Business Case\n2. Organising\n3. Plans\n4. Quality\n5. Risk\n6. Issues\n7. Progress"},
+{deck:"Practices",front:"Business Case — output-outcome-benefit chain + negative term?",back:"Outputs (what's produced) → outcomes (resulting change) → benefits (measurable improvement). Negative outcome = dis-benefit. Executive owns it."},
+{deck:"Practices",front:"Organising — the four levels of organisation?",back:"1. Corporate/programme/customer (sets mandate)\n2. Directing — Project Board\n3. Managing — Project Manager\n4. Delivering — Team Managers"},
+{deck:"Practices",front:"Plans — three levels + what Exception Plan replaces?",back:"Project Plan, Stage Plan, Team Plan. Exception Plan replaces a Stage Plan or Project Plan — never a Team Plan."},
+{deck:"Practices",front:"Quality — acceptance criteria vs quality criteria?",back:"Acceptance criteria: prioritised list for the whole project product (Project Product Description, owned by Senior User). Quality criteria: per individual product (Product Description). QA is external to the project."},
+{deck:"Practices",front:"Risk — threat responses (5+1) and opportunity responses (4)?",back:"Threats: avoid, reduce, transfer, share, accept (+ prepare contingent plans). Opportunities: exploit, enhance, share, accept (reject also possible)."},
+{deck:"Practices",front:"Issues — the three types?",back:"1. Request for change\n2. Off-specification (should be delivered to standard but won't be)\n3. Problem/concern (anything else)"},
+{deck:"Practices",front:"Progress — the report cadences (who→whom)?",back:"Highlight: PM→Board (time-driven). Checkpoint: Team Mgr→PM. End Stage Report: at SB. End Project Report: at CP. Exception Report: event-driven on forecast breach."},
+{deck:"Processes",front:"Name the 7 processes.",back:"SU (Starting up), DP (Directing), IP (Initiating), CS (Controlling a Stage), MP (Managing Product Delivery), SB (Managing a Stage Boundary), CP (Closing a Project)."},
+{deck:"Processes",front:"SU — trigger and main output?",back:"Trigger: the project mandate. Output: the Project Brief (NOT the PID — that's IP). Also starts Daily Log + Lessons Log."},
+{deck:"Processes",front:"DP — the 5 decision points?",back:"1. Authorise initiation\n2. Authorise the project\n3. Authorise a Stage/Exception Plan\n4. Give ad hoc direction\n5. Authorise project closure"},
+{deck:"Processes",front:"IP — main output and what it contains?",back:"The PID: project definition, approach, detailed Business Case, team structure, the four approaches (Risk/Quality/Comms/Change), Project Plan, controls."},
+{deck:"Processes",front:"CS vs MP — the difference?",back:"CS = PM's day-to-day stage management (authorise WPs, Highlight Reports, corrective action). MP = the PM↔Team Manager interface (accept/execute/deliver a Work Package, Checkpoint Reports)."},
+{deck:"Processes",front:"SB — two triggers + key outputs?",back:"Triggers: approaching end of a stage, OR an exception. Outputs: next Stage Plan (or Exception Plan), updated Project Plan/Business Case, End Stage Report."},
+{deck:"Processes",front:"CP — purpose + key outputs?",back:"Fixed point to confirm acceptance. Outputs: End Project Report, Lessons Report, updated Benefits Management Approach. Premature closure also handled here."},
+{deck:"Products",front:"Baseline vs Record vs Report — quick test?",back:"Baselines = plans & approaches (PID, Business Case, Plans). Records = logs & registers (Daily Log, Risk/Issue/Quality Register). Reports = snapshots named 'Report'. Trap: Daily Log & Lessons Log behave like records despite the name."},
+{deck:"Products",front:"Who owns: Business Case / Project Product Description / Benefits Mgmt Approach?",back:"Business Case → Executive. Project Product Description → Senior User. Benefits Management Approach → Executive."},
+{deck:"Roles",front:"The 'cannot combine' rules?",back:"Executive ≠ Project Manager. Project Manager ≠ Project Assurance. Board roles can't be delegated to the PM. PM CAN be Team Manager or Project Support on small projects."},
+{deck:"Roles",front:"Who is ultimately accountable for the project?",back:"The Executive (the Project Board is collectively responsible, but the Executive is ultimately accountable and chairs the Board)."}
+];
+
+</script>
+<script>
+/* ============ PRINCE2 Foundation app ============ */
+const LS = 'p2f_state_v1';
+const STATE_VERSION = 2;
+let state = load();
+function defaults(){
+  return { version:STATE_VERSION, read:{}, cards:{}, examBest:null, examHistory:[],
+           drillStats:{}, checklist:{}, recentSeen:[], lastView:'dashboard' };
+}
+function migrate(raw){
+  if(!raw || typeof raw!=='object') return defaults();
+  // v1 (no version, or older card shape) → v2
+  if(!raw.version || raw.version<2){
+    // old flashcard shape was {due,grade,ts}; reset to SM-2 baseline so intervals recompute cleanly
+    if(raw.cards){
+      Object.keys(raw.cards).forEach(k=>{
+        const m=raw.cards[k];
+        if(m && m.ease===undefined){
+          raw.cards[k]={ease:2.5, interval:1, reps:1, lapses:0, due:m.due||Date.now(), last:m.ts||Date.now()};
+        }
+      });
+    }
+    raw.recentSeen = raw.recentSeen||[];
+    raw.version = 2;
+  }
+  return raw;
+}
+function load(){
+  let parsed;
+  try{ parsed = JSON.parse(localStorage.getItem(LS)||'{}'); }
+  catch(e){ return defaults(); }
+  const merged = Object.assign(defaults(), migrate(parsed));
+  // guard: ensure nested containers exist even if stored state was partial
+  ['read','cards','drillStats','checklist'].forEach(k=>{ if(!merged[k]||typeof merged[k]!=='object')merged[k]={}; });
+  if(!Array.isArray(merged.examHistory))merged.examHistory=[];
+  if(!Array.isArray(merged.recentSeen))merged.recentSeen=[];
+  return merged;
+}
+function save(){ try{ localStorage.setItem(LS, JSON.stringify(state)); }catch(e){} }
+
+/* ---------- Navigation ---------- */
+const VIEWS = [
+  {id:'dashboard', label:'Dashboard', ico:'◆', group:'main'},
+  {id:'principles', label:'The 7 Principles', ico:'①', group:'main'},
+  {id:'practices', label:'The 7 Practices', ico:'②', group:'main'},
+  {id:'processes', label:'The 7 Processes', ico:'③', group:'main'},
+  {id:'products', label:'Management Products', ico:'④', group:'main'},
+  {id:'roles', label:'Roles', ico:'⑤', group:'main'},
+  {id:'tailoring', label:'Tailoring', ico:'⑥', group:'main'},
+  {id:'practitioner', label:'Practitioner Intro', ico:'✦', group:'main'},
+  {id:'schedule', label:'3-Week Schedule', ico:'▦', group:'main'},
+  {id:'flashcards', label:'Flashcards', ico:'⊞', group:'practice'},
+  {id:'drill', label:'Drill by Topic', ico:'✎', group:'practice'},
+  {id:'exam', label:'Mock Exam', ico:'⏱', group:'practice'},
+  {id:'checklist', label:'Pre-Exam Checklist', ico:'✓', group:'practice'},
+];
+function buildNav(){
+  const m=document.getElementById('navMain'), p=document.getElementById('navPractice');
+  m.innerHTML=''; p.innerHTML='';
+  VIEWS.forEach(v=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<button data-v="${v.id}" onclick="go('${v.id}')"><span class="ico">${v.ico}</span>${v.label}</button>`;
+    (v.group==='main'?m:p).appendChild(li);
+  });
+}
+function go(id){
+  state.lastView=id; save();
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.v===id));
+  const c=document.getElementById('content');
+  c.innerHTML=''; c.scrollTop=0; window.scrollTo(0,0);
+  try{
+    (RENDER[id]||RENDER.dashboard)(c);
+  }catch(e){
+    c.innerHTML=`<div class="card" style="text-align:center;padding:40px">
+      <div class="serif" style="font-size:22px;font-weight:600;margin-bottom:6px">Something went wrong</div>
+      <p style="color:var(--ink-soft)">That view hit an error. Your saved progress is safe.</p>
+      <button class="btn btn-primary" onclick="go('dashboard')">Back to dashboard</button></div>`;
+    if(window.console)console.error('render error:',id,e);
+  }
+  c.classList.remove('fade'); void c.offsetWidth; c.classList.add('fade');
+  // make any tables horizontally scrollable on small screens
+  if(c.querySelectorAll){
+    c.querySelectorAll('table').forEach(t=>{
+      if(t.parentElement && t.parentElement.classList && t.parentElement.classList.contains('table-scroll'))return;
+      const wrap=document.createElement('div'); wrap.className='table-scroll';
+      t.parentNode.insertBefore(wrap,t); wrap.appendChild(t);
+    });
+  }
+  if(c.focus)try{c.focus();}catch(e){}
+  closeNav();
+}
+function openNav(){document.getElementById('sidebar').classList.add('open');document.getElementById('scrim').classList.add('show');}
+function closeNav(){document.getElementById('sidebar').classList.remove('open');document.getElementById('scrim').classList.remove('show');}
+
+/* ---------- helpers ---------- */
+function markRead(topic){ if(!state.read[topic]){state.read[topic]=true;save();} }
+const SECTIONS=['principles','practices','processes','products','roles','tailoring'];
+const SEC_LABEL={principles:'Principles',practices:'Practices',processes:'Processes',products:'Products',roles:'Roles',tailoring:'Tailoring & General'};
+const LETTERS=['A','B','C','D'];
+
+/* ============================================================
+   RENDERERS
+============================================================ */
+const RENDER = {};
+
+/* ---------------- DASHBOARD ---------------- */
+RENDER.dashboard = (c)=>{
+  const readN = SECTIONS.concat(['practitioner','schedule']).filter(t=>state.read[t]).length;
+  const readTotal = 8;
+  const cardsSeen = Object.keys(state.cards).length;
+  const best = state.examBest;
+  const checkN = Object.values(state.checklist).filter(Boolean).length;
+  c.innerHTML = `
+    <div class="eyebrow">Projects in Controlled Environments</div>
+    <h1 class="page">PRINCE2 Foundation<span class="small">Interactive self-study · 7th edition</span></h1>
+    <p class="lede">Everything in one place: the full framework, spaced-repetition flashcards, topic drills, and a timed 60-question mock exam. Your progress saves automatically in this browser.</p>
+
+    <div class="dash-grid">
+      <div class="stat"><div class="n">${readN}<span class="u">/${readTotal}</span></div><div class="l">Sections read</div>
+        <div class="prog-wrap"><div class="prog-bar" style="width:${readN/readTotal*100}%"></div></div></div>
+      <div class="stat"><div class="n">${cardsSeen}<span class="u">/${CARDS.length}</span></div><div class="l">Flashcards reviewed</div>
+        <div class="prog-wrap"><div class="prog-bar" style="width:${cardsSeen/CARDS.length*100}%"></div></div></div>
+      <div class="stat"><div class="n">${best!==null?best:'—'}<span class="u">${best!==null?'%':''}</span></div><div class="l">Best mock exam${best!==null?(best>=85?' · exam-ready ✓':best>=70?' · nearly there':' · keep drilling'):''}</div></div>
+      <div class="stat"><div class="n">${checkN}<span class="u">/13</span></div><div class="l">Checklist items done</div>
+        <div class="prog-wrap"><div class="prog-bar" style="width:${checkN/13*100}%"></div></div></div>
+    </div>
+
+    <div class="callout key"><div class="tag">How to use this</div>
+      Read the six framework sections in order first. Then live in <strong>Flashcards</strong> and <strong>Drill by Topic</strong> daily. In week three, take <strong>Mock Exams</strong> until you clear 85% comfortably. Pass mark on the real exam is 55% (33/60) — aim well above it.</div>
+
+    <h2 class="sec">Jump back in</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="go('${state.read.principles?'flashcards':'principles'}')">${state.read.principles?'Review flashcards':'Start: The 7 Principles'} →</button>
+      <button class="btn btn-gold" onclick="go('exam')">Take a mock exam</button>
+      <button class="btn btn-ghost" onclick="go('drill')">Drill a topic</button>
+    </div>
+
+    <h2 class="sec">The framework at a glance</h2>
+    <p>PRINCE2 is a <strong>closed framework</strong>: exactly 7 principles, 7 practices, 7 processes, a fixed set of management products, and a defined role structure. The exam tests the framework <em>as written</em> — answer with the textbook answer, not your professional instinct. The mental model is a four-layer cake:</p>
+    <div class="lifecycle"><b>PRINCIPLES</b>  (why)        →  the guiding rules, all 7 always apply
+<b>PRACTICES</b>   (what)       →  aspects addressed continuously
+<b>PROCESSES</b>   (when)       →  what you do, in what order
+<b>PRODUCTS</b>    (artefacts)  →  the documents produced
+        ROLES cut across all four layers</div>
+
+    ${best!==null && state.examHistory.length?`<h2 class="sec">Mock exam history</h2>
+    <table><tr><th>Attempt</th><th>Score</th><th>Result</th><th>Date</th></tr>
+    ${state.examHistory.slice(-6).reverse().map((h,i)=>`<tr><td>#${state.examHistory.length-i}</td><td>${h.pct}% (${h.correct}/60)</td><td>${h.pct>=55?'<span class="pill ok">Pass</span>':'<span class="pill">Below pass</span>'}</td><td>${h.date}</td></tr>`).join('')}
+    </table>`:''}
+  `;
+};
+
+/* ---------------- COURSE CONTENT ---------------- */
+function courseShell(c, topic, eyebrow, title, lede, bodyHTML, recallHTML){
+  markRead(topic);
+  c.innerHTML = `
+    <div class="eyebrow">${eyebrow}</div>
+    <h1 class="page">${title}</h1>
+    <p class="lede">${lede}</p>
+    ${bodyHTML}
+    ${recallHTML||''}
+    <div style="margin-top:34px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="go('drill')">Drill this topic →</button>
+      <button class="btn btn-ghost" onclick="go('flashcards')">Flashcards</button>
+    </div>`;
+}
+function pblock(n,name,stmt,hook){
+  return `<div class="pblock"><div class="pnum">${n}</div><div class="pbody">
+    <h4>${name}</h4><div class="stmt">${stmt}</div><div class="hook">Exam hook: ${hook}</div></div></div>`;
+}
+
+RENDER.principles = (c)=>courseShell(c,'principles','Part 1','The 7 Principles',
+  'The guiding rules. Universal, self-validating, empowering. Every PRINCE2 project applies all seven — omit one and it is not a PRINCE2 project.',
+  `<div class="card">
+    ${pblock(1,'Continued business justification','A justified reason to start that stays valid throughout — if it stops being justified, the project stops. The Business Case is the document; the Executive owns it.','why a project stops; when the Business Case is reviewed; who owns justification (<b>Executive</b>).')}
+    ${pblock(2,'Learn from experience','Lessons are sought, recorded and acted upon. Review prior lessons at start, capture new ones during, pass them forward at close.','Lessons Log, Lessons Report, lesson-gathering in <b>SU</b>.')}
+    ${pblock(3,'Defined roles, responsibilities & relationships','An organisation structure engaging three interests — business, user, supplier — on the Project Board.','who does what; who approves what; the <b>three interests</b>.')}
+    ${pblock(4,'Manage by stages','Planned, monitored and controlled stage-by-stage. Minimum two: the initiation stage + at least one delivery stage.','"minimum of two stages"; Stage Plan approval; Board at stage ends.')}
+    ${pblock(5,'Manage by exception','Defined tolerances for each objective set limits of delegated authority. Stay within tolerance, don\'t escalate; forecast a breach, raise an Exception.','the <b>six tolerances</b>; who sets them for whom; what triggers an Exception Report.')}
+    ${pblock(6,'Focus on products','Product-based, not activity-based: define products and their quality first, then derive the activities.','Product-based planning; Product Descriptions; Product Breakdown Structure.')}
+    ${pblock(7,'Tailor to suit the project','Adapt to environment, size, complexity, importance, capability and risk. Mandatory — but principles cannot be tailored away, and tailoring is documented in the PID.','"tailoring is mandatory"; "principles cannot be tailored"; "recorded in the PID".')}
+  </div>
+  <div class="callout"><div class="tag">The six tolerances</div><strong>Time · Cost · Scope · Quality · Benefits · Risk.</strong> Memorise these six — they recur across "manage by exception" and the Progress practice. "Reputation" and "resource" are common distractors.</div>
+  <div class="callout trap"><div class="tag">Classic trap</div>The minimum is <strong>two management stages</strong>, not three. Closure ("Closing a Project") and start-up ("Starting up a Project") are <em>processes</em>, not stages. Only <strong>initiation + delivery</strong> count as stages.</div>`,
+  `<div class="recall"><div class="tag">Recall check</div><ol>
+    <li>Name the 7 principles in order.</li>
+    <li>Which principle owns the decision to stop a project, and who is accountable?</li>
+    <li>List the six tolerance areas.</li>
+    <li>What is the minimum number of management stages, and what are they?</li>
+  </ol></div>`);
+
+RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
+  'Called "themes" in the 6th edition — interchangeable for Foundation. These are the aspects of a project addressed continuously throughout its life, each supported by specific management products.',
+  `<div class="card">
+    ${pblock(1,'Business Case','Judges whether the project is desirable, viable and achievable. Outline in SU → detailed in IP → reviewed at every stage boundary. <b>Executive owns it.</b> Chain: outputs → outcomes → benefits; a negative outcome is a <b>dis-benefit</b>.','outline vs detailed timing; dis-benefits; benefits measured <em>after</em> close.')}
+    ${pblock(2,'Organising','Four levels: corporate/programme/customer · directing (Board) · managing (PM) · delivering (Team Managers). Three Board interests: business, user, supplier.','the four levels; Project Assurance = oversight; Project Support = admin; combination rules.')}
+    ${pblock(3,'Plans','Three levels: Project Plan, Stage Plan, Team Plan. An Exception Plan replaces a Stage or Project Plan — never a Team Plan. Product-based planning.','three levels; what an Exception Plan replaces; who approves what.')}
+    ${pblock(4,'Quality','Quality planning (define fit-for-purpose) → quality control (check products) → quality assurance (external, corporate governance). Acceptance criteria = whole product (Senior User owns the Project Product Description); quality criteria = per product.','acceptance vs quality criteria; QA is <em>external</em>; Senior User owns the PPD.')}
+    ${pblock(5,'Risk','Uncertain event(s) — threat or opportunity. Threat responses: avoid, reduce, transfer, share, accept (+ contingent plans). Opportunity: exploit, enhance, share, accept. Owner is accountable; actionee acts.','threat vs opportunity responses; owner vs actionee; Risk Budget (Board approves).')}
+    ${pblock(6,'Issues','Things that have happened (vs risks, which might). Three types: request for change, off-specification, problem/concern. Daily Log (informal) vs Issue Register (formal).','the three issue types — especially off-specification; Daily Log vs Issue Register.')}
+    ${pblock(7,'Progress','Monitor actual vs planned; forecast viability; control deviations. Six tolerances cascade down the levels. Reports: Highlight (PM→Board), Checkpoint (TM→PM), End Stage, End Project, Exception.','six tolerances; who reports to whom; time-driven vs event-driven controls.')}
+  </div>
+  <div class="callout key"><div class="tag">Two "assurance" words — don't confuse them</div><strong>Quality assurance</strong> sits <em>outside</em> the project (corporate/programme governance). <strong>Project Assurance</strong> sits <em>inside</em>, on behalf of the Project Board, and must be independent of the Project Manager.</div>
+  <div class="callout trap"><div class="tag">Classic trap</div><strong>Off-specification</strong> = something that should be delivered (to standard) but won't be. It is <em>not</em> "a poorly written spec". A <strong>request for change</strong> is a proposed alteration to an approved baseline.</div>`,
+  `<div class="recall"><div class="tag">Recall check</div><ol>
+    <li>Name the 7 practices.</li>
+    <li>Acceptance criteria vs quality criteria — what's the difference and who owns each artefact?</li>
+    <li>Five threat responses and four opportunity responses.</li>
+    <li>The three issue types.</li>
+  </ol></div>`);
+
+RENDER.processes = (c)=>courseShell(c,'processes','Part 3','The 7 Processes',
+  'What you do, in what order, across the lifecycle. Each has a purpose, a trigger, key activities and outputs.',
+  `<div class="lifecycle">Pre-project        Initiation Stage     Delivery Stage(s)              Final Stage
+-----------        ----------------     ----------------------         -----------
+<b>SU</b>                                                                    <b>CP</b>
+                   <b>IP</b>                   <b>SB</b> → <b>SB</b> → ... → <b>SB</b>
+                                        <b>CS</b> → <b>CS</b> → ... → <b>CS</b>
+                                        <b>MP</b> runs throughout delivery
+<b>DP</b> runs across the whole project, from end of SU to end of CP</div>
+  <div class="card">
+    ${pblock('SU','Starting up a Project','"Do we have a viable, worthwhile project?" Triggered by the <b>project mandate</b>. Appoints Executive + PM, captures prior lessons, builds the <b>Project Brief</b> and Initiation Stage Plan. Starts Daily Log + Lessons Log.','pre-project; produces the <em>Project Brief</em> (not the PID).')}
+    ${pblock('DP','Directing a Project','The Project Board\'s accountability process — spans end of SU to end of CP. Five decision points: authorise initiation · authorise the project · authorise a Stage/Exception Plan · give ad hoc direction · authorise closure.','the 5 decision points; DP runs throughout; ad hoc direction.')}
+    ${pblock('IP','Initiating a Project','"Solid foundations" before significant spend. Refines the Business Case (→ detailed), builds the four approaches (Risk/Quality/Comms/Change), creates the Project Plan, assembles the <b>PID</b>.','PID contents; detailed Business Case lives here.')}
+    ${pblock('CS','Controlling a Stage','The PM\'s day-to-day: authorise Work Packages, review status, handle issues/risks, escalate, take corrective action, send <b>Highlight Reports</b> to the Board.','Work Package authorisation; Highlight cadence; where corrective action happens.')}
+    ${pblock('MP','Managing Product Delivery','The PM↔Team Manager interface. Three sub-processes: accept · execute · deliver a Work Package. Produces <b>Checkpoint Reports</b> (TM→PM).','three sub-processes; Checkpoint (not Highlight) Report.')}
+    ${pblock('SB','Managing a Stage Boundary','Near the end of a stage (or on an exception). Plans the next stage, updates Project Plan + Business Case, produces the <b>End Stage Report</b> (or an Exception Plan).','two triggers; what gets updated; End Stage Report.')}
+    ${pblock('CP','Closing a Project','A fixed point confirming acceptance. Hands over products, evaluates the project (<b>End Project Report</b>, <b>Lessons Report</b>), updates the Benefits Management Approach. Premature closure handled here too.','final process; premature closure; lessons handed forward.')}
+  </div>
+  <div class="callout trap"><div class="tag">Two traps</div><strong>1.</strong> SU produces the Project Brief; <strong>IP</strong> produces the PID — don't swap them. <strong>2.</strong> Highlight Report is from <em>CS</em> (PM→Board); Checkpoint Report is from <em>MP</em> (Team Manager→PM).</div>`,
+  `<div class="recall"><div class="tag">Recall check</div><ol>
+    <li>Draw the lifecycle from memory and label all 7 processes.</li>
+    <li>SU's trigger and main output? IP's main output?</li>
+    <li>The five decision points of Directing a Project.</li>
+    <li>Which report comes from CS, and which from MP?</li>
+  </ol></div>`);
+
+RENDER.products = (c)=>courseShell(c,'products','Part 4','Management Products',
+  'Around 26 defined products in three families — baselines, records, and reports. Foundation tests which is which, who creates it, and which process produces it.',
+  `<h3 class="sub">Baselines — definitive, approved, change-controlled</h3>
+  <table><tr><th>Product</th><th>Created in</th><th>Owned by</th></tr>
+    <tr><td>Project Brief</td><td>SU</td><td>Project Manager (Exec approves)</td></tr>
+    <tr><td>PID</td><td>IP</td><td>Project Manager (Board approves)</td></tr>
+    <tr><td>Business Case</td><td>SU → IP</td><td>Executive</td></tr>
+    <tr><td>Benefits Management Approach</td><td>IP, refined CP</td><td>Executive</td></tr>
+    <tr><td>Project / Stage / Team / Exception Plan</td><td>IP / SB / SB / SB</td><td>PM / PM / Team Mgr / PM</td></tr>
+    <tr><td>Product Description</td><td>as identified</td><td>Project Manager</td></tr>
+    <tr><td>Project Product Description</td><td>SU</td><td>Senior User</td></tr>
+    <tr><td>Quality / Risk / Comms / Change Control Approach</td><td>IP</td><td>Project Manager</td></tr>
+    <tr><td>Work Package</td><td>CS</td><td>Project Manager</td></tr>
+  </table>
+  <h3 class="sub">Records — working logs, updated continuously</h3>
+  <table><tr><th>Product</th><th>Started in</th><th>Owned by</th></tr>
+    <tr><td>Daily Log</td><td>SU</td><td>Project Manager</td></tr>
+    <tr><td>Lessons Log</td><td>SU</td><td>Project Manager</td></tr>
+    <tr><td>Risk Register</td><td>IP</td><td>Project Manager</td></tr>
+    <tr><td>Issue Register</td><td>IP</td><td>Project Manager</td></tr>
+    <tr><td>Quality Register</td><td>IP</td><td>Project Manager</td></tr>
+    <tr><td>Configuration Item Records</td><td>IP</td><td>PM / Project Support</td></tr>
+  </table>
+  <h3 class="sub">Reports — point-in-time communications</h3>
+  <table><tr><th>Product</th><th>Produced in</th><th>From → To</th></tr>
+    <tr><td>Highlight Report</td><td>CS</td><td>PM → Board</td></tr>
+    <tr><td>Checkpoint Report</td><td>MP</td><td>Team Mgr → PM</td></tr>
+    <tr><td>End Stage Report</td><td>SB</td><td>PM → Board</td></tr>
+    <tr><td>End Project Report</td><td>CP</td><td>PM → Board</td></tr>
+    <tr><td>Lessons Report</td><td>CP</td><td>PM → corporate</td></tr>
+    <tr><td>Exception Report</td><td>CS</td><td>PM → Board</td></tr>
+    <tr><td>Issue Report</td><td>CS</td><td>PM → decision-maker</td></tr>
+    <tr><td>Product Status Account</td><td>as needed</td><td>Project Support → PM</td></tr>
+  </table>
+  <div class="callout key"><div class="tag">5-second classifier</div><strong>Baselines</strong> = plans &amp; approaches. <strong>Records</strong> = logs &amp; registers. <strong>Reports</strong> = snapshots named "Report". The only confusing ones: the <strong>Daily Log</strong> and <strong>Lessons Log</strong> behave like records despite being called "Log".</div>
+  <div class="callout"><div class="tag">Who makes what</div>The PM creates almost everything. <strong>Executive</strong> owns the Business Case. <strong>Senior User</strong> owns the Project Product Description. <strong>Team Manager</strong> creates the Checkpoint Report (and possibly Team Plans).</div>`,
+  `<div class="recall"><div class="tag">Recall check</div><ol>
+    <li>Classify each as baseline / record / report: PID, Risk Register, Highlight Report, Daily Log.</li>
+    <li>Who owns: Business Case, Project Product Description, Benefits Management Approach?</li>
+    <li>Which process starts the Risk Register? Which starts the Lessons Log?</li>
+  </ol></div>`);
+
+RENDER.roles = (c)=>courseShell(c,'roles','Part 5','Roles & Responsibilities',
+  'A fixed role structure. Know what each role does and which roles can — and cannot — be combined.',
+  `<h3 class="sub">The Project Board — three interests, one board</h3>
+  <table><tr><th>Role</th><th>Interest</th><th>Key points</th></tr>
+    <tr><td>Executive</td><td>Business</td><td>Ultimately accountable; owns the Business Case; chairs the Board. <strong>Cannot be the PM.</strong></td></tr>
+    <tr><td>Senior User</td><td>User</td><td>Represents users; owns the Project Product Description; accountable for realising benefits after the project.</td></tr>
+    <tr><td>Senior Supplier</td><td>Supplier</td><td>Represents those who design/build/deliver; accountable for supplier-side product quality.</td></tr>
+  </table>
+  <p>Collectively the Board is responsible for success, directs the PM, and makes the five decision points in Directing a Project.</p>
+  <h3 class="sub">Project & delivery levels</h3>
+  <div class="card">
+    <p><strong>Project Manager</strong> — day-to-day management on the Board's behalf, within its constraints. Cannot be the Executive; cannot be Project Assurance. <em>Can</em> double as Team Manager or Project Support on small projects.</p>
+    <p style="margin-bottom:0"><strong>Team Manager</strong> — delivers Work Packages; reports to the PM via Checkpoint Reports. Optional: in small projects, members report straight to the PM.</p>
+  </div>
+  <h3 class="sub">Support & assurance</h3>
+  <div class="card">
+    <p><strong>Project Assurance</strong> — independent oversight for the Board; three roles mirroring business/user/supplier. <strong>Cannot be the Project Manager</strong> (independence).</p>
+    <p><strong>Project Support</strong> — admin and configuration management (logs, document control). <em>Can</em> be combined with the PM on small projects.</p>
+    <p style="margin-bottom:0"><strong>Change Authority</strong> — the Board may delegate change decisions to it within set limits. Can be the PM, a separate person, or the Board itself.</p>
+  </div>
+  <div class="callout trap"><div class="tag">Memorise the "cannots"</div>Executive <strong>≠</strong> Project Manager · Project Manager <strong>≠</strong> Project Assurance · Board roles cannot be delegated to the PM. (PM <em>may</em> take on Team Manager or Project Support on small projects.)</div>`,
+  `<div class="recall"><div class="tag">Recall check</div><ol>
+    <li>Who is ultimately accountable for the project, and who chairs the Board?</li>
+    <li>Who owns the Project Product Description and is accountable for benefits after closure?</li>
+    <li>Which two combinations are forbidden involving the Project Manager?</li>
+  </ol></div>`);
+
+RENDER.tailoring = (c)=>courseShell(c,'tailoring','Part 6','Tailoring',
+  'Foundation tests tailoring at a high level only — three rules and a vocabulary distinction.',
+  `<div class="card">
+    <h3 class="sub" style="margin-top:0">Three rules to memorise</h3>
+    <ol style="margin-left:20px;font-size:15px">
+      <li style="margin:8px 0"><strong>Tailoring is mandatory</strong> — every PRINCE2 project is tailored.</li>
+      <li style="margin:8px 0"><strong>Principles cannot be tailored away</strong> — all seven always apply.</li>
+      <li style="margin:8px 0"><strong>Tailoring is recorded in the PID</strong> — in the project approach / management approaches.</li>
+    </ol>
+  </div>
+  <h3 class="sub">What can be tailored</h3>
+  <p>Processes (combine, omit or extend activities) · practices (more or less rigour) · management products (combine/omit/extend — e.g. merge Daily Log and Lessons Log on a small project) · roles (combine within the rules) · terminology (use your own organisation's terms).</p>
+  <div class="callout key"><div class="tag">Embedding vs tailoring</div><strong>Embedding</strong> = the host organisation adopts PRINCE2 as its standard (organisation-wide). <strong>Tailoring</strong> = adapting PRINCE2 to one specific project. Foundation rarely tests embedding deeply — just recognise the term.</div>
+  <div class="callout"><div class="tag">Also worth banking</div>PRINCE2 = <strong>PR</strong>ojects <strong>IN</strong> <strong>C</strong>ontrolled <strong>E</strong>nvironments. 7 principles · 7 practices · 7 processes · 3 Board interests.</div>`,
+  `<div class="recall"><div class="tag">Recall check</div><ol>
+    <li>The three tailoring rules.</li>
+    <li>What can never be tailored away?</li>
+    <li>Embedding vs tailoring — the one-line difference.</li>
+  </ol></div>`);
+
+RENDER.practitioner = (c)=>courseShell(c,'practitioner','Part 7','Practitioner Intro',
+  'Not tested at Foundation. Included for orientation and interviews — and so the jump to Practitioner study later feels familiar.',
+  `<div class="card">
+    <h3 class="sub" style="margin-top:0">Foundation vs Practitioner</h3>
+    <p>Foundation asks "<em>what is X?</em>" — recall. Practitioner asks "<em>given this scenario, what should X be doing?</em>" — application. Same framework, harder demand.</p>
+    <table><tr><th></th><th>Foundation</th><th>Practitioner</th></tr>
+      <tr><td>Questions</td><td>60 multiple-choice</td><td>8 × 10 marks = 80</td></tr>
+      <tr><td>Time</td><td>60 min</td><td>2.5 hrs</td></tr>
+      <tr><td>Pass</td><td>55% (33/60)</td><td>60%</td></tr>
+      <tr><td>Book</td><td>Closed</td><td>Open (manual only)</td></tr>
+    </table>
+  </div>
+  <h3 class="sub">The 5 Practitioner question styles</h3>
+  <p><strong>Classic MCQ</strong> (harder distractors) · <strong>Multiple response</strong> ("which TWO…") · <strong>Matching</strong> (pair list A to list B) · <strong>Assertion–Reason</strong> (is each true, and does the reason explain the assertion?) · <strong>Sequencing</strong> (put events in PRINCE2 order).</p>
+  <div class="callout key"><div class="tag">Mindset shift</div>The scenario will feed you irrelevant noise — your job is to <strong>ignore it</strong> and apply PRINCE2 rules. When two options both sound sensible, the more textbook-correct one wins. Many questions reward knowing what to <em>leave out</em>, not what to add.</div>
+  <p style="color:var(--ink-soft)">You're not preparing for Practitioner now. Once Foundation is passed, Practitioner study is almost entirely practice-paper work on scenarios.</p>`,
+  '');
+
+RENDER.schedule = (c)=>{
+  markRead('schedule');
+  const wk=(title,note,rows)=>`<h3 class="sub">${title}</h3><p style="color:var(--ink-soft);font-size:14px">${note}</p>
+    <table><tr><th>Day</th><th>Focus</th><th>Hrs</th></tr>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</table>`;
+  c.innerHTML=`
+    <div class="eyebrow">Part 8</div>
+    <h1 class="page">3-Week Study Schedule</h1>
+    <p class="lede">Built for ~4 focused hours/day. You watch at 1.75–2× so seat time is roughly half of typical estimates — adjust freely.</p>
+    ${wk('Week 1 — Framework absorption','By Friday: list all 7 principles and 7 practices from memory, one sentence each.',[
+      ['Mon','Orientation + Principles 1–4 + recall','4'],['Tue','Principles 5–7 + recall + Business Case','4'],
+      ['Wed','Organising, Plans','4'],['Thu','Quality, Risk','4'],['Fri','Issues, Progress','4'],
+      ['Sat','All-practices recall; re-read weak','3'],['Sun','Light review + one mock-style quiz','2']])}
+    ${wk('Week 2 — Processes & integration','By Sunday: walk the whole framework without notes.',[
+      ['Mon','Lifecycle + SU, DP','4'],['Tue','IP, CS','4'],['Wed','MP, SB, CP','4'],
+      ['Thu','Process recall; redraw lifecycle; trace a product','4'],['Fri','Products: baselines/records/reports','4'],
+      ['Sat','Roles + combination rules','3'],['Sun','Tailoring + full review of weeks 1–2','2']])}
+    ${wk('Week 3 — Practice & exam readiness','By Sunday: book the official exam with confidence.',[
+      ['Mon','Drill across all sections','4'],['Tue','Drill; find weak topics; re-read','4'],
+      ['Wed','First timed mock (60/60); review wrong','4'],['Thu','Targeted re-study','4'],
+      ['Fri','Second mock (PeopleCert sample paper); review','4'],['Sat','Third mock; final weak-area review','3'],
+      ['Sun','Light review only; rest','1']])}
+    <div class="callout key"><div class="tag">Resources to acquire</div>Official manual <em>Managing Successful Projects with PRINCE2</em> (7th ed., ~£60) · free PeopleCert sample papers from peoplecert.org · an accredited course + exam voucher (Belgian/online ATOs, Foundation-only self-paced ≈ €400–600). Don't split focus to Practitioner until Foundation is passed.</div>
+    <div style="margin-top:24px"><button class="btn btn-gold" onclick="go('exam')">Ready — take a mock exam →</button></div>`;
+};
+
+/* ============ PRACTICE ENGINES ============ */
+
+/* ---------------- FLASHCARDS (SM-2 spaced repetition) ---------------- */
+/* Card memory shape: {ease, interval(days), reps, lapses, due(ts), last(ts)} */
+let fcQueue=[], fcIdx=0, fcAgainPool=[];
+const DAY=86400000;
+function startOfTomorrow(days){
+  // due at start of the day `days` out, not an exact-millisecond offset
+  const d=new Date(); d.setHours(0,0,0,0); return d.getTime()+Math.max(0,Math.round(days))*DAY;
+}
+function fcSortKey(key){
+  const m=state.cards[key];
+  if(!m) return 0;              // unseen → highest priority
+  return m.due||0;
+}
+function buildFcQueue(deck){
+  let pool=CARDS.map((c,i)=>({c,key:'c'+i})).filter(x=>deck==='all'||x.c.deck===deck);
+  pool.sort((a,b)=>fcSortKey(a.key)-fcSortKey(b.key));
+  const now=Date.now();
+  const due=pool.filter(x=>{const m=state.cards[x.key];return !m||(m.due||0)<=now;});
+  return due.length?due:pool;   // if nothing due, allow a free review round
+}
+function isLeech(key){const m=state.cards[key];return m&&(m.lapses||0)>=4;}
+RENDER.flashcards=(c)=>{
+  const decks=['all',...[...new Set(CARDS.map(x=>x.deck))]];
+  const seen=Object.keys(state.cards).length;
+  const now=Date.now();
+  const dueNow=CARDS.filter((_,i)=>{const m=state.cards['c'+i];return m&&(m.due||0)<=now;}).length;
+  const fresh=CARDS.filter((_,i)=>!state.cards['c'+i]).length;
+  const leeches=CARDS.filter((_,i)=>isLeech('c'+i)).length;
+  c.innerHTML=`
+    <div class="eyebrow">Practice</div>
+    <h1 class="page">Flashcards</h1>
+    <p class="lede">Real spaced repetition (SM-2). Rate honestly — intervals grow as you recall well and reset when you lapse. <strong>Again</strong> cards reappear before the round ends.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px">
+      <span class="pill">${seen}/${CARDS.length} started</span>
+      <span class="pill ${dueNow?'':''}">${dueNow} due now</span>
+      <span class="pill">${fresh} new</span>
+      ${leeches?`<span class="pill" style="background:var(--red-soft);color:var(--red)">${leeches} struggling</span>`:''}
+    </div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:8px" id="fcDecks">
+      ${decks.map(d=>`<button class="btn btn-ghost" style="padding:8px 16px" onclick="App.startFc('${d}')">${d==='all'?'All decks':d}</button>`).join('')}
+    </div>
+    <div id="fcArea"></div>`;
+};
+function startFc(deck){
+  fcQueue=buildFcQueue(deck); fcIdx=0; fcAgainPool=[];
+  renderFc();
+}
+function renderFc(){
+  const area=document.getElementById('fcArea');
+  // pull in any "Again" cards once the main queue is exhausted
+  if(fcIdx>=fcQueue.length && fcAgainPool.length){
+    fcQueue=fcQueue.concat(fcAgainPool); fcAgainPool=[];
+  }
+  if(fcIdx>=fcQueue.length){
+    area.innerHTML=`<div class="card" style="text-align:center;padding:40px">
+      <div class="serif" style="font-size:24px;font-weight:600;margin-bottom:8px">Round complete ✓</div>
+      <p style="color:var(--ink-soft)">Reviewed ${fcQueue.length} card${fcQueue.length!==1?'s':''}. Intervals updated and saved.</p>
+      <button class="btn btn-primary" onclick="go('flashcards')">Back to decks</button>
+      <button class="btn btn-gold" onclick="go('drill')">Drill questions →</button></div>`;
+    return;
+  }
+  const {c:card,key}=fcQueue[fcIdx];
+  const leech=isLeech(key);
+  area.innerHTML=`
+    <div style="text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:6px">Card ${fcIdx+1} of ${fcQueue.length}${fcAgainPool.length?` · ${fcAgainPool.length} to redo`:''}</div>
+    <div class="fc-stage">
+      <div class="flashcard" id="flash" role="button" tabindex="0" aria-label="Flashcard. Activate to reveal the answer."
+           onclick="App.flipFc()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();App.flipFc()}">
+        <div class="fc-inner">
+          <div class="fc-face fc-front">
+            <div class="fc-deck">${card.deck}${leech?' · ⚠ struggling':''}</div>
+            <div class="fc-text">${card.front}</div><div class="fc-hint">tap or press Enter to reveal</div></div>
+          <div class="fc-face fc-back">
+            <div class="fc-deck">${card.deck} · answer</div>
+            <div class="fc-text">${card.back}</div><div class="fc-hint">how well did you recall it?</div></div>
+        </div>
+      </div>
+      <div class="fc-rate hidden" id="fcRate">
+        <button class="btn btn-ghost" onclick="App.rateFc(0)">Again</button>
+        <button class="btn btn-ghost" onclick="App.rateFc(1)">Hard</button>
+        <button class="btn btn-primary" onclick="App.rateFc(2)">Good</button>
+        <button class="btn btn-gold" onclick="App.rateFc(3)">Easy</button>
+      </div>
+    </div>`;
+}
+function flipFc(){
+  const el=document.getElementById('flash');
+  if(!el||el.classList.contains('flipped'))return;
+  el.classList.add('flipped');
+  document.getElementById('fcRate').classList.remove('hidden');
+}
+function rateFc(grade){            // 0 Again, 1 Hard, 2 Good, 3 Easy
+  const {key}=fcQueue[fcIdx];
+  const prev=state.cards[key]||{ease:2.5,interval:0,reps:0,lapses:0};
+  let {ease,interval,reps,lapses}=prev;
+  if(grade===0){                   // lapse
+    reps=0; lapses=(lapses||0)+1; interval=1; ease=Math.max(1.3,ease-0.2);
+    fcAgainPool.push(fcQueue[fcIdx]);          // show again this session
+  }else{
+    reps=(reps||0)+1;
+    if(grade===1){ ease=Math.max(1.3,ease-0.15); interval = reps===1?1:Math.max(1,Math.round(interval*1.2)); }
+    else if(grade===2){ interval = reps===1?1:reps===2?3:Math.round(interval*ease); }
+    else { ease=ease+0.15; interval = reps===1?2:reps===2?4:Math.round(interval*ease*1.3); }
+  }
+  state.cards[key]={ease:+ease.toFixed(2),interval,reps,lapses,due:startOfTomorrow(interval),last:Date.now()};
+  save();
+  fcIdx++; renderFc();
+}
+
+/* ---------------- DRILL BY TOPIC ---------------- */
+let drill={pool:[],idx:0,correct:0,answered:false};
+RENDER.drill=(c)=>{
+  c.innerHTML=`
+    <div class="eyebrow">Practice</div>
+    <h1 class="page">Drill by Topic</h1>
+    <p class="lede">Untimed practice with instant explanations. Pick a topic — or drill the whole bank. Questions shuffle each round.</p>
+    <div class="quiz-setup" id="drillSetup">
+      ${SECTIONS.map(s=>{
+        const st=state.drillStats[s]||{seen:0,right:0};
+        const acc=st.seen?Math.round(st.right/st.seen*100):null;
+        const n=QUESTIONS.filter(q=>q.s===s).length;
+        return `<button class="sec-choice" onclick="startDrill('${s}')">
+          <h4>${SEC_LABEL[s]}</h4><div class="c">${n} questions</div>
+          <div class="acc" style="color:${acc===null?'var(--ink-soft)':acc>=80?'var(--green)':acc>=60?'var(--gold)':'var(--red)'}">${acc===null?'not yet drilled':acc+'% accuracy'}</div></button>`;
+      }).join('')}
+      <button class="sec-choice sel" onclick="startDrill('all')" style="border-color:var(--navy)">
+        <h4>Full bank</h4><div class="c">all 100 questions</div><div class="acc" style="color:var(--navy)">mixed practice</div></button>
+    </div>
+    <div id="drillArea"></div>`;
+};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startDrill(sec){
+  let pool=QUESTIONS.map((q,i)=>({q,gi:i})).filter(x=>sec==='all'||x.q.s===sec);
+  drill={pool:shuffle(pool),idx:0,correct:0,answered:false,sec};
+  document.getElementById('drillSetup').classList.add('hidden');
+  renderDrill();
+}
+function renderDrill(){
+  const area=document.getElementById('drillArea');
+  if(drill.idx>=drill.pool.length){
+    const pct=Math.round(drill.correct/drill.pool.length*100);
+    area.innerHTML=`<div class="card" style="text-align:center;padding:36px">
+      <div class="verdict ${pct>=80?'pass':''}" >${drill.correct} / ${drill.pool.length} correct · ${pct}%</div>
+      <p style="color:var(--ink-soft)">${pct>=85?'Strong. This topic is close to exam-ready.':pct>=60?'Decent — re-read the weak spots and drill again.':'Re-read the section, then come back.'}</p>
+      <button class="btn btn-primary" onclick="startDrill('${drill.sec}')">Drill again</button>
+      <button class="btn btn-ghost" onclick="go('drill')">Pick another topic</button></div>`;
+    return;
+  }
+  const {q,gi}=drill.pool[drill.idx];
+  drill.answered=false;
+  area.innerHTML=`
+    <div class="q-card">
+      <div class="q-meta"><span class="q-sec-tag">${SEC_LABEL[q.s]}</span><span>${drill.idx+1} / ${drill.pool.length} · score ${drill.correct}</span></div>
+      <div class="q-text">${q.q}</div>
+      <div id="drillOpts">${q.o.map((o,i)=>`<button class="opt" onclick="answerDrill(${i},${gi})"><span class="ltr">${LETTERS[i]}</span><span>${o}</span></button>`).join('')}</div>
+      <div class="explain" id="drillExp"></div>
+      <div class="exam-nav hidden" id="drillNext"><span></span><button class="btn btn-primary" onclick="drill.idx++;renderDrill();">${drill.idx+1>=drill.pool.length?'See results':'Next'} →</button></div>
+    </div>`;
+}
+function answerDrill(choice,gi){
+  if(drill.answered) return;
+  drill.answered=true;
+  const q=QUESTIONS[gi];
+  const right=q.a;
+  const opts=document.querySelectorAll('#drillOpts .opt');
+  opts.forEach((b,i)=>{b.disabled=true;if(i===right)b.classList.add('correct');if(i===choice&&choice!==right)b.classList.add('wrong');});
+  const ok=choice===right;
+  if(ok)drill.correct++;
+  // stats
+  const s=q.s; const st=state.drillStats[s]||{seen:0,right:0}; st.seen++; if(ok)st.right++; state.drillStats[s]=st; save();
+  const exp=document.getElementById('drillExp');
+  exp.className='explain show '+(ok?'right':'wrong');
+  exp.innerHTML=`<span class="v">${ok?'Correct':'Not quite — answer: '+LETTERS[right]}</span>${q.e}`;
+  document.getElementById('drillNext').classList.remove('hidden');
+}
+
+/* ---------------- MOCK EXAM (60Q / 60min) ---------------- */
+let exam=null, examTimer=null;
+RENDER.exam=(c)=>{
+  if(exam&&exam.active){renderExamQ(c);return;}
+  const best=state.examBest;
+  c.innerHTML=`
+    <div class="eyebrow">Practice</div>
+    <h1 class="page">Mock Exam</h1>
+    <p class="lede">60 questions, 60 minutes, closed-book — the real Foundation format. Pass mark 55% (33/60). Questions are drawn across all sections in exam proportions. Flag questions to revisit; submit when ready or when time runs out.</p>
+    ${best!==null?`<div class="callout ${best>=85?'key':''}"><div class="tag">Your best</div>${best}% ${best>=85?'— exam-ready. Take another to confirm consistency.':best>=55?'— passing, but aim for 85%+ before booking.':'— below pass. Keep drilling weak topics.'}</div>`:''}
+    <div class="card" style="text-align:center;padding:34px">
+      <div style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;margin-bottom:6px">Ready to begin?</div>
+      <p style="color:var(--ink-soft);max-width:46ch;margin:0 auto 18px">The timer starts immediately. Find 60 uninterrupted minutes.</p>
+      <button class="btn btn-gold" style="font-size:16px;padding:13px 30px" onclick="startExam()">Start 60-minute exam</button>
+    </div>`;
+};
+function startExam(){
+  // 60 questions in section proportions
+  const want={principles:9,practices:12,processes:12,products:12,roles:9,tailoring:6};
+  const recent=new Set(state.recentSeen||[]);   // global indices shown in the last exam
+  let q=[], usedGi=[];
+  SECTIONS.forEach(s=>{
+    let pool=QUESTIONS.map((qq,i)=>({qq,gi:i})).filter(x=>x.qq.s===s);
+    // prefer questions NOT recently seen; fall back to recent ones only if needed
+    let fresh=shuffle(pool.filter(x=>!recent.has(x.gi)));
+    let stale=shuffle(pool.filter(x=>recent.has(x.gi)));
+    const picked=fresh.concat(stale).slice(0,want[s]);
+    q=q.concat(picked); usedGi=usedGi.concat(picked.map(x=>x.gi));
+  });
+  q=shuffle(q);
+  state.recentSeen=usedGi;   // remember this set so the next exam avoids it
+  exam={active:true,q,idx:0,answers:new Array(q.length).fill(null),flags:new Array(q.length).fill(false),
+    start:Date.now(),end:Date.now()+60*60000};
+  save();
+  startExamTimer();
+  go('exam');
+}
+function startExamTimer(){
+  clearInterval(examTimer);
+  examTimer=setInterval(()=>{
+    const el=document.getElementById('examTimer'); if(!el){return;}
+    const left=Math.max(0,exam.end-Date.now());
+    const m=Math.floor(left/60000), s=Math.floor((left%60000)/1000);
+    el.textContent=`${m}:${String(s).padStart(2,'0')}`;
+    el.classList.toggle('warn',left<5*60000);
+    if(left<=0){clearInterval(examTimer);submitExam();}
+  },500);
+}
+function renderExamQ(c){
+  const i=exam.idx, item=exam.q[i], q=item.qq;
+  const answered=exam.answers.filter(a=>a!==null).length;
+  c.innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+      <div><div class="eyebrow" style="margin-bottom:2px">Mock Exam</div><div style="font-size:13px;color:var(--ink-soft)">${answered}/60 answered</div></div>
+      <div style="display:flex;gap:10px;align-items:center"><span class="timer" id="examTimer">60:00</span>
+        <button class="btn btn-ghost" style="padding:8px 14px" onclick="confirmSubmit()">Submit</button></div>
+    </div>
+    <div class="q-card">
+      <div class="q-meta"><span class="q-sec-tag">Q${i+1}</span>
+        <button class="btn btn-ghost" style="padding:5px 13px;font-size:13px;${exam.flags[i]?'background:var(--gold-soft);border-color:var(--gold)':''}" onclick="toggleFlag()">${exam.flags[i]?'★ Flagged':'☆ Flag'}</button></div>
+      <div class="q-text">${q.q}</div>
+      <div>${q.o.map((o,j)=>`<button class="opt ${exam.answers[i]===j?'':''}" style="${exam.answers[i]===j?'border-color:var(--navy);background:var(--card)':''}" onclick="pickExam(${j})"><span class="ltr" style="${exam.answers[i]===j?'background:var(--navy);border-color:var(--navy);color:#fff':''}">${LETTERS[j]}</span><span>${o}</span></button>`).join('')}</div>
+      <div class="exam-nav">
+        <button class="btn btn-ghost" onclick="examGo(${i-1})" ${i===0?'disabled':''}>← Prev</button>
+        <button class="btn btn-primary" onclick="examGo(${i+1})" ${i===exam.q.length-1?'disabled':''}>Next →</button>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px">Question map</div>
+      <div class="qgrid">${exam.q.map((_,j)=>`<button class="qdot ${exam.answers[j]!==null?'answered':''} ${exam.flags[j]?'flagged':''} ${j===i?'current':''}" onclick="examGo(${j})">${j+1}</button>`).join('')}</div>
+    </div>`;
+  startExamTimer();
+}
+function pickExam(j){exam.answers[exam.idx]=j;save();renderExamQ(document.getElementById('content'));}
+function toggleFlag(){exam.flags[exam.idx]=!exam.flags[exam.idx];renderExamQ(document.getElementById('content'));}
+function examGo(j){if(j<0||j>=exam.q.length)return;exam.idx=j;renderExamQ(document.getElementById('content'));}
+function confirmSubmit(){
+  const un=exam.answers.filter(a=>a===null).length;
+  if(un>0){if(!confirm(`${un} question${un!==1?'s':''} still unanswered. Submit anyway?`))return;}
+  submitExam();
+}
+function submitExam(){
+  clearInterval(examTimer);
+  let correct=0; const bySec={};
+  SECTIONS.forEach(s=>bySec[s]={right:0,total:0});
+  const detail=exam.q.map((item,i)=>{
+    const q=item.qq; bySec[q.s].total++;
+    const chosen=exam.answers[i];
+    const ok=chosen===q.a;
+    if(ok){correct++;bySec[q.s].right++;}
+    return {q, chosen, ok, flagged:exam.flags[i]};
+  });
+  const pct=Math.round(correct/exam.q.length*100);
+  const flaggedTotal=exam.flags.filter(Boolean).length;
+  const flaggedRight=detail.filter(d=>d.flagged&&d.ok).length;
+  const rec={pct,correct,date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'})};
+  state.examHistory.push(rec);
+  if(state.examBest===null||pct>state.examBest)state.examBest=pct;
+  exam.active=false;
+  exam.result={pct,correct,bySec,detail,flaggedTotal,flaggedRight};
+  save();
+  renderExamResult(document.getElementById('content'));
+}
+function renderExamResult(c){
+  const {pct,correct,bySec}=exam.result;
+  const pass=pct>=55, ready=pct>=85;
+  const circ=2*Math.PI*72;
+  const off=circ*(1-pct/100);
+  const col=ready?'var(--green)':pass?'var(--gold)':'var(--red)';
+  c.innerHTML=`
+    <div class="eyebrow">Mock Exam · Result</div>
+    <h1 class="page">${ready?'Exam-ready':pass?'Passing':'Below pass'}</h1>
+    <div class="result-ring">
+      <svg width="170" height="170"><circle cx="85" cy="85" r="72" fill="none" stroke="var(--line)" stroke-width="12"/>
+        <circle cx="85" cy="85" r="72" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/></svg>
+      <div class="pct"><div class="n" style="color:${col}">${pct}%</div><div class="l">${correct}/60</div></div>
+    </div>
+    <div class="verdict ${pass?'pass':'fail'}">${ready?'85%+ — book the official exam with confidence':pass?'Above the 55% pass mark — push toward 85% before booking':'Below 55% — another week of study'}</div>
+    <h2 class="sec">By section</h2>
+    <div class="breakdown">
+      ${SECTIONS.map(s=>{const b=bySec[s];const p=b.total?Math.round(b.right/b.total*100):0;
+        const col=p>=80?'var(--green)':p>=60?'var(--gold)':'var(--red)';
+        return `<div class="bd-row"><span class="nm">${SEC_LABEL[s]}</span>
+          <span class="track"><span class="fill" style="width:${p}%;background:${col}"></span></span>
+          <span class="sc">${b.right}/${b.total}</span></div>`;}).join('')}
+    </div>
+    <div class="callout"><div class="tag">Next step</div>${ready?'You are consistently clearing the bar. Take one PeopleCert official sample paper as a final calibration, then book.':'Your weakest sections above are where to spend next. Re-read them, drill them untimed, then re-sit a full mock.'}</div>
+    ${exam.result.flaggedTotal?`<div class="callout key"><div class="tag">Flagged questions</div>You flagged ${exam.result.flaggedTotal} question${exam.result.flaggedTotal!==1?'s':''} — ${exam.result.flaggedRight} correct, ${exam.result.flaggedTotal-exam.result.flaggedRight} wrong. Worth a second look in the review below.</div>`:''}
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+      <button class="btn btn-primary" onclick="App.reviewExam()">Review answers →</button>
+      <button class="btn btn-gold" onclick="App.startExam()">Take another mock</button>
+      <button class="btn btn-ghost" onclick="go('drill')">Drill weak topics</button>
+      <button class="btn btn-ghost" onclick="go('dashboard')">Dashboard</button>
+    </div>`;
+}
+let reviewFilter='wrong';
+function reviewExam(){ reviewFilter='wrong'; renderReview(); }
+function setReviewFilter(f){ reviewFilter=f; renderReview(); }
+function renderReview(){
+  const c=document.getElementById('content');
+  if(!exam||!exam.result||!exam.result.detail){go('exam');return;}
+  const d=exam.result.detail;
+  const wrong=d.filter(x=>!x.ok).length, flagged=d.filter(x=>x.flagged).length;
+  let list=d.map((x,i)=>({...x,n:i+1}));
+  if(reviewFilter==='wrong')list=list.filter(x=>!x.ok);
+  else if(reviewFilter==='flagged')list=list.filter(x=>x.flagged);
+  const fbtn=(f,label)=>`<button class="btn ${reviewFilter===f?'btn-primary':'btn-ghost'}" style="padding:8px 16px" onclick="App.setReviewFilter('${f}')">${label}</button>`;
+  c.innerHTML=`
+    <div class="eyebrow">Mock Exam · Review</div>
+    <h1 class="page">Answer Review</h1>
+    <p class="lede">${exam.result.correct}/60 correct. Go through what you missed — the explanation tells you why the right answer is right.</p>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px">
+      ${fbtn('wrong',`Wrong (${wrong})`)}
+      ${fbtn('flagged',`Flagged (${flagged})`)}
+      ${fbtn('all','All 60')}
+    </div>
+    ${list.length?list.map(x=>{
+      const chosenTxt = x.chosen===null?'<em>no answer</em>':`${LETTERS[x.chosen]}. ${x.q.o[x.chosen]}`;
+      return `<div class="q-card" style="padding:20px 22px;margin-bottom:14px">
+        <div class="q-meta"><span class="q-sec-tag">Q${x.n} · ${SEC_LABEL[x.q.s]}</span>
+          <span>${x.flagged?'<span class="pill" style="background:var(--gold-soft);color:#1a1206">★ flagged</span> ':''}${x.ok?'<span class="pill ok">correct</span>':'<span class="pill" style="background:var(--red-soft);color:var(--red)">wrong</span>'}</span></div>
+        <div class="q-text" style="font-size:18px">${x.q.q}</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin:6px 0 12px">
+          ${x.ok?'':`<div class="opt wrong" style="cursor:default"><span class="ltr">${x.chosen===null?'–':LETTERS[x.chosen]}</span><span>Your answer: ${chosenTxt}</span></div>`}
+          <div class="opt correct" style="cursor:default"><span class="ltr">${LETTERS[x.q.a]}</span><span>Correct: ${x.q.o[x.q.a]}</span></div>
+        </div>
+        <div class="explain show right" style="margin-top:0"><span class="v">Why</span>${x.q.e}</div>
+      </div>`;}).join('')
+      :`<div class="card" style="text-align:center;padding:34px"><div class="serif" style="font-size:20px;font-weight:600">Nothing here ✓</div><p style="color:var(--ink-soft);margin:0">No ${reviewFilter==='wrong'?'wrong answers':'flagged questions'} this time.</p></div>`}
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn btn-gold" onclick="App.startExam()">Take another mock</button>
+      <button class="btn btn-ghost" onclick="App.renderExamResult(document.getElementById('content'))">← Back to result</button>
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+/* ---------------- PRE-EXAM CHECKLIST ---------------- */
+const CHECK=[
+  'List all 7 principles in order, one line each',
+  'List all 7 practices with purpose + key products',
+  'Draw the lifecycle and name all 7 processes',
+  'State purpose, trigger, main output of each process',
+  'Classify any product as baseline / record / report',
+  'State who owns and who creates each major product',
+  'List the 6 tolerances and who sets them for whom',
+  'List 5 threat responses and 4 opportunity responses',
+  'List the 3 issue types',
+  'Name Board roles, combination rules, what Assurance does',
+  'State the 3 tailoring rules',
+  'Scored 85%+ on this question bank',
+  'Scored 80%+ on an official PeopleCert sample paper',
+];
+RENDER.checklist=(c)=>{
+  const done=Object.values(state.checklist).filter(Boolean).length;
+  c.innerHTML=`
+    <div class="eyebrow">Part 11</div>
+    <h1 class="page">Pre-Exam Checklist</h1>
+    <p class="lede">When every box is ticked, book the exam. ${done}/13 done.</p>
+    <div class="prog-wrap" style="margin-bottom:20px"><div class="prog-bar" style="width:${done/13*100}%"></div></div>
+    <div class="card"><ul class="checklist">
+      ${CHECK.map((t,i)=>`<li><span class="box ${state.checklist[i]?'done':''}" onclick="toggleCheck(${i})">${state.checklist[i]?'✓':''}</span><span>${t}</span></li>`).join('')}
+    </ul></div>
+    ${done===13?`<div class="callout key"><div class="tag">All clear ✓</div>Every box ticked. Book the official PeopleCert course + exam — at this point it should feel like confirmation, not learning.</div>`:''}
+    <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-ghost" onclick="resetProgress()">Reset all progress</button>
+    </div>`;
+};
+function toggleCheck(i){state.checklist[i]=!state.checklist[i];save();RENDER.checklist(document.getElementById('content'));}
+function resetProgress(){
+  if(confirm('Reset all progress — reading, flashcards, drills, exam history and checklist? This cannot be undone.')){
+    state=defaults();save();go('dashboard');
+  }
+}
+
+/* ---------- expose handlers (namespace + globals so all onclick styles resolve) ---------- */
+const App = { go, openNav, closeNav, startFc, flipFc, rateFc, startDrill, answerDrill,
+  startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
+  renderExamResult, reviewExam, setReviewFilter, toggleCheck, resetProgress };
+if(typeof window!=='undefined'){ Object.assign(window, App); window.App=App; }
+
+/* ---------- keyboard: Escape closes mobile nav ---------- */
+if(typeof document!=='undefined' && document.addEventListener){
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
+}
+
+/* ---------- merge the expansion question bank if present ---------- */
+if(typeof QUESTIONS_EXT!=='undefined' && Array.isArray(QUESTIONS_EXT)){
+  QUESTIONS.push(...QUESTIONS_EXT);
+}
+
+buildNav();
+go(state.lastView||'dashboard');
+
+</script>
+</body>
+</html>

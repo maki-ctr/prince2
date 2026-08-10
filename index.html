@@ -315,8 +315,8 @@ let QUESTIONS = [
 {s:"practices",q:"The 'detailed' Business Case is produced in which process?",o:["Initiating a Project","Starting up a Project","Directing a Project","Managing a Stage Boundary"],a:0,e:"Detailed Business Case is produced in Initiating a Project (IP)."},
 {s:"practices",q:"How many levels of plan does PRINCE2 define?",o:["2","3","4","5"],a:1,e:"Three: Project Plan, Stage Plan, Team Plan (Exception Plan replaces Stage/Project Plan)."},
 {s:"practices",q:"An Exception Plan replaces:",o:["Any plan in the hierarchy","A Stage Plan or Project Plan (not Team Plan)","Only a Stage Plan","Only the Project Plan"],a:1,e:"It replaces a Stage Plan or Project Plan — never a Team Plan."},
-{s:"practices",q:"Which is NOT a tolerance area in PRINCE2?",o:["Cost","Time","Reputation","Risk"],a:2,e:"The six are time, cost, scope, quality, benefits, risk. Reputation is not one."},
-{s:"practices",q:"How many tolerance areas does PRINCE2 define?",o:["4","5","6","7"],a:2,e:"Six: time, cost, scope, quality, benefits, risk."},
+{s:"practices",q:"Which is NOT a tolerance area in PRINCE2 7?",o:["Sustainability","Time","Reputation","Risk"],a:2,e:"The seven are benefits, cost, time, quality, scope, sustainability, risk. Reputation is not one."},
+{s:"practices",q:"How many tolerance areas (performance targets) does PRINCE2 7 define?",o:["4","5","6","7"],a:3,e:"Seven: benefits, cost, time, quality, scope, sustainability, risk."},
 {s:"practices",q:"Quality assurance in PRINCE2 is:",o:["Performed by the Project Manager","Performed by the Quality Manager","Independent of the project, part of corporate governance","Performed by the Project Board"],a:2,e:"Quality assurance sits OUTSIDE the project as corporate/programme governance. (Distinct from Project Assurance.)"},
 {s:"practices",q:"Which document defines how risks will be identified, assessed and controlled?",o:["Risk Register","Risk Management Approach","Risk Budget","Risk Plan"],a:1,e:"The Risk Management Approach. The Register logs the risks themselves."},
 {s:"practices",q:"A 'dis-benefit' is:",o:["A failed benefit","A negative outcome of the project","A risk that materialised","A poorly-defined benefit"],a:1,e:"A dis-benefit is a measurable negative outcome of the project."},
@@ -376,7 +376,7 @@ let QUESTIONS = [
 {s:"roles",q:"Which role represents those who design and deliver the project's products?",o:["Executive","Senior User","Senior Supplier","Project Manager"],a:2,e:"The Senior Supplier represents the supplier interest."},
 {s:"roles",q:"Project Assurance is independent of:",o:["The Senior User","The Project Board","The Project Manager","The Senior Supplier"],a:2,e:"Independent of the Project Manager (it assures on the Board's behalf)."},
 {s:"roles",q:"Which role chairs the Project Board?",o:["Senior User","Senior Supplier","Executive","Project Manager"],a:2,e:"The Executive chairs the Board."},
-{s:"roles",q:"Realising benefits after project closure is the responsibility of:",o:["Project Manager","Senior User","Executive","Senior Supplier"],a:1,e:"The Senior User is accountable for realising benefits post-project."},
+{s:"roles",q:"Realising benefits after project closure is the responsibility of:",o:["Project Manager","Senior User","Executive","Senior Supplier"],a:1,e:"The Senior User is accountable for specifying benefits and demonstrating forecast benefits are on track; the Executive owns the Business Case and continued justification."},
 {s:"roles",q:"The Change Authority is appointed by:",o:["Project Manager","Senior User","Project Board","Corporate"],a:2,e:"The Project Board appoints the Change Authority and delegates limits to it."},
 {s:"roles",q:"The Project Manager reports to:",o:["Corporate directly","The Project Board","The Senior User","The Team Manager"],a:1,e:"The PM reports to the Project Board."},
 {s:"roles",q:"The Project Support role:",o:["Performs project assurance","Performs administrative and configuration management functions","Acts as a deputy Project Manager","Reports to the Senior User"],a:1,e:"Administrative / configuration management support."},
@@ -441,7 +441,7 @@ const QUESTIONS_EXT = [
 {s:"processes",q:"Which two roles are appointed during Starting up a Project?",o:["Executive and Project Manager","Senior User and Senior Supplier","Team Manager and Project Support","Change Authority and Executive"],a:0,e:"SU appoints the Executive and the Project Manager."},
 {s:"processes",q:"Which document is NOT produced in Starting up a Project?",o:["Project Brief","Initiation Stage Plan","PID","Daily Log"],a:2,e:"The PID is produced in Initiating a Project, not SU."},
 {s:"processes",q:"The purpose of Initiating a Project is to:",o:["Decide if there is a viable project","Establish solid foundations before significant spend","Deliver the products","Close the project"],a:1,e:"IP establishes solid foundations before committing major spend."},
-{s:"processes",q:"How many activities does Managing Product Delivery contain?",o:["Two","Three (accept, execute, deliver)","Five","Seven"],a:1,e:"Accept a WP, execute a WP, deliver a WP."},
+{s:"processes",q:"How many activities does Managing Product Delivery contain?",o:["Two","Three (accept, execute, evaluate)","Five","Seven"],a:1,e:"Accept a WP, execute a WP, evaluate a WP."},
 {s:"processes",q:"Which process produces the End Project Report?",o:["Managing a Stage Boundary","Controlling a Stage","Closing a Project","Directing a Project"],a:2,e:"The End Project Report is produced in Closing a Project."},
 {s:"processes",q:"The Project Board authorises the project at the end of:",o:["Starting up a Project","Initiating a Project","The first delivery stage","Closing a Project"],a:1,e:"After IP, the Board authorises the project (decision point 2)."},
 {s:"processes",q:"Corrective action within tolerance is taken in:",o:["Directing a Project","Controlling a Stage","Managing a Stage Boundary","Closing a Project"],a:1,e:"The PM takes corrective action within tolerance in Controlling a Stage."},
@@ -569,9 +569,9 @@ const CARDS = [
 {deck:"Principles",front:"Manage by exception — the 7 tolerances?",back:"Time, Cost, Scope, Quality, Benefits, Sustainability, Risk. Stay within tolerance = no escalation; forecast breach = raise an Exception to the level above."},
 {deck:"Principles",front:"Focus on products — central artefact?",back:"Product-based planning. The Product Description defines quality; the Product Breakdown Structure decomposes deliverables. Activities are derived from products, not the reverse."},
 {deck:"Principles",front:"Tailor to suit the project — three rules?",back:"1. Tailoring is mandatory. 2. Principles cannot be tailored away. 3. Tailoring is recorded in the PID."},
-{deck:"Practices",front:"Name the 7 practices (themes).",back:"1. Business Case\n2. Organising\n3. Plans\n4. Quality\n5. Risk\n6. Issues\n7. Progress"},
-{deck:"Practices",front:"Business Case — output-outcome-benefit chain + negative term?",back:"Outputs (what's produced) → outcomes (resulting change) → benefits (measurable improvement). Negative outcome = dis-benefit. Executive owns it."},
-{deck:"Practices",front:"Organising — the four levels of organisation?",back:"1. Commissioning — business layer (sets mandate & project tolerances)\n2. Directing — Project Board\n3. Managing — Project Manager\n4. Delivering — Team Managers"},
+{deck:"Practices",front:"Name the 7 practices (themes).",back:"1. Business Case\n2. Organization\n3. Plans\n4. Quality\n5. Risk\n6. Issues\n7. Progress"},
+{deck:"Practices",front:"Business Case — the full value chain + negative term?",back:"Outputs → Capabilities → Outcomes → Benefits → Business objectives. A negative outcome = dis-benefit (detracts from objectives). Executive owns the Business Case."},
+{deck:"Practices",front:"Organization — the four levels of organisation?",back:"1. Commissioning — business layer (sets mandate & project tolerances)\n2. Directing — Project Board\n3. Managing — Project Manager\n4. Delivering — Team Managers"},
 {deck:"Practices",front:"Plans — three levels + what Exception Plan replaces?",back:"Project Plan, Stage Plan, Team Plan. Exception Plan replaces a Stage Plan or Project Plan — never a Team Plan."},
 {deck:"Practices",front:"Quality — acceptance criteria vs quality criteria?",back:"Acceptance criteria: prioritised list for the whole project product (Project Product Description, owned by Senior User). Quality criteria: per individual product (Product Description). QA is external to the project."},
 {deck:"Practices",front:"Risk — threat responses (5+1) and opportunity responses (4)?",back:"Threats: avoid, reduce, transfer, share, accept (+ prepare contingent plans). Opportunities: exploit, enhance, share, accept (reject also possible)."},
@@ -581,24 +581,24 @@ const CARDS = [
 {deck:"Processes",front:"SU — trigger and main output?",back:"Trigger: the project mandate. Output: the Project Brief (NOT the PID — that's IP). Also starts Daily Log + Lessons Log."},
 {deck:"Processes",front:"DP — the 5 decision points?",back:"1. Authorise initiation\n2. Authorise the project\n3. Authorise a Stage/Exception Plan\n4. Give ad hoc direction\n5. Authorise project closure"},
 {deck:"Processes",front:"IP — main output and what it contains?",back:"The PID: project definition, approach, detailed Business Case, team structure, the four approaches (Risk/Quality/Comms/Change), Project Plan, controls."},
-{deck:"Processes",front:"CS vs MP — the difference?",back:"CS = PM's day-to-day stage management (authorise WPs, Highlight Reports, corrective action). MP = the PM↔Team Manager interface (accept/execute/deliver a Work Package, Checkpoint Reports)."},
+{deck:"Processes",front:"CS vs MP — the difference?",back:"CS = PM's day-to-day stage management (authorise WPs, Highlight Reports, corrective action). MP = the PM↔Team Manager interface (accept/execute/evaluate a Work Package, Checkpoint Reports)."},
 {deck:"Processes",front:"SB — two triggers + key outputs?",back:"Triggers: approaching end of a stage, OR an exception. Outputs: next Stage Plan (or Exception Plan), updated Project Plan/Business Case, End Stage Report."},
 {deck:"Processes",front:"CP — purpose + key outputs?",back:"Fixed point to confirm acceptance. Outputs: End Project Report, Lessons Report, updated Benefits Management Approach. Premature closure also handled here."},
 {deck:"Products",front:"Baseline vs Record vs Report — quick test?",back:"Baselines = plans & approaches (PID, Business Case, Plans). Records = logs & registers (Daily Log, Risk/Issue/Quality Register). Reports = snapshots named 'Report'. Trap: Daily Log & Lessons Log behave like records despite the name."},
-{deck:"Products",front:"Who owns: Business Case / Project Product Description / Benefits Mgmt Approach?",back:"Business Case → Executive. Project Product Description → Senior User. Benefits Management Approach → Executive."},
+{deck:"Products",front:"Who owns: Business Case / Project Product Description / Benefits Mgmt Approach?",back:"Business Case → Executive. Project Product Description → Senior User (specifies & tracks benefits). Business Case & Benefits Management Approach → Executive."},
 {deck:"Roles",front:"The 'cannot combine' rules?",back:"Executive ≠ Project Manager. Project Manager ≠ Project Assurance. Board roles can't be delegated to the PM. PM CAN be Team Manager or Project Support on small projects."},
 {deck:"Roles",front:"Who is ultimately accountable for the project?",back:"The Executive (the Project Board is collectively responsible, but the Executive is ultimately accountable and chairs the Board)."},
 {deck:"Procedures",front:"Product-based planning — the 4 steps in order?",back:"1. Project Product Description (whole-project deliverable + acceptance criteria)\n2. Product Breakdown Structure (decompose)\n3. Product Descriptions (per product)\n4. Product Flow Diagram (sequence + dependencies)"},
 {deck:"Procedures",front:"The quality audit trail — five links?",back:"Customer's quality expectations → acceptance criteria (prioritised, measurable) → quality criteria (per product) → Quality Register (activities log) → quality/acceptance records (evidence)."},
 {deck:"Procedures",front:"The risk management procedure — 5 steps?",back:"Identify → Assess (probability, impact, proximity) → Plan (responses) → Implement (owner + actionee) → Communicate (throughout)."},
 {deck:"Procedures",front:"The change control procedure — 5 steps?",back:"Capture → Assess → Recommend → Decide → Implement."},
-{deck:"Procedures",front:"The value chain (Business Case)?",back:"Output (product) → Outcome (change from using it) → Benefit (measurable improvement). A foreseeable negative is a dis-benefit (accepted, not uncertain)."},
-{deck:"Procedures",front:"Threat responses vs opportunity responses?",back:"Threats: Avoid, Reduce, Transfer, Share, Accept (+ contingent plans). Opportunities: Exploit, Enhance, Share, Accept, Reject. Share & Accept are in both."},
+{deck:"Procedures",front:"The value chain (Business Case)?",back:"Outputs → Capabilities → Outcomes → Benefits → Business objectives. Benefit = measurable improvement; dis-benefit = measurable decline. Both flow from outcomes."},
+{deck:"Procedures",front:"Threat responses vs opportunity responses?",back:"Threats: Avoid, Reduce, Transfer, Share, Accept (+ prepare contingent plans). Opportunities: Exploit, Enhance, Share, Accept (+ prepare contingent plans). Paired: avoid/exploit, reduce/enhance. No 'reject'."},
 {deck:"Procedures",front:"Tolerance cascade — who sets for whom?",back:"Business layer → project tolerances. Project Board → stage tolerances (for PM). PM → Work Package tolerances (for Team Manager). Forecast breach escalates up one level."},
 {deck:"Composition",front:"What's in any Approach (Risk/Quality/Comms/Change)?",back:"Same skeleton: procedure · tools & techniques · roles/responsibilities · timing · how the related register/record is used. All produced in IP."},
 {deck:"Composition",front:"What's in a Product Description?",back:"Purpose · composition · derivation · format · quality criteria · quality method · quality responsibilities. (No investment appraisal — that's the Business Case.)"},
 {deck:"Composition",front:"What's in the Business Case?",back:"Reasons · business options (do nothing/minimum/something) · benefits & dis-benefits · costs · timescale · investment appraisal · major risks. Owned by the Executive."},
-{deck:"v7 Edition",front:"PRINCE2 7 — what were 'themes' renamed to?",back:"Practices. (Organization → Organizing.) The set: Business Case, Organizing, Plans, Quality, Risk, Issues, Progress."},
+{deck:"v7 Edition",front:"PRINCE2 7 — what were 'themes' renamed to?",back:"Practices. The seven: Business Case, Organization, Plans, Quality, Risk, Issues, Progress. (The word 'themes' became 'practices'; the practice names themselves are unchanged.)"},
 {deck:"v7 Edition",front:"PRINCE2 7 — the headline new performance target?",back:"Sustainability. PRINCE2 7 now manages seven performance targets, each with tolerances: benefits, cost, time, quality, scope, sustainability, risk. Sustainability IS one of the seven tolerances (v7 added it)."},
 {deck:"v7 Edition",front:"PRINCE2 7 — integrated elements + new emphasis?",back:"Principles, people, practices, processes — applied in a project context. 'People' is the newly foregrounded element vs the 6th edition."},
 {deck:"v7 Edition",front:"PRINCE2 7 — what did NOT change?",back:"7 principles (number + intent), 7 processes, and the role structure. Most learning transfers directly."},
@@ -608,7 +608,11 @@ const CARDS = [
 {deck:"Practices",front:"Risk: exposure vs velocity vs proximity?",back:"Exposure = degree an objective is 'at risk' (neutral, +/-). Velocity = how FAST impact hits if it occurs. Proximity = how NEAR in time it might occur."},
 {deck:"Practices",front:"Risk: appetite vs tolerance vs budget?",back:"Appetite = amount/type of risk the business will take. Tolerance = measurable threshold per objective. Budget = money set aside to fund responses."},
 {deck:"Composition",front:"Business case chain — outputs to benefits?",back:"Outputs → (deliver) Capabilities → (embed) Outcomes → (lead to) Benefits. Dis-benefits are negative outcomes; all measured against Business objectives."},
-{deck:"v7 Edition",front:"The 3 management approaches under Business Case?",back:"Business case (justification), Benefits management approach (realizing benefits), Sustainability management approach (sustainability targets)."}
+{deck:"v7 Edition",front:"The 3 management approaches under Business Case?",back:"Business case (justification), Benefits management approach (realizing benefits), Sustainability management approach (sustainability targets)."},
+{deck:"Principles",front:"People — the 4 themes in PRINCE2 7?",back:"1. Leading successful change (change management approach)\n2. Leading successful teams\n3. Managing successful teams\n4. Communication (communication management approach)"},
+{deck:"Principles",front:"Managing successful teams — 4 considerations?",back:"Cultural intelligence · Competencies & capabilities · Team building · Social cohesion (co-located / virtual / hybrid)."},
+{deck:"Procedures",front:"Org design & development — the 5 steps?",back:"1. Understand organizational ecosystem\n2. Design project ecosystem\n3. Develop project ecosystem\n4. Manage changes to project ecosystem\n5. Transition project into organizational ecosystem"},
+{deck:"Composition",front:"Business Case — the three approaches?",back:"1. Business Case (justification)\n2. Benefits Management Approach (realizing benefits)\n3. Sustainability Management Approach (sustainability performance targets)"}
 ];
 
 </script>
@@ -682,7 +686,7 @@ const LC_DETAIL={
   SU:{n:'Starting up a Project',t:'Trigger: the project mandate',p:'"Do we have a viable, worthwhile project?" Appoint Exec + PM, capture lessons, outline Business Case.',o:'Project Brief · Initiation Stage Plan'},
   IP:{n:'Initiating a Project',t:'Trigger: Board authorises initiation',p:'Build solid foundations: detailed Business Case, the four approaches, Project Plan.',o:'PID (the master baseline)'},
   CS:{n:'Controlling a Stage',t:'Repeats through every delivery stage',p:"The PM's day-to-day: authorise Work Packages, handle issues/risks, take corrective action.",o:'Highlight Reports · escalations'},
-  MP:{n:'Managing Product Delivery',t:'Runs in parallel with CS',p:'The PM↔Team Manager interface: accept, execute, deliver a Work Package.',o:'Checkpoint Reports · completed products'},
+  MP:{n:'Managing Product Delivery',t:'Runs in parallel with CS',p:'The PM↔Team Manager interface: accept, execute, evaluate a Work Package.',o:'Checkpoint Reports · completed products'},
   SB:{n:'Managing a Stage Boundary',t:'Trigger: near stage end OR an exception',p:'Plan the next stage, update Project Plan + Business Case, report stage end.',o:'Next Stage Plan (or Exception Plan) · End Stage Report'},
   CP:{n:'Closing a Project',t:'Trigger: near end of final stage (or premature)',p:'Confirm acceptance, hand over products, evaluate the project.',o:'End Project Report · Lessons Report'}
 };
@@ -807,7 +811,7 @@ function diagChange(){
     <text x="265" y="165" class="dg-mini">impact on objectives,</text><text x="265" y="178" class="dg-mini">Business Case, risk</text>
     <text x="405" y="165" class="dg-mini">options +</text><text x="405" y="178" class="dg-mini">recommendation</text>
     <text x="545" y="165" class="dg-mini">PM / Change Authority</text><text x="545" y="178" class="dg-mini">/ Board (per limits)</text>
-  </svg><div class="dg-hint">Three issue types feed this path: request for change · off-specification · problem/concern.</div></div>`;
+  </svg><div class="dg-hint">Six issue types: problem · concern · event external · business opportunity · request for change · off-specification.</div></div>`;
 }
 
 /* ---- 6. Quality audit trail (static) ---- */
@@ -830,17 +834,19 @@ function diagQuality(){
 
 /* ---- 7. Value chain (static, compact) ---- */
 function diagValueChain(){
-  return `<div class="diagram"><svg viewBox="0 0 600 140" ${SVGNS} role="img" aria-label="Output outcome benefit value chain">
+  return `<div class="diagram"><svg viewBox="0 0 980 150" ${SVGNS} role="img" aria-label="Outputs capabilities outcomes benefits business objectives value chain">
     <defs><marker id="arr5" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--gold)"/></marker></defs>
-    ${[['Output','the product\nthe project builds','ip'],
-       ['Outcome','the change from\nusing the output','cs'],
-       ['Benefit','measurable\nimprovement','plan']]
-      .map((s,i)=>{const x=30+i*190;return `
-      <rect class="dg-box ${s[2]}" x="${x}" y="30" width="150" height="64" rx="11"/>
-      <text x="${x+75}" y="56" class="dg-lbl">${s[0]}</text>
-      <text x="${x+75}" y="76" class="dg-sub2">${s[1].split('\n').map((l,j)=>`<tspan x="${x+75}" dy="${j?12:0}">${l}</tspan>`).join('')}</text>
-      ${i<2?`<line x1="${x+150}" y1="62" x2="${x+218}" y2="62" stroke="var(--gold)" stroke-width="2.5" marker-end="url(#arr5)"/>`:''}`;}).join('')}
-    <text x="300" y="125" class="dg-mini" text-anchor="middle">A foreseeable negative outcome = a dis-benefit (accepted, not uncertain)</text>
+    ${[['Outputs','deliverables the\nproject builds','ip'],
+       ['Capabilities','completed outputs\nready to use','ip'],
+       ['Outcomes','the change from\nusing capabilities','cs'],
+       ['Benefits','measurable\nimprovement','plan'],
+       ['Business\nobjectives','what the org\nsets out to achieve','plan']]
+      .map((s,i)=>{const x=14+i*192;return `
+      <rect class="dg-box ${s[2]}" x="${x}" y="26" width="164" height="66" rx="11"/>
+      <text x="${x+82}" y="50" class="dg-lbl">${s[0].split('\n').map((l,j)=>`<tspan x="${x+82}" dy="${j?13:0}">${l}</tspan>`).join('')}</text>
+      <text x="${x+82}" y="${s[0].includes('\n')?84:74}" class="dg-sub2">${s[1].split('\n').map((l,j)=>`<tspan x="${x+82}" dy="${j?12:0}">${l}</tspan>`).join('')}</text>
+      ${i<4?`<line x1="${x+164}" y1="59" x2="${x+220}" y2="59" stroke="var(--gold)" stroke-width="2.5" marker-end="url(#arr5)"/>`:''}`;}).join('')}
+    <text x="490" y="132" class="dg-mini" text-anchor="middle">A negative outcome = a dis-benefit (detracts from business objectives). Benefits &amp; dis-benefits both flow from outcomes.</text>
   </svg></div>`;
 }
 
@@ -937,6 +943,7 @@ const VIEWS = [
   {id:'processes', label:'The 7 Processes', ico:'③', group:'main'},
   {id:'products', label:'Management Products', ico:'④', group:'main'},
   {id:'roles', label:'Roles', ico:'⑤', group:'main'},
+  {id:'people', label:'People', ico:'☳', group:'main'},
   {id:'tailoring', label:'Tailoring', ico:'⑥', group:'main'},
   {id:'edition', label:"What's New in v7", ico:'✺', group:'main'},
   {id:'practitioner', label:'Practitioner Intro', ico:'✦', group:'main'},
@@ -1086,12 +1093,12 @@ RENDER.principles = (c)=>courseShell(c,'principles','Part 1','The 7 Principles',
 RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
   'Called "themes" in the 6th edition — interchangeable for Foundation. These are the aspects of a project addressed continuously throughout its life, each supported by specific management products.',
   `<div class="card">
-    ${pblock(1,'Business Case','Judges whether the project is desirable, viable and achievable. Outline in SU → detailed in IP → reviewed at every stage boundary. <b>Executive owns it.</b> Chain: outputs → outcomes → benefits; a negative outcome is a <b>dis-benefit</b>.','outline vs detailed timing; dis-benefits; benefits measured <em>after</em> close.')}
-    ${pblock(2,'Organising','Four levels: commissioning / business layer · directing (Board) · managing (PM) · delivering (Team Managers). Three Board interests: business, user, supplier.','the four levels; Project Assurance = oversight; Project Support = admin; combination rules.')}
+    ${pblock(1,'Business Case','Judges whether the project is desirable, viable and achievable. Outline in SU → detailed in IP → reviewed at every stage boundary. <b>Executive owns it.</b> Full chain: outputs → <b>capabilities</b> → outcomes → benefits → <b>business objectives</b>; a negative outcome is a <b>dis-benefit</b>. Three approaches sit here: Business Case, <b>Benefits Management Approach</b>, and <b>Sustainability Management Approach</b> (defines the actions, reviews and controls to ensure sustainability performance targets are met).','the full chain incl capabilities &amp; business objectives; the three approaches; benefits measured <em>after</em> close.')}
+    ${pblock(2,'Organization','Four levels: commissioning / business layer · directing (Board) · managing (PM) · delivering (Team Managers). Three Board interests: business, user, supplier. <b>Org-design &amp; development technique (5 steps):</b> 1) Understand the organizational ecosystem → 2) Design the project ecosystem → 3) Develop the project ecosystem → 4) Manage changes to the project ecosystem → 5) Transition the project into the organizational ecosystem.','the four levels; Project Assurance = oversight; Project Support = admin; combination rules.')}
     ${pblock(3,'Plans','Three levels: Project Plan, Stage Plan, Team Plan. An Exception Plan replaces a Stage or Project Plan — never a Team Plan. Product-based planning.','three levels; what an Exception Plan replaces; who approves what.')}
     ${pblock(4,'Quality','Quality planning (define fit-for-purpose) → quality control (check products) → quality assurance (external, corporate governance). Acceptance criteria = whole product (Senior User owns the Project Product Description); quality criteria = per product.','acceptance vs quality criteria; QA is <em>external</em>; Senior User owns the PPD.')}
     ${pblock(5,'Risk','Uncertain event(s) — threat or opportunity. Threat responses: avoid, reduce, transfer, share, accept (+ contingent plans). Opportunity: exploit, enhance, share, accept. Owner is accountable; actionee acts.','threat vs opportunity responses; owner vs actionee; Risk Budget (Board approves).')}
-    ${pblock(6,'Issues','Things that have happened (vs risks, which might). Three types: request for change, off-specification, problem/concern. Daily Log (informal) vs Issue Register (formal).','the three issue types — especially off-specification; Daily Log vs Issue Register.')}
+    ${pblock(6,'Issues','Things that have happened (vs risks, which might). Six types: problem, concern, event external to the project, business opportunity, request for change, off-specification. Daily Log (informal) vs Issue Register (formal).','the six issue types — especially off-specification (a product that won&rsquo;t meet its quality specifications); Daily Log vs Issue Register.')}
     ${pblock(7,'Progress','Monitor actual vs planned; forecast viability; control deviations. Seven tolerances cascade down the levels. Reports: Highlight (PM→Board), Checkpoint (TM→PM), End Stage, End Project, Exception.','seven tolerances; who reports to whom; time-driven vs event-driven controls.')}
   </div>
   <div class="callout key"><div class="tag">Two "assurance" words — don't confuse them</div><strong>Quality assurance</strong> sits <em>outside</em> the project (corporate/programme governance). <strong>Project Assurance</strong> sits <em>inside</em>, on behalf of the Project Board, and must be independent of the Project Manager.</div>
@@ -1100,7 +1107,7 @@ RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
     <li>Name the 7 practices.</li>
     <li>Acceptance criteria vs quality criteria — what's the difference and who owns each artefact?</li>
     <li>Five threat responses and four opportunity responses.</li>
-    <li>The three issue types.</li>
+    <li>Name the six issue types.</li>
   </ol></div>
   <div class="callout key"><div class="tag">Go deeper</div>This page is for recognition. For the full procedures, worked examples, and document contents the harder questions test, see <strong>Practices — In Depth</strong> in the sidebar.</div>`);
 
@@ -1112,7 +1119,7 @@ RENDER.processes = (c)=>courseShell(c,'processes','Part 3','The 7 Processes',
     ${pblock('DP','Directing a Project','The Project Board\'s accountability process — spans end of SU to end of CP. Five decision points: authorise initiation · authorise the project · authorise a Stage/Exception Plan · give ad hoc direction · authorise closure.','the 5 decision points; DP runs throughout; ad hoc direction.')}
     ${pblock('IP','Initiating a Project','"Solid foundations" before significant spend. Refines the Business Case (→ detailed), builds the four approaches (Risk/Quality/Comms/Change), creates the Project Plan, assembles the <b>PID</b>.','PID contents; detailed Business Case lives here.')}
     ${pblock('CS','Controlling a Stage','The PM\'s day-to-day: authorise Work Packages, review status, handle issues/risks, escalate, take corrective action, send <b>Highlight Reports</b> to the Board.','Work Package authorisation; Highlight cadence; where corrective action happens.')}
-    ${pblock('MP','Managing Product Delivery','The PM↔Team Manager interface. Three sub-processes: accept · execute · deliver a Work Package. Produces <b>Checkpoint Reports</b> (TM→PM).','three sub-processes; Checkpoint (not Highlight) Report.')}
+    ${pblock('MP','Managing Product Delivery','The PM↔Team Manager interface. Three sub-processes: accept · execute · evaluate a Work Package. Produces <b>Checkpoint Reports</b> (TM→PM).','three sub-processes; Checkpoint (not Highlight) Report.')}
     ${pblock('SB','Managing a Stage Boundary','Near the end of a stage (or on an exception). Plans the next stage, updates Project Plan + Business Case, produces the <b>End Stage Report</b> (or an Exception Plan).','two triggers; what gets updated; End Stage Report.')}
     ${pblock('CP','Closing a Project','A fixed point confirming acceptance. Hands over products, evaluates the project (<b>End Project Report</b>, <b>Lessons Report</b>), updates the Benefits Management Approach. Premature closure handled here too.','final process; premature closure; lessons handed forward.')}
   </div>
@@ -1188,7 +1195,7 @@ RENDER.roles = (c)=>courseShell(c,'roles','Part 5','Roles & Responsibilities',
   <h3 class="sub">The Project Board — three interests, one board</h3>
   <table><tr><th>Role</th><th>Interest</th><th>Key points</th></tr>
     <tr><td>Executive</td><td>Business</td><td>Ultimately accountable; owns the Business Case; chairs the Board. <strong>Cannot be the PM.</strong></td></tr>
-    <tr><td>Senior User</td><td>User</td><td>Represents users; owns the Project Product Description; accountable for realising benefits after the project.</td></tr>
+    <tr><td>Senior User</td><td>User</td><td>Represents users; specifies the benefits and demonstrates forecast benefits are on track. (The <strong>Executive</strong> owns the Business Case &amp; continued justification.)</td></tr>
     <tr><td>Senior Supplier</td><td>Supplier</td><td>Represents those who design/build/deliver; accountable for supplier-side product quality.</td></tr>
   </table>
   <p>Collectively the Board is responsible for success, directs the PM, and makes the five decision points in Directing a Project.</p>
@@ -1206,8 +1213,39 @@ RENDER.roles = (c)=>courseShell(c,'roles','Part 5','Roles & Responsibilities',
   <div class="callout trap"><div class="tag">Memorise the "cannots"</div>Executive <strong>≠</strong> Project Manager · Project Manager <strong>≠</strong> Project Assurance · Board roles cannot be delegated to the PM. (PM <em>may</em> take on Team Manager or Project Support on small projects.)</div>`,
   `<div class="recall"><div class="tag">Recall check</div><ol>
     <li>Who is ultimately accountable for the project, and who chairs the Board?</li>
-    <li>Who owns the Project Product Description and is accountable for benefits after closure?</li>
+    <li>Who specifies the benefits and demonstrates they are on track — and who owns the Business Case?</li>
     <li>Which two combinations are forbidden involving the Project Manager?</li>
+  </ol></div>`);
+
+RENDER.people = (c)=>courseShell(c,'people','Part 3','People',
+  'PRINCE2 7 places people at the centre of the method. Four themes: leading change, leading teams, managing teams, and communication.',
+  `<div class="callout key"><div class="tag">Why this matters in v7</div>PRINCE2 7 elevated <strong>people</strong> to one of the method's integrated elements (principles · <strong>people</strong> · practices · processes · project context). Projects are delivered by temporary teams working across organizational boundaries — this needs a different leadership style than established business teams.</div>
+  <h3 class="sub">3.1 Leading successful change</h3>
+  <div class="card">
+    <p><strong>Change management</strong> is how an organization transitions from its current state to the target state — and effective leadership is required to deliver it.</p>
+    <p style="margin-bottom:0">PRINCE2 addresses this by creating and maintaining a <strong>change management approach</strong> for the project. (Don't confuse this with <em>change control</em>, which handles issues/requests for change under the Issues practice.)</p>
+  </div>
+  <h3 class="sub">3.2 Leading successful teams</h3>
+  <div class="card">
+    <p style="margin-bottom:0">Project teams are <strong>temporary</strong> and typically cross organizational boundaries, so a temporary leader can find it harder to exercise authority. Leadership here differs from managing an established, permanent business team.</p>
+  </div>
+  <h3 class="sub">3.3 Managing successful teams — the four considerations</h3>
+  <table><tr><th>Consideration</th><th>What it means</th></tr>
+    <tr><td>Cultural intelligence</td><td>Ability to relate and work across cultures within the organizational ecosystem.</td></tr>
+    <tr><td>Competencies &amp; capabilities</td><td>Assess those assigned to the project to identify and mitigate skill gaps.</td></tr>
+    <tr><td>Team building</td><td>Build trust and find compatible ways of working.</td></tr>
+    <tr><td>Social cohesion</td><td>Bring teams together — whether co-located, virtual, or hybrid.</td></tr>
+  </table>
+  <h3 class="sub">3.4 Communication</h3>
+  <div class="card">
+    <p>Good communication avoids misconceptions and unnecessary barriers when implementing change. PRINCE2 addresses it through a <strong>communication management approach</strong>, which defines the <em>means</em> and <em>frequency</em> of communication — and of receiving feedback — across the project ecosystem.</p>
+    <p style="margin-bottom:0">It establishes a controlled, <strong>bidirectional</strong> flow of information, and how the team communicates depends on whether they are <strong>co-located, remote, or hybrid</strong>.</p>
+  </div>
+  <div class="callout trap"><div class="tag">Exam watch</div>Three "approaches" are easy to mix up: <strong>change management approach</strong> (People — leading change) vs <strong>change control</strong> (Issues practice) vs the <strong>Benefits/Sustainability management approaches</strong> (Business Case). Different homes, different jobs.</div>`,
+  `<div class="recall"><div class="tag">Recall check</div><ol>
+    <li>Which document does PRINCE2 use to address leading change — and how does it differ from change control?</li>
+    <li>Name the four considerations for managing successful teams.</li>
+    <li>What two things does a communication management approach define, and what does "bidirectional" add?</li>
   </ol></div>`);
 
 RENDER.tailoring = (c)=>courseShell(c,'tailoring','Part 6','Tailoring',
@@ -1258,7 +1296,7 @@ RENDER.schedule = (c)=>{
     <p class="lede">Built for ~4 focused hours/day. You watch at 1.75–2× so seat time is roughly half of typical estimates — adjust freely.</p>
     ${wk('Week 1 — Framework absorption','By Friday: list all 7 principles and 7 practices from memory, one sentence each.',[
       ['Mon','Orientation + Principles 1–4 + recall','4'],['Tue','Principles 5–7 + recall + Business Case','4'],
-      ['Wed','Organising, Plans','4'],['Thu','Quality, Risk','4'],['Fri','Issues, Progress','4'],
+      ['Wed','Organization, Plans','4'],['Thu','Quality, Risk','4'],['Fri','Issues, Progress','4'],
       ['Sat','All-practices recall; re-read weak','3'],['Sun','Light review + one mock-style quiz','2']])}
     ${wk('Week 2 — Processes & integration','By Sunday: walk the whole framework without notes.',[
       ['Mon','Lifecycle + SU, DP','4'],['Tue','IP, CS','4'],['Wed','MP, SB, CP','4'],
@@ -1697,14 +1735,14 @@ RENDER.practices_deep = (c)=>{
       <p>Outline Business Case is written in <strong>Starting up a Project</strong> (enough to justify initiating). It becomes the <strong>detailed</strong> Business Case in <strong>Initiating a Project</strong>. It is then <strong>reviewed and updated at every stage boundary</strong> (in Managing a Stage Boundary) and <strong>verified at closure</strong>. The <strong>Executive owns it throughout.</strong></p>
       <h4 class="sub" style="font-size:16px">What's in the Business Case</h4>
       <p>Executive summary · reasons · business options (do nothing / do minimum / do something) · expected benefits and dis-benefits · timescale · costs · investment appraisal · major risks. <strong>The three business options are a frequent exam item</strong> — and "do nothing" is always the baseline you compare against.</p>
-      <div class="callout key"><div class="tag">Benefits are measured AFTER the project</div>Most benefits only appear once outputs are in use. They are measured per the <strong>Benefits Management Approach</strong>, often after closure — which is why the Senior User (accountable for benefits) carries that responsibility beyond the project's end.</div>`})}
+      <div class="callout key"><div class="tag">Benefits are measured AFTER the project</div>Most benefits only appear once outputs are in use, so they are measured per the <strong>Benefits Management Approach</strong>, often after closure. The <strong>Senior User</strong> specifies the benefits and demonstrates the forecast benefits are on track; the <strong>Executive</strong> owns the Business Case and continued justification.</div>`})}
 
-    ${deepPractice({id:'org',num:'2',name:'Organising',
+    ${deepPractice({id:'org',num:'2',name:'Organization',
       purpose:'Define an organisation structure with clear accountabilities, engaging business, user and supplier interests.',
       body:`
       <h4 class="sub" style="font-size:16px">Four levels of organisation</h4>
       <p><strong>1. Commissioning (business layer)</strong> — sits above the project, issues the mandate, sets project-level tolerances. <strong>2. Directing</strong> — the Project Board. <strong>3. Managing</strong> — the Project Manager. <strong>4. Delivering</strong> — Team Managers (or team members directly).</p>
-      <p>Authority and tolerance <em>cascade down</em>; exceptions <em>escalate up</em>. That single sentence ties Organising to Progress and to "manage by exception".</p>
+      <p>Authority and tolerance <em>cascade down</em>; exceptions <em>escalate up</em>. That single sentence ties Organization to Progress and to "manage by exception".</p>
       <h4 class="sub" style="font-size:16px">The three interests — why three</h4>
       <p>Every project balances what the <strong>business</strong> will fund (Executive), what <strong>users</strong> need from the outputs (Senior User), and what <strong>suppliers</strong> can build (Senior Supplier). All three must be represented on the Board so decisions aren't made blind to one side.</p>
       <h4 class="sub" style="font-size:16px">Assurance vs Support vs Change Authority</h4>
@@ -1766,10 +1804,14 @@ RENDER.practices_deep = (c)=>{
       body:`
       <h4 class="sub" style="font-size:16px">Risk vs issue — the one-word test</h4>
       <p>A <strong>risk</strong> <em>might</em> happen (future, uncertain). An <strong>issue</strong> <em>has</em> happened (now, real). When a risk materialises, it becomes an issue.</p>
-      <h4 class="sub" style="font-size:16px">The three issue types</h4>
-      <p><strong>1. Request for change</strong> — someone wants to alter an approved baseline (a product or its spec).<br>
-      <strong>2. Off-specification</strong> — a product that should be delivered (to standard) won't be, or hasn't been. Includes a missing product or one that fails its criteria.<br>
-      <strong>3. Problem/concern</strong> — anything else the PM must resolve or escalate.</p>
+      <h4 class="sub" style="font-size:16px">The six issue types</h4>
+      <p><strong>1. Problem</strong> — a threat/issue with immediate negative impact the PM must resolve or escalate.<br>
+      <strong>2. Concern</strong> — an issue whose timelines and impact need to be assessed.<br>
+      <strong>3. Event external to the project</strong> — something outside the project that affects it.<br>
+      <strong>4. Business opportunity</strong> — a beneficial change worth considering.<br>
+      <strong>5. Request for change</strong> — someone wants to alter an approved baseline (a product or its spec).<br>
+      <strong>6. Off-specification</strong> — a product that will not meet its quality specifications (includes a missing product).</p>
+      <div class="callout"><div class="tag">Note</div>The v6 simplification grouped these as just three (request for change · off-specification · problem/concern). PRINCE2 7 tests all <strong>six</strong>.</div>
       <h4 class="sub" style="font-size:16px">The change control procedure — 5 steps</h4>
       ${diagChange()}
       <p><strong>Capture</strong> (log it) → <strong>Assess</strong> (impact on objectives, Business Case, risk) → <strong>Propose</strong> (options and recommendation) → <strong>Decide</strong> (PM, Change Authority, or Board per the limits) → <strong>Implement</strong>.</p>
@@ -1811,7 +1853,7 @@ RENDER.edition = (c)=>{
 
     <div class="card">
       <h3 class="sub" style="margin-top:0">1. "Themes" are now "Practices"</h3>
-      <p>The seven <strong>themes</strong> of the 6th edition were renamed the seven <strong>practices</strong>. The substance is largely continuous, but the exam uses the new word — and one practice was relabelled: the old <strong>"Organization"</strong> theme is now <strong>"Organizing"</strong>. The set is: Business Case, Organizing, Plans, Quality, Risk, Issues, Progress.</p>
+      <p>The seven <strong>themes</strong> of the 6th edition were renamed the seven <strong>practices</strong>. The substance is largely continuous, but the exam uses the new word — The names are largely unchanged: the set is Business Case, Organization, Plans, Quality, Risk, Issues, Progress.</p>
     </div>
 
     <div class="card">
@@ -1898,7 +1940,12 @@ const QUESTIONS_VERIFIED = [
 {s:"processes",q:"In starting up a project, the business justification is documented in the:",o:["Full business case","Outline business case","PID","End project report"],a:1,e:"QRG 5.1: SU documents justification in an outline business case; the full business case is prepared during initiation."},
 {s:"processes",q:"The purpose of managing product delivery is to:",o:["Authorize the project","Control the link between the project manager and the team manager","Prepare the next stage plan","Confirm project acceptance"],a:1,e:"QRG 5.5: MP controls the link between PM and team manager for accepting, executing, and delivering specialist products."},
 {s:"processes",q:"Which process provides a fixed point at which acceptance of the project product is confirmed?",o:["Controlling a stage","Managing a stage boundary","Closing a project","Directing a project"],a:2,e:"QRG 5.8: closing a project provides a fixed point at which acceptance of the project product is confirmed."},
-{s:"principles",q:"A PRINCE2 project must have at least how many stages?",o:["One","Two, the first being the initiation stage","Three","Four"],a:1,e:"QRG 1.3 note: there should be at least two stages, the first of which is the initiation stage."}
+{s:"principles",q:"A PRINCE2 project must have at least how many stages?",o:["One","Two, the first being the initiation stage","Three","Four"],a:1,e:"QRG 1.3 note: there should be at least two stages, the first of which is the initiation stage."},
+{s:"principles",q:"PRINCE2 addresses leading successful change through a:",o:["Change control procedure","Change management approach","Communication management approach","Benefits management approach"],a:1,e:"QRG 3.1: leading change is addressed via a change management approach — distinct from change control (Issues practice)."},
+{s:"principles",q:"Which is NOT one of the four considerations for managing successful teams?",o:["Cultural intelligence","Team building","Social cohesion","Earned value analysis"],a:3,e:"QRG 3.3: cultural intelligence, competencies/capabilities, team building, and social cohesion. Earned value is not one of them."},
+{s:"principles",q:"A communication management approach primarily defines the:",o:["Escalation tolerances","Means and frequency of bidirectional communication and feedback","Quality criteria for products","Roles on the project board"],a:1,e:"QRG 3.4: it defines the means and frequency of communication and feedback across the project ecosystem — a controlled, bidirectional flow."},
+{s:"roles",q:"In the organizational design & development technique, the FINAL step is to:",o:["Understand the organizational ecosystem","Design the project ecosystem","Transition the project into the organizational ecosystem","Develop the project ecosystem"],a:2,e:"QRG fig 6.4: understand → design → develop → manage changes → transition into the organizational ecosystem (final)."},
+{s:"products",q:"The Sustainability Management Approach defines the actions, reviews and controls to ensure:",o:["Benefits are realized after closure","Sustainability performance targets for the project are achieved","Risks are transferred to a third party","Quality criteria are testable"],a:1,e:"QRG 4.1.1: the sustainability management approach ensures the project's sustainability performance targets are achieved."}
 ];
 
 /* ---------- merge expansion + deep question banks if present ---------- */

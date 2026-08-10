@@ -272,7 +272,7 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
     <div class="nav-sec">Practice</div>
     <ul class="nav" id="navPractice"></ul>
     <div class="sb-foot">
-      7th edition (2023). A structured first pass —<br>pair with the official manual + PeopleCert sample papers before the exam.
+      7th edition (v7.2, 2025). Content cross-checked against the official PeopleCert Quick Reference Guide &amp; Learner Workbook —<br>still pair with the official manual + PeopleCert sample papers before the exam.
     </div>
   </aside>
 
@@ -287,7 +287,7 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 </div>
 
 <script>
-// PRINCE2 Foundation — 100-question bank
+// PRINCE2 Foundation — question bank (dynamic count via QUESTIONS.length)
 // section: principles | practices | processes | products | roles | tailoring
 let QUESTIONS = [
 // ---------- PRINCIPLES (1-15) ----------
@@ -320,7 +320,7 @@ let QUESTIONS = [
 {s:"practices",q:"Quality assurance in PRINCE2 is:",o:["Performed by the Project Manager","Performed by the Quality Manager","Independent of the project, part of corporate governance","Performed by the Project Board"],a:2,e:"Quality assurance sits OUTSIDE the project as corporate/programme governance. (Distinct from Project Assurance.)"},
 {s:"practices",q:"Which document defines how risks will be identified, assessed and controlled?",o:["Risk Register","Risk Management Approach","Risk Budget","Risk Plan"],a:1,e:"The Risk Management Approach. The Register logs the risks themselves."},
 {s:"practices",q:"A 'dis-benefit' is:",o:["A failed benefit","A negative outcome of the project","A risk that materialised","A poorly-defined benefit"],a:1,e:"A dis-benefit is a measurable negative outcome of the project."},
-{s:"practices",q:"Three types of issue in PRINCE2 are:",o:["Risk, problem, change","Request for change, off-specification, problem/concern","Internal, external, supplier","High, medium, low"],a:1,e:"Request for change, off-specification, problem/concern."},
+{s:"practices",q:"How many issue types does PRINCE2 7 define, and which set is correct?",o:["Six: problem, concern, event external, business opportunity, request for change, off-specification","Three: request for change, off-specification, problem","Four: risk, problem, change, concern","Two: request for change and off-specification"],a:0,e:"PRINCE2 7 lists six issue types: problem, concern, event external to the project, business opportunity, request for change, and off-specification."},
 {s:"practices",q:"An 'off-specification' issue is:",o:["Something that should be delivered but won't be (or wasn't)","A proposed change to a baseline","A poorly-specified product","An issue raised outside the project"],a:0,e:"Off-specification: a product that should be delivered (to standard) but won't be / hasn't been."},
 {s:"practices",q:"Who can decide on changes within delegated limits?",o:["Project Manager only","Change Authority","Project Support","Senior User"],a:1,e:"The Change Authority decides on changes within limits delegated by the Project Board."},
 {s:"practices",q:"The Project Product Description is owned by:",o:["Project Manager","Executive","Senior User","Senior Supplier"],a:2,e:"Owned by the Senior User (represents the user/acceptance interest)."},
@@ -368,7 +368,7 @@ let QUESTIONS = [
 {s:"products",q:"Highlight Reports go from:",o:["Team Manager to Project Manager","Project Manager to Project Board","Project Board to corporate","Project Manager to Senior User"],a:1,e:"PM to Project Board."},
 {s:"products",q:"Checkpoint Reports go from:",o:["Team Manager to Project Manager","Project Manager to Project Board","Project Board to corporate","Senior User to Project Manager"],a:0,e:"Team Manager to Project Manager."},
 {s:"products",q:"End Stage Reports cover:",o:["The whole project to date","Only the current stage","Only outstanding risks","Only completed Work Packages"],a:1,e:"They report on the stage just completed."},
-{s:"products",q:"The Project Mandate is:",o:["A PRINCE2 management product","An input to PRINCE2 from corporate/programme/customer","Created in Starting up a Project","The same as the Project Brief"],a:1,e:"The mandate is an external input that triggers SU; not a PRINCE2 management product."},
+{s:"products",q:"The Project Mandate is:",o:["A PRINCE2 management product","An external input from the business layer (commissioning organization)","Created in Starting up a Project","The same as the Project Brief"],a:1,e:"The mandate is an external input from the business layer that triggers SU; not a PRINCE2 management product."},
 // ---------- ROLES (76-90) ----------
 {s:"roles",q:"Which role is ultimately accountable for the project's success?",o:["Project Manager","Senior User","Executive","Team Manager"],a:2,e:"The Executive is ultimately accountable (the Board is collectively responsible)."},
 {s:"roles",q:"Which role CANNOT be combined with Project Manager?",o:["Team Manager","Project Support","Project Assurance","Change Authority"],a:2,e:"Project Assurance must stay independent of management — cannot be the PM."},
@@ -421,7 +421,7 @@ const QUESTIONS_EXT = [
 {s:"practices",q:"An 'output' in the benefits chain is:",o:["A measurable improvement","A change resulting from using a deliverable","A specialist product the project delivers","A negative consequence"],a:2,e:"Output = what the project delivers; outcome = the change; benefit = the measurable improvement."},
 {s:"practices",q:"A 'benefit' in PRINCE2 is:",o:["Any project deliverable","A measurable improvement perceived as advantageous","An approved change","A completed Work Package"],a:1,e:"A measurable improvement from an outcome, seen as an advantage by stakeholders."},
 {s:"practices",q:"Which document records how and when benefits will be measured?",o:["Business Case","Benefits Management Approach","Quality Register","End Project Report"],a:1,e:"The Benefits Management Approach defines benefit measurement, including post-project."},
-{s:"practices",q:"The four organisational levels in order (highest to lowest) are:",o:["Directing, managing, delivering, corporate","Corporate/programme/customer, directing, managing, delivering","Managing, directing, delivering, corporate","Corporate, delivering, managing, directing"],a:1,e:"Corporate/programme/customer → directing → managing → delivering."},
+{s:"practices",q:"The four organisational levels in order (highest to lowest) are:",o:["Directing, commissioning, managing, delivering","Commissioning (business layer), directing, managing, delivering","Managing, directing, delivering, commissioning","Business layer, delivering, managing, directing"],a:1,e:"Commissioning (business layer) → directing (project board) → managing (project manager) → delivering (team managers)."},
 {s:"practices",q:"Project Support is best described as:",o:["Independent oversight for the Board","An administrative and configuration management function","A decision-making Board role","The Team Manager's deputy"],a:1,e:"Project Support handles admin and configuration management."},
 {s:"practices",q:"A Team Plan is:",o:["Mandatory for all projects","Optional, produced by a Team Manager","Approved by corporate","Part of the PID"],a:1,e:"Team Plans are optional and produced by Team Managers."},
 {s:"practices",q:"The first step of product-based planning is to:",o:["Identify activities","Write the Project Product Description / design the plan","Estimate costs","Build the schedule"],a:1,e:"Designing the plan and defining products comes before identifying activities."},
@@ -432,7 +432,7 @@ const QUESTIONS_EXT = [
 {s:"practices",q:"'Transfer' as a risk response is used for:",o:["Opportunities only","Passing a threat's impact to a third party (e.g. insurance)","Eliminating a risk entirely","Accepting a risk"],a:1,e:"Transfer moves the financial impact of a threat to a third party."},
 {s:"practices",q:"'Exploit' as a risk response means:",o:["Reducing a threat","Making the most of an opportunity so it definitely happens","Sharing pain and gain","Ignoring a risk"],a:1,e:"Exploit ensures an opportunity is realised."},
 {s:"practices",q:"'Share' as a risk response applies to:",o:["Only threats","Only opportunities","Both threats and opportunities","Neither"],a:2,e:"Share (pain/gain via agreed split) applies to both threats and opportunities."},
-{s:"practices",q:"A request for change is best handled through:",o:["The Daily Log informally","Change control (capture, assess, propose, decide, implement)","Immediate implementation by the PM","The End Project Report"],a:1,e:"Requests for change follow the change control procedure."},
+{s:"practices",q:"A request for change is best handled through:",o:["The Daily Log informally","Change control (capture, assess, recommend, decide, implement)","Immediate implementation by the PM","The End Project Report"],a:1,e:"Requests for change follow the change control procedure."},
 {s:"practices",q:"Where are minor issues handled informally?",o:["Issue Register","Daily Log","Risk Register","Quality Register"],a:1,e:"Informally-managed issues are recorded in the Daily Log."},
 {s:"practices",q:"The Progress practice provides forecasts of:",o:["Staff morale","The project's continued viability and objectives","Marketing reach","Supplier profit"],a:1,e:"Progress forecasts viability and whether objectives will be met."},
 {s:"practices",q:"A 'time-driven' control is:",o:["Triggered by an event","Produced at regular intervals (e.g. Highlight Report)","Only used in exceptions","Optional"],a:1,e:"Time-driven controls occur on a regular cadence."},
@@ -456,7 +456,7 @@ const QUESTIONS_EXT = [
 {s:"processes",q:"Which process is concerned with reviewing the current stage and planning the next?",o:["Controlling a Stage","Managing a Stage Boundary","Managing Product Delivery","Closing a Project"],a:1,e:"SB reviews the current stage and plans the next."},
 {s:"processes",q:"Premature closure differs from planned closure in that:",o:["It uses a different process","The project ends before all planned products are delivered","It skips the End Project Report","The Board is not involved"],a:1,e:"Premature closure (still within CP) ends the project early."},
 {s:"processes",q:"In which process are the four management approaches created?",o:["Starting up a Project","Initiating a Project","Directing a Project","Controlling a Stage"],a:1,e:"Risk, Quality, Communication and Change Control Approaches are created in IP."},
-{s:"processes",q:"The trigger that begins the whole PRINCE2 method is the:",o:["Project Brief","Project mandate","PID","Stage Plan"],a:1,e:"The project mandate (from corporate/programme/customer) triggers SU."},
+{s:"processes",q:"The trigger that begins the whole PRINCE2 method is the:",o:["Project Brief","Project mandate","PID","Stage Plan"],a:1,e:"The project mandate (from the business layer / commissioning organization) triggers SU."},
 {s:"processes",q:"Which process produces Checkpoint Reports?",o:["Controlling a Stage","Managing Product Delivery","Directing a Project","Closing a Project"],a:1,e:"Checkpoint Reports are produced in MP by the Team Manager."},
 // ---------- PRODUCTS (20) ----------
 {s:"products",q:"Which of these is an 'approach' (a baseline management product)?",o:["Risk Register","Risk Management Approach","Highlight Report","Daily Log"],a:1,e:"Approaches are baselines; registers/logs are records."},
@@ -500,7 +500,7 @@ const QUESTIONS_EXT = [
 {s:"tailoring",q:"Merging the Daily Log and Lessons Log on a small project is an example of:",o:["Embedding","Tailoring management products","Breaking a principle","A reporting control"],a:1,e:"Combining products is permitted tailoring."},
 {s:"tailoring",q:"Who is responsible for ensuring PRINCE2 is tailored appropriately for the project?",o:["Corporate audit","The Project Manager (with Board agreement)","The Team Manager","Project Support"],a:1,e:"The PM proposes tailoring; the Board agrees it, recorded in the PID."},
 {s:"tailoring",q:"Embedding is the responsibility of:",o:["The individual project","The host organisation","The Project Board","PeopleCert"],a:1,e:"Embedding (adopting PRINCE2 as a standard) is an organisational responsibility."},
-{s:"tailoring",q:"Foundation pass mark and format:",o:["55%, 60 questions, 60 minutes, closed book","70%, 75 questions, 90 minutes","50%, 50 questions, 40 minutes","60%, 80 questions, open book"],a:0,e:"55% (33/60), 60 multiple-choice, 60 minutes, closed book."},
+{s:"tailoring",q:"Foundation pass mark and format:",o:["60%, 60 questions, 60 minutes, closed book","70%, 75 questions, 90 minutes","50%, 50 questions, 40 minutes","60%, 80 questions, open book"],a:0,e:"60% (36/60), 60 multiple-choice, 60 minutes, closed book."},
 {s:"tailoring",q:"PRINCE2 is best described as:",o:["A predictive-only methodology","A flexible, tailorable project management method","A software tool","A certification body"],a:1,e:"A generic, tailorable project management method."},
 {s:"tailoring",q:"Which of these is a benefit of using PRINCE2?",o:["Guarantees project success","Provides a common vocabulary and controlled approach","Removes the need for a Project Manager","Eliminates all risk"],a:1,e:"It provides common language, defined roles and a controlled, consistent approach."},
 {s:"tailoring",q:"How many management products does PRINCE2 define (approximately)?",o:["7","About 26","50","100"],a:1,e:"Around 26 management products across baselines, records and reports."},
@@ -533,7 +533,7 @@ const QUESTIONS_DEEP = [
 {s:"practices",q:"Which response appears in BOTH the threat and opportunity lists?",o:["Avoid","Reduce","Share","Enhance"],a:2,e:"Share (and Accept) apply to both threats and opportunities."},
 {s:"practices",q:"The Risk Budget is:",o:["Part of the Stage Plan only","Money set aside to fund risk responses, approved by the Board","The cost of the Risk Register","Owned by the Team Manager"],a:1,e:"It funds responses and is approved by the Project Board."},
 // ----- issues / change control (practices) -----
-{s:"practices",q:"The change control procedure order is:",o:["Decide → capture → implement","Capture → assess → propose → decide → implement","Propose → implement → review","Assess → implement → capture"],a:1,e:"Capture, assess, propose, decide, implement."},
+{s:"practices",q:"The change control procedure order is:",o:["Decide → capture → implement","Capture → assess → recommend → decide → implement","Propose → implement → review","Assess → implement → capture"],a:1,e:"Capture, assess, recommend, decide, implement (the PRINCE2 7 issue/change technique)."},
 {s:"practices",q:"A risk that has now materialised should be handled as:",o:["A new risk","An issue","A dis-benefit","A tolerance"],a:1,e:"Once it has happened it is an issue, not a risk."},
 {s:"practices",q:"Which document defines the Change Authority's delegated limits?",o:["Risk Management Approach","Change Control Approach","Quality Register","Daily Log"],a:1,e:"The Change Control Approach sets out roles, limits and the change procedure."},
 // ----- progress / control (practices) -----
@@ -552,7 +552,7 @@ const QUESTIONS_DEEP = [
 {s:"tailoring",q:"Which is a new performance target introduced in PRINCE2 7th edition?",o:["Reputation","Sustainability","Morale","Innovation"],a:1,e:"Sustainability is added as a performance target in the 7th edition."},
 {s:"tailoring",q:"Which aspect did 7th edition give explicit new emphasis to?",o:["Documents","People","Gantt charts","Vendors"],a:1,e:"7th edition foregrounds 'people' alongside principles, practices and processes."},
 {s:"tailoring",q:"How many principles and processes does the 7th edition have, vs the 6th?",o:["Fewer principles","More processes","The same: 7 principles, 7 processes","8 principles"],a:2,e:"Principles (7) and processes (7) are unchanged between editions."},
-{s:"tailoring",q:"The six tolerance areas in PRINCE2 are:",o:["Time, cost, scope, quality, benefits, risk","Time, cost, scope, quality, benefits, sustainability","Time, cost, scope, quality, risk, reputation","Time, cost, quality, benefits, risk, people"],a:0,e:"The tolerance set remains time, cost, scope, quality, benefits, risk. Sustainability is a performance target, not one of the six tolerances."},
+{s:"tailoring",q:"The seven tolerance areas (performance targets) in PRINCE2 7 are:",o:["Time, cost, scope, quality, benefits, sustainability, risk","Time, cost, scope, quality, benefits, risk","Time, cost, scope, quality, risk, reputation, people","Time, cost, quality, benefits, risk, morale, scope"],a:0,e:"PRINCE2 7 manages seven performance targets, each with tolerances: benefits, cost, time, quality, scope, sustainability, and risk. Sustainability is one of the seven — not excluded."},
 {s:"tailoring",q:"In 7th edition, management products are framed as:",o:["Mandatory paper documents","Information sets that may live in digital tools","Optional for all projects","Owned only by corporate"],a:1,e:"7th edition treats them as information that can be held in tools, reinforcing tailoring."},
 {s:"tailoring",q:"Which best states what 7th edition did NOT change?",o:["The number of principles and processes","The names of the themes","The emphasis on people","The performance targets"],a:0,e:"Principles (7) and processes (7) are unchanged; themes were renamed and sustainability/people emphasis were added."},
 {s:"tailoring",q:"The integrated elements emphasised in 7th edition are:",o:["Principles, people, practices, processes (in a project context)","Inputs, tools, outputs","Plan, do, check, act","Scope, time, cost"],a:0,e:"Principles, people, practices and processes, applied in a project context."}
@@ -566,16 +566,16 @@ const CARDS = [
 {deck:"Principles",front:"Continued business justification — one line + who owns it?",back:"A project must stay justified throughout; stops if justification collapses. Owned by the Executive via the Business Case, reviewed at every stage boundary."},
 {deck:"Principles",front:"Learn from experience — the three checkpoints?",back:"Start: review prior lessons. During: capture new ones. Close: pass them forward (Lessons Report)."},
 {deck:"Principles",front:"Manage by stages — minimum stages?",back:"Minimum two management stages: the initiation stage + at least one delivery stage. (Closure and SU are NOT stages.)"},
-{deck:"Principles",front:"Manage by exception — the 6 tolerances?",back:"Time, Cost, Scope, Quality, Benefits, Risk. Stay within tolerance = no escalation; forecast breach = raise an Exception to the level above."},
+{deck:"Principles",front:"Manage by exception — the 7 tolerances?",back:"Time, Cost, Scope, Quality, Benefits, Sustainability, Risk. Stay within tolerance = no escalation; forecast breach = raise an Exception to the level above."},
 {deck:"Principles",front:"Focus on products — central artefact?",back:"Product-based planning. The Product Description defines quality; the Product Breakdown Structure decomposes deliverables. Activities are derived from products, not the reverse."},
 {deck:"Principles",front:"Tailor to suit the project — three rules?",back:"1. Tailoring is mandatory. 2. Principles cannot be tailored away. 3. Tailoring is recorded in the PID."},
 {deck:"Practices",front:"Name the 7 practices (themes).",back:"1. Business Case\n2. Organising\n3. Plans\n4. Quality\n5. Risk\n6. Issues\n7. Progress"},
 {deck:"Practices",front:"Business Case — output-outcome-benefit chain + negative term?",back:"Outputs (what's produced) → outcomes (resulting change) → benefits (measurable improvement). Negative outcome = dis-benefit. Executive owns it."},
-{deck:"Practices",front:"Organising — the four levels of organisation?",back:"1. Corporate/programme/customer (sets mandate)\n2. Directing — Project Board\n3. Managing — Project Manager\n4. Delivering — Team Managers"},
+{deck:"Practices",front:"Organising — the four levels of organisation?",back:"1. Commissioning — business layer (sets mandate & project tolerances)\n2. Directing — Project Board\n3. Managing — Project Manager\n4. Delivering — Team Managers"},
 {deck:"Practices",front:"Plans — three levels + what Exception Plan replaces?",back:"Project Plan, Stage Plan, Team Plan. Exception Plan replaces a Stage Plan or Project Plan — never a Team Plan."},
 {deck:"Practices",front:"Quality — acceptance criteria vs quality criteria?",back:"Acceptance criteria: prioritised list for the whole project product (Project Product Description, owned by Senior User). Quality criteria: per individual product (Product Description). QA is external to the project."},
 {deck:"Practices",front:"Risk — threat responses (5+1) and opportunity responses (4)?",back:"Threats: avoid, reduce, transfer, share, accept (+ prepare contingent plans). Opportunities: exploit, enhance, share, accept (reject also possible)."},
-{deck:"Practices",front:"Issues — the three types?",back:"1. Request for change\n2. Off-specification (should be delivered to standard but won't be)\n3. Problem/concern (anything else)"},
+{deck:"Practices",front:"Issues — the six types?",back:"1. Problem\n2. Concern\n3. Event external to the project\n4. Business opportunity\n5. Request for change (change to a baseline)\n6. Off-specification (product won't meet its quality specifications)"},
 {deck:"Practices",front:"Progress — the report cadences (who→whom)?",back:"Highlight: PM→Board (time-driven). Checkpoint: Team Mgr→PM. End Stage Report: at SB. End Project Report: at CP. Exception Report: event-driven on forecast breach."},
 {deck:"Processes",front:"Name the 7 processes.",back:"SU (Starting up), DP (Directing), IP (Initiating), CS (Controlling a Stage), MP (Managing Product Delivery), SB (Managing a Stage Boundary), CP (Closing a Project)."},
 {deck:"Processes",front:"SU — trigger and main output?",back:"Trigger: the project mandate. Output: the Project Brief (NOT the PID — that's IP). Also starts Daily Log + Lessons Log."},
@@ -591,17 +591,24 @@ const CARDS = [
 {deck:"Procedures",front:"Product-based planning — the 4 steps in order?",back:"1. Project Product Description (whole-project deliverable + acceptance criteria)\n2. Product Breakdown Structure (decompose)\n3. Product Descriptions (per product)\n4. Product Flow Diagram (sequence + dependencies)"},
 {deck:"Procedures",front:"The quality audit trail — five links?",back:"Customer's quality expectations → acceptance criteria (prioritised, measurable) → quality criteria (per product) → Quality Register (activities log) → quality/acceptance records (evidence)."},
 {deck:"Procedures",front:"The risk management procedure — 5 steps?",back:"Identify → Assess (probability, impact, proximity) → Plan (responses) → Implement (owner + actionee) → Communicate (throughout)."},
-{deck:"Procedures",front:"The change control procedure — 5 steps?",back:"Capture → Assess → Propose → Decide → Implement."},
+{deck:"Procedures",front:"The change control procedure — 5 steps?",back:"Capture → Assess → Recommend → Decide → Implement."},
 {deck:"Procedures",front:"The value chain (Business Case)?",back:"Output (product) → Outcome (change from using it) → Benefit (measurable improvement). A foreseeable negative is a dis-benefit (accepted, not uncertain)."},
 {deck:"Procedures",front:"Threat responses vs opportunity responses?",back:"Threats: Avoid, Reduce, Transfer, Share, Accept (+ contingent plans). Opportunities: Exploit, Enhance, Share, Accept, Reject. Share & Accept are in both."},
-{deck:"Procedures",front:"Tolerance cascade — who sets for whom?",back:"Corporate → project tolerances. Project Board → stage tolerances (for PM). PM → Work Package tolerances (for Team Manager). Forecast breach escalates up one level."},
+{deck:"Procedures",front:"Tolerance cascade — who sets for whom?",back:"Business layer → project tolerances. Project Board → stage tolerances (for PM). PM → Work Package tolerances (for Team Manager). Forecast breach escalates up one level."},
 {deck:"Composition",front:"What's in any Approach (Risk/Quality/Comms/Change)?",back:"Same skeleton: procedure · tools & techniques · roles/responsibilities · timing · how the related register/record is used. All produced in IP."},
 {deck:"Composition",front:"What's in a Product Description?",back:"Purpose · composition · derivation · format · quality criteria · quality method · quality responsibilities. (No investment appraisal — that's the Business Case.)"},
 {deck:"Composition",front:"What's in the Business Case?",back:"Reasons · business options (do nothing/minimum/something) · benefits & dis-benefits · costs · timescale · investment appraisal · major risks. Owned by the Executive."},
 {deck:"v7 Edition",front:"PRINCE2 7 — what were 'themes' renamed to?",back:"Practices. (Organization → Organizing.) The set: Business Case, Organizing, Plans, Quality, Risk, Issues, Progress."},
-{deck:"v7 Edition",front:"PRINCE2 7 — the headline new performance target?",back:"Sustainability. It's a performance TARGET, not one of the six tolerances. The six tolerances remain: time, cost, scope, quality, benefits, risk."},
+{deck:"v7 Edition",front:"PRINCE2 7 — the headline new performance target?",back:"Sustainability. PRINCE2 7 now manages seven performance targets, each with tolerances: benefits, cost, time, quality, scope, sustainability, risk. Sustainability IS one of the seven tolerances (v7 added it)."},
 {deck:"v7 Edition",front:"PRINCE2 7 — integrated elements + new emphasis?",back:"Principles, people, practices, processes — applied in a project context. 'People' is the newly foregrounded element vs the 6th edition."},
-{deck:"v7 Edition",front:"PRINCE2 7 — what did NOT change?",back:"7 principles (number + intent), 7 processes, and the role structure. Most learning transfers directly."}
+{deck:"v7 Edition",front:"PRINCE2 7 — what did NOT change?",back:"7 principles (number + intent), 7 processes, and the role structure. Most learning transfers directly."},
+{deck:"Principles",front:"The 5 characteristics that make work a 'project'?",back:"1. Change\n2. Temporary\n3. Cross-functional\n4. Unique\n5. Uncertainty (introduces threats & opportunities beyond BAU)"},
+{deck:"v7 Edition",front:"The 7 aspects of project performance to manage?",back:"Benefits, Cost, Time, Quality, Scope, Sustainability, Risk. Each is managed against a tolerance."},
+{deck:"Roles",front:"Executive — the non-negotiable facts?",back:"Single point of accountability for the project. Accountability CANNOT be delegated. Only ONE executive. Cannot be combined with the project manager. Owns the business case."},
+{deck:"Practices",front:"Risk: exposure vs velocity vs proximity?",back:"Exposure = degree an objective is 'at risk' (neutral, +/-). Velocity = how FAST impact hits if it occurs. Proximity = how NEAR in time it might occur."},
+{deck:"Practices",front:"Risk: appetite vs tolerance vs budget?",back:"Appetite = amount/type of risk the business will take. Tolerance = measurable threshold per objective. Budget = money set aside to fund responses."},
+{deck:"Composition",front:"Business case chain — outputs to benefits?",back:"Outputs → (deliver) Capabilities → (embed) Outcomes → (lead to) Benefits. Dis-benefits are negative outcomes; all measured against Business objectives."},
+{deck:"v7 Edition",front:"The 3 management approaches under Business Case?",back:"Business case (justification), Benefits management approach (realizing benefits), Sustainability management approach (sustainability targets)."}
 ];
 
 </script>
@@ -693,7 +700,7 @@ function diagOrg(){
 
       <!-- corporate -->
       <rect class="dg-box corp" x="270" y="20" width="200" height="46" rx="9" data-role="CORP"/>
-      <text x="370" y="48" class="dg-lbl">Corporate / Programme / Customer</text>
+      <text x="370" y="48" class="dg-lbl">Business layer (commissioning)</text>
 
       <!-- board container -->
       <rect x="160" y="96" width="420" height="74" rx="12" fill="none" stroke="var(--gold)" stroke-dasharray="5 4"/>
@@ -736,7 +743,7 @@ function diagOrg(){
   </div>`;
 }
 const ORG_DETAIL={
-  CORP:{n:'Corporate / Programme / Customer',d:'Sits above the project. Issues the mandate, sets overall tolerances. Not part of the project team.'},
+  CORP:{n:'Business layer (commissioning)',d:'Sits above the project. Issues the mandate, sets project-level tolerances. Not part of the project team; known as corporate/programme/customer in the 6th edition.'},
   EXEC:{n:'Executive (business interest)',d:'Ultimately accountable. Owns the Business Case, chairs the Board. CANNOT be the Project Manager. Provides continuity.'},
   SU:{n:'Senior User (user interest)',d:'Represents users; owns the Project Product Description; accountable for realising benefits AFTER the project.'},
   SS:{n:'Senior Supplier (supplier interest)',d:'Represents those who design/build/deliver; accountable for the quality of supplier products.'},
@@ -791,7 +798,7 @@ function diagTolerance(){
 function diagChange(){
   return `<div class="diagram"><svg viewBox="0 0 720 210" ${SVGNS} role="img" aria-label="Change control procedure">
     <defs><marker id="arr3" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--navy-2)"/></marker></defs>
-    ${['Capture','Assess','Propose','Decide','Implement'].map((s,i)=>{const x=20+i*140;return `
+    ${['Capture','Assess','Recommend','Decide','Implement'].map((s,i)=>{const x=20+i*140;return `
       <rect class="dg-box cs" x="${x}" y="80" width="118" height="48" rx="10"/>
       <text x="${x+59}" y="109" class="dg-lbl">${s}</text>
       ${i<4?`<line x1="${x+118}" y1="104" x2="${x+138}" y2="104" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#arr3)"/>`:''}`;}).join('')}
@@ -1012,7 +1019,7 @@ RENDER.dashboard = (c)=>{
     </div>
 
     <div class="callout key"><div class="tag">How to use this</div>
-      Read the six framework sections in order first. Then live in <strong>Flashcards</strong> and <strong>Drill by Topic</strong> daily. In week three, take <strong>Mock Exams</strong> until you clear 85% comfortably. Pass mark on the real exam is 55% (33/60) — aim well above it.</div>
+      Read the six framework sections in order first. Then live in <strong>Flashcards</strong> and <strong>Drill by Topic</strong> daily. In week three, take <strong>Mock Exams</strong> until you clear 85% comfortably. Pass mark on the real exam is 60% (36/60) — aim well above it.</div>
 
     <h2 class="sec">Jump back in</h2>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -1062,17 +1069,17 @@ RENDER.principles = (c)=>courseShell(c,'principles','Part 1','The 7 Principles',
     ${pblock(2,'Learn from experience','Lessons are sought, recorded and acted upon. Review prior lessons at start, capture new ones during, pass them forward at close.','Lessons Log, Lessons Report, lesson-gathering in <b>SU</b>.')}
     ${pblock(3,'Defined roles, responsibilities & relationships','An organisation structure engaging three interests — business, user, supplier — on the Project Board.','who does what; who approves what; the <b>three interests</b>.')}
     ${pblock(4,'Manage by stages','Planned, monitored and controlled stage-by-stage. Minimum two: the initiation stage + at least one delivery stage.','"minimum of two stages"; Stage Plan approval; Board at stage ends.')}
-    ${pblock(5,'Manage by exception','Defined tolerances for each objective set limits of delegated authority. Stay within tolerance, don\'t escalate; forecast a breach, raise an Exception.','the <b>six tolerances</b>; who sets them for whom; what triggers an Exception Report.')}
+    ${pblock(5,'Manage by exception','Defined tolerances for each objective set limits of delegated authority. Stay within tolerance, don\'t escalate; forecast a breach, raise an Exception.','the <b>seven tolerances</b>; who sets them for whom; what triggers an Exception Report.')}
     ${pblock(6,'Focus on products','Product-based, not activity-based: define products and their quality first, then derive the activities.','Product-based planning; Product Descriptions; Product Breakdown Structure.')}
     ${pblock(7,'Tailor to suit the project','Adapt to environment, size, complexity, importance, capability and risk. Mandatory — but principles cannot be tailored away, and tailoring is documented in the PID.','"tailoring is mandatory"; "principles cannot be tailored"; "recorded in the PID".')}
   </div>
-  <div class="callout"><div class="tag">The six tolerances</div><strong>Time · Cost · Scope · Quality · Benefits · Risk.</strong> Memorise these six — they recur across "manage by exception" and the Progress practice. "Reputation" and "resource" are common distractors.</div>
+  <div class="callout"><div class="tag">The seven tolerances</div><strong>Benefits · Cost · Time · Quality · Scope · Sustainability · Risk.</strong> PRINCE2 7 manages seven performance targets, each with tolerances. Memorise all seven — sustainability was added in v7. "Reputation" and "resource" are common distractors.</div>
   ${diagTolerance()}
   <div class="callout trap"><div class="tag">Classic trap</div>The minimum is <strong>two management stages</strong>, not three. Closure ("Closing a Project") and start-up ("Starting up a Project") are <em>processes</em>, not stages. Only <strong>initiation + delivery</strong> count as stages.</div>`,
   `<div class="recall"><div class="tag">Recall check</div><ol>
     <li>Name the 7 principles in order.</li>
     <li>Which principle owns the decision to stop a project, and who is accountable?</li>
-    <li>List the six tolerance areas.</li>
+    <li>List the seven tolerance areas (performance targets).</li>
     <li>What is the minimum number of management stages, and what are they?</li>
   </ol></div>`);
 
@@ -1080,12 +1087,12 @@ RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
   'Called "themes" in the 6th edition — interchangeable for Foundation. These are the aspects of a project addressed continuously throughout its life, each supported by specific management products.',
   `<div class="card">
     ${pblock(1,'Business Case','Judges whether the project is desirable, viable and achievable. Outline in SU → detailed in IP → reviewed at every stage boundary. <b>Executive owns it.</b> Chain: outputs → outcomes → benefits; a negative outcome is a <b>dis-benefit</b>.','outline vs detailed timing; dis-benefits; benefits measured <em>after</em> close.')}
-    ${pblock(2,'Organising','Four levels: corporate/programme/customer · directing (Board) · managing (PM) · delivering (Team Managers). Three Board interests: business, user, supplier.','the four levels; Project Assurance = oversight; Project Support = admin; combination rules.')}
+    ${pblock(2,'Organising','Four levels: commissioning / business layer · directing (Board) · managing (PM) · delivering (Team Managers). Three Board interests: business, user, supplier.','the four levels; Project Assurance = oversight; Project Support = admin; combination rules.')}
     ${pblock(3,'Plans','Three levels: Project Plan, Stage Plan, Team Plan. An Exception Plan replaces a Stage or Project Plan — never a Team Plan. Product-based planning.','three levels; what an Exception Plan replaces; who approves what.')}
     ${pblock(4,'Quality','Quality planning (define fit-for-purpose) → quality control (check products) → quality assurance (external, corporate governance). Acceptance criteria = whole product (Senior User owns the Project Product Description); quality criteria = per product.','acceptance vs quality criteria; QA is <em>external</em>; Senior User owns the PPD.')}
     ${pblock(5,'Risk','Uncertain event(s) — threat or opportunity. Threat responses: avoid, reduce, transfer, share, accept (+ contingent plans). Opportunity: exploit, enhance, share, accept. Owner is accountable; actionee acts.','threat vs opportunity responses; owner vs actionee; Risk Budget (Board approves).')}
     ${pblock(6,'Issues','Things that have happened (vs risks, which might). Three types: request for change, off-specification, problem/concern. Daily Log (informal) vs Issue Register (formal).','the three issue types — especially off-specification; Daily Log vs Issue Register.')}
-    ${pblock(7,'Progress','Monitor actual vs planned; forecast viability; control deviations. Six tolerances cascade down the levels. Reports: Highlight (PM→Board), Checkpoint (TM→PM), End Stage, End Project, Exception.','six tolerances; who reports to whom; time-driven vs event-driven controls.')}
+    ${pblock(7,'Progress','Monitor actual vs planned; forecast viability; control deviations. Seven tolerances cascade down the levels. Reports: Highlight (PM→Board), Checkpoint (TM→PM), End Stage, End Project, Exception.','seven tolerances; who reports to whom; time-driven vs event-driven controls.')}
   </div>
   <div class="callout key"><div class="tag">Two "assurance" words — don't confuse them</div><strong>Quality assurance</strong> sits <em>outside</em> the project (corporate/programme governance). <strong>Project Assurance</strong> sits <em>inside</em>, on behalf of the Project Board, and must be independent of the Project Manager.</div>
   <div class="callout trap"><div class="tag">Classic trap</div><strong>Off-specification</strong> = something that should be delivered (to standard) but won't be. It is <em>not</em> "a poorly written spec". A <strong>request for change</strong> is a proposed alteration to an approved baseline.</div>`,
@@ -1231,7 +1238,7 @@ RENDER.practitioner = (c)=>courseShell(c,'practitioner','Part 7','Practitioner I
     <table><tr><th></th><th>Foundation</th><th>Practitioner</th></tr>
       <tr><td>Questions</td><td>60 multiple-choice</td><td>8 × 10 marks = 80</td></tr>
       <tr><td>Time</td><td>60 min</td><td>2.5 hrs</td></tr>
-      <tr><td>Pass</td><td>55% (33/60)</td><td>60%</td></tr>
+      <tr><td>Pass</td><td>60% (36/60)</td><td>60%</td></tr>
       <tr><td>Book</td><td>Closed</td><td>Open (manual only)</td></tr>
     </table>
   </div>
@@ -1394,7 +1401,7 @@ RENDER.drill=(c)=>{
           <div class="acc" style="color:${acc===null?'var(--ink-soft)':acc>=80?'var(--green)':acc>=60?'var(--gold)':'var(--red)'}">${acc===null?'not yet drilled':acc+'% accuracy'}</div></button>`;
       }).join('')}
       <button class="sec-choice sel" onclick="startDrill('all')" style="border-color:var(--navy)">
-        <h4>Full bank</h4><div class="c">all 100 questions</div><div class="acc" style="color:var(--navy)">mixed practice</div></button>
+        <h4>Full bank</h4><div class="c">all ${QUESTIONS.length} questions</div><div class="acc" style="color:var(--navy)">mixed practice</div></button>
     </div>
     <div id="drillArea"></div>`;
 };
@@ -1452,8 +1459,8 @@ RENDER.exam=(c)=>{
   c.innerHTML=`
     <div class="eyebrow">Practice</div>
     <h1 class="page">Mock Exam</h1>
-    <p class="lede">60 questions, 60 minutes, closed-book — the real Foundation format. Pass mark 55% (33/60). Questions are drawn across all sections in exam proportions. Flag questions to revisit; submit when ready or when time runs out.</p>
-    ${best!==null?`<div class="callout ${best>=85?'key':''}"><div class="tag">Your best</div>${best}% ${best>=85?'— exam-ready. Take another to confirm consistency.':best>=55?'— passing, but aim for 85%+ before booking.':'— below pass. Keep drilling weak topics.'}</div>`:''}
+    <p class="lede">60 questions, 60 minutes, closed-book — the real Foundation format. Pass mark 60% (36/60). Questions are drawn across all sections in exam proportions. Flag questions to revisit; submit when ready or when time runs out.</p>
+    ${best!==null?`<div class="callout ${best>=85?'key':''}"><div class="tag">Your best</div>${best}% ${best>=85?'— exam-ready. Take another to confirm consistency.':best>=60?'— passing, but aim for 85%+ before booking.':'— below pass. Keep drilling weak topics.'}</div>`:''}
     <div class="card" style="text-align:center;padding:34px">
       <div style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;margin-bottom:6px">Ready to begin?</div>
       <p style="color:var(--ink-soft);max-width:46ch;margin:0 auto 18px">The timer starts immediately. Find 60 uninterrupted minutes.</p>
@@ -1549,7 +1556,7 @@ function submitExam(){
 }
 function renderExamResult(c){
   const {pct,correct,bySec}=exam.result;
-  const pass=pct>=55, ready=pct>=85;
+  const pass=pct>=60, ready=pct>=85;
   const circ=2*Math.PI*72;
   const off=circ*(1-pct/100);
   const col=ready?'var(--green)':pass?'var(--gold)':'var(--red)';
@@ -1561,7 +1568,7 @@ function renderExamResult(c){
         <circle cx="85" cy="85" r="72" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/></svg>
       <div class="pct"><div class="n" style="color:${col}">${pct}%</div><div class="l">${correct}/60</div></div>
     </div>
-    <div class="verdict ${pass?'pass':'fail'}">${ready?'85%+ — book the official exam with confidence':pass?'Above the 55% pass mark — push toward 85% before booking':'Below 55% — another week of study'}</div>
+    <div class="verdict ${pass?'pass':'fail'}">${ready?'85%+ — book the official exam with confidence':pass?'Above the 60% pass mark — push toward 85% before booking':'Below 60% — another week of study'}</div>
     <h2 class="sec">By section</h2>
     <div class="breakdown">
       ${SECTIONS.map(s=>{const b=bySec[s];const p=b.total?Math.round(b.right/b.total*100):0;
@@ -1696,7 +1703,7 @@ RENDER.practices_deep = (c)=>{
       purpose:'Define an organisation structure with clear accountabilities, engaging business, user and supplier interests.',
       body:`
       <h4 class="sub" style="font-size:16px">Four levels of organisation</h4>
-      <p><strong>1. Corporate/programme/customer</strong> — sits above the project, issues the mandate, sets overall tolerances. <strong>2. Directing</strong> — the Project Board. <strong>3. Managing</strong> — the Project Manager. <strong>4. Delivering</strong> — Team Managers (or team members directly).</p>
+      <p><strong>1. Commissioning (business layer)</strong> — sits above the project, issues the mandate, sets project-level tolerances. <strong>2. Directing</strong> — the Project Board. <strong>3. Managing</strong> — the Project Manager. <strong>4. Delivering</strong> — Team Managers (or team members directly).</p>
       <p>Authority and tolerance <em>cascade down</em>; exceptions <em>escalate up</em>. That single sentence ties Organising to Progress and to "manage by exception".</p>
       <h4 class="sub" style="font-size:16px">The three interests — why three</h4>
       <p>Every project balances what the <strong>business</strong> will fund (Executive), what <strong>users</strong> need from the outputs (Senior User), and what <strong>suppliers</strong> can build (Senior Supplier). All three must be represented on the Board so decisions aren't made blind to one side.</p>
@@ -1773,7 +1780,7 @@ RENDER.practices_deep = (c)=>{
       purpose:'Monitor actual vs planned achievement, forecast viability, and control unacceptable deviations.',
       body:`
       <h4 class="sub" style="font-size:16px">Tolerances and the cascade</h4>
-      <p>Six tolerance areas: <strong>Time · Cost · Scope · Quality · Benefits · Risk.</strong> Corporate sets project-level tolerances → the Board sets stage tolerances for the PM → the PM sets Work Package tolerances for Team Managers. Each level works freely within tolerance; a <em>forecast</em> breach triggers escalation to the level above.</p>
+      <p>Seven tolerance areas: <strong>Benefits · Cost · Time · Quality · Scope · Sustainability · Risk.</strong> The business layer sets project-level tolerances → the Board sets stage tolerances for the PM → the PM sets Work Package tolerances for Team Managers. Each level works freely within tolerance; a <em>forecast</em> breach triggers escalation to the level above.</p>
       <h4 class="sub" style="font-size:16px">Two kinds of control</h4>
       <p><strong>Time-driven</strong> — happen on a regular cadence (Highlight Report, Checkpoint Report). <strong>Event-driven</strong> — triggered by something occurring (Exception Report, End Stage Report, completion of a Work Package).</p>
       <h4 class="sub" style="font-size:16px">Who reports what to whom</h4>
@@ -1815,8 +1822,8 @@ RENDER.edition = (c)=>{
 
     <div class="card">
       <h3 class="sub" style="margin-top:0">3. Sustainability as a performance target</h3>
-      <p>This is the headline addition. 7th edition adds <strong>sustainability</strong> to the set of <strong>performance targets</strong> the project is managed against. The earlier six tolerance/performance areas — <strong>time, cost, scope, quality, benefits, risk</strong> — are now joined in the 7th-edition framing by <strong>sustainability</strong> as a seventh performance aspect to plan for and measure.</p>
-      <div class="callout key"><div class="tag">Exam-critical distinction</div>Know how the question is framed. The classic <strong>six tolerances</strong> (time, cost, scope, quality, benefits, risk) remain the tolerance set you escalate against. <strong>Sustainability</strong> is the new <em>performance target / objective</em> added in 7th edition. If a question asks "which is a 7th-edition addition," the answer is sustainability; if it asks "the tolerance areas," it's still the six.</div>
+      <p>This is the headline addition. PRINCE2 7 adds <strong>sustainability</strong> as a seventh <strong>performance target</strong>, and — importantly — it carries its own <strong>tolerance</strong> like the others. The seven performance targets, each managed against tolerances, are: <strong>benefits, cost, time, quality, scope, sustainability, and risk</strong>.</p>
+      <div class="callout key"><div class="tag">Exam-critical distinction</div>PRINCE2 7 manages <strong>seven</strong> performance targets, and <strong>each has a tolerance</strong> — including sustainability. So both framings point the same way: the seventh performance target is <strong>sustainability</strong>, and it is also the seventh tolerance area. Beware older materials that call sustainability a "target but not a tolerance" — that reflects a pre-release/6th-edition framing, not the official v7.2 syllabus.</div>
     </div>
 
     <div class="card">
@@ -1834,7 +1841,7 @@ RENDER.edition = (c)=>{
     <div class="recall"><div class="tag">Recall check</div><ol>
       <li>What were "themes" renamed to, and which one's spelling/label changed?</li>
       <li>Name the integrated elements 7th edition emphasises — which is the newly foregrounded one?</li>
-      <li>Sustainability is a 7th-edition addition — a tolerance, or a performance target? How does that differ from the six tolerances?</li>
+      <li>Sustainability is a 7th-edition addition — confirm it is BOTH a performance target AND a tolerance. Name all seven tolerance areas from memory.</li>
       <li>Name three things that did NOT change from the 6th edition.</li>
     </ol></div>
 
@@ -1856,9 +1863,48 @@ if(typeof document!=='undefined' && document.addEventListener){
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
 }
 
+// PRINCE2 Foundation — QRG-verified additions (v7.2), targeting coverage gaps
+// Each item verified against the official Quick Reference Guide section noted in its explanation.
+const QUESTIONS_VERIFIED = [
+{s:"principles",q:"PRINCE2 defines a project as:",o:["A temporary organization created to deliver one or more business products per an agreed business case","Any set of tasks with a deadline","A permanent department delivering products","A programme of related work streams"],a:0,e:"QRG 1.1: a project is a temporary organization created to deliver one or more business products according to an agreed business case."},
+{s:"principles",q:"Which is NOT one of the five characteristics that distinguish a project from business as usual?",o:["Change","Temporary","Cross-functional","Profitable"],a:3,e:"The five are change, temporary, cross-functional, unique, and uncertainty. 'Profitable' is not one of them."},
+{s:"principles",q:"'Uncertainty' as a project characteristic means:",o:["The budget is always unknown","Projects introduce threats and opportunities beyond those of business as usual","Requirements can never be defined","The team is temporary"],a:1,e:"QRG 1.1: uncertainty introduces threats and opportunities over and above those typically encountered within BAU."},
+{s:"tailoring",q:"How many aspects of project performance does PRINCE2 manage, and which list is correct?",o:["Seven: benefits, cost, time, quality, scope, sustainability, risk","Six: time, cost, quality, scope, benefits, risk","Five: time, cost, quality, scope, risk","Eight: adds reputation to the seven"],a:0,e:"QRG 1.2: seven aspects — benefits, cost, time, quality, scope, sustainability, risk."},
+{s:"tailoring",q:"In the seven aspects of performance, 'scope' refers to:",o:["The total budget available","The degree to which it is permissible to under- or over-deliver benefits","The number of stages","The quality criteria"],a:1,e:"QRG 1.2: scope = the degree to which it is permissible to under-deliver or over-deliver benefits."},
+{s:"principles",q:"The five integrated elements of PRINCE2 are principles, people, practices, processes and:",o:["Products","Project context","Programmes","Portfolios"],a:1,e:"QRG 1.3: principles, people, practices, processes, and the project context."},
+{s:"principles",q:"In PRINCE2 7, what sits at the centre of the method?",o:["The business case","People","The project plan","The project board"],a:1,e:"QRG 3: people are central to the PRINCE2 method."},
+{s:"roles",q:"A stakeholder is best defined as anyone who:",o:["Holds a formal role on the project board","Can affect, be affected by, or perceives itself affected by the project","Signs the business case","Works for the supplier"],a:1,e:"QRG 3.1: a stakeholder is any individual, group, or organization that can affect or be affected by (or perceives itself to be affected by) the project."},
+{s:"principles",q:"PRINCE2 addresses communication through a:",o:["Stakeholder register only","Communication management approach","Highlight report","Daily log"],a:1,e:"QRG 3.4: communication is addressed in a communication management approach, defining means and frequency of bidirectional communication."},
+{s:"practices",q:"The business case practice judges whether the project is and remains:",o:["On time, on budget, in scope","Desirable, viable, and achievable","Approved, funded, resourced","Cross-functional and unique"],a:1,e:"QRG 4.1: the purpose is to judge whether the project is (and remains) desirable, viable, and achievable."},
+{s:"practices",q:"In the benefits chain, a 'capability' is:",o:["A measurable improvement","The completed set of project outputs required to deliver an outcome","A negative consequence","A business objective"],a:1,e:"QRG 4.1.1: capability = the completed set of project outputs required to deliver an outcome."},
+{s:"products",q:"Which approach defines the actions to ensure sustainability performance targets are achieved?",o:["Benefits management approach","Sustainability management approach","Quality management approach","Risk management approach"],a:1,e:"QRG 4.1.1: the sustainability management approach defines actions, reviews and controls to achieve sustainability performance targets."},
+{s:"roles",q:"Which statement about the executive is correct?",o:["There may be several executives on large projects","The role can be shared with the project manager","The executive is the single point of accountability and this cannot be delegated","The executive represents the user community"],a:2,e:"QRG 4.2.1: the executive is the single point of accountability; this accountability cannot be delegated, there is only one, and it cannot be combined with the project manager."},
+{s:"roles",q:"Why must project support be kept separate from project assurance?",o:["To reduce cost","To maintain the independence of assurance","Because support reports to the supplier","To speed up reporting"],a:1,e:"QRG 4.2.1: project support must be kept separate from assurance to maintain the independence of assurance."},
+{s:"roles",q:"Creating the right environment for the project to succeed is a responsibility of the:",o:["Project manager","Team manager","Project board","Project support"],a:2,e:"QRG 4.2.1: the project board is responsible for creating the right environment — sufficient funding/resources, feedback loops, independent assurance."},
+{s:"practices",q:"The four PRINCE2 organizational levels, highest to lowest, are:",o:["Directing, commissioning, managing, delivering","Commissioning (business layer), directing, managing, delivering","Managing, directing, delivering, commissioning","Business layer, delivering, managing, directing"],a:1,e:"QRG 4.2.2: commissioning (business layer) sits above directing (board), managing (PM), and delivering (team managers)."},
+{s:"practices",q:"Which plan is optional in PRINCE2?",o:["Project plan","Stage plan","Team plan","Exception plan"],a:2,e:"QRG 4.3: team plans are optional in PRINCE2."},
+{s:"practices",q:"An exception plan:",o:["Replaces the project brief","Follows an exception report and explains how to respond within the stage","Is prepared only at project start","Is the same as a stage plan"],a:1,e:"QRG 4.3: an exception plan follows an exception report and explains how the project will respond to the exception within the stage."},
+{s:"practices",q:"Which is a quality control activity (not quality assurance)?",o:["Providing independent confidence products will meet specifications","Checking specific products against relevant standards as they are produced","Setting corporate quality policy","Appointing the executive"],a:1,e:"QRG 4.4.2: quality control monitors specific products against standards; quality assurance is independent confidence, typically managed outside the project team."},
+{s:"practices",q:"Acceptance criteria are best described as:",o:["A statement of expected quality in the PPD","A prioritized list of criteria the project product must meet before the user will accept it","The quality methods used in testing","The user's requirements register"],a:1,e:"QRG 4.4.1: acceptance criteria = a prioritized list of criteria the project product must meet before the user will accept it."},
+{s:"practices",q:"Risk is measured by a combination of:",o:["Probability and proximity","Probability of the threat/opportunity occurring and the magnitude of its impact on objectives","Impact and velocity","Exposure and appetite"],a:1,e:"QRG 4.5: risk is measured by combining the probability of occurrence and the magnitude of impact on objectives."},
+{s:"practices",q:"'Risk exposure' is:",o:["Always a negative measure","The degree to which an objective is 'at risk' — a neutral concept that can be positive or negative","The money set aside for risk responses","How soon a risk may occur"],a:1,e:"QRG 4.5.1: risk exposure is the degree to which an objective is 'at risk'; it is neutral and can be positive or negative."},
+{s:"practices",q:"'Risk velocity' refers to:",o:["How near in time a risk may occur","How quickly a risk would impact objectives if it occurred","The chance the risk occurs","The cost of the response"],a:1,e:"QRG 4.5.1: risk velocity = how quickly a risk would have an impact should it occur (distinct from proximity, which is how near in time it might occur)."},
+{s:"practices",q:"'Risk appetite' is:",o:["A measurable threshold for a single objective","The amount and type of risk the business is willing to take in pursuit of its objectives","Money to fund risk responses","The list of identified risks"],a:1,e:"QRG 4.5.1: risk appetite = the amount and type of risk the business is willing to take. (Contrast risk tolerance = a measurable threshold; risk budget = money.)"},
+{s:"practices",q:"A 'concern' as an issue type is:",o:["An issue with immediate negative impact","An issue whose timelines and impact need to be assessed","A proposal to change a baseline","A product that won't meet specifications"],a:1,e:"QRG 4.6: a concern is an issue whose timelines and impact need to be assessed. (A problem has immediate negative impact.)"},
+{s:"practices",q:"'Change budget' is:",o:["The project's total contingency","Money/authorized constraints set aside in a plan to cover changes","The same as risk budget","Held by the team manager"],a:1,e:"QRG 4.6/progress: change budget is money or authorized constraints set aside in a plan to cover changes, allocated by those with delegated authority."},
+{s:"practices",q:"In PRINCE2, issue management encompasses:",o:["Risk management","Change control","Quality assurance","Benefits management"],a:1,e:"QRG 4.7.1: in PRINCE2, issue management encompasses change control."},
+{s:"practices",q:"A highlight report is an example of a:",o:["Event-driven control","Time-driven control","Exception","Baseline"],a:1,e:"QRG 4.7.2: highlight reports (produced at periodic intervals for the board) are time-driven; the end of a stage is event-driven."},
+{s:"processes",q:"The process of starting up a project answers the question:",o:["'Are we delivering the products?'","'Do we have a viable and worthwhile project?'","'Should we close the project?'","'Is the stage within tolerance?'"],a:1,e:"QRG 5.1: SU ensures prerequisites for initiating are established, answering 'Do we have a viable and worthwhile project?'"},
+{s:"processes",q:"In starting up a project, the business justification is documented in the:",o:["Full business case","Outline business case","PID","End project report"],a:1,e:"QRG 5.1: SU documents justification in an outline business case; the full business case is prepared during initiation."},
+{s:"processes",q:"The purpose of managing product delivery is to:",o:["Authorize the project","Control the link between the project manager and the team manager","Prepare the next stage plan","Confirm project acceptance"],a:1,e:"QRG 5.5: MP controls the link between PM and team manager for accepting, executing, and delivering specialist products."},
+{s:"processes",q:"Which process provides a fixed point at which acceptance of the project product is confirmed?",o:["Controlling a stage","Managing a stage boundary","Closing a project","Directing a project"],a:2,e:"QRG 5.8: closing a project provides a fixed point at which acceptance of the project product is confirmed."},
+{s:"principles",q:"A PRINCE2 project must have at least how many stages?",o:["One","Two, the first being the initiation stage","Three","Four"],a:1,e:"QRG 1.3 note: there should be at least two stages, the first of which is the initiation stage."}
+];
+
 /* ---------- merge expansion + deep question banks if present ---------- */
 if(typeof QUESTIONS_EXT!=='undefined' && Array.isArray(QUESTIONS_EXT)){ QUESTIONS.push(...QUESTIONS_EXT); }
 if(typeof QUESTIONS_DEEP!=='undefined' && Array.isArray(QUESTIONS_DEEP)){ QUESTIONS.push(...QUESTIONS_DEEP); }
+if(typeof QUESTIONS_VERIFIED!=='undefined' && Array.isArray(QUESTIONS_VERIFIED)){ QUESTIONS.push(...QUESTIONS_VERIFIED); }
 
 buildNav();
 go(state.lastView||'dashboard');

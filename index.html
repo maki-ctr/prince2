@@ -256,6 +256,18 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
   h1.page{font-size:32px}
   .lede{font-size:16px}
 }
+
+/* --- Video Lessons --- */
+.vid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;margin-top:22px}
+.vid-card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.vid-frame{position:relative;width:100%;padding-top:56.25%;background:var(--navy)}
+.vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-meta{padding:16px 18px 18px}
+.vid-num{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
+.vid-title{margin:0 0 8px;font-size:17px;line-height:1.3;color:var(--navy)}
+.vid-desc{margin:0 0 12px;font-size:14px;line-height:1.5;color:var(--ink-soft)}
+.vid-link{font-size:13px;font-weight:600;color:var(--gold);text-decoration:none}
+.vid-link:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -267,6 +279,8 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
       <div class="crest">PR<em>IN</em>CE2</div>
       <div class="sub">Foundation · Self-Study</div>
     </div>
+    <div class="nav-sec">Lessons</div>
+    <ul class="nav" id="navVideos"></ul>
     <div class="nav-sec">Study</div>
     <ul class="nav" id="navMain"></ul>
     <div class="nav-sec">Practice</div>
@@ -938,6 +952,7 @@ function save(){ try{ localStorage.setItem(LS, JSON.stringify(state)); }catch(e)
 
 /* ---------- Navigation ---------- */
 const VIEWS = [
+  {id:'videos', label:'Video Lessons', ico:'▶', group:'video'},
   {id:'dashboard', label:'Dashboard', ico:'◆', group:'main'},
   {id:'principles', label:'The 7 Principles', ico:'①', group:'main'},
   {id:'practices', label:'The 7 Practices', ico:'②', group:'main'},
@@ -956,12 +971,12 @@ const VIEWS = [
   {id:'checklist', label:'Pre-Exam Checklist', ico:'✓', group:'practice'},
 ];
 function buildNav(){
-  const m=document.getElementById('navMain'), p=document.getElementById('navPractice');
-  m.innerHTML=''; p.innerHTML='';
+  const vid=document.getElementById('navVideos'), m=document.getElementById('navMain'), p=document.getElementById('navPractice');
+  vid.innerHTML=''; m.innerHTML=''; p.innerHTML='';
   VIEWS.forEach(v=>{
     const li=document.createElement('li');
     li.innerHTML=`<button data-v="${v.id}" onclick="go('${v.id}')"><span class="ico">${v.ico}</span>${v.label}</button>`;
-    (v.group==='main'?m:p).appendChild(li);
+    (v.group==='video'?vid:v.group==='main'?m:p).appendChild(li);
   });
 }
 function go(id){
@@ -1006,6 +1021,44 @@ const LETTERS=['A','B','C','D'];
 const RENDER = {};
 
 /* ---------------- DASHBOARD ---------------- */
+RENDER.videos = (c)=>{
+  markRead('videos');
+  const VIDS=[
+    {n:'1',id:'Mzndr3U9f8Y',t:'Introduction to PRINCE2 & Project Management',d:'Why PRINCE2 exists, the five integrated elements, what a project is, and how to think like the exam.'},
+    {n:'2',id:'rfHOs_djT7U',t:'The Seven Principles',d:'The seven universal obligations — including the seven tolerances and why you can never tailor a principle away.'},
+    {n:'3',id:'dlQ5UbzPHV8',t:'People & the Seven Practices',d:'The v7 People element plus all seven practices, from Business Case to Progress.'},
+    {n:'4',id:'yefK-Y4RYJ0',t:'The Seven Processes',d:'The full project lifecycle, from mandate to closure, followed through the Meridian scenario.'},
+    {n:'5',id:'hVgJXX3BvBs',t:'Tailoring PRINCE2',d:'What can and cannot be tailored, and how PRINCE2 governs any delivery approach including agile.'},
+    {n:'6',id:'jbBzmbzUapA',t:'The Project Environment & Roles',d:'Who is allowed to do what — the Board, PM, Team Manager, Assurance and Support.'},
+    {n:'7',id:'didB0ew9YVM',t:'Products, Plans & Quality',d:'Product-based planning, baselines, the quality audit trail, and the three management-product types.'},
+    {n:'8',id:'czY5NhS9LVU',t:'Exam Strategy, Practice & Review',d:'Question types, elimination tactics, the high-yield checklist and final practice questions.'},
+    {n:'★',id:'Mabvl9OxCqc',t:'Wrap-Up',d:'A final synthesis pulling the whole method together.'}
+  ];
+  c.innerHTML = `
+    <div class="eyebrow">Video Course</div>
+    <h1 class="page">Video Lessons</h1>
+    <p class="lede">Nine tutorial videos following the full v7 course, one per module plus a wrap-up. Watch a module here, then drill it in Practice. Each video mirrors the study sections word-for-word.</p>
+    <div class="callout"><div class="tag">How to use these</div>Watch the module video first for the narrative and reasoning, then use <strong>Drill by Topic</strong> and <strong>Flashcards</strong> to lock it in, and the <strong>Mock Exam</strong> when you've covered all eight.</div>
+    <div class="vid-grid">
+    ${VIDS.map(v=>`
+      <div class="vid-card">
+        <div class="vid-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/${v.id}" title="Module ${v.n}: ${v.t}" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="vid-meta">
+          <div class="vid-num">${v.n==='★'?'Wrap-Up':'Module '+v.n}</div>
+          <h3 class="vid-title">${v.t}</h3>
+          <p class="vid-desc">${v.d}</p>
+          <a class="vid-link" href="https://youtu.be/${v.id}" target="_blank" rel="noopener">Open on YouTube →</a>
+        </div>
+      </div>`).join('')}
+    </div>
+    <div style="margin-top:34px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="go('drill')">Drill by topic →</button>
+      <button class="btn btn-ghost" onclick="go('flashcards')">Flashcards</button>
+    </div>`;
+};
+
 RENDER.dashboard = (c)=>{
   const readN = SECTIONS.concat(['practitioner','schedule']).filter(t=>state.read[t]).length;
   const readTotal = 8;
@@ -1033,7 +1086,8 @@ RENDER.dashboard = (c)=>{
     <h2 class="sec">Jump back in</h2>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
       <button class="btn btn-primary" onclick="go('${state.read.principles?'flashcards':'principles'}')">${state.read.principles?'Review flashcards':'Start: The 7 Principles'} →</button>
-      <button class="btn btn-gold" onclick="go('exam')">Take a mock exam</button>
+      <button class="btn btn-gold" onclick="go('videos')">Watch the video course</button>
+      <button class="btn btn-ghost" onclick="go('exam')">Take a mock exam</button>
       <button class="btn btn-ghost" onclick="go('drill')">Drill a topic</button>
     </div>
 

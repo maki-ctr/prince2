@@ -258,6 +258,24 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 }
 
 .mp-opt:hover{border-color:var(--navy)!important}
+.kc-group{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:var(--card);overflow:hidden}
+.kc-group summary{cursor:pointer;padding:14px 18px;font-weight:600;color:var(--navy);font-size:15.5px;list-style:none;user-select:none;display:flex;justify-content:space-between;align-items:center}
+.kc-group summary::-webkit-details-marker{display:none}
+.kc-group summary::after{content:'+';color:var(--gold);font-size:20px;font-weight:400}
+.kc-group[open] summary::after{content:'–'}
+.kc-group summary:hover{background:var(--paper-2)}
+.kc-body{padding:2px 18px 14px}
+.kc-item{padding:10px 0;border-top:1px solid var(--line-soft)}
+.kc-q{font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:3px}
+.kc-a{font-size:14px;color:var(--ink-soft);line-height:1.5}
+.vid-kc{margin-top:12px;border-radius:8px}
+.vid-kc summary{padding:9px 12px;font-size:13.5px}
+.vid-kc summary::after{font-size:17px}
+.vid-kc .kc-body{padding:0 12px 8px}
+.vid-kc .kc-q{font-size:13px}
+.vid-kc .kc-a{font-size:12.5px}
+.elog-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0}
+.etagbar button:hover{background:var(--paper-2)!important}
 /* --- Video Lessons --- */
 .vid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;margin-top:22px}
 .vid-card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
@@ -921,10 +939,10 @@ function wireDiagrams(container){
 /* ============ PRINCE2 Foundation app ============ */
 const LS = 'p2f_state_v1';
 const STATE_VERSION = 2;
-let state = load(); if(state && state.mpBest===undefined) state.mpBest=null;
+let state = load(); if(state && state.mpBest===undefined) state.mpBest=null; if(state && !Array.isArray(state.errorLog)) state.errorLog=[];
 function defaults(){
   return { version:STATE_VERSION, read:{}, cards:{}, examBest:null, examHistory:[], mpBest:null,
-           drillStats:{}, checklist:{}, recentSeen:[], lastView:'dashboard' };
+           drillStats:{}, checklist:{}, recentSeen:[], errorLog:[], lastView:'dashboard' };
 }
 function migrate(raw){
   if(!raw || typeof raw!=='object') return defaults();
@@ -976,6 +994,7 @@ const VIEWS = [
   {id:'drill', label:'Drill by Topic', ico:'✎', group:'practice'},
   {id:'exam', label:'Mock Exam', ico:'⏱', group:'practice'},
   {id:'mockpaper', label:'Mock Exam Paper', ico:'▤', group:'practice'},
+  {id:'errorlog', label:'Error Log', ico:'◉', group:'practice'},
   {id:'checklist', label:'Pre-Exam Checklist', ico:'✓', group:'practice'},
 ];
 function buildNav(){
@@ -1215,23 +1234,146 @@ function renderMpResults(c){
           return `<div style="padding:6px 10px;margin:3px 0;border-radius:6px;background:${bg};font-size:14px"><strong>${LET[oi]}</strong> ${o}<span style="color:var(--ink-soft);font-size:12px">${mk}</span></div>`;
         }).join('')}
         <div style="margin-top:10px;font-size:14px;color:var(--ink-soft);line-height:1.5"><strong style="color:var(--navy)">Why:</strong> ${q.e}</div>
+        ${wrong.includes(i)?errorTagBar(q.q,(q.topic||''),'mock paper'):''}
       </div>`;
     }).join('')}`:''}`;
 }
 var mpReviewMode='';
 
+/* ---------------- ERROR LOG ---------------- */
+const CAUSES={
+  gap:{label:'Knowledge gap',desc:"Didn't know the definition, role, or rule",color:'var(--navy)'},
+  misread:{label:'Misinterpretation',desc:'Applied real-world logic instead of the PRINCE2 rule',color:'var(--gold)'},
+  trick:{label:'Question trickery',desc:'Missed a keyword — NOT, MUST, ALWAYS, MAIN, BEST',color:'var(--red)'}
+};
+function logError(qtext,section,cause,src){
+  if(!state.errorLog)state.errorLog=[];
+  state.errorLog.push({q:qtext,s:section||'',cause:cause,src:src||'drill',t:Date.now()});
+  save();
+}
+function tagLastError(cause,btnGroupId){
+  // called from inline buttons after a wrong answer
+  const g=document.getElementById(btnGroupId);
+  if(!g||g.dataset.done)return;
+  logError(g.dataset.q,g.dataset.s,cause,g.dataset.src);
+  g.dataset.done='1';
+  g.innerHTML='<span style="font-size:13px;color:var(--green)">✓ Logged as '+CAUSES[cause].label+' — see Error Log</span>';
+}
+function errorTagBar(qtext,section,src){
+  const id='etag'+Math.random().toString(36).slice(2,8);
+  const esc=s=>(s||'').replace(/"/g,'&quot;');
+  return `<div class="etagbar" id="${id}" data-q="${esc(qtext)}" data-s="${esc(section)}" data-src="${src}" style="margin-top:12px;padding-top:11px;border-top:1px dashed var(--line)">
+    <span style="font-size:12px;color:var(--ink-soft);margin-right:8px">Why did you miss it?</span>
+    ${Object.entries(CAUSES).map(([k,v])=>`<button onclick="tagLastError('${k}','${id}')" title="${v.desc}" style="font-size:12px;padding:4px 10px;margin:3px 4px 3px 0;border:1px solid var(--line);border-radius:20px;background:var(--card);cursor:pointer;color:${v.color}">${v.label}</button>`).join('')}
+  </div>`;
+}
+RENDER.errorlog=(c)=>{
+  const log=state.errorLog||[];
+  const counts={gap:0,misread:0,trick:0};
+  log.forEach(e=>{if(counts[e.cause]!==undefined)counts[e.cause]++;});
+  const total=log.length;
+  const dominant=total?Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]:null;
+  c.innerHTML=`
+    <div class="eyebrow">Practice</div>
+    <h1 class="page">Error Log</h1>
+    <p class="lede">Every question you miss, tagged by <em>why</em> — so you fix the real cause, not just the answer. A pattern of one colour tells you exactly what to work on.</p>
+    ${total===0?`<div class="callout"><div class="tag">Nothing logged yet</div>When you get a drill or mock-paper question wrong, tap one of the three "why" buttons that appears with the explanation. Your misses collect here so you can spot your dominant failure mode.</div>`:`
+    <div class="elog-cards">
+      ${Object.entries(CAUSES).map(([k,v])=>{
+        const n=counts[k],pct=total?Math.round(n/total*100):0;
+        return `<div class="card" style="padding:18px;border-top:3px solid ${v.color}">
+          <div style="font-size:28px;font-weight:700;color:${v.color};font-family:'Fraunces',serif">${n}</div>
+          <div style="font-weight:600;margin:2px 0">${v.label}</div>
+          <div style="font-size:12.5px;color:var(--ink-soft);line-height:1.4">${v.desc}</div>
+          <div style="margin-top:9px;height:6px;background:var(--paper-2);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${v.color}"></div></div>
+        </div>`;
+      }).join('')}
+    </div>
+    ${dominant&&dominant[1]>0?`<div class="callout key"><div class="tag">Your dominant pattern</div><strong>${CAUSES[dominant[0]].label}</strong> — ${dominant[1]} of ${total} misses.
+      ${dominant[0]==='gap'?'Drill the weak topics and review the flashcards; this is pure recall you can close fast.':dominant[0]==='misread'?"You're answering as a working PM, not as the PRINCE2 manual. On each question ask: what does PRINCE2 <em>specify</em>, regardless of what you'd do at work?":'Slow down and underline the keyword before answering — NOT, MUST, ALWAYS, MAIN, BEST flip the meaning. Speed is not your problem; reading is.'}</div>`:''}
+    <div style="display:flex;gap:10px;margin:18px 0;flex-wrap:wrap">
+      <button class="btn btn-ghost" onclick="if(confirm('Clear all error-log entries?')){state.errorLog=[];save();go('errorlog');}">Clear log</button>
+      <button class="btn btn-gold" onclick="go('drill')">Drill weak topics →</button>
+    </div>
+    <h2 class="sec">Logged misses (${total})</h2>
+    <div class="elog-list">
+      ${log.slice().reverse().map(e=>`<div class="card" style="padding:13px 16px;margin:8px 0;border-left:4px solid ${CAUSES[e.cause]?CAUSES[e.cause].color:'var(--line)'}">
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline">
+          <span style="font-size:14px;line-height:1.4;flex:1;min-width:200px">${e.q}</span>
+          <span style="font-size:11px;color:var(--ink-soft);white-space:nowrap">${CAUSES[e.cause]?CAUSES[e.cause].label:e.cause} · ${e.src}</span>
+        </div>
+      </div>`).join('')}
+    </div>`}`;
+};
+
+
 RENDER.videos = (c)=>{
   markRead('videos');
   const VIDS=[
-    {n:'1',id:'Mzndr3U9f8Y',t:'Introduction to PRINCE2 & Project Management',d:'Why PRINCE2 exists, the five integrated elements, what a project is, and how to think like the exam.'},
-    {n:'2',id:'rfHOs_djT7U',t:'The Seven Principles',d:'The seven universal obligations — including the seven tolerances and why you can never tailor a principle away.'},
-    {n:'3',id:'dlQ5UbzPHV8',t:'People & the Seven Practices',d:'The v7 People element plus all seven practices, from Business Case to Progress.'},
-    {n:'4',id:'yefK-Y4RYJ0',t:'The Seven Processes',d:'The full project lifecycle, from mandate to closure, followed through the Meridian scenario.'},
-    {n:'5',id:'hVgJXX3BvBs',t:'Tailoring PRINCE2',d:'What can and cannot be tailored, and how PRINCE2 governs any delivery approach including agile.'},
-    {n:'6',id:'jbBzmbzUapA',t:'The Project Environment & Roles',d:'Who is allowed to do what — the Board, PM, Team Manager, Assurance and Support.'},
-    {n:'7',id:'didB0ew9YVM',t:'Products, Plans & Quality',d:'Product-based planning, baselines, the quality audit trail, and the three management-product types.'},
-    {n:'8',id:'czY5NhS9LVU',t:'Exam Strategy, Practice & Review',d:'Question types, elimination tactics, the high-yield checklist and final practice questions.'},
-    {n:'★',id:'Mabvl9OxCqc',t:'Wrap-Up',d:'A final synthesis pulling the whole method together.'}
+    {n:'1',id:'Mzndr3U9f8Y',t:'Introduction to PRINCE2 & Project Management',d:'Why PRINCE2 exists, the five integrated elements, what a project is, and how to think like the exam.',key:[
+      ['Project','A temporary organization created to deliver one or more business products according to an agreed business case.'],
+      ['The 5 integrated elements','Principles · People · Practices · Processes · Project context. (Five — "people" is one of them; it is NOT four.)'],
+      ['Project vs programme vs portfolio','Project delivers products; programme delivers outcomes/benefits across related projects; portfolio is the strategic investment set.'],
+      ['5 project characteristics','Change · Temporary · Cross-functional · Unique · Uncertainty.'],
+      ['Pass mark','60% — 36 of 60, closed book, 60 min. (55% is the retired v6 exam.)'],
+    ]},
+    {n:'2',id:'rfHOs_djT7U',t:'The Seven Principles',d:'The seven universal obligations — including the seven tolerances and why you can never tailor a principle away.',key:[
+      ['The 7 principles','Ensure continued business justification · Learn from experience · Define roles, responsibilities and relationships · Manage by stages · Manage by exception · Focus on products · Tailor to suit the project.'],
+      ['The 7 tolerance areas','Benefits · Cost · Time · Quality · Scope · Sustainability · Risk. (Seven — sustainability is the v7 addition.)'],
+      ['Minimum stages','At least two — the initiation stage plus one delivery stage.'],
+      ['Can you tailor away a principle?','Never. Principles are what make a project genuinely PRINCE2.'],
+      ['Exception','A situation where a deviation beyond an agreed tolerance is forecast.'],
+    ]},
+    {n:'3',id:'dlQ5UbzPHV8',t:'People & the Seven Practices',d:'The v7 People element plus all seven practices, from Business Case to Progress.',key:[
+      ['The 7 practices','Business Case · Organization · Plans · Quality · Risk · Issues · Progress. (Called "themes" in v6; it is "Organization", not "Organizing".)'],
+      ['The value chain','Outputs → Capabilities → Outcomes → Benefits → Business objectives. (A dis-benefit is a measurable decline from an outcome.)'],
+      ['The 6 issue types','Problem · Concern · Event external to the project · Business opportunity · Request for change · Off-specification.'],
+      ['Is a risk an issue type?','No. A risk is an uncertain future event. A risk that OCCURS becomes an issue.'],
+      ['"Reject" as a risk response?','No such v7 response. Pairs are avoid/exploit and reduce/enhance; plus transfer, share, accept, prepare contingent plans.'],
+      ['Acceptance criteria','A prioritized list of measurable definitions of the attributes required for the products to be acceptable.'],
+    ]},
+    {n:'4',id:'yefK-Y4RYJ0',t:'The Seven Processes',d:'The full project lifecycle, from mandate to closure, followed through the Meridian scenario.',key:[
+      ['The 7 processes (lifecycle order)','Starting up a Project · Directing a Project · Initiating a Project · Controlling a Stage · Managing Product Delivery · Managing a Stage Boundary · Closing a Project.'],
+      ['Processes vs practices','Processes are verbs (Controlling a Stage); practices are nouns (Risk). Match the category to eliminate options fast.'],
+      ['SU vs IP outputs','Starting up produces the Project Brief; Initiating produces the PID.'],
+      ['Who authorises a work package?','The Project Manager (a Controlling a Stage activity). The team then accepts / executes / evaluates it (Managing Product Delivery).'],
+      ['Managing Product Delivery — third activity','Evaluate a work package (not "deliver").'],
+      ['Work package','The set of information about one or more products, handed from the PM to a team manager to agree their delivery.'],
+    ]},
+    {n:'5',id:'hVgJXX3BvBs',t:'Tailoring PRINCE2',d:'What can and cannot be tailored, and how PRINCE2 governs any delivery approach including agile.',key:[
+      ['What can be tailored','Terminology, the detail/format of management products, how roles are combined, how processes are applied — to suit context.'],
+      ['What cannot be tailored','The seven principles, and the requirement for the defined management products and minimum controls.'],
+      ['Tailoring is recorded in…','The PID (and agreed by the Project Board).'],
+      ['PRINCE2 + agile','PRINCE2 governs direction and control; the delivery method (incl. agile) is a tailoring choice — they coexist.'],
+    ]},
+    {n:'6',id:'jbBzmbzUapA',t:'The Project Environment & Roles',d:'Who is allowed to do what — the Board, PM, Team Manager, Assurance and Support.',key:[
+      ['Who owns the business case?','The Executive — the single point of accountability; cannot be delegated or combined with the PM.'],
+      ['Who specifies & tracks benefits?','The Senior User (specifies the benefits and demonstrates they are on track).'],
+      ['Who is accountable for product quality/technical integrity?','The Senior Supplier.'],
+      ['Who manages day-to-day within tolerance?','The Project Manager.'],
+      ['Who sets which tolerance?','Business layer → project · Project Board → stage · Project Manager → work package.'],
+      ['Project Assurance vs Project Support','Assurance = independent check for the Board; Support = admin/tools for the PM. Kept separate to protect independence.'],
+    ]},
+    {n:'7',id:'didB0ew9YVM',t:'Products, Plans & Quality',d:'Product-based planning, baselines, the quality audit trail, and the three management-product types.',key:[
+      ['Baseline','An approved version of a product that is subject to change control.'],
+      ['3 management-product types','Baselines (change-controlled) · Records (updated continuously) · Reports (a snapshot in time).'],
+      ['Product-based planning steps','Project product description → product breakdown structure → product descriptions → product flow diagram.'],
+      ['The quality audit trail','User quality expectations → acceptance criteria → quality specifications → quality register.'],
+      ['Quality control vs quality assurance','Control = checking products meet criteria; Assurance = independent confidence the approach is sound.'],
+    ]},
+    {n:'8',id:'czY5NhS9LVU',t:'Exam Strategy, Practice & Review',d:'Question types, elimination tactics, the high-yield checklist and final practice questions.',key:[
+      ['Pass mark','60% — 36 of 60. No negative marking, so answer every question.'],
+      ['Weed out fake buzzwords','If a term is not PRINCE2 (generic business/agile jargon), eliminate it.'],
+      ['Beware absolutes','"always / never / must immediately terminate" are rarely correct — PRINCE2 emphasises tailoring and thresholds.'],
+      ['Match the category','"Which principle?" → strike any option naming a process or practice.'],
+      ['Log why you missed it','Knowledge gap · Misinterpretation (real-world logic) · Trickery (missed NOT/MUST/MAIN). Fix the cause, not the letter.'],
+    ]},
+    {n:'★',id:'Mabvl9OxCqc',t:'Wrap-Up',d:'A final synthesis pulling the whole method together.',key:[
+      ['Stakeholder','Any individual, group or organization that can affect, be affected by, or perceive itself to be affected by the project.'],
+      ['Risk','An uncertain event that, if it occurs, will affect objectives — a threat OR an opportunity.'],
+      ['Issue','An event that has happened, was not planned, and requires management action.'],
+      ['Tolerance','The permissible range of variation around a target before escalation is needed.'],
+    ]},
   ];
   c.innerHTML = `
     <div class="eyebrow">Video Course</div>
@@ -1249,6 +1391,7 @@ RENDER.videos = (c)=>{
           <h3 class="vid-title">${v.t}</h3>
           <p class="vid-desc">${v.d}</p>
           <a class="vid-link" href="https://youtu.be/${v.id}" target="_blank" rel="noopener">Open on YouTube →</a>
+          ${v.key&&v.key.length?`<details class="kc-group vid-kc"><summary>Key concepts to retain</summary><div class="kc-body">${v.key.map(([q,a])=>`<div class="kc-item"><div class="kc-q">${q}</div><div class="kc-a">${a}</div></div>`).join('')}</div></details>`:''}
         </div>
       </div>`).join('')}
     </div>
@@ -1369,6 +1512,7 @@ RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
 RENDER.processes = (c)=>courseShell(c,'processes','Part 3','The 7 Processes',
   'What you do, in what order, across the lifecycle. Each has a purpose, a trigger, key activities and outputs.',
   `${diagLifecycle()}
+  <div class="callout"><div class="tag">Exam memory aid</div><strong>Processes are verbs; practices are nouns.</strong> A process is an action workflow (<em>Controlling a Stage</em>, <em>Initiating a Project</em>); a practice is a knowledge area (<em>Risk</em>, <em>Quality</em>, <em>Business Case</em>). When a question asks "which <u>process</u> applies?", eliminate any option that names a practice — matching the category alone removes one or two options instantly.</div>
   <div class="card">
     ${pblock('SU','Starting up a Project','"Do we have a viable, worthwhile project?" Triggered by the <b>project mandate</b>. Appoints Executive + PM, captures prior lessons, builds the <b>Project Brief</b> and Initiation Stage Plan. Starts Daily Log + Lessons Log.','pre-project; produces the <em>Project Brief</em> (not the PID).')}
     ${pblock('DP','Directing a Project','The Project Board\'s accountability process — spans end of SU to end of CP. Five decision points: authorise initiation · authorise the project · authorise a Stage/Exception Plan · give ad hoc direction · authorise closure.','the 5 decision points; DP runs throughout; ad hoc direction.')}
@@ -1741,7 +1885,7 @@ function answerDrill(choice,gi){
   const s=q.s; const st=state.drillStats[s]||{seen:0,right:0}; st.seen++; if(ok)st.right++; state.drillStats[s]=st; save();
   const exp=document.getElementById('drillExp');
   exp.className='explain show '+(ok?'right':'wrong');
-  exp.innerHTML=`<span class="v">${ok?'Correct':'Not quite — answer: '+LETTERS[right]}</span>${q.e}`;
+  exp.innerHTML=`<span class="v">${ok?'Correct':'Not quite — answer: '+LETTERS[right]}</span>${q.e}`+(ok?'':errorTagBar(q.q,q.s,'drill'));
   document.getElementById('drillNext').classList.remove('hidden');
 }
 
@@ -2151,7 +2295,7 @@ RENDER.edition = (c)=>{
 
 
 /* ---------- expose handlers (namespace + globals so all onclick styles resolve) ---------- */
-const App = { go, openNav, closeNav, startFc, flipFc, rateFc, startDrill, answerDrill,
+const App = { go, openNav, closeNav, startFc, flipFc, rateFc, startDrill, answerDrill, tagLastError, logError,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
   renderExamResult, reviewExam, setReviewFilter, toggleCheck, resetProgress };
 if(typeof window!=='undefined'){ Object.assign(window, App); window.App=App; }

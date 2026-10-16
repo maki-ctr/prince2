@@ -256,6 +256,13 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
   h1.page{font-size:32px}
   .lede{font-size:16px}
 }
+/* video lessons */
+.vid-list{display:grid;gap:18px;max-width:880px}
+.vid-card{margin-bottom:0}
+.vid-card h3.sub{margin-top:0}
+.vid-frame{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--paper-2);border:1px solid var(--line-soft)}
+.vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-frame.empty{display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:14px;aspect-ratio:auto;min-height:72px}
 </style>
 </head>
 <body>
@@ -924,6 +931,7 @@ function save(){ try{ localStorage.setItem(LS, JSON.stringify(state)); }catch(e)
 /* ---------- Navigation ---------- */
 const VIEWS = [
   {id:'dashboard', label:'Dashboard', ico:'◆', group:'main'},
+  {id:'videos', label:'Video Lessons', ico:'▶', group:'main'},
   {id:'principles', label:'The 7 Principles', ico:'①', group:'main'},
   {id:'practices', label:'The 7 Practices', ico:'②', group:'main'},
   {id:'practices_deep', label:'Practices — In Depth', ico:'▸', group:'main'},
@@ -1876,6 +1884,33 @@ if(typeof QUESTIONS_EXT!=='undefined' && Array.isArray(QUESTIONS_EXT)){ QUESTION
 if(typeof QUESTIONS_DEEP!=='undefined' && Array.isArray(QUESTIONS_DEEP)){ QUESTIONS.push(...QUESTIONS_DEEP); }
 
 /* ---------------- RESIT RECOVERY (post-fail, weak-topic focus) ---------------- */
+/* ---------- Video lessons (add IDs for modules 5–8 when ready) ---------- */
+const VIDEOS = [
+  {n:1, id:'h-vVo9j_qJk'},
+  {n:2, id:'-UKRhG_0_sE'},
+  {n:3, id:'TB-P7wQU3n4'},
+  {n:4, id:'vaAoZuN8X8k'},
+  {n:5, id:''},
+  {n:6, id:''},
+  {n:7, id:''},
+  {n:8, id:''},
+];
+RENDER.videos = (c)=>{
+  markRead('videos');
+  c.innerHTML = `
+    <div class="eyebrow">Course</div>
+    <h1 class="page">Video Lessons</h1>
+    <p class="lede">The course in eight modules. Watch in order, then use the flashcards and drills to lock it in.</p>
+    <div class="vid-list">
+      ${VIDEOS.map(v=>`
+        <div class="card vid-card">
+          <h3 class="sub">Module ${v.n}</h3>
+          ${v.id
+            ? `<div class="vid-frame"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0" title="PRINCE2 Foundation — Module ${v.n}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`
+            : `<div class="vid-frame empty">Not published yet</div>`}
+        </div>`).join('')}
+    </div>`;
+};
 RENDER.resit = (c)=>{
   markRead('resit');
   c.innerHTML = `

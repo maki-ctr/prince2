@@ -217,6 +217,35 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
 .table-scroll table{margin:0}
 
+/* ---- video lessons ---- */
+.vid-block{margin:0 0 40px;padding-bottom:30px;border-bottom:1px solid var(--line)}
+.vid-block:last-of-type{border-bottom:none}
+.vid-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);background:#000;border:1px solid var(--line)}
+.vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-qa{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.vid-qa>summary{cursor:pointer;padding:15px 20px;font-weight:600;font-size:15.5px;color:var(--navy);list-style:none;display:flex;align-items:center;gap:10px;transition:background .15s}
+.vid-qa>summary::-webkit-details-marker{display:none}
+.vid-qa>summary::after{content:'▾';margin-left:auto;transition:transform .2s;color:var(--gold);font-size:14px}
+.vid-qa[open]>summary::after{transform:rotate(180deg)}
+.vid-qa>summary:hover{background:var(--paper-2)}
+.qa-count{background:var(--gold);color:#1a1206;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px}
+.qa-body{padding:6px 14px 14px}
+.qa-item{border-top:1px solid var(--line-soft);padding:2px 0}
+.qa-item:first-child{border-top:none}
+.qa-item>summary{cursor:pointer;padding:12px 8px;font-size:14.5px;list-style:none;display:flex;gap:7px;align-items:baseline;color:var(--ink);transition:color .12s}
+.qa-item>summary::-webkit-details-marker{display:none}
+.qa-item>summary::after{content:'+';margin-left:auto;color:var(--gold);font-weight:700;font-size:16px;transition:transform .2s}
+.qa-item[open]>summary::after{content:'−'}
+.qa-item>summary:hover{color:var(--navy)}
+.qa-q{color:var(--gold);font-weight:700;flex-shrink:0}
+.qa-a{margin:0 8px 12px 26px;padding:12px 16px;background:var(--green-soft);border-left:3px solid var(--green);border-radius:0 10px 10px 0;font-size:14px;line-height:1.55;color:var(--ink)}
+.vid-upcoming{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+.vid-soon{display:flex;align-items:center;gap:12px;padding:13px 18px;background:var(--paper-2);border:1px dashed var(--line);border-radius:12px}
+.vs-n{font-family:'Fraunces',serif;font-weight:700;color:var(--navy);font-size:15px;flex-shrink:0}
+.vs-t{color:var(--ink-soft);font-size:14px;flex:1}
+.vs-tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700}
+@media(prefers-reduced-motion:reduce){.vid-qa>summary::after,.qa-item>summary::after{transition:none}}
+
 /* ---- diagrams ---- */
 .diagram{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;margin:20px 0;box-shadow:var(--shadow);overflow-x:auto}
 .diagram svg{width:100%;height:auto;min-width:520px;display:block}
@@ -256,13 +285,6 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
   h1.page{font-size:32px}
   .lede{font-size:16px}
 }
-/* video lessons */
-.vid-list{display:grid;gap:18px;max-width:880px}
-.vid-card{margin-bottom:0}
-.vid-card h3.sub{margin-top:0}
-.vid-frame{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--paper-2);border:1px solid var(--line-soft)}
-.vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.vid-frame.empty{display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:14px;aspect-ratio:auto;min-height:72px}
 </style>
 </head>
 <body>
@@ -1868,6 +1890,143 @@ RENDER.edition = (c)=>{
 };
 
 
+
+/* ---------------- VIDEO LESSONS ---------------- */
+const VIDEO_MODULES = [
+  {
+    n:'1', id:'h-vVo9j_qJk', title:'Introduction to PRINCE2 & Project Management',
+    blurb:'Why the method exists, what a project is, the five integrated elements, and how to think like the exam.',
+    qa:[
+      ['What does PRINCE2 stand for, and who maintains it now?','PRojects IN Controlled Environments. It was developed by the UK government and is now maintained by PeopleCert.'],
+      ['Is PRINCE2 a guarantee of success?','No. It improves the probability of success — it never guarantees it. "Guarantees success" is a classic wrong answer.'],
+      ['What is PRINCE2 NOT?','Not a substitute for leadership/judgment, not a software tool, not IT-only, and not a guarantee of success.'],
+      ['What is the PRINCE2 definition of a project?','A temporary organization created to deliver one or more business products according to an agreed business case.'],
+      ['What are the five characteristics that make work a project?','Change, Temporary, Cross-functional, Unique, and Uncertainty.'],
+      ['Project vs programme vs portfolio?','Project = delivers products (outputs). Programme = coordinates related projects for outcomes and benefits. Portfolio = the total investment in change — selecting and prioritising what to fund.'],
+      ['What are the FIVE integrated elements of PRINCE2 7?','Principles, People, Practices, Processes, and Project context. ("People" is new in v7; knowing there are five is itself an exam point.)'],
+      ['What were "themes" renamed to in v7?','Practices. If a source says "principles, themes and processes" with no people element, it is 6th-edition.'],
+      ['Exam format for Foundation?','60 questions, 60 minutes, 60% to pass (36/60), closed book, multiple choice (including negative "which is NOT" questions).'],
+      ['A good elimination tactic?','The "most PRINCE2" answer emphasises structure, clear accountability, and continued business justification. Be suspicious of options where the PM makes all decisions, the business case is ignored, PRINCE2 is used rigidly, outputs are confused with benefits, or the PM approves their own plans.']
+    ]
+  },
+  {
+    n:'2', id:'-UKRhG_0_sE', title:'The Seven PRINCE2 Principles',
+    blurb:'The seven universal, mandatory, self-validating obligations — and the exam traps around each.',
+    qa:[
+      ['What makes a principle different from a practice or process?','Principles are universal, mandatory and self-validating: apply all seven or it is not a PRINCE2 project. You can scale practices and streamline processes, but you can never tailor out a principle.'],
+      ['Name the seven principles.','1) Ensure continued business justification, 2) Learn from experience, 3) Define roles, responsibilities and relationships, 4) Manage by stages, 5) Manage by exception, 6) Focus on products, 7) Tailor to suit the project.'],
+      ['Who owns the business case, and what does "continued" mean?','The Executive owns it. "Continued" means justification must stay valid and be actively rechecked throughout — not written once and filed. If justification dies, the project should stop.'],
+      ['When does "learn from experience" happen?','Before (review prior lessons at the start), During (record in the Lessons Log), and After (hand lessons to the organisation). A lesson only counts if it is acted on, not just logged.'],
+      ['What did v7 add to the third principle?','The words "and relationships" — now "Define roles, responsibilities AND relationships" — reflecting the new focus on people.'],
+      ['What are the four levels of organisation?','Commissioning (the business layer, outside the project — sets mandate and tolerances), Directing (the Project Board), Managing (the Project Manager), Delivering (Team Managers and teams).'],
+      ['What is the minimum number of management stages?','Two: the initiation stage plus at least one delivery stage. The Board authorises one stage at a time.'],
+      ['Management stage vs technical stage?','Management stages are PRINCE2 control points (decision-driven). Technical stages are how the work naturally divides (design, build, test). They may or may not line up.'],
+      ['How many tolerance areas are there in v7, and what are they?','SEVEN: Benefits, Cost, Time, Quality, Scope, Sustainability, Risk. Sustainability was added in v7 — a heavily tested change. (If a source says six, it is out of date.)'],
+      ['What triggers escalation under "manage by exception"?','A FORECAST breach of tolerance — you escalate via an Exception Report when you can see the breach coming, not after. The PM must never quietly exceed delegated authority.'],
+      ['What does "focus on products" change about planning?','You define the products (and their quality, via Product Descriptions) FIRST, then derive the activities — the reverse of traditional activity-first planning.'],
+      ['Is tailoring optional? What can you never tailor away?','Tailoring is mandatory — using PRINCE2 rigidly out-of-the-box is wrong. But you can never tailor away the seven principles, the business case, the directing/managing separation, or management stages. Tailoring decisions are recorded in the PID.']
+    ]
+  },
+  {
+    n:'3', id:'TB-P7wQU3n4', title:'People & the Seven Practices',
+    blurb:'The v7 People element, and all seven practices with their owners and the distinctions the exam probes.',
+    qa:[
+      ['Why is "People" new and important in v7?','The 6th edition had no people element. v7 puts people at the centre because a temporary team, assembled across boundaries, needs active leadership. It is a pillar, not a footnote.'],
+      ['What are the people-focused themes?','Leading successful change; leading and managing successful teams (cultural intelligence, competencies, team development, social cohesion); and communication.'],
+      ['Change management vs change control — what is the difference?','Change management (People element) is the HUMAN side — helping people adopt the change, via the Change Management Approach. Change control (Issues practice) is about controlling changes to BASELINES. Same word, different homes.'],
+      ['Is communication one-way or two-way?','Bidirectional. The Communication Management Approach defines the means and frequency of communication AND feedback — not just broadcasting at stakeholders.'],
+      ['What is a "practice", and what was it called before?','An aspect of project management applied continuously, all seven in parallel. Called "themes" in the 6th edition; renamed "practices" in v7.'],
+      ['What is the correct name of the second practice?','Organizing. v7 renamed the 6th-edition theme "Organization" to the practice "Organizing". If an option says "Organization", that is the outdated term.'],
+      ['What three questions does the Business Case practice answer?','Is the project Desirable (benefits vs cost/risk), Viable (can we deliver it), and Achievable (can the products produce the benefits)?'],
+      ['What is the value chain, and the output-vs-benefit trap?','Outputs → Outcomes → Benefits, contributing to business objectives (a capability links an output to the outcome it enables). The classic trap is confusing an output (what you build) with a benefit (the measurable improvement).'],
+      ['What is a dis-benefit?','A measurable decline resulting from an outcome, perceived as negative by one or more stakeholders — planned for, not ignored.'],
+      ['Who owns the business case vs who specifies benefits?','The Executive owns the business case. The Senior User specifies the benefits and confirms they are on track. The Project Manager owns neither.'],
+      ['What are the three Project Board interests?','Business (Executive — one only, chairs the Board, cannot be the PM), User (Senior User), Supplier (Senior Supplier). Can be more than one Senior User/Supplier, but only one Executive.'],
+      ['Quality planning vs control vs assurance?','Planning = defining specifications up front. Control = checking products against them as built. Assurance = independent confidence, managed OUTSIDE the project team (corporate governance).'],
+      ['What are the four plan types?','Project Plan, Stage Plan, Team Plan (optional), and Exception Plan (replaces a Stage or Project Plan — never a Team Plan).'],
+      ['What are the four product-based planning steps?','Create the project product description → create the product breakdown structure → write the product descriptions → create the product flow diagram.'],
+      ['Can a risk be positive? What are the paired responses?','Yes — a risk can be a threat (negative) or an opportunity (positive). Paired responses: Avoid/Exploit, Reduce/Enhance; plus Transfer, Share, Accept, and prepare contingent plans. There is no "reject" response in v7.'],
+      ['Risk owner vs risk actionee?','The risk owner manages the risk (accountable); the risk actionee carries out a specific response action.'],
+      ['What are the issue types in v7?','Request for change, off-specification, and problem/concern — the three core types — plus business opportunity, which is new in v7.'],
+      ['Who decides on a change that affects a baseline?','The PM decides within delegated limits; if a baseline (business case, Project Plan) is affected, the Board or a delegated Change Authority decides. A change budget can fund changes.'],
+      ['Time-driven vs event-driven controls?','Time-driven happen at regular intervals (Highlight Reports PM→Board; Checkpoint Reports team→PM). Event-driven are triggered by an event (End Stage Report at a boundary; Exception Report on a forecast breach).']
+    ]
+  },
+  {
+    n:'4', id:'vaAoZuN8X8k', title:'The Seven PRINCE2 Processes',
+    blurb:'The project timeline from mandate to close — triggers, outputs, and the boundaries the exam tests.',
+    qa:[
+      ['Process vs practice — what is the difference?','A practice is a discipline you apply continuously (e.g. Risk — every day). A process is a phase you pass through once at the right point in the lifecycle (e.g. Starting Up — at the beginning).'],
+      ['Name the seven processes in lifecycle order.','Starting Up → Directing a Project → Initiating a Project → Controlling a Stage ↔ Managing Product Delivery (repeating, with Managing a Stage Boundary between stages) → Closing a Project.'],
+      ['What question does Starting Up answer, and what triggers it?','"Do we have a viable AND worthwhile project?" Triggered by a project mandate from the business layer.'],
+      ['What is the main output of Starting Up?','The Project Brief (plus outline Business Case, initiation stage plan, Daily Log, Lessons Log). NOT the PID — remember: SU = Brief, IP = PID.'],
+      ['Who is appointed during Starting Up?','The Executive and the Project Manager. The full Project Board does not exist yet.'],
+      ['What are the five activities of Directing a Project?','Authorize initiation; authorize the project; authorize a stage or exception plan; give ongoing direction; authorize project closure.'],
+      ['Does Directing a Project create specialist products?','No — it produces decisions and authorizations only. The Board directs; it does not do. An option with the Board writing a plan or building a product is wrong.'],
+      ['What is the main output of Initiating a Project?','The PID (Project Initiation Documentation) — the aggregation of the management approaches, Project Plan, detailed Business Case, controls and team structure into one authoritative pack. Think of it as the agreed basis between the Board and the PM.'],
+      ['SU → IP → DP: how do they relate?','SU produces the Brief; IP produces the PID; the Board authorizes the project using that PID in Directing a Project. Three processes, one chain.'],
+      ['In which process is a Work Package AUTHORIZED?','Controlling a Stage — this is the PM\u2019s action. (The team then accepts/executes/evaluates it in Managing Product Delivery.)'],
+      ['What are the Managing Product Delivery activities?','Accept a Work Package → Execute it → Evaluate it → Notify Work Package completion. The v7 verb is "evaluate" — NOT the old 6th-edition "deliver".'],
+      ['What is the CS/MP boundary the exam tests?','The PM authorizes a Work Package (Controlling a Stage); the team accepts, executes and evaluates it, then notifies completion (Managing Product Delivery). Same Work Package, two sides of one door.'],
+      ['What triggers Managing a Stage Boundary?','Either the current stage nearing its end, OR an exception where the Board has asked for an exception plan. Two triggers.'],
+      ['What happens at a Stage Boundary?','Plan the next stage, update the Project Plan and Business Case, and produce the End Stage Report (or an Exception Plan). This is where "continued business justification" is enforced, stage after stage.'],
+      ['Why does Closing a Project PLAN benefits measurement rather than DO it?','Most benefits only appear once the products have been in use for a while — after the project ends. CP plans how and when they will be measured; the Senior User carries that forward.'],
+      ['Does Closing a Project handle early (premature) closure?','Yes. If the Board stops the project early, CP still runs — documenting why, handing over anything usable, and updating records. A stopped project still closes properly.']
+    ]
+  }
+];
+
+// upcoming modules (links to be added)
+const VIDEO_UPCOMING = [
+  {n:'5', title:'Tailoring PRINCE2 to Your Environment'},
+  {n:'6', title:'The Project Environment & Roles'},
+  {n:'7', title:'Products, Plans & Quality'},
+  {n:'8', title:'Exam Strategy, Practice Questions & Review'}
+];
+
+RENDER.videos = (c)=>{
+  markRead('videos');
+  c.innerHTML = `
+    <div class="eyebrow">Video Lessons</div>
+    <h1 class="page">Watch the Course<span class="small">module videos + key Q&A</span></h1>
+    <p class="lede">The full teaching course as videos, one per module. Under each, open the dropdown for the module's most important questions and answers — use them to self-test after watching.</p>
+
+    ${VIDEO_MODULES.map(m=>`
+      <div class="vid-block">
+        <h2 class="sec" style="border:none;margin-bottom:10px">Module ${m.n} · ${m.title}</h2>
+        <p style="color:var(--ink-soft);margin-top:-4px;margin-bottom:14px">${m.blurb}</p>
+        <div class="vid-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/${m.id}" title="Module ${m.n}: ${m.title}"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <details class="vid-qa">
+          <summary><span class="qa-count">${m.qa.length}</span> Key questions & answers — Module ${m.n}</summary>
+          <div class="qa-body">
+            ${m.qa.map((q,i)=>`
+              <details class="qa-item">
+                <summary><span class="qa-q">Q${i+1}.</span> ${q[0]}</summary>
+                <p class="qa-a">${q[1]}</p>
+              </details>`).join('')}
+          </div>
+        </details>
+      </div>`).join('')}
+
+    <h2 class="sec">Coming next</h2>
+    <p style="color:var(--ink-soft)">Videos for these modules will appear here as they're published.</p>
+    <div class="vid-upcoming">
+      ${VIDEO_UPCOMING.map(m=>`<div class="vid-soon"><span class="vs-n">Module ${m.n}</span><span class="vs-t">${m.title}</span><span class="vs-tag">soon</span></div>`).join('')}
+    </div>
+
+    <div class="callout key" style="margin-top:24px"><div class="tag">How to use these</div>Watch a module, then close your eyes and answer its Q&A dropdown from memory before opening each answer. Anything you miss, drill in <strong>Drill by Topic</strong> and review the matching framework section.</div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="go('drill')">Drill what you watched →</button>
+      <button class="btn btn-ghost" onclick="go('exam')">Mock exam</button>
+    </div>`;
+};
+
+
 /* ---------- expose handlers (namespace + globals so all onclick styles resolve) ---------- */
 const App = { go, openNav, closeNav, startFc, flipFc, rateFc, startDrill, answerDrill,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
@@ -1884,33 +2043,6 @@ if(typeof QUESTIONS_EXT!=='undefined' && Array.isArray(QUESTIONS_EXT)){ QUESTION
 if(typeof QUESTIONS_DEEP!=='undefined' && Array.isArray(QUESTIONS_DEEP)){ QUESTIONS.push(...QUESTIONS_DEEP); }
 
 /* ---------------- RESIT RECOVERY (post-fail, weak-topic focus) ---------------- */
-/* ---------- Video lessons (add IDs for modules 5–8 when ready) ---------- */
-const VIDEOS = [
-  {n:1, id:'h-vVo9j_qJk'},
-  {n:2, id:'-UKRhG_0_sE'},
-  {n:3, id:'TB-P7wQU3n4'},
-  {n:4, id:'vaAoZuN8X8k'},
-  {n:5, id:''},
-  {n:6, id:''},
-  {n:7, id:''},
-  {n:8, id:''},
-];
-RENDER.videos = (c)=>{
-  markRead('videos');
-  c.innerHTML = `
-    <div class="eyebrow">Course</div>
-    <h1 class="page">Video Lessons</h1>
-    <p class="lede">The course in eight modules. Watch in order, then use the flashcards and drills to lock it in.</p>
-    <div class="vid-list">
-      ${VIDEOS.map(v=>`
-        <div class="card vid-card">
-          <h3 class="sub">Module ${v.n}</h3>
-          ${v.id
-            ? `<div class="vid-frame"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0" title="PRINCE2 Foundation — Module ${v.n}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`
-            : `<div class="vid-frame empty">Not published yet</div>`}
-        </div>`).join('')}
-    </div>`;
-};
 RENDER.resit = (c)=>{
   markRead('resit');
   c.innerHTML = `

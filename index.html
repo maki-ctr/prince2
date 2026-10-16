@@ -217,6 +217,51 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
 .table-scroll table{margin:0}
 
+/* ---- people ecosystem map ---- */
+.pe-diagram svg{min-width:600px}
+.pe-org{fill:rgba(36,76,115,.06);stroke:var(--navy-2);stroke-width:1.5;stroke-dasharray:7 5}
+.pe-proj{fill:rgba(176,124,43,.07);stroke:var(--gold);stroke-width:1.5}
+.pe-outer-lbl{font-size:12px;font-weight:700;fill:var(--navy-2);letter-spacing:.5px}
+.pe-outer-sub{font-size:10px;fill:var(--ink-soft)}
+.pe-inner-lbl{font-size:11px;font-weight:700;fill:var(--gold);text-anchor:middle;letter-spacing:.5px}
+.pe-circle{opacity:.82;cursor:pointer;transition:all .15s;mix-blend-mode:multiply}
+.pe-circle:hover{opacity:.95}
+.pe-circle.pe-sel{stroke:var(--navy);stroke-width:3.5}
+.pe-business{fill:#5b8bb8}.pe-user{fill:#6aa98a}.pe-supplier{fill:#c9a24a}
+.pe-cl{font-size:13px;font-weight:700;fill:#fff;text-anchor:middle;pointer-events:none}
+.pe-cl-sm{font-size:10px;fill:#fff;text-anchor:middle;pointer-events:none;opacity:.9}
+.pe-dot{fill:var(--navy-2);cursor:pointer;transition:all .15s}
+.pe-dot:hover{fill:var(--gold)}.pe-dot.pe-sel{fill:var(--gold);stroke:var(--navy);stroke-width:2}
+.pe-rel{stroke:var(--navy-2);stroke-width:1;opacity:.4}
+.pe-legend{font-size:11px;fill:var(--ink-soft)}
+
+/* ---- role relationship map ---- */
+.rm-diagram svg{min-width:600px}
+.rm-lane{font-size:11px;font-weight:700;fill:var(--gold);text-transform:uppercase;letter-spacing:.5px}
+.rm-board-label{font-size:10.5px;font-weight:700;fill:var(--gold);text-anchor:middle;letter-spacing:1px}
+.rm-box{fill:var(--paper-2);stroke:var(--line);stroke-width:1.5;cursor:pointer;transition:all .15s}
+.rm-box:hover{stroke:var(--navy-2);stroke-width:2.4}
+.rm-box.rm-sel{stroke:var(--gold);stroke-width:3.4;filter:drop-shadow(0 2px 6px rgba(176,124,43,.35))}
+.rm-box.corp{fill:#e9e3f0}.rm-box.exec{fill:#e7eef5}.rm-box.su{fill:#e3ecdf}.rm-box.ss{fill:#dfe8ee}
+.rm-box.pm{fill:#f0e7d4}.rm-box.tm{fill:#e3ecdf}.rm-box.assure{fill:#f3e9d6;stroke:var(--gold)}
+.rm-box.support{fill:#ededed}.rm-box.ca{fill:#f3e9d6;stroke:var(--gold)}
+.rm-lbl{font-size:13px;font-weight:600;fill:var(--ink);text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+.rm-lbl-sm{font-size:11.5px;font-weight:600;fill:var(--ink);text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+.rm-legend{font-size:10.5px;fill:var(--ink-soft)}
+.rm-hint{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:10px;font-style:italic}
+.rm-detail{margin-top:14px;min-height:10px}
+.rm-card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;animation:fade .25s}
+.rm-card-h{background:var(--navy);color:#fff;padding:13px 18px;font-family:'Fraunces',serif;font-size:18px;font-weight:600;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.rm-interest{font-family:'Spline Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gold-soft)}
+.rm-rows{padding:6px 0}
+.rm-row{display:flex;gap:14px;padding:11px 18px;border-top:1px solid var(--line-soft);font-size:14px;line-height:1.5}
+.rm-row:first-child{border-top:none}
+.rm-k{flex-shrink:0;width:82px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--navy);padding-top:2px}
+.rm-v{color:var(--ink)}
+.rm-never{background:var(--red-soft)}
+.rm-never .rm-k{color:var(--red)}
+@media(prefers-reduced-motion:reduce){.rm-card{animation:none}}
+
 /* ---- cross-channel link bar ---- */
 .xlink-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 22px;padding:11px 15px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px}
 .xl-label{font-size:12.5px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.5px}
@@ -379,7 +424,7 @@ let QUESTIONS = [
 {s:"practices",q:"Quality assurance in PRINCE2 is:",o:["Performed by the Project Manager","Performed by the Quality Manager","Independent of the project, part of corporate governance","Performed by the Project Board"],a:2,e:"Quality assurance sits OUTSIDE the project as corporate/programme governance. (Distinct from Project Assurance.)"},
 {s:"practices",q:"Which document defines how risks will be identified, assessed and controlled?",o:["Risk Register","Risk Management Approach","Risk Budget","Risk Plan"],a:1,e:"The Risk Management Approach. The Register logs the risks themselves."},
 {s:"practices",q:"A 'dis-benefit' is:",o:["A failed benefit","A negative outcome of the project","A risk that materialised","A poorly-defined benefit"],a:1,e:"A dis-benefit is a measurable negative outcome of the project."},
-{s:"practices",q:"The core issue types in PRINCE2 are:",o:["Risk, problem, change","Request for change, off-specification, problem/concern","Internal, external, supplier","High, medium, low"],a:1,e:"Request for change, off-specification, problem/concern — the three core types. PRINCE2 7 adds a fourth: business opportunity."},
+{s:"practices",q:"Which is NOT one of the six issue types in the PRINCE2 7 QRG?",o:["Problem","Business opportunity","Request for change","Risk"],a:3,e:"The six issue types are: problem, concern, event external to the project, business opportunity, request for change, off-specification. A risk is not an issue (a risk might happen; an issue has happened)."},
 {s:"practices",q:"An 'off-specification' issue is:",o:["Something that should be delivered but won't be (or wasn't)","A proposed change to a baseline","A poorly-specified product","An issue raised outside the project"],a:0,e:"Off-specification: a product that should be delivered (to standard) but won't be / hasn't been."},
 {s:"practices",q:"Who can decide on changes within delegated limits?",o:["Project Manager only","Change Authority","Project Support","Senior User"],a:1,e:"The Change Authority decides on changes within limits delegated by the Project Board."},
 {s:"practices",q:"The Project Product Description is owned by:",o:["Project Manager","Executive","Senior User","Senior Supplier"],a:2,e:"Owned by the Senior User (represents the user/acceptance interest)."},
@@ -628,9 +673,9 @@ const CARDS = [
 {deck:"Principles",front:"Manage by exception — the 7 tolerances (performance aspects)?",back:"Time, Cost, Scope, Quality, Benefits, Risk, Sustainability (sustainability added in v7). Stay within tolerance = no escalation; forecast breach = raise an Exception to the level above."},
 {deck:"Principles",front:"Focus on products — central artefact?",back:"Product-based planning. The Product Description defines quality; the Product Breakdown Structure decomposes deliverables. Activities are derived from products, not the reverse."},
 {deck:"Principles",front:"Tailor to suit the project — three rules?",back:"1. Tailoring is mandatory. 2. Principles cannot be tailored away. 3. Tailoring is recorded in the PID."},
-{deck:"Practices",front:"Name the 7 practices (themes).",back:"1. Business Case\n2. Organizing\n3. Plans\n4. Quality\n5. Risk\n6. Issues\n7. Progress"},
+{deck:"Practices",front:"Name the 7 practices (themes).",back:"1. Business Case\n2. Organization\n3. Plans\n4. Quality\n5. Risk\n6. Issues\n7. Progress"},
 {deck:"Practices",front:"Business Case — output-outcome-benefit chain + negative term?",back:"Outputs (what's produced) → outcomes (resulting change) → benefits (measurable improvement). Negative outcome = dis-benefit. Executive owns it."},
-{deck:"Practices",front:"Organizing — the four levels of organisation?",back:"1. Corporate/programme/customer (sets mandate)\n2. Directing — Project Board\n3. Managing — Project Manager\n4. Delivering — Team Managers"},
+{deck:"Practices",front:"Organization — the four levels of organisation?",back:"1. Corporate/programme/customer (sets mandate)\n2. Directing — Project Board\n3. Managing — Project Manager\n4. Delivering — Team Managers"},
 {deck:"Practices",front:"Plans — three levels + what Exception Plan replaces?",back:"Project Plan, Stage Plan, Team Plan. Exception Plan replaces a Stage Plan or Project Plan — never a Team Plan."},
 {deck:"Practices",front:"Quality — acceptance criteria vs quality criteria?",back:"Acceptance criteria: prioritised list for the whole project product (Project Product Description, owned by Senior User). Quality criteria: per individual product (Product Description). QA is external to the project."},
 {deck:"Practices",front:"Risk — threat responses (5+1) and opportunity responses (4)?",back:"Threats: avoid, reduce, transfer, share, accept (+ prepare contingent plans). Opportunities: exploit, enhance, share, accept (reject also possible)."},
@@ -657,7 +702,7 @@ const CARDS = [
 {deck:"Composition",front:"What's in any Approach (Risk/Quality/Comms/Change)?",back:"Same skeleton: procedure · tools & techniques · roles/responsibilities · timing · how the related register/record is used. All produced in IP."},
 {deck:"Composition",front:"What's in a Product Description?",back:"Purpose · composition · derivation · format · quality criteria · quality method · quality responsibilities. (No investment appraisal — that's the Business Case.)"},
 {deck:"Composition",front:"What's in the Business Case?",back:"Reasons · business options (do nothing/minimum/something) · benefits & dis-benefits · costs · timescale · investment appraisal · major risks. Owned by the Executive."},
-{deck:"v7 Edition",front:"PRINCE2 7 — what were 'themes' renamed to?",back:"Practices. (Organization → Organizing.) The set: Business Case, Organizing, Plans, Quality, Risk, Issues, Progress."},
+{deck:"v7 Edition",front:"PRINCE2 7 — what were 'themes' renamed to?",back:"Practices. (Organization → Organization.) The set: Business Case, Organization, Plans, Quality, Risk, Issues, Progress."},
 {deck:"v7 Edition",front:"PRINCE2 7 — the headline new performance target?",back:"Sustainability — added in v7 as the SEVENTH performance aspect. PRINCE2 7 has seven tolerances: time, cost, scope, quality, benefits, risk, sustainability. You can set a tolerance against sustainability (per the official PeopleCert sample paper)."},
 {deck:"v7 Edition",front:"PRINCE2 7 — integrated elements + new emphasis?",back:"Principles, people, practices, processes — applied in a project context. 'People' is the newly foregrounded element vs the 6th edition."},
 {deck:"v7 Edition",front:"PRINCE2 7 — what did NOT change?",back:"7 principles (number + intent), 7 processes, and the role structure. Most learning transfers directly."}
@@ -859,7 +904,7 @@ function diagChange(){
     <text x="265" y="165" class="dg-mini">impact on objectives,</text><text x="265" y="178" class="dg-mini">Business Case, risk</text>
     <text x="405" y="165" class="dg-mini">options +</text><text x="405" y="178" class="dg-mini">recommendation</text>
     <text x="545" y="165" class="dg-mini">PM / Change Authority</text><text x="545" y="178" class="dg-mini">/ Board (per limits)</text>
-  </svg><div class="dg-hint">Issue types: request for change · off-specification · problem/concern · business opportunity (new in v7).</div></div>`;
+  </svg><div class="dg-hint">Six issue types: problem · concern · event external to the project · business opportunity · request for change · off-specification.</div></div>`;
 }
 
 /* ---- 6. Quality audit trail (static) ---- */
@@ -927,6 +972,256 @@ function orgPick(code){
   const svg=el.closest('.diagram').querySelector('svg');
   svg.querySelectorAll('.dg-box').forEach(b=>b.classList.toggle('sel', b.getAttribute('data-role')===code));
 }
+
+/* ============ ROLE RELATIONSHIP MAP (who/when/how/reports-to/never) ============ */
+function diagRoleMap(){
+  return `
+  <div class="diagram rm-diagram">
+    <svg viewBox="0 0 760 440" ${SVGNS} role="img" aria-label="PRINCE2 role relationships">
+      <defs>
+        <marker id="rmArr" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto">
+          <path d="M0,0 L8,3.2 L0,6.4 Z" fill="var(--navy-2)"/></marker>
+        <marker id="rmArrGold" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto">
+          <path d="M0,0 L8,3.2 L0,6.4 Z" fill="var(--gold)"/></marker>
+      </defs>
+
+      <!-- level labels -->
+      <text x="14" y="40" class="rm-lane">Commissioning</text>
+      <text x="14" y="150" class="rm-lane">Directing</text>
+      <text x="14" y="270" class="rm-lane">Managing</text>
+      <text x="14" y="388" class="rm-lane">Delivering</text>
+
+      <!-- Corporate -->
+      <rect class="rm-box corp" x="250" y="18" width="260" height="42" rx="9" data-rm="CORP"/>
+      <text x="380" y="44" class="rm-lbl">Corporate / Programme / Customer</text>
+
+      <!-- Board container -->
+      <rect x="150" y="92" width="460" height="86" rx="13" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="380" y="110" class="rm-board-label">PROJECT BOARD · directs, does not manage</text>
+      <rect class="rm-box exec" x="166" y="122" width="134" height="44" rx="9" data-rm="EXEC"/>
+      <text x="233" y="148" class="rm-lbl">Executive</text>
+      <rect class="rm-box su" x="313" y="122" width="134" height="44" rx="9" data-rm="SU"/>
+      <text x="380" y="148" class="rm-lbl">Senior User</text>
+      <rect class="rm-box ss" x="460" y="122" width="134" height="44" rx="9" data-rm="SS"/>
+      <text x="527" y="148" class="rm-lbl">Senior Supplier</text>
+
+      <!-- Assurance (independent, to the side) -->
+      <rect class="rm-box assure" x="628" y="110" width="118" height="68" rx="9" data-rm="ASSURE"/>
+      <text x="687" y="138" class="rm-lbl">Project</text>
+      <text x="687" y="156" class="rm-lbl">Assurance</text>
+
+      <!-- Change Authority (delegated by board) -->
+      <rect class="rm-box ca" x="14" y="110" width="122" height="68" rx="9" data-rm="CA"/>
+      <text x="75" y="138" class="rm-lbl-sm">Change</text>
+      <text x="75" y="155" class="rm-lbl-sm">Authority</text>
+
+      <!-- PM -->
+      <rect class="rm-box pm" x="300" y="238" width="160" height="50" rx="10" data-rm="PM"/>
+      <text x="380" y="268" class="rm-lbl">Project Manager</text>
+
+      <!-- Support (beside PM) -->
+      <rect class="rm-box support" x="480" y="240" width="118" height="46" rx="9" data-rm="SUPPORT"/>
+      <text x="539" y="262" class="rm-lbl-sm">Project</text>
+      <text x="539" y="278" class="rm-lbl-sm">Support</text>
+
+      <!-- Team Managers -->
+      <rect class="rm-box tm" x="236" y="356" width="150" height="46" rx="9" data-rm="TM"/>
+      <text x="311" y="383" class="rm-lbl">Team Manager</text>
+      <rect class="rm-box tm" x="400" y="356" width="150" height="46" rx="9" data-rm="TM"/>
+      <text x="475" y="383" class="rm-lbl">Team Manager</text>
+
+      <!-- reports-to / authority lines (navy solid, arrow = reports up) -->
+      <line x1="380" y1="60" x2="380" y2="90" stroke="var(--navy-2)" stroke-width="2"/>
+      <line x1="380" y1="178" x2="380" y2="236" stroke="var(--navy-2)" stroke-width="2.4" marker-end="url(#rmArr)"/>
+      <line x1="311" y1="356" x2="372" y2="290" stroke="var(--navy-2)" stroke-width="2.4" marker-end="url(#rmArr)"/>
+      <line x1="475" y1="356" x2="388" y2="290" stroke="var(--navy-2)" stroke-width="2.4" marker-end="url(#rmArr)"/>
+
+      <!-- assurance: dashed gold = independent oversight FOR the board -->
+      <line x1="594" y1="144" x2="628" y2="144" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/>
+      <!-- change authority: dashed = delegated by board -->
+      <line x1="136" y1="144" x2="166" y2="144" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/>
+      <!-- support: dashed = assists PM -->
+      <line x1="460" y1="263" x2="480" y2="263" stroke="var(--navy-2)" stroke-width="2" stroke-dasharray="3 3"/>
+
+      <!-- legend -->
+      <g transform="translate(600,330)">
+        <line x1="0" y1="0" x2="26" y2="0" stroke="var(--navy-2)" stroke-width="2.4" marker-end="url(#rmArr)"/>
+        <text x="32" y="4" class="rm-legend">reports to</text>
+        <line x1="0" y1="20" x2="26" y2="20" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="32" y="24" class="rm-legend">delegated / assures</text>
+      </g>
+    </svg>
+    <div class="rm-hint">Tap any role for what it does, when, how it reports — and what it must never do.</div>
+    <div id="rmDetail" class="rm-detail"></div>
+  </div>`;
+}
+
+/* each role: name, interest, does, when, how (products), reportsTo, never */
+const ROLEMAP = {
+  CORP:{n:'Corporate / Programme / Customer', interest:'Commissioning (outside the project)',
+    does:'Commissions the project, issues the mandate, sets overall (project-level) tolerances and the business objectives the project must serve.',
+    when:'Before the project (sends the mandate that triggers Starting Up); receives escalations that exceed project tolerance.',
+    how:'The project mandate; sets project tolerances for the Board.',
+    reports:'Nobody within the project — it sits above it.',
+    never:'Does not run or manage the project; not part of the project management team.'},
+  EXEC:{n:'Executive', interest:'Business',
+    does:'Single point of accountability for the whole project. Owns the Business Case, chairs the Board, ensures value for money, makes the final go/no-go decisions.',
+    when:'Appointed first (in Starting Up); acts at every Board decision point in Directing a Project, from authorise-initiation to authorise-closure.',
+    how:'Owns the Business Case; authorises via Directing a Project; sets stage tolerances for the PM.',
+    reports:'To corporate/programme/customer.',
+    never:'NEVER also the Project Manager. Cannot be delegated. There is only ONE Executive.'},
+  SU:{n:'Senior User', interest:'User',
+    does:'Represents those who will use the products. Specifies the benefits, confirms they stay on track, ensures products are fit for purpose, commits user resources.',
+    when:'On the Board throughout; central at acceptance (Closing) and at benefit reviews after the project.',
+    how:'Owns the Project Product Description (acceptance criteria); provides user assurance.',
+    reports:'Part of the Board; collectively the Board reports to corporate.',
+    never:'Does not build the products (that is the supplier side). There can be more than one Senior User.'},
+  SS:{n:'Senior Supplier', interest:'Supplier',
+    does:'Represents those who design, build and deliver. Accountable for the quality and technical integrity of the products; commits supplier resources.',
+    when:'On the Board throughout; weighs in on technical feasibility and supplier-side quality.',
+    how:'Provides supplier assurance; commits the people who produce the specialist products.',
+    reports:'Part of the Board.',
+    never:'Does not represent the users or own the Business Case. There can be more than one Senior Supplier.'},
+  PM:{n:'Project Manager', interest:'Managing level',
+    does:'Runs the project day-to-day on the Board\u2019s behalf, within its tolerances. Plans, authorises Work Packages, controls issues/risks/changes within tolerance, takes corrective action, reports up.',
+    when:'Throughout the delivery stages (Controlling a Stage); produces plans in Initiating and at each Stage Boundary.',
+    how:'Highlight Reports (to Board), Exception Reports (on forecast breach), End Stage Reports; authorises Work Packages.',
+    reports:'To the Project Board.',
+    never:'NEVER the Executive. NEVER Project Assurance. Never approves their own plans (the Board does). Never exceeds delegated tolerance without escalating.'},
+  TM:{n:'Team Manager', interest:'Delivering level',
+    does:'Delivers the specialist products. Accepts Work Packages, builds to the quality criteria, reports progress, raises issues to the PM, returns completed products.',
+    when:'During delivery stages, inside Managing Product Delivery (accept \u2192 execute \u2192 evaluate \u2192 notify).',
+    how:'Checkpoint Reports (to the PM); optional Team Plans.',
+    reports:'To the Project Manager.',
+    never:'Never deals directly with the Board (escalates through the PM). Never changes a Work Package\u2019s scope without PM approval. Optional role \u2014 members can report straight to the PM.'},
+  ASSURE:{n:'Project Assurance', interest:'Independent oversight FOR the Board',
+    does:'Gives the Board independent confidence the project is being run properly \u2014 across business, user and supplier assurance (mirroring the three interests).',
+    when:'Throughout the project, independently of the day-to-day management.',
+    how:'Reviews and checks on the Board\u2019s behalf; may be the Board members themselves or delegated to independent people.',
+    reports:'To the Project Board.',
+    never:'NEVER the Project Manager (that would destroy its independence). Kept separate from Project Support.'},
+  SUPPORT:{n:'Project Support', interest:'Administrative function',
+    does:'Administrative and configuration-management support: maintaining logs and registers, document control, tools, templates, planning support.',
+    when:'Throughout, as the PM needs it.',
+    how:'Maintains the records (registers, logs, Configuration Item Records); may produce the Product Status Account.',
+    reports:'To the Project Manager.',
+    never:'Must be kept SEPARATE from Project Assurance (to protect assurance\u2019s independence). May be combined with the PM on a small project.'},
+  CA:{n:'Change Authority', interest:'Delegated decision role',
+    does:'Decides on requests for change and off-specifications within limits the Board delegates to it.',
+    when:'During change control (part of the Issues practice), whenever a change is within its delegated limits.',
+    how:'Decides within a set change budget / authority limits; anything beyond goes to the Board.',
+    reports:'To the Project Board (which sets its limits).',
+    never:'Does not decide beyond its delegated limits \u2014 those escalate to the Board. Can be the PM, a separate person, or the Board itself.'}
+};
+
+function rmPick(code){
+  const d=ROLEMAP[code]; const el=document.getElementById('rmDetail'); if(!d||!el)return;
+  el.innerHTML=`<div class="rm-card">
+    <div class="rm-card-h">${d.n}<span class="rm-interest">${d.interest}</span></div>
+    <div class="rm-rows">
+      <div class="rm-row"><span class="rm-k">Does</span><span class="rm-v">${d.does}</span></div>
+      <div class="rm-row"><span class="rm-k">When</span><span class="rm-v">${d.when}</span></div>
+      <div class="rm-row"><span class="rm-k">How</span><span class="rm-v">${d.how}</span></div>
+      <div class="rm-row"><span class="rm-k">Reports to</span><span class="rm-v">${d.reports}</span></div>
+      <div class="rm-row rm-never"><span class="rm-k">Never</span><span class="rm-v">${d.never}</span></div>
+    </div>
+  </div>`;
+  const svg=el.closest('.diagram').querySelector('svg');
+  svg.querySelectorAll('.rm-box').forEach(b=>b.classList.toggle('rm-sel', b.getAttribute('data-rm')===code));
+}
+
+
+/* ============ PEOPLE & ADOPTION MAP (QRG Fig 3.2 + 3.3, change transition) ============ */
+/* Two connected views: ecosystem map, and the current→target change transition. */
+function diagPeople(){
+  return `
+  <div class="diagram pe-diagram">
+    <svg viewBox="0 0 760 420" ${SVGNS} role="img" aria-label="PRINCE2 People ecosystem and three interests">
+      <defs>
+        <marker id="peArr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--navy-2)"/></marker>
+      </defs>
+      <!-- organizational ecosystem (outer) -->
+      <ellipse cx="300" cy="210" rx="285" ry="190" class="pe-org"/>
+      <text x="90" y="48" class="pe-outer-lbl">ORGANIZATIONAL ECOSYSTEM</text>
+      <text x="90" y="64" class="pe-outer-sub">the whole environment the project sits in</text>
+
+      <!-- project ecosystem (inner) -->
+      <ellipse cx="330" cy="225" rx="180" ry="135" class="pe-proj"/>
+      <text x="330" y="118" class="pe-inner-lbl">PROJECT ECOSYSTEM</text>
+
+      <!-- three interests as overlapping nodes -->
+      <circle cx="268" cy="205" r="58" class="pe-circle pe-business" data-pe="BUSINESS"/>
+      <text x="268" y="200" class="pe-cl">Business</text>
+      <text x="268" y="216" class="pe-cl-sm">Executive</text>
+
+      <circle cx="355" cy="180" r="58" class="pe-circle pe-user" data-pe="USER"/>
+      <text x="372" y="166" class="pe-cl">User</text>
+      <text x="372" y="182" class="pe-cl-sm">Senior User</text>
+
+      <circle cx="360" cy="268" r="58" class="pe-circle pe-supplier" data-pe="SUPPLIER"/>
+      <text x="378" y="282" class="pe-cl">Supplier</text>
+      <text x="378" y="298" class="pe-cl-sm">Senior Supplier</text>
+
+      <!-- stakeholder nodes outside the project but in the org ecosystem -->
+      <circle cx="90" cy="150" r="7" class="pe-dot" data-pe="STAKE"/>
+      <circle cx="75" cy="220" r="7" class="pe-dot" data-pe="STAKE"/>
+      <circle cx="110" cy="290" r="7" class="pe-dot" data-pe="STAKE"/>
+      <circle cx="545" cy="140" r="7" class="pe-dot" data-pe="STAKE"/>
+      <circle cx="560" cy="300" r="7" class="pe-dot" data-pe="STAKE"/>
+      <line x1="97" y1="150" x2="212" y2="190" class="pe-rel"/>
+      <line x1="82" y1="220" x2="212" y2="210" class="pe-rel"/>
+      <line x1="117" y1="290" x2="215" y2="235" class="pe-rel"/>
+      <line x1="538" y1="140" x2="410" y2="175" class="pe-rel"/>
+      <line x1="553" y1="300" x2="415" y2="270" class="pe-rel"/>
+      <text x="610" y="210" class="pe-legend">● stakeholders</text>
+      <text x="610" y="226" class="pe-legend">(affect / affected)</text>
+      <text x="610" y="250" class="pe-legend">— relationships</text>
+    </svg>
+    <div class="rm-hint">Tap an interest or a stakeholder dot. A stakeholder affects, is affected by, or <em>perceives</em> itself affected by the project.</div>
+    <div id="peDetail" class="rm-detail"></div>
+  </div>`;
+}
+
+const PEOPLE_DETAIL = {
+  BUSINESS:{n:'Business interest', role:'represented by the Executive',
+    d:'Projects are created to meet a business need that must be continuously justified as value for money. The business layer commissions the project; the <strong>Executive</strong> represents this viewpoint and owns the Business Case.'},
+  USER:{n:'User interest', role:'represented by the Senior User',
+    d:'Those who will use the products — defining requirements and ensuring they are met. Users may sit inside the business as end users, be impacted by the project, or operate/maintain the products. The <strong>Senior User</strong> is accountable for specifying benefits and for <em>successful handover and adoption</em> of products into the business.'},
+  SUPPLIER:{n:'Supplier interest', role:'represented by the Senior Supplier',
+    d:'Those with the skills and knowledge to collaborate and deliver the products — internal or external. The <strong>Senior Supplier</strong> is accountable for the quality of supplier products and the technical integrity of the project.'},
+  STAKE:{n:'Stakeholder', role:'may hold no formal role',
+    d:'Any individual, group or organisation that can <em>affect</em>, be <em>affected by</em>, or <em>perceives itself to be affected by</em> the project. A project must involve those with a formal role <em>and</em> key people impacted by or critical to success who may hold no formal role — which is why the organisational ecosystem is wider than the project team.'}
+};
+function pePick(code){
+  const d=PEOPLE_DETAIL[code]; const el=document.getElementById('peDetail'); if(!d||!el)return;
+  el.innerHTML=`<div class="rm-card"><div class="rm-card-h">${d.n}<span class="rm-interest">${d.role}</span></div>
+    <div class="rm-rows"><div class="rm-row"><span class="rm-v">${d.d}</span></div></div></div>`;
+  const svg=el.closest('.diagram').querySelector('svg');
+  svg.querySelectorAll('[data-pe]').forEach(b=>b.classList.toggle('pe-sel', b.getAttribute('data-pe')===code));
+}
+
+/* change transition: current -> target, and the three people themes */
+function diagChangeTransition(){
+  return `<div class="diagram"><svg viewBox="0 0 720 230" ${SVGNS} role="img" aria-label="Change transition current to target state">
+    <defs><marker id="ct" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto"><path d="M0,0 L8,3.2 L0,6.4 Z" fill="var(--green)"/></marker></defs>
+    <rect class="dg-box" x="30" y="40" width="160" height="60" rx="11" fill="#efe2dd"/>
+    <text x="110" y="66" class="dg-lbl">Current state</text><text x="110" y="84" class="dg-sub2">business as usual</text>
+    <rect class="dg-box" x="280" y="40" width="160" height="60" rx="11" fill="#f0e7d4"/>
+    <text x="360" y="66" class="dg-lbl">Transition</text><text x="360" y="84" class="dg-sub2">change management approach</text>
+    <rect class="dg-box" x="530" y="40" width="160" height="60" rx="11" fill="#e3ecdf"/>
+    <text x="610" y="66" class="dg-lbl">Target state</text><text x="610" y="84" class="dg-sub2">adopted &amp; embedded</text>
+    <line x1="190" y1="70" x2="278" y2="70" stroke="var(--green)" stroke-width="2.5" marker-end="url(#ct)"/>
+    <line x1="440" y1="70" x2="528" y2="70" stroke="var(--green)" stroke-width="2.5" marker-end="url(#ct)"/>
+    <text x="360" y="140" class="dg-phase">The three people themes drive the transition</text>
+    <rect class="dg-box" x="40" y="155" width="200" height="46" rx="9" fill="#e7eef5"/>
+    <text x="140" y="182" class="dg-lbl2">Leading successful change</text>
+    <rect class="dg-box" x="260" y="155" width="200" height="46" rx="9" fill="#e7eef5"/>
+    <text x="360" y="182" class="dg-lbl2">Leading successful teams</text>
+    <rect class="dg-box" x="480" y="155" width="200" height="46" rx="9" fill="#e7eef5"/>
+    <text x="580" y="182" class="dg-lbl2">Communication (two-way)</text>
+  </svg><div class="dg-hint">The product can be built while the organisation is still unready to use it — adoption is a separate track. Change management = moving people current → target state.</div></div>`;
+}
+
 /* attach delegated clicks after a diagram renders */
 function wireDiagrams(container){
   if(!container||!container.querySelectorAll)return;
@@ -937,6 +1232,14 @@ function wireDiagrams(container){
   container.querySelectorAll('svg [data-role]').forEach(el=>{
     el.style.cursor='pointer';
     el.addEventListener('click',()=>orgPick(el.getAttribute('data-role')));
+  });
+  container.querySelectorAll('svg [data-rm]').forEach(el=>{
+    el.style.cursor='pointer';
+    el.addEventListener('click',()=>rmPick(el.getAttribute('data-rm')));
+  });
+  container.querySelectorAll('svg [data-pe]').forEach(el=>{
+    el.style.cursor='pointer';
+    el.addEventListener('click',()=>pePick(el.getAttribute('data-pe')));
   });
 }
 
@@ -1163,11 +1466,11 @@ RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
   'Called "themes" in the 6th edition — interchangeable for Foundation. These are the aspects of a project addressed continuously throughout its life, each supported by specific management products.',
   `<div class="card">
     ${pblock(1,'Business Case','Judges whether the project is desirable, viable and achievable. Outline in SU → detailed in IP → reviewed at every stage boundary. <b>Executive owns it.</b> Chain: outputs → outcomes → benefits; a negative outcome is a <b>dis-benefit</b>.','outline vs detailed timing; dis-benefits; benefits measured <em>after</em> close.')}
-    ${pblock(2,'Organizing','Four levels: corporate/programme/customer · directing (Board) · managing (PM) · delivering (Team Managers). Three Board interests: business, user, supplier.','the four levels; Project Assurance = oversight; Project Support = admin; combination rules.')}
+    ${pblock(2,'Organization','Four levels: corporate/programme/customer · directing (Board) · managing (PM) · delivering (Team Managers). Three Board interests: business, user, supplier.','the four levels; Project Assurance = oversight; Project Support = admin; combination rules.')}
     ${pblock(3,'Plans','Three levels: Project Plan, Stage Plan, Team Plan. An Exception Plan replaces a Stage or Project Plan — never a Team Plan. Product-based planning.','three levels; what an Exception Plan replaces; who approves what.')}
     ${pblock(4,'Quality','Quality planning (define fit-for-purpose) → quality control (check products) → quality assurance (external, corporate governance). Acceptance criteria = whole product (Senior User owns the Project Product Description); quality criteria = per product.','acceptance vs quality criteria; QA is <em>external</em>; Senior User owns the PPD.')}
     ${pblock(5,'Risk','Uncertain event(s) — threat or opportunity. Threat responses: avoid, reduce, transfer, share, accept (+ contingent plans). Opportunity: exploit, enhance, share, accept. Owner is accountable; actionee acts.','threat vs opportunity responses; owner vs actionee; Risk Budget (Board approves).')}
-    ${pblock(6,'Issues','Things that have happened (vs risks, which might). Types: request for change, off-specification, problem/concern, plus business opportunity (new in v7). Daily Log (informal) vs Issue Register (formal).','the issue types — especially off-specification and the v7 business-opportunity addition; Daily Log vs Issue Register.')}
+    ${pblock(6,'Issues','An issue is an unplanned event that has happened and needs management action (vs a risk, which might happen). The QRG names six types. Issue management encompasses change control; issues are logged in the Issue Register (project log).','the six issue types; issue management includes change control; the Issue Register.')}
     ${pblock(7,'Progress','Monitor actual vs planned; forecast viability; control deviations. Seven tolerances cascade down the levels. Reports: Highlight (PM→Board), Checkpoint (TM→PM), End Stage, End Project, Exception.','seven tolerances; who reports to whom; time-driven vs event-driven controls.')}
   </div>
   <div class="callout key"><div class="tag">Two "assurance" words — don't confuse them</div><strong>Quality assurance</strong> sits <em>outside</em> the project (corporate/programme governance). <strong>Project Assurance</strong> sits <em>inside</em>, on behalf of the Project Board, and must be independent of the Project Manager.</div>
@@ -1176,7 +1479,7 @@ RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
     <li>Name the 7 practices.</li>
     <li>Acceptance criteria vs quality criteria — what's the difference and who owns each artefact?</li>
     <li>Five threat responses and four opportunity responses.</li>
-    <li>The issue types (incl. the v7 addition, business opportunity).</li>
+    <li>The six issue types (problem, concern, event external, business opportunity, request for change, off-specification).</li>
   </ol></div>
   <div class="callout key"><div class="tag">Go deeper</div>This page is for recognition. For the full procedures, worked examples, and document contents the harder questions test, see <strong>Practices — In Depth</strong> in the sidebar.</div>`);
 
@@ -1270,8 +1573,14 @@ RENDER.products = (c)=>courseShell(c,'products','Part 4','Management Products',
   </ol></div>`);
 
 RENDER.roles = (c)=>courseShell(c,'roles','Part 5','Roles & Responsibilities',
-  'A fixed role structure. Know what each role does and which roles can — and cannot — be combined.',
-  `${diagOrg()}
+  'A fixed role structure. A big share of exam marks come from one question: "who is allowed to do what?" Tap any role below for exactly what it does, when, how it reports — and what it must never do.',
+  `<h3 class="sub" style="margin-top:0">Who does what — the relationship map</h3>
+  <p>The highest-yield view for the exam. Tap each role; pay special attention to the red <strong>Never</strong> rows — the forbidden combinations are the single most-tested trap.</p>
+  ${diagRoleMap()}
+  <div class="callout trap"><div class="tag">The "never" rules, in one place</div><strong>Executive ≠ Project Manager</strong> (directing vs managing must stay separate). <strong>Project Manager ≠ Project Assurance</strong> (assurance must be independent). <strong>Project Support ≠ Project Assurance</strong> (keeps assurance independent). Only <strong>one Executive</strong>, and it can't be delegated. The PM <em>may</em> double as Team Manager or Project Support on a small project.</div>
+  <h3 class="sub">Reports-to chain, at a glance</h3>
+  <p>Team Manager → <strong>Project Manager</strong> → <strong>Project Board</strong> → corporate/programme. Everything from the delivery level escalates <em>through</em> the PM — a Team Manager never goes straight to the Board.</p>
+  ${diagOrg()}
   ${bpFigure('02-org-levels','The four organization levels, mapped onto the Meridian cast')}
   <h3 class="sub">The Project Board — three interests, one board</h3>
   <table><tr><th>Role</th><th>Interest</th><th>Key points</th></tr>
@@ -1346,7 +1655,7 @@ RENDER.schedule = (c)=>{
     <p class="lede">Built for ~4 focused hours/day. You watch at 1.75–2× so seat time is roughly half of typical estimates — adjust freely.</p>
     ${wk('Week 1 — Framework absorption','By Friday: list all 7 principles and 7 practices from memory, one sentence each.',[
       ['Mon','Orientation + Principles 1–4 + recall','4'],['Tue','Principles 5–7 + recall + Business Case','4'],
-      ['Wed','Organizing, Plans','4'],['Thu','Quality, Risk','4'],['Fri','Issues, Progress','4'],
+      ['Wed','Organization, Plans','4'],['Thu','Quality, Risk','4'],['Fri','Issues, Progress','4'],
       ['Sat','All-practices recall; re-read weak','3'],['Sun','Light review + one mock-style quiz','2']])}
     ${wk('Week 2 — Processes & integration','By Sunday: walk the whole framework without notes.',[
       ['Mon','Lifecycle + SU, DP','4'],['Tue','IP, CS','4'],['Wed','MP, SB, CP','4'],
@@ -1736,7 +2045,7 @@ const CHECK=[
   'State who owns and who creates each major product',
   'List the 7 tolerances (performance aspects) and who sets them for whom',
   'List 5 threat responses and 4 opportunity responses',
-  'List the issue types (3 core + business opportunity in v7)',
+  'List the six issue types (problem, concern, event external, business opportunity, request for change, off-specification)',
   'Name Board roles, combination rules, what Assurance does',
   'State the 3 tailoring rules',
   'Scored 85%+ on this question bank',
@@ -1799,12 +2108,12 @@ RENDER.practices_deep = (c)=>{
       <p>Executive summary · reasons · business options (do nothing / do minimum / do something) · expected benefits and dis-benefits · timescale · costs · investment appraisal · major risks. <strong>The three business options are a frequent exam item</strong> — and "do nothing" is always the baseline you compare against.</p>
       <div class="callout key"><div class="tag">Benefits are measured AFTER the project</div>Most benefits only appear once outputs are in use. They are measured per the <strong>Benefits Management Approach</strong>, often after closure — which is why the Senior User (accountable for benefits) carries that responsibility beyond the project's end.</div>`})}
 
-    ${deepPractice({id:'org',num:'2',name:'Organizing',
+    ${deepPractice({id:'org',num:'2',name:'Organization',
       purpose:'Define an organisation structure with clear accountabilities, engaging business, user and supplier interests.',
       body:`
       <h4 class="sub" style="font-size:16px">Four levels of organisation</h4>
       <p><strong>1. Corporate/programme/customer</strong> — sits above the project, issues the mandate, sets overall tolerances. <strong>2. Directing</strong> — the Project Board. <strong>3. Managing</strong> — the Project Manager. <strong>4. Delivering</strong> — Team Managers (or team members directly).</p>
-      <p>Authority and tolerance <em>cascade down</em>; exceptions <em>escalate up</em>. That single sentence ties Organizing to Progress and to "manage by exception".</p>
+      <p>Authority and tolerance <em>cascade down</em>; exceptions <em>escalate up</em>. That single sentence ties Organization to Progress and to "manage by exception".</p>
       <h4 class="sub" style="font-size:16px">The three interests — why three</h4>
       <p>Every project balances what the <strong>business</strong> will fund (Executive), what <strong>users</strong> need from the outputs (Senior User), and what <strong>suppliers</strong> can build (Senior Supplier). All three must be represented on the Board so decisions aren't made blind to one side.</p>
       <h4 class="sub" style="font-size:16px">Assurance vs Support vs Change Authority</h4>
@@ -1866,13 +2175,15 @@ RENDER.practices_deep = (c)=>{
       body:`
       <h4 class="sub" style="font-size:16px">Risk vs issue — the one-word test</h4>
       <p>A <strong>risk</strong> <em>might</em> happen (future, uncertain). An <strong>issue</strong> <em>has</em> happened (now, real). When a risk materialises, it becomes an issue.</p>
-      <h4 class="sub" style="font-size:16px">Issue types (v7)</h4>
-      <p>Three core classification types, plus one added in PRINCE2 7:</p>
-      <p><strong>1. Request for change</strong> — someone wants to alter an approved baseline (a product or its spec).<br>
-      <strong>2. Off-specification</strong> — a product that should be delivered (to standard) won't be, or hasn't been. Includes a missing product or one that fails its criteria.<br>
-      <strong>3. Problem/concern</strong> — anything else the PM must resolve or escalate. (A <em>problem</em> has immediate negative impact; a <em>concern</em> needs its timing/impact assessed.)<br>
-      <strong>4. Business opportunity</strong> — <em>new in v7</em>: an unanticipated upside the project could capture. This is the main change from the 6th edition's three types.</p>
-      <div class="callout"><div class="tag">Exam note on the count</div>The 6th edition had <strong>three</strong> issue types. PRINCE2 7 adds <strong>business opportunity</strong> as a fourth. If a question asks for the issue types, request-for-change, off-specification and problem/concern are always right; business opportunity is the v7 addition to watch for. (Some materials further split problem/concern or list "event external to the project" separately — don't overthink the exact number; know these types by name.)</div>
+      <h4 class="sub" style="font-size:16px">The six issue types (PRINCE2 7)</h4>
+      <p>An issue is an unplanned event that <em>has happened</em> and needs management action (a risk, by contrast, <em>might</em> happen). The official QRG names six types:</p>
+      <p><strong>1. Problem</strong> — an issue with an immediate and negative impact.<br>
+      <strong>2. Concern</strong> — an issue whose timelines and impact need to be assessed.<br>
+      <strong>3. Event external to the project</strong> — something outside the project that may impact it.<br>
+      <strong>4. Business opportunity</strong> — an unanticipated positive consequence for the project or user organisation.<br>
+      <strong>5. Request for change</strong> — a proposal for a change to a project baseline.<br>
+      <strong>6. Off-specification</strong> — a product that will not meet its quality specifications.</p>
+      <div class="callout key"><div class="tag">Issue management includes change control</div>In PRINCE2 7, the Issues practice <em>encompasses change control</em>. A <strong>change</strong> is a modification to any approved product in the project baseline; a <strong>change budget</strong> funds authorised changes. Issues are logged in the <strong>Issue Register</strong> (part of the project log).</div>
       <h4 class="sub" style="font-size:16px">The change control procedure — 5 steps</h4>
       ${diagChange()}
       <p><strong>Capture</strong> (log it) → <strong>Assess</strong> (impact on objectives, Business Case, risk) → <strong>Propose</strong> (options and recommendation) → <strong>Decide</strong> (PM, Change Authority, or Board per the limits) → <strong>Implement</strong>.</p>
@@ -1916,7 +2227,7 @@ RENDER.edition = (c)=>{
 
     <div class="card">
       <h3 class="sub" style="margin-top:0">1. "Themes" are now "Practices"</h3>
-      <p>The seven <strong>themes</strong> of the 6th edition were renamed the seven <strong>practices</strong>. The substance is largely continuous, but the exam uses the new word — and one practice was relabelled: the old <strong>"Organization"</strong> theme is now <strong>"Organizing"</strong>. The set is: Business Case, Organizing, Plans, Quality, Risk, Issues, Progress.</p>
+      <p>The seven <strong>themes</strong> of the 6th edition were renamed the seven <strong>practices</strong>. The substance is largely continuous, but the exam uses the new word — and one practice was relabelled: the old <strong>"Organization"</strong> theme is now <strong>"Organization"</strong>. The set is: Business Case, Organization, Plans, Quality, Risk, Issues, Progress.</p>
     </div>
 
     <div class="card">
@@ -2003,7 +2314,7 @@ const VIDEO_MODULES = [
       ['Change management vs change control — what is the difference?','Change management (People element) is the HUMAN side — helping people adopt the change, via the Change Management Approach. Change control (Issues practice) is about controlling changes to BASELINES. Same word, different homes.'],
       ['Is communication one-way or two-way?','Bidirectional. The Communication Management Approach defines the means and frequency of communication AND feedback — not just broadcasting at stakeholders.'],
       ['What is a "practice", and what was it called before?','An aspect of project management applied continuously, all seven in parallel. Called "themes" in the 6th edition; renamed "practices" in v7.'],
-      ['What is the correct name of the second practice?','Organizing. v7 renamed the 6th-edition theme "Organization" to the practice "Organizing". If an option says "Organization", that is the outdated term.'],
+      ['What is the correct name of the second practice?','Organization. v7 renamed the 6th-edition theme "Organization" to the practice "Organization". If an option says "Organization", that is the outdated term.'],
       ['What three questions does the Business Case practice answer?','Is the project Desirable (benefits vs cost/risk), Viable (can we deliver it), and Achievable (can the products produce the benefits)?'],
       ['What is the value chain, and the output-vs-benefit trap?','Outputs → Outcomes → Benefits, contributing to business objectives (a capability links an output to the outcome it enables). The classic trap is confusing an output (what you build) with a benefit (the measurable improvement).'],
       ['What is a dis-benefit?','A measurable decline resulting from an outcome, perceived as negative by one or more stakeholders — planned for, not ignored.'],
@@ -2014,7 +2325,7 @@ const VIDEO_MODULES = [
       ['What are the four product-based planning steps?','Create the project product description → create the product breakdown structure → write the product descriptions → create the product flow diagram.'],
       ['Can a risk be positive? What are the paired responses?','Yes — a risk can be a threat (negative) or an opportunity (positive). Paired responses: Avoid/Exploit, Reduce/Enhance; plus Transfer, Share, Accept, and prepare contingent plans. There is no "reject" response in v7.'],
       ['Risk owner vs risk actionee?','The risk owner manages the risk (accountable); the risk actionee carries out a specific response action.'],
-      ['What are the issue types in v7?','Request for change, off-specification, and problem/concern — the three core types — plus business opportunity, which is new in v7.'],
+      ['What are the six issue types in PRINCE2 7?','Problem, concern, event external to the project, business opportunity, request for change, and off-specification. Issue management also encompasses change control.'],
       ['Who decides on a change that affects a baseline?','The PM decides within delegated limits; if a baseline (business case, Project Plan) is affected, the Board or a delegated Change Authority decides. A change budget can fund changes.'],
       ['Time-driven vs event-driven controls?','Time-driven happen at regular intervals (Highlight Reports PM→Board; Checkpoint Reports team→PM). Event-driven are triggered by an event (End Stage Report at a boundary; Exception Report on a forecast breach).']
     ]
@@ -2107,7 +2418,7 @@ const VIDEO_PENDING_QA = [
       ['How do you handle a "which is NOT" (negative) question?','Cover the word NOT, find the options that DO belong, and the leftover is your answer. Negative questions flip your brain — slow down on them.'],
       ['What is the "most PRINCE2" answer when two options look right?','The one emphasising structure, clear accountability, and continued business justification. Be suspicious of options where the PM makes all decisions, the business case is ignored, PRINCE2 is used rigidly, outputs are confused with benefits, or the PM approves their own plans.'],
       ['Five recurring big ideas that carry much of the exam?','(1) Separation of directing and managing. (2) Business justification is king. (3) Manage by exception. (4) Product focus. (5) People — leading change and teams, bidirectional communication.'],
-      ['Six-edition holdovers that are now WRONG answers?','"Six tolerance areas" (it is seven, incl. sustainability), "the practice is Organization" (it is Organizing), "deliver a Work Package" (the MP verb is evaluate), and "55% pass mark" (it is 60%).'],
+      ['Six-edition holdovers that are now WRONG answers?','"Six tolerance areas" (it is seven, incl. sustainability), "the practice is Organization" (it is Organization), "deliver a Work Package" (the MP verb is evaluate), and "55% pass mark" (it is 60%).'],
       ['Who owns the business case — and why is this tested so often?','The Executive. It is the single most common role-authority question; the Project Manager owning it is the classic wrong answer.'],
       ['SU vs IP outputs — the relay to remember?','SU produces the Project Brief; IP produces the PID; the Board authorises the project using that PID in Directing a Project. Three processes, one chain.'],
       ['What are the Managing Product Delivery activities?','Accept → Execute → Evaluate → Notify Work Package completion. "Evaluate", not the old "deliver".'],
@@ -2291,6 +2602,14 @@ RENDER.resit = (c)=>{
     <p>This is the <strong>newest</strong> part of PRINCE2 7 and the one most likely to catch people trained on older material. In the 6th edition there were <strong>four</strong> integrated elements; the 7th adds <strong>people</strong> as the fifth.</p>
     <div class="callout"><div class="tag">The five integrated elements (v7)</div><strong>Principles · People · Practices · Processes · Project context.</strong> "People" is the new one. If a question lists four elements with no people, that's the 6th-edition trap — wrong answer.</div>
 
+    <h3 class="sub">The ecosystem map — who the project touches</h3>
+    <p>Based on the official ecosystem figure. The <strong>organisational ecosystem</strong> (outer) is wider than the <strong>project ecosystem</strong> (inner); the three interests sit inside, and stakeholders reach in from outside. Tap each to learn its role.</p>
+    ${diagPeople()}
+
+    <h3 class="sub">Change: current state → target state</h3>
+    <p>The whole point of the People element — delivering the product is <em>not</em> the same as the organisation adopting it.</p>
+    ${diagChangeTransition()}
+
     <h3 class="sub">The three people-focused activities</h3>
     <p>Everything in the people element hangs off three activities. They are <em>not</em> standalone — they run through all of project management:</p>
     <div class="card">
@@ -2324,7 +2643,7 @@ RENDER.resit = (c)=>{
       <tr><td><strong>Change Management Approach</strong></td><td>How people will be prepared, supported and helped to <em>adopt</em> the outputs (transition current → future state). Includes stakeholder engagement strategy.</td></tr>
       <tr><td><strong>Communication Management Approach</strong></td><td>The means, content and <em>frequency</em> of communication with stakeholders — two-way.</td></tr>
     </table>
-    <div class="callout key"><div class="tag">People threads through everything</div>People isn't a silo. It connects to <strong>principles</strong> (defined roles & responsibilities, learn from experience), to the <strong>Organizing practice</strong> (forming the team with business/user/supplier representation), and to every process. If a question asks "how does people relate to X", the answer is usually "it's integrated throughout", not "it's separate".</div>
+    <div class="callout key"><div class="tag">People threads through everything</div>People isn't a silo. It connects to <strong>principles</strong> (defined roles & responsibilities, learn from experience), to the <strong>Organization practice</strong> (forming the team with business/user/supplier representation), and to every process. If a question asks "how does people relate to X", the answer is usually "it's integrated throughout", not "it's separate".</div>
 
     <h2 class="sec">② Processes — the memorisation gap</h2>
     <p>Only 7 processes, and you scored 44% — this is recall, not understanding. The fix is drilling the fixed facts until they're automatic: each process's <strong>trigger</strong>, <strong>main output</strong>, and <strong>who owns it</strong>. Re-draw the lifecycle from memory daily until it's effortless.</p>
@@ -2389,7 +2708,7 @@ const QUESTIONS_PEOPLE = [
 {s:"people",q:"Leadership differs from management in PRINCE2 7 because management is primarily about:",o:["Inspiring and influencing people","Plan, delegate, monitor and control","Setting the vision","Resolving conflict"],a:1,e:"Management = plan, delegate, monitor, control; leadership = influencing/motivating people through change."},
 {s:"people",q:"Stakeholder engagement in PRINCE2 7 should be:",o:["One-way broadcasting of decisions","Planned, two-way communication","Handled only by the Executive","Limited to project close"],a:1,e:"Stakeholder engagement is planned, two-way communication to understand and involve stakeholders."},
 {s:"people",q:"When people block a change, PRINCE2 7 advises you to:",o:["Replace them","Escalate immediately","Look at how the system is affecting them","Reduce the scope"],a:2,e:"Look at how the system/change affects them rather than seeking someone to blame."},
-{s:"people",q:"Which practice most directly forms the project team with business, user and supplier representation?",o:["Plans","Organizing","Quality","Risk"],a:1,e:"The Organizing practice defines how the temporary project management team is formed."},
+{s:"people",q:"Which practice most directly forms the project team with business, user and supplier representation?",o:["Plans","Organization","Quality","Risk"],a:1,e:"The Organization practice defines how the temporary project management team is formed."},
 {s:"people",q:"Projects deliver change that most directly disrupts:",o:["The Business Case","Business-as-usual (BAU) routines and responsibilities","The project schedule","The Risk Register"],a:1,e:"Change affects people's BAU routines, roles and responsibilities — the human side the people element addresses."},
 {s:"people",q:"The Communication Management Approach primarily defines:",o:["How risks are scored","The means, content and frequency of stakeholder communication","Who owns the Business Case","Quality criteria"],a:1,e:"It sets out the means, content and frequency of two-way stakeholder communication."},
 {s:"people",q:"Why is the people element described as 'integrated'?",o:["It replaces the processes","It is a separate optional module","It runs through principles, practices and processes, not in isolation","It applies only at closure"],a:2,e:"People is woven through the whole method — principles, practices and processes — not a standalone silo."},

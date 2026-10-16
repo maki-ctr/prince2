@@ -217,6 +217,12 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
 .table-scroll table{margin:0}
 
+/* ---- cross-channel link bar ---- */
+.xlink-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 22px;padding:11px 15px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px}
+.xl-label{font-size:12.5px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.5px}
+.xl-chip{font-family:'Spline Sans',sans-serif;font-size:13.5px;font-weight:600;color:var(--navy);background:var(--card);border:1.5px solid var(--line);border-radius:99px;padding:6px 14px;cursor:pointer;transition:all .14s}
+.xl-chip:hover{border-color:var(--gold);background:#fff;transform:translateY(-1px)}
+
 /* ---- visual blueprint gallery ---- */
 .bp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:22px 0}
 .bp-card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,box-shadow .15s}
@@ -1093,12 +1099,32 @@ RENDER.dashboard = (c)=>{
 };
 
 /* ---------------- COURSE CONTENT ---------------- */
+/* topic -> matching video module number + a representative blueprint slug */
+const TOPIC_XLINK = {
+  principles:{vid:'2', img:'10-exception-trigger'},
+  practices:{vid:'3', img:'12-value-chain'},
+  practices_deep:{vid:'3', img:'12-value-chain'},
+  processes:{vid:'4', img:'03-process-timeline'},
+  roles:{vid:'6', img:'02-org-levels'},
+  products:{vid:'7', img:null},
+  tailoring:{vid:'5', img:null}
+};
+function xlinkBanner(topic){
+  const x = TOPIC_XLINK[topic];
+  if(!x) return '';
+  const bits=[];
+  if(x.vid) bits.push(`<button class="xl-chip" onclick="go('videos')">▶ Watch the video lesson</button>`);
+  if(x.img) bits.push(`<button class="xl-chip" onclick="App.bpZoom('${x.img}')">◳ See the blueprint</button>`);
+  if(!bits.length) return '';
+  return `<div class="xlink-bar"><span class="xl-label">Study this across formats:</span>${bits.join('')}</div>`;
+}
 function courseShell(c, topic, eyebrow, title, lede, bodyHTML, recallHTML){
   markRead(topic);
   c.innerHTML = `
     <div class="eyebrow">${eyebrow}</div>
     <h1 class="page">${title}</h1>
     <p class="lede">${lede}</p>
+    ${xlinkBanner(topic)}
     ${bodyHTML}
     ${recallHTML||''}
     <div style="margin-top:34px;display:flex;gap:12px;flex-wrap:wrap">
@@ -2039,6 +2065,60 @@ const VIDEO_UPCOMING = [
   {n:'8', title:'Exam Strategy, Practice Questions & Review'}
 ];
 
+/* Q&A for modules whose videos aren't published yet — so the Video page is a
+   complete self-test resource across all 8 modules. Shown under "Coming next". */
+const VIDEO_PENDING_QA = [
+  {
+    n:'6', title:'The Project Environment & Roles',
+    qa:[
+      ['Why do roles matter so much on the exam?','A large share of Foundation questions reduce to "who is allowed to do X?" — who owns the business case, approves the plan, signs off a change. Knowing the role structure cold answers a whole category of questions.'],
+      ['What is the one mandatory role separation?','The Executive cannot also be the Project Manager. Directing and managing are different levels of accountability; collapsing them removes the check between the person spending the money and the person justifying it.'],
+      ['What is the recommended separation around assurance?','Project Assurance should be independent of the Project Manager, and Project Support should be kept separate from Assurance so assurance stays genuinely independent. The PM may do Support on a small project, but never Assurance.'],
+      ['Who is the Executive and what do they do?','The single point of accountability for the whole project. Owns the business case, chairs the Board, ensures value for money. There is only ONE Executive; the role cannot be delegated or combined with the PM.'],
+      ['What does the Senior User do?','Represents those who will use the products; specifies the benefits and confirms they are on track; ensures products are fit for purpose; commits user resources. There can be more than one.'],
+      ['What does the Senior Supplier do?','Represents those who design, build and deliver; accountable for the quality and technical integrity of the products; commits supplier resources. There can be more than one.'],
+      ['What does the Project Manager NOT do?','Does not own the business case (the Executive does), does not approve their own plans (the Board does), does not act beyond delegated tolerances (they escalate), and does not direct the Board.'],
+      ['What does the Team Manager do?','Accepts Work Packages, builds products to the quality criteria, reports to the PM via Checkpoint Reports, raises issues to the PM. Does not deal directly with the Board — everything escalates through the PM.'],
+      ['Project Assurance vs Project Support?','Assurance = independent confidence FOR the Board (business, user, supplier assurance), never done by the PM. Support = administrative: logs, registers, configuration management, templates; can be the PM on a small project.'],
+      ['What is a stakeholder in PRINCE2 7?','Any individual, group or organisation that can affect, be affected by, or PERCEIVE itself to be affected by the project. Perception alone makes someone a stakeholder to manage.'],
+      ['How is stakeholder engagement run?','Through the Communication Management Approach (built in Initiating): who needs what information, when, how, and from whom — a controlled, bidirectional flow.']
+    ]
+  },
+  {
+    n:'7', title:'Products, Plans & Quality',
+    qa:[
+      ['What is a "product" in PRINCE2, and the two families?','Anything the project creates or uses. Specialist products = the actual deliverables (the building, the network). Management products = the documents used to run the project (plans, logs, reports, approaches).'],
+      ['What are the three types of management product?','Baselines (defined then change-controlled — Business Case, PID, Project Plan, Product Description), Records (continuously updated — Issue/Risk/Quality Registers, Daily & Lessons Logs), and Reports (point-in-time snapshots — Highlight, End Stage, Exception, End Project, Checkpoint).'],
+      ['Quick test to classify a management product?','Does it get baselined and change-controlled (baseline), continuously updated (record), or is it a one-time snapshot (report)?'],
+      ['What is a Product Description and when is it written?','A definition of "what good looks like" for a product — purpose, composition, quality criteria, quality method, responsibilities. Written DURING planning, before the product is built.'],
+      ['What are the four product-based planning steps?','Create the project product description → create the product breakdown structure → write the product descriptions → create the product flow diagram. Products first, activities derived after.'],
+      ['Why is product-based planning better than task lists?','You cannot accidentally forget a deliverable (every product is identified up front), and quality is built in from step one rather than inspected at the end.'],
+      ['What are the four plan types?','Project Plan, Stage Plan, Team Plan (optional), and Exception Plan (replaces a Stage or Project Plan after a forecast breach — never a Team Plan).'],
+      ['What is a baseline, and who can change one?','A reference point you measure progress and change against. The PM can approve changes within delegated tolerance; changes that hit a baseline go to the Board or a delegated Change Authority.'],
+      ['Quality planning vs control vs assurance?','Planning = defining the specifications up front. Control = checking products against them as built. Assurance = independent confidence, managed OUTSIDE the project team (corporate governance).'],
+      ['What is the quality audit trail?','User\u2019s quality expectations → acceptance criteria (prioritised, measurable) → Quality Management Approach → Product Descriptions (per-product criteria) → Quality Register (the evidence of activities done). Quality is planned, then verified — never just inspected at the end.'],
+      ['Acceptance criteria vs quality criteria?','Acceptance criteria are a prioritised, measurable list for the WHOLE project product (in the Project Product Description, owned by the Senior User). Quality criteria are per individual product (in each Product Description).']
+    ]
+  },
+  {
+    n:'8', title:'Exam Strategy, Practice Questions & Review',
+    qa:[
+      ['What is the exact exam format?','60 questions, 60 minutes, 60% to pass (36/60), closed book, multiple choice. That is one minute per question on average. Note: 60%, not the retired 55%.'],
+      ['How do you handle a "which is NOT" (negative) question?','Cover the word NOT, find the options that DO belong, and the leftover is your answer. Negative questions flip your brain — slow down on them.'],
+      ['What is the "most PRINCE2" answer when two options look right?','The one emphasising structure, clear accountability, and continued business justification. Be suspicious of options where the PM makes all decisions, the business case is ignored, PRINCE2 is used rigidly, outputs are confused with benefits, or the PM approves their own plans.'],
+      ['Five recurring big ideas that carry much of the exam?','(1) Separation of directing and managing. (2) Business justification is king. (3) Manage by exception. (4) Product focus. (5) People — leading change and teams, bidirectional communication.'],
+      ['Six-edition holdovers that are now WRONG answers?','"Six tolerance areas" (it is seven, incl. sustainability), "the practice is Organization" (it is Organizing), "deliver a Work Package" (the MP verb is evaluate), and "55% pass mark" (it is 60%).'],
+      ['Who owns the business case — and why is this tested so often?','The Executive. It is the single most common role-authority question; the Project Manager owning it is the classic wrong answer.'],
+      ['SU vs IP outputs — the relay to remember?','SU produces the Project Brief; IP produces the PID; the Board authorises the project using that PID in Directing a Project. Three processes, one chain.'],
+      ['What are the Managing Product Delivery activities?','Accept → Execute → Evaluate → Notify Work Package completion. "Evaluate", not the old "deliver".'],
+      ['How many of each? (principles / practices / processes / elements / tolerances)','7 principles, 7 practices, 7 processes, 5 integrated elements, 7 tolerance areas (incl. sustainability).'],
+      ['What is the one thing to do before booking the exam?','Sit at least one official PeopleCert PRINCE2 7 sample paper under timed, closed-book conditions. It is the only way to calibrate to the real exam\u2019s phrasing and difficulty.']
+    ]
+  }
+];
+
+
+
 RENDER.videos = (c)=>{
   markRead('videos');
   c.innerHTML = `
@@ -2067,11 +2147,22 @@ RENDER.videos = (c)=>{
         </details>
       </div>`).join('')}
 
-    <h2 class="sec">Coming next</h2>
-    <p style="color:var(--ink-soft)">Videos for these modules will appear here as they're published.</p>
-    <div class="vid-upcoming">
-      ${VIDEO_UPCOMING.map(m=>`<div class="vid-soon"><span class="vs-n">Module ${m.n}</span><span class="vs-t">${m.title}</span><span class="vs-tag">soon</span></div>`).join('')}
-    </div>
+    <h2 class="sec">Coming next — videos pending, study material ready</h2>
+    <p style="color:var(--ink-soft)">Videos for these modules aren't published yet, but the key questions & answers are here now — so you can self-test across the whole syllabus. Open each dropdown.</p>
+    ${(typeof VIDEO_PENDING_QA!=='undefined'?VIDEO_PENDING_QA:[]).map(m=>`
+      <div class="vid-block" style="padding-bottom:22px">
+        <div class="vid-soon" style="margin-bottom:12px"><span class="vs-n">Module ${m.n}</span><span class="vs-t">${m.title}</span><span class="vs-tag">video soon</span></div>
+        <details class="vid-qa">
+          <summary><span class="qa-count">${m.qa.length}</span> Key questions & answers — Module ${m.n}</summary>
+          <div class="qa-body">
+            ${m.qa.map((q,i)=>`
+              <details class="qa-item">
+                <summary><span class="qa-q">Q${i+1}.</span> ${q[0]}</summary>
+                <p class="qa-a">${q[1]}</p>
+              </details>`).join('')}
+          </div>
+        </details>
+      </div>`).join('')}
 
     <div class="callout key" style="margin-top:24px"><div class="tag">How to use these</div>Watch a module, then close your eyes and answer its Q&A dropdown from memory before opening each answer. Anything you miss, drill in <strong>Drill by Topic</strong> and review the matching framework section.</div>
 

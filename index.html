@@ -217,6 +217,30 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
 .table-scroll table{margin:0}
 
+/* ---- visual blueprint gallery ---- */
+.bp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:22px 0}
+.bp-card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.bp-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.bp-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#1b2a3f}
+.bp-card-body{padding:13px 16px}
+.bp-card-body h4{font-family:'Fraunces',serif;font-size:15.5px;font-weight:600;color:var(--navy);margin:0 0 4px;line-height:1.25}
+.bp-card-body p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.45}
+/* in-context figure */
+.bp-fig{margin:20px 0;cursor:pointer;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);transition:box-shadow .15s}
+.bp-fig:hover{box-shadow:var(--shadow-lg)}
+.bp-fig img{width:100%;display:block;background:#1b2a3f}
+.bp-fig figcaption{padding:10px 16px;font-size:13.5px;color:var(--ink-soft);background:var(--card);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.bp-expand{font-size:12px;color:var(--gold);font-weight:600;white-space:nowrap}
+/* lightbox */
+.bp-lightbox{position:fixed;inset:0;z-index:200;background:rgba(14,22,33,.9);display:none;align-items:center;justify-content:center;padding:20px;animation:fade .2s}
+.bp-lightbox.show{display:flex}
+.bp-lb-inner{position:relative;max-width:1200px;width:100%;max-height:92vh;display:flex;flex-direction:column;align-items:center}
+.bp-lb-inner img{max-width:100%;max-height:82vh;object-fit:contain;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.bp-lb-cap{color:#e8eef3;font-size:14px;margin-top:12px;text-align:center;max-width:70ch;line-height:1.5}
+.bp-lb-cap strong{color:var(--gold-soft)}
+.bp-lb-close{position:absolute;top:-6px;right:-6px;width:38px;height:38px;border-radius:50%;border:none;background:var(--gold);color:#1a1206;font-size:17px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
+@media(max-width:880px){.bp-lb-close{top:4px;right:4px}}
+
 /* ---- video lessons ---- */
 .vid-block{margin:0 0 40px;padding-bottom:30px;border-bottom:1px solid var(--line)}
 .vid-block:last-of-type{border-bottom:none}
@@ -954,6 +978,7 @@ function save(){ try{ localStorage.setItem(LS, JSON.stringify(state)); }catch(e)
 const VIEWS = [
   {id:'dashboard', label:'Dashboard', ico:'◆', group:'main'},
   {id:'videos', label:'Video Lessons', ico:'▶', group:'main'},
+  {id:'gallery', label:'Visual Blueprint', ico:'◳', group:'main'},
   {id:'principles', label:'The 7 Principles', ico:'①', group:'main'},
   {id:'practices', label:'The 7 Practices', ico:'②', group:'main'},
   {id:'practices_deep', label:'Practices — In Depth', ico:'▸', group:'main'},
@@ -1099,6 +1124,7 @@ RENDER.principles = (c)=>courseShell(c,'principles','Part 1','The 7 Principles',
   </div>
   <div class="callout"><div class="tag">The seven tolerances (performance aspects)</div><strong>Time · Cost · Scope · Quality · Benefits · Risk · Sustainability.</strong> PRINCE2 7 has <strong>seven</strong> — sustainability was added in the 7th edition. They recur across "manage by exception" and the Progress practice. "Reputation" and "resource" are common distractors. (If a source says six, it is out of date for v7.)</div>
   ${diagTolerance()}
+  ${bpFigure('10-exception-trigger','Manage by exception in action: a forecast breach escalates up the cascade')}
   <div class="callout trap"><div class="tag">Classic trap</div>The minimum is <strong>two management stages</strong>, not three. Closure ("Closing a Project") and start-up ("Starting up a Project") are <em>processes</em>, not stages. Only <strong>initiation + delivery</strong> count as stages.</div>`,
   `<div class="recall"><div class="tag">Recall check</div><ol>
     <li>Name the 7 principles in order.</li>
@@ -1140,7 +1166,18 @@ RENDER.processes = (c)=>courseShell(c,'processes','Part 3','The 7 Processes',
     ${pblock('SB','Managing a Stage Boundary','Near the end of a stage (or on an exception). Plans the next stage, updates Project Plan + Business Case, produces the <b>End Stage Report</b> (or an Exception Plan).','two triggers; what gets updated; End Stage Report.')}
     ${pblock('CP','Closing a Project','A fixed point confirming acceptance. Hands over products, evaluates the project (<b>End Project Report</b>, <b>Lessons Report</b>), updates the Benefits Management Approach. Premature closure handled here too.','final process; premature closure; lessons handed forward.')}
   </div>
-  <div class="callout trap"><div class="tag">Two traps</div><strong>1.</strong> SU produces the Project Brief; <strong>IP</strong> produces the PID — don't swap them. <strong>2.</strong> Highlight Report is from <em>CS</em> (PM→Board); Checkpoint Report is from <em>MP</em> (Team Manager→PM).</div>`,
+  <div class="callout trap"><div class="tag">Two traps</div><strong>1.</strong> SU produces the Project Brief; <strong>IP</strong> produces the PID — don't swap them. <strong>2.</strong> Highlight Report is from <em>CS</em> (PM→Board); Checkpoint Report is from <em>MP</em> (Team Manager→PM).</div>
+  <h3 class="sub">Visual walkthrough — the Meridian project</h3>
+  <p>The same seven processes, illustrated end-to-end on the office-relocation scenario. Tap any image to enlarge.</p>
+  ${bpFigure('03-process-timeline')}
+  ${bpFigure('04-starting-up')}
+  ${bpFigure('05-directing')}
+  ${bpFigure('06-initiating')}
+  ${bpFigure('07-cs-mp-engine')}
+  ${bpFigure('09-managing-product-delivery')}
+  ${bpFigure('11-stage-boundary')}
+  ${bpFigure('13-closing')}
+  ${bpFigure('15-process-matrix')}`,
   `<div class="recall"><div class="tag">Recall check</div><ol>
     <li>Draw the lifecycle from memory and label all 7 processes.</li>
     <li>SU's trigger and main output? IP's main output?</li>
@@ -1209,6 +1246,7 @@ RENDER.products = (c)=>courseShell(c,'products','Part 4','Management Products',
 RENDER.roles = (c)=>courseShell(c,'roles','Part 5','Roles & Responsibilities',
   'A fixed role structure. Know what each role does and which roles can — and cannot — be combined.',
   `${diagOrg()}
+  ${bpFigure('02-org-levels','The four organization levels, mapped onto the Meridian cast')}
   <h3 class="sub">The Project Board — three interests, one board</h3>
   <table><tr><th>Role</th><th>Interest</th><th>Key points</th></tr>
     <tr><td>Executive</td><td>Business</td><td>Ultimately accountable; owns the Business Case; chairs the Board. <strong>Cannot be the PM.</strong></td></tr>
@@ -1726,6 +1764,7 @@ RENDER.practices_deep = (c)=>{
       body:`
       <h4 class="sub" style="font-size:16px">The value chain — learn it as a sentence</h4>
       ${diagValueChain()}
+      ${bpFigure('12-value-chain','The value chain on Meridian: output → capability → outcome → benefit')}
       <p>A project produces <strong>outputs</strong> (the products). Using those outputs creates <strong>outcomes</strong> (a change in how things work). Outcomes deliver <strong>benefits</strong> (measurable improvements that justify the investment). A foreseeable negative is a <strong>dis-benefit</strong> — not a risk (a dis-benefit is a planned, accepted downside; a risk is uncertain).</p>
       <div class="callout"><div class="tag">Worked example</div>Output: a new mobile banking app. Outcome: customers self-serve instead of visiting branches. Benefit: €X/year saved in branch costs + measurable rise in retention. Dis-benefit: some older customers disengage — accepted, quantified, managed.</div>
       <h4 class="sub" style="font-size:16px">The development path</h4>
@@ -1846,6 +1885,8 @@ RENDER.edition = (c)=>{
     <div class="eyebrow">7th Edition (2023)</div>
     <h1 class="page">What's New in PRINCE2 7<span class="small">the recently-tested material</span></h1>
     <p class="lede">PRINCE2 was substantially refreshed in 2023. Current exams concentrate questions in exactly the areas that changed — so these are worth knowing precisely, not just in passing.</p>
+
+    ${bpFigure('00-framework-overview','The five integrated elements, project characteristics, and the People element')}
 
     <div class="card">
       <h3 class="sub" style="margin-top:0">1. "Themes" are now "Practices"</h3>
@@ -2027,8 +2068,85 @@ RENDER.videos = (c)=>{
 };
 
 
+
+/* ---------------- VISUAL BLUEPRINT (image gallery + in-context embeds) ---------------- */
+const BP_PATH = 'img/blueprint/';
+const BLUEPRINTS = [
+  {f:'00-framework-overview', t:'PRINCE2 7 Core Framework', d:'The five integrated elements, project vs operations, and the People element at a glance.'},
+  {f:'01-title-walkthrough', t:'The Meridian Relocation', d:'A PRINCE2 7 visual walkthrough — the seven processes from mandate to handover.'},
+  {f:'03-process-timeline', t:'The Project Timeline Architecture', d:'The whole lifecycle: Directing across the top, the CS↔MP engine in the middle, SU and CP at the ends.'},
+  {f:'02-org-levels', t:'The Four Organization Levels', d:'Commissioning → Directing → Managing → Delivering, mapped onto the Meridian cast.'},
+  {f:'04-starting-up', t:'Process 1 · Starting Up (SU)', d:'The mandate funnels into the Project Brief. Exam trap: SU produces the Brief, not the PID.'},
+  {f:'05-directing', t:'Process 2 · Directing a Project (DP)', d:'The Board\u2019s five decision gates over the PM\u2019s working lane. No specialist products — only decisions.'},
+  {f:'06-initiating', t:'Process 3 · Initiating a Project (IP)', d:'The PID assembled from the management approaches, Project Plan, Business Case and controls.'},
+  {f:'07-cs-mp-engine', t:'The Core Engine (CS ↔ MP)', d:'Work Packages flow down; completed products and Checkpoint Reports flow up.'},
+  {f:'08-controlling-stage', t:'Process 4 · Controlling a Stage (CS)', d:'The PM\u2019s cockpit: authorize work, monitor tolerances (incl. sustainability), take corrective action.'},
+  {f:'09-managing-product-delivery', t:'Process 5 · Managing Product Delivery (MP)', d:'Accept → Execute → Evaluate → Notify. The v7 term is evaluate, not deliver.'},
+  {f:'10-exception-trigger', t:'The £150k Surprise (Exception Trigger)', d:'A forecast breach cracks through the tolerance cascade → Exception Report → Exception Plan.'},
+  {f:'11-stage-boundary', t:'Process 6 · Managing a Stage Boundary (SB)', d:'Re-justify the project: is it still worth doing, given what we now know?'},
+  {f:'12-value-chain', t:'The Value Chain: Output vs Benefit', d:'Output → Capability → Outcome → Benefit. A project delivers outputs; benefits come later.'},
+  {f:'13-closing', t:'Process 7 · Closing a Project (CP)', d:'A clean stop: confirm acceptance, hand over, and plan benefits measurement.'},
+  {f:'14-synthesis', t:'The Complete Blueprint (Synthesis)', d:'The whole Meridian journey across all seven processes on three swimlanes.'},
+  {f:'15-process-matrix', t:'The 7 Processes · Quick Reference Matrix', d:'Process, core purpose, key output and primary owner — the one-glance summary.'}
+];
+
+/* a single blueprint figure, clickable to enlarge */
+function bpFigure(slug, caption){
+  const b = BLUEPRINTS.find(x=>x.f===slug);
+  const cap = caption || (b ? b.t : '');
+  return `<figure class="bp-fig" onclick="App.bpZoom('${slug}')">
+    <img src="${BP_PATH}${slug}.jpg" alt="${cap.replace(/"/g,'&quot;')}" loading="lazy">
+    ${cap?`<figcaption>${cap} <span class="bp-expand">⤢ tap to enlarge</span></figcaption>`:''}
+  </figure>`;
+}
+
+/* lightbox */
+function bpZoom(slug){
+  const b = BLUEPRINTS.find(x=>x.f===slug) || {t:'',d:''};
+  let box = document.getElementById('bpLightbox');
+  if(!box){
+    box = document.createElement('div');
+    box.id='bpLightbox'; box.className='bp-lightbox';
+    box.onclick=()=>{box.classList.remove('show');};
+    document.body.appendChild(box);
+  }
+  box.innerHTML = `<div class="bp-lb-inner">
+    <img src="${BP_PATH}${slug}.jpg" alt="${b.t.replace(/"/g,'&quot;')}">
+    <div class="bp-lb-cap"><strong>${b.t}</strong>${b.d?' — '+b.d:''}</div>
+    <button class="bp-lb-close" aria-label="Close">✕</button>
+  </div>`;
+  box.classList.add('show');
+}
+
+RENDER.gallery = (c)=>{
+  markRead('gallery');
+  c.innerHTML = `
+    <div class="eyebrow">Visual Blueprint</div>
+    <h1 class="page">The PRINCE2 7 Blueprint<span class="small">the whole method, one picture at a time</span></h1>
+    <p class="lede">A visual companion to the course, built around the Meridian office-relocation scenario. Each image maps a part of the framework to something concrete. Tap any image to enlarge it. These also appear inside the relevant sections as you study.</p>
+
+    <div class="bp-grid">
+      ${BLUEPRINTS.map(b=>`
+        <div class="bp-card" onclick="App.bpZoom('${b.f}')">
+          <img src="${BP_PATH}${b.f}.jpg" alt="${b.t.replace(/"/g,'&quot;')}" loading="lazy">
+          <div class="bp-card-body">
+            <h4>${b.t}</h4>
+            <p>${b.d}</p>
+          </div>
+        </div>`).join('')}
+    </div>
+
+    <div class="callout key" style="margin-top:26px"><div class="tag">How to use these</div>Read a section, then find its blueprint here (or in the section itself) and talk through it out loud from memory. If you can narrate the picture, you understand the concept — which is what the scenario questions on the exam reward.</div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="go('videos')">Watch the lessons →</button>
+      <button class="btn btn-ghost" onclick="go('drill')">Drill a topic</button>
+    </div>`;
+};
+
+
 /* ---------- expose handlers (namespace + globals so all onclick styles resolve) ---------- */
-const App = { go, openNav, closeNav, startFc, flipFc, rateFc, startDrill, answerDrill,
+const App = { go, openNav, closeNav, bpZoom, startFc, flipFc, rateFc, startDrill, answerDrill,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
   renderExamResult, reviewExam, setReviewFilter, toggleCheck, resetProgress };
 if(typeof window!=='undefined'){ Object.assign(window, App); window.App=App; }

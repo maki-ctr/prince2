@@ -217,6 +217,13 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
 .table-scroll table{margin:0}
 
+/* ---- diagrams hub ---- */
+.dh-block{margin:0 0 26px;padding-bottom:20px;border-bottom:1px solid var(--line-soft)}
+.dh-block:last-of-type{border-bottom:none}
+.dh-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:2px}
+.dh-tag{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1206;background:var(--gold);padding:3px 9px;border-radius:99px;vertical-align:middle}
+.dh-tag.dh-static{background:var(--paper-2);color:var(--ink-soft)}
+
 /* ---- people ecosystem map ---- */
 .pe-diagram svg{min-width:600px}
 .pe-org{fill:rgba(36,76,115,.06);stroke:var(--navy-2);stroke-width:1.5;stroke-dasharray:7 5}
@@ -1288,6 +1295,7 @@ const VIEWS = [
   {id:'dashboard', label:'Dashboard', ico:'◆', group:'main'},
   {id:'videos', label:'Video Lessons', ico:'▶', group:'main'},
   {id:'gallery', label:'Visual Blueprint', ico:'◳', group:'main'},
+  {id:'diagrams', label:'Diagrams Hub', ico:'◈', group:'main'},
   {id:'principles', label:'The 7 Principles', ico:'①', group:'main'},
   {id:'practices', label:'The 7 Practices', ico:'②', group:'main'},
   {id:'practices_deep', label:'Practices — In Depth', ico:'▸', group:'main'},
@@ -2380,7 +2388,8 @@ const VIDEO_UPCOMING = [
    complete self-test resource across all 8 modules. Shown under "Coming next". */
 const VIDEO_PENDING_QA = [
   {
-    n:'6', title:'The Project Environment & Roles',
+    n:'6', id:'j1SgJyws1V8', title:'The Project Environment & Roles',
+    blurb:'The role structure and the authority questions the exam loves \u2014 who does what, who reports to whom, and the forbidden combinations.',
     qa:[
       ['Why do roles matter so much on the exam?','A large share of Foundation questions reduce to "who is allowed to do X?" — who owns the business case, approves the plan, signs off a change. Knowing the role structure cold answers a whole category of questions.'],
       ['What is the one mandatory role separation?','The Executive cannot also be the Project Manager. Directing and managing are different levels of accountability; collapsing them removes the check between the person spending the money and the person justifying it.'],
@@ -2396,7 +2405,8 @@ const VIDEO_PENDING_QA = [
     ]
   },
   {
-    n:'7', title:'Products, Plans & Quality',
+    n:'7', id:'yfCkvNepQF8', title:'Products, Plans & Quality',
+    blurb:'Management vs specialist products, baseline/record/report, product-based planning, and the quality audit trail.',
     qa:[
       ['What is a "product" in PRINCE2, and the two families?','Anything the project creates or uses. Specialist products = the actual deliverables (the building, the network). Management products = the documents used to run the project (plans, logs, reports, approaches).'],
       ['What are the three types of management product?','Baselines (defined then change-controlled — Business Case, PID, Project Plan, Product Description), Records (continuously updated — Issue/Risk/Quality Registers, Daily & Lessons Logs), and Reports (point-in-time snapshots — Highlight, End Stage, Exception, End Project, Checkpoint).'],
@@ -2412,7 +2422,8 @@ const VIDEO_PENDING_QA = [
     ]
   },
   {
-    n:'8', title:'Exam Strategy, Practice Questions & Review',
+    n:'8', id:'dUi-7sH0zIs', title:'Exam Strategy, Practice Questions & Review',
+    blurb:'Exam format, question types, the big recurring ideas, elimination tactics, and the 6th-edition holdovers that are now wrong answers.',
     qa:[
       ['What is the exact exam format?','60 questions, 60 minutes, 60% to pass (36/60), closed book, multiple choice. That is one minute per question on average. Note: 60%, not the retired 55%.'],
       ['How do you handle a "which is NOT" (negative) question?','Cover the word NOT, find the options that DO belong, and the leftover is your answer. Negative questions flip your brain — slow down on them.'],
@@ -2437,7 +2448,7 @@ RENDER.videos = (c)=>{
     <h1 class="page">Watch the Course<span class="small">module videos + key Q&A</span></h1>
     <p class="lede">The full teaching course as videos, one per module. Under each, open the dropdown for the module's most important questions and answers — use them to self-test after watching.</p>
 
-    ${VIDEO_MODULES.map(m=>`
+    ${VIDEO_MODULES.concat(typeof VIDEO_PENDING_QA!=='undefined'?VIDEO_PENDING_QA:[]).map(m=>`
       <div class="vid-block">
         <h2 class="sec" style="border:none;margin-bottom:10px">Module ${m.n} · ${m.title}</h2>
         <p style="color:var(--ink-soft);margin-top:-4px;margin-bottom:14px">${m.blurb}</p>
@@ -2458,24 +2469,8 @@ RENDER.videos = (c)=>{
         </details>
       </div>`).join('')}
 
-    <h2 class="sec">Coming next — videos pending, study material ready</h2>
-    <p style="color:var(--ink-soft)">Videos for these modules aren't published yet, but the key questions & answers are here now — so you can self-test across the whole syllabus. Open each dropdown.</p>
-    ${(typeof VIDEO_PENDING_QA!=='undefined'?VIDEO_PENDING_QA:[]).map(m=>`
-      <div class="vid-block" style="padding-bottom:22px">
-        <div class="vid-soon" style="margin-bottom:12px"><span class="vs-n">Module ${m.n}</span><span class="vs-t">${m.title}</span><span class="vs-tag">video soon</span></div>
-        <details class="vid-qa">
-          <summary><span class="qa-count">${m.qa.length}</span> Key questions & answers — Module ${m.n}</summary>
-          <div class="qa-body">
-            ${m.qa.map((q,i)=>`
-              <details class="qa-item">
-                <summary><span class="qa-q">Q${i+1}.</span> ${q[0]}</summary>
-                <p class="qa-a">${q[1]}</p>
-              </details>`).join('')}
-          </div>
-        </details>
-      </div>`).join('')}
-
-    <div class="callout key" style="margin-top:24px"><div class="tag">How to use these</div>Watch a module, then close your eyes and answer its Q&A dropdown from memory before opening each answer. Anything you miss, drill in <strong>Drill by Topic</strong> and review the matching framework section.</div>
+    <div class="callout key" style="margin-top:24px"><div class="tag">Complete set</div>All eight module videos are now published, each with its key Q&A. <span style="color:var(--ink-soft)"></span></div>
+    <div class="callout key" style="margin-top:14px"><div class="tag">How to use these</div>Watch a module, then close your eyes and answer its Q&A dropdown from memory before opening each answer. Anything you miss, drill in <strong>Drill by Topic</strong> and review the matching framework section.</div>
 
     <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
       <button class="btn btn-gold" onclick="go('drill')">Drill what you watched →</button>
@@ -2557,6 +2552,53 @@ RENDER.gallery = (c)=>{
     <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
       <button class="btn btn-gold" onclick="go('videos')">Watch the lessons →</button>
       <button class="btn btn-ghost" onclick="go('drill')">Drill a topic</button>
+    </div>`;
+};
+
+
+
+/* ---------------- DIAGRAMS HUB (every interactive diagram in one place) ---------------- */
+RENDER.diagrams = (c)=>{
+  markRead('diagrams');
+  const block = (title, desc, svgFn, jump, interactive)=>`
+    <div class="dh-block">
+      <div class="dh-head">
+        <h3 class="sub" style="margin:0">${title} ${interactive?'<span class="dh-tag">interactive</span>':'<span class="dh-tag dh-static">reference</span>'}</h3>
+        ${jump?`<button class="xl-chip" onclick="go('${jump}')">Study in context →</button>`:''}
+      </div>
+      <p style="color:var(--ink-soft);font-size:14px;margin:4px 0 8px">${desc}</p>
+      ${svgFn()}
+    </div>`;
+
+  c.innerHTML = `
+    <div class="eyebrow">Diagrams</div>
+    <h1 class="page">All Diagrams, One Place<span class="small">every visual in the course</span></h1>
+    <p class="lede">Every interactive and reference diagram in the tool, gathered here. Tap the <strong>interactive</strong> ones (highlighted) to reveal detail; use "Study in context" to jump to the section where each one is taught. For the full illustrated blueprint set, see <button class="xl-chip" onclick="go('gallery')">Visual Blueprint →</button></p>
+
+    <h2 class="sec">Processes & lifecycle</h2>
+    ${block('Process lifecycle', 'The whole project timeline across the three levels. Tap any process for its purpose, trigger and output.', diagLifecycle, 'processes', true)}
+
+    <h2 class="sec">People & roles</h2>
+    ${block('People ecosystem (QRG Fig 3.2)', 'Organisational ecosystem, project ecosystem, the three interests and stakeholders. Tap each.', diagPeople, 'resit', true)}
+    ${block('Change transition', 'Current state → target state, driven by the three people themes. Delivering ≠ adopting.', diagChangeTransition, 'resit', false)}
+    ${block('Role relationship map', 'Who does what, when, how, reports to whom — and what each role must never do. Tap each role.', diagRoleMap, 'roles', true)}
+    ${block('Four organization levels', 'Commissioning → Directing → Managing → Delivering, with reports-to lines. Tap each box.', diagOrg, 'roles', true)}
+
+    <h2 class="sec">Principles & control</h2>
+    ${block('Tolerance cascade', 'Authority flows down; a forecast breach escalates up one level. Seven performance aspects.', diagTolerance, 'principles', false)}
+
+    <h2 class="sec">Practices</h2>
+    ${block('Value chain', 'Output → capability → outcome → benefit → business objectives. Tap the nodes.', diagValueChain, 'practices_deep', true)}
+    ${block('Product-based planning', 'The four-step planning technique: product descriptions first, activities derived after.', diagPlanning, 'practices_deep', false)}
+    ${block('Quality audit trail', 'User expectations → acceptance criteria → quality criteria → register → records.', diagQuality, 'practices_deep', false)}
+    ${block('Risk procedure', 'Identify → assess → plan → implement, with communicate running throughout.', diagRisk, 'practices_deep', true)}
+    ${block('Change control procedure', 'Capture → assess → recommend → decide → implement (the issue & change path).', diagChange, 'practices_deep', false)}
+
+    <div class="callout key" style="margin-top:26px"><div class="tag">How to use this page</div>For each diagram, try to narrate it out loud from memory before tapping anything. If you can explain the picture — what connects to what and why — you understand the concept, which is what the scenario questions reward.</div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="go('drill')">Drill a topic →</button>
+      <button class="btn btn-ghost" onclick="go('gallery')">Visual Blueprint gallery</button>
     </div>`;
 };
 

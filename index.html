@@ -217,12 +217,14 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
 .table-scroll table{margin:0}
 
-/* ---- diagrams hub ---- */
-.dh-block{margin:0 0 26px;padding-bottom:20px;border-bottom:1px solid var(--line-soft)}
-.dh-block:last-of-type{border-bottom:none}
-.dh-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:2px}
-.dh-tag{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1206;background:var(--gold);padding:3px 9px;border-radius:99px;vertical-align:middle}
+/* ---- diagrams hub (rich cards) ---- */
+.dh-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:0 0 20px;box-shadow:var(--shadow)}
+.dh-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.dh-card .diagram{margin-top:4px;margin-bottom:4px}
+.dh-tag{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1206;background:var(--gold);padding:3px 10px;border-radius:99px;vertical-align:middle;white-space:nowrap}
 .dh-tag.dh-static{background:var(--paper-2);color:var(--ink-soft)}
+.dh-expl{font-size:14.5px;line-height:1.6;color:var(--ink);margin:14px 0 12px}
+.dh-qa{margin-top:4px}
 
 /* ---- people ecosystem map ---- */
 .pe-diagram svg{min-width:600px}
@@ -2558,47 +2560,98 @@ RENDER.gallery = (c)=>{
 
 
 /* ---------------- DIAGRAMS HUB (every interactive diagram in one place) ---------------- */
+/* ---------------- DIAGRAMS HUB (rich: card + explanation + self-test per diagram) ---------------- */
+const DIAGRAM_DECK = [
+  {group:'Processes & lifecycle', items:[
+    {fn:'diagLifecycle', title:'Process lifecycle', jump:'processes', interactive:true,
+     expl:'The whole project timeline on three levels at once. <strong>Directing</strong> runs across the top (the Board, acting only at decision points). <strong>Controlling a Stage</strong> and <strong>Managing Product Delivery</strong> turn together in the middle for every delivery stage. <strong>Starting Up</strong> sits pre-project on the left; <strong>Closing</strong> on the right. Tap any process for its purpose, trigger and output.',
+     qa:[['Which process produces the Project Brief, and which produces the PID?','SU produces the Project Brief; IP produces the PID. Remember: SU = Brief, IP = PID.'],
+         ['Which two processes run together through a delivery stage?','Controlling a Stage (PM) and Managing Product Delivery (teams), with Managing a Stage Boundary between stages.']]},
+  ]},
+  {group:'People & roles', items:[
+    {fn:'diagPeople', title:'People ecosystem (QRG Fig 3.2)', jump:'resit', interactive:true,
+     expl:'The official ecosystem picture. The <strong>organisational ecosystem</strong> (outer) is wider than the <strong>project ecosystem</strong> (inner); the three interests — business, user, supplier — sit inside, and stakeholders reach in from outside. This is why engagement extends beyond the project team. Tap each interest or stakeholder.',
+     qa:[['What is the definition of a stakeholder?','Any individual, group or organisation that can affect, be affected by, or perceives itself to be affected by the project.'],
+         ['Who is accountable for successful handover and adoption of products into the business?','The Senior User (user interest).']]},
+    {fn:'diagChangeTransition', title:'Change transition', jump:'resit', interactive:false,
+     expl:'The core People point made visual: delivering the product is <em>not</em> the same as the organisation adopting it. Change management moves people from the <strong>current state</strong> (business as usual) through a <strong>transition</strong> to the <strong>target state</strong> (adopted and embedded), driven by the three people themes.',
+     qa:[['What are the three people themes that drive the transition?','Leading successful change, leading successful teams, and communication (two-way).'],
+         ['What document defines how people adopt the change?','The change management approach (distinct from change control, which handles baseline changes).']]},
+    {fn:'diagRoleMap', title:'Role relationship map', jump:'roles', interactive:true,
+     expl:'The highest-yield view for the exam — a huge share of questions reduce to "who is allowed to do what?" Tap each role for what it <strong>does</strong>, <strong>when</strong>, <strong>how it reports</strong>, who it <strong>reports to</strong>, and — in red — what it must <strong>never</strong> do. The forbidden combinations are the single most-tested trap.',
+     qa:[['Which role can never be combined with the Project Manager?','The Executive (directing vs managing must stay separate) and Project Assurance (which must stay independent of the PM).'],
+         ['A Team Manager wants to raise something with the Board. What is correct?','Escalate through the Project Manager — a Team Manager never deals directly with the Board.']]},
+    {fn:'diagOrg', title:'Four organization levels', jump:'roles', interactive:true,
+     expl:'The accountability hierarchy: <strong>Commissioning</strong> (business layer, outside the project) → <strong>Directing</strong> (Project Board) → <strong>Managing</strong> (Project Manager) → <strong>Delivering</strong> (Team Managers). Reports-to lines flow up; the Board sits below corporate. Tap each box.',
+     qa:[['Which level sits outside the project management team?','Commissioning (the business layer) — it provides the mandate and sets project tolerances but is not part of the project team.'],
+         ['Who sets stage tolerances, and who sets Work Package tolerances?','The Board sets stage tolerances for the PM; the PM sets Work Package tolerances for Team Managers.']]},
+  ]},
+  {group:'Principles & control', items:[
+    {fn:'diagTolerance', title:'Tolerance cascade', jump:'principles', interactive:false,
+     expl:'How "manage by exception" works mechanically. Authority <strong>cascades down</strong> (corporate → Board → PM → team); a <strong>forecast breach escalates up</strong> one level. Tolerances are set against the <strong>seven performance aspects</strong>: benefits, cost, time, quality, scope, sustainability, risk.',
+     qa:[['When does the PM escalate — before or after breaching tolerance?','Before — you escalate on a FORECAST breach (an Exception Report), not after the fact.'],
+         ['How many performance aspects have tolerances, and which was added in v7?','Seven. Sustainability was added in PRINCE2 7.']]},
+  ]},
+  {group:'Practices', items:[
+    {fn:'diagValueChain', title:'Value chain', jump:'practices_deep', interactive:true,
+     expl:'The engine of the Business Case: <strong>Output</strong> (what you deliver) → <strong>Capability</strong> (the completed set of outputs) → <strong>Outcome</strong> (the real-world change) → <strong>Benefit</strong> (measurable improvement) → <strong>business objectives</strong>. The classic trap is confusing an output with a benefit. Tap the nodes.',
+     qa:[['What is the difference between an output and a benefit?','An output is the thing the project delivers; a benefit is the measurable improvement that results once outputs are used. A project delivers outputs; benefits come later.'],
+         ['What is a dis-benefit?','A measurable decline from an outcome, perceived as negative by the investing organisation.']]},
+    {fn:'diagPlanning', title:'Product-based planning', jump:'practices_deep', interactive:false,
+     expl:'PRINCE2\u2019s signature technique, in four steps: write the <strong>project product description</strong> → create the <strong>product breakdown structure</strong> → write the <strong>product descriptions</strong> → create the <strong>product flow diagram</strong>. Products first; activities are derived from them.',
+     qa:[['What comes first in product-based planning — products or activities?','Products. You identify and define the products first, then derive the activities needed to build them.'],
+         ['Which planning product is written for the project plan only?','The project product description (the other three steps apply to all levels of plan).']]},
+    {fn:'diagQuality', title:'Quality audit trail', jump:'practices_deep', interactive:false,
+     expl:'How quality flows from vague wish to verified product: <strong>user\u2019s quality expectations</strong> → <strong>acceptance criteria</strong> (prioritised, measurable) → <strong>quality specifications</strong> (per product) → <strong>quality register</strong> → records/acceptance. Quality is planned, then verified — never just inspected at the end.',
+     qa:[['Where are acceptance criteria documented, and who owns that product?','In the project product description; the Senior User owns it.'],
+         ['Quality control vs quality assurance?','Control = checking products against criteria as built (inside the project). Assurance = independent confidence, typically managed outside the project team.']]},
+    {fn:'diagRisk', title:'Risk procedure', jump:'practices_deep', interactive:true,
+     expl:'The risk management technique: <strong>Identify → Assess → Plan → Implement</strong>, with <strong>Communicate</strong> running throughout. A risk can be a threat or an opportunity. Tap the steps.',
+     qa:[['Name the threat/opportunity paired responses.','Avoid/Exploit, Reduce/Enhance; plus transfer, share, accept, and prepare contingent plans. (No "reject" in v7.)'],
+         ['Risk owner vs risk action owner (actionee)?','The risk owner is responsible for responding to a risk; the risk action owner carries out an agreed action.']]},
+    {fn:'diagChange', title:'Change control procedure', jump:'practices_deep', interactive:false,
+     expl:'The issue & change-control path (issue management encompasses change control in v7): <strong>Capture → Assess → Recommend → Decide → Implement</strong>. Baseline changes go to the Board or a delegated Change Authority.',
+     qa:[['Who decides on a change that affects a baseline?','The Board, or a delegated Change Authority within set limits. The PM decides only within delegated tolerance.'],
+         ['Where are issues recorded?','The Issue Register (part of the project log).']]},
+  ]},
+];
+
 RENDER.diagrams = (c)=>{
   markRead('diagrams');
-  const block = (title, desc, svgFn, jump, interactive)=>`
-    <div class="dh-block">
-      <div class="dh-head">
-        <h3 class="sub" style="margin:0">${title} ${interactive?'<span class="dh-tag">interactive</span>':'<span class="dh-tag dh-static">reference</span>'}</h3>
-        ${jump?`<button class="xl-chip" onclick="go('${jump}')">Study in context →</button>`:''}
+  const diagFns = {diagLifecycle, diagPeople, diagChangeTransition, diagRoleMap, diagOrg, diagTolerance, diagValueChain, diagPlanning, diagQuality, diagRisk, diagChange};
+  const card = (it)=>`
+    <div class="dh-card">
+      <div class="dh-card-head">
+        <h3 class="sub" style="margin:0">${it.title}</h3>
+        <span class="dh-tag ${it.interactive?'':'dh-static'}">${it.interactive?'tap to explore':'reference'}</span>
       </div>
-      <p style="color:var(--ink-soft);font-size:14px;margin:4px 0 8px">${desc}</p>
-      ${svgFn()}
+      ${diagFns[it.fn]()}
+      <p class="dh-expl">${it.expl}</p>
+      <details class="vid-qa dh-qa">
+        <summary><span class="qa-count">${it.qa.length}</span> Quick check</summary>
+        <div class="qa-body">
+          ${it.qa.map((q,i)=>`
+            <details class="qa-item">
+              <summary><span class="qa-q">Q${i+1}.</span> ${q[0]}</summary>
+              <p class="qa-a">${q[1]}</p>
+            </details>`).join('')}
+        </div>
+      </details>
+      ${it.jump?`<div style="margin-top:12px"><button class="xl-chip" onclick="go('${it.jump}')">Study in context →</button></div>`:''}
     </div>`;
 
   c.innerHTML = `
     <div class="eyebrow">Diagrams</div>
-    <h1 class="page">All Diagrams, One Place<span class="small">every visual in the course</span></h1>
-    <p class="lede">Every interactive and reference diagram in the tool, gathered here. Tap the <strong>interactive</strong> ones (highlighted) to reveal detail; use "Study in context" to jump to the section where each one is taught. For the full illustrated blueprint set, see <button class="xl-chip" onclick="go('gallery')">Visual Blueprint →</button></p>
-
-    <h2 class="sec">Processes & lifecycle</h2>
-    ${block('Process lifecycle', 'The whole project timeline across the three levels. Tap any process for its purpose, trigger and output.', diagLifecycle, 'processes', true)}
-
-    <h2 class="sec">People & roles</h2>
-    ${block('People ecosystem (QRG Fig 3.2)', 'Organisational ecosystem, project ecosystem, the three interests and stakeholders. Tap each.', diagPeople, 'resit', true)}
-    ${block('Change transition', 'Current state → target state, driven by the three people themes. Delivering ≠ adopting.', diagChangeTransition, 'resit', false)}
-    ${block('Role relationship map', 'Who does what, when, how, reports to whom — and what each role must never do. Tap each role.', diagRoleMap, 'roles', true)}
-    ${block('Four organization levels', 'Commissioning → Directing → Managing → Delivering, with reports-to lines. Tap each box.', diagOrg, 'roles', true)}
-
-    <h2 class="sec">Principles & control</h2>
-    ${block('Tolerance cascade', 'Authority flows down; a forecast breach escalates up one level. Seven performance aspects.', diagTolerance, 'principles', false)}
-
-    <h2 class="sec">Practices</h2>
-    ${block('Value chain', 'Output → capability → outcome → benefit → business objectives. Tap the nodes.', diagValueChain, 'practices_deep', true)}
-    ${block('Product-based planning', 'The four-step planning technique: product descriptions first, activities derived after.', diagPlanning, 'practices_deep', false)}
-    ${block('Quality audit trail', 'User expectations → acceptance criteria → quality criteria → register → records.', diagQuality, 'practices_deep', false)}
-    ${block('Risk procedure', 'Identify → assess → plan → implement, with communicate running throughout.', diagRisk, 'practices_deep', true)}
-    ${block('Change control procedure', 'Capture → assess → recommend → decide → implement (the issue & change path).', diagChange, 'practices_deep', false)}
-
-    <div class="callout key" style="margin-top:26px"><div class="tag">How to use this page</div>For each diagram, try to narrate it out loud from memory before tapping anything. If you can explain the picture — what connects to what and why — you understand the concept, which is what the scenario questions reward.</div>
-
+    <h1 class="page">All Diagrams, One Place<span class="small">each with an explanation and a quick check</span></h1>
+    <p class="lede">Every interactive and reference diagram in the course, gathered here. Tap the interactive ones to reveal detail, read the explanation, then open "Quick check" and answer from memory before revealing. For the illustrated image set, see <button class="xl-chip" onclick="go('gallery')">Visual Blueprint →</button></p>
+    ${DIAGRAM_DECK.map(g=>`
+      <h2 class="sec">${g.group}</h2>
+      ${g.items.map(card).join('')}
+    `).join('')}
+    <div class="callout key" style="margin-top:26px"><div class="tag">How to use this page</div>Narrate each diagram out loud from memory before tapping. If you can explain what connects to what and why, you understand the concept — which is exactly what the scenario questions reward.</div>
     <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
       <button class="btn btn-gold" onclick="go('drill')">Drill a topic →</button>
-      <button class="btn btn-ghost" onclick="go('gallery')">Visual Blueprint gallery</button>
+      <button class="btn btn-ghost" onclick="go('exam')">Mock exam</button>
     </div>`;
 };
 

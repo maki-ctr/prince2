@@ -1956,7 +1956,7 @@ function submitExam(){
   let correct=0; const bySec={};
   Object.keys(LO_LABEL).forEach(lo=>bySec[lo]={right:0,total:0});
   const detail=exam.q.map((item,i)=>{
-    const q=item.qq; const lo=item.lo||'practices';
+    const q=item.qq; const lo=item.lo||q.lo||'unclassified';
     bySec[lo].total++;
     const chosen=exam.answers[i];
     const ok=chosen===q.a;
@@ -1976,7 +1976,7 @@ function submitExam(){
 }
 function renderExamResult(c){
   const {pct,correct,bySec}=exam.result;
-  const pass=pct>=60, ready=pct>=85;
+  const pass=correct>=36, ready=correct>=51;
   const circ=2*Math.PI*72;
   const off=circ*(1-pct/100);
   const col=ready?'var(--green)':pass?'var(--gold)':'var(--red)';
@@ -2757,8 +2757,8 @@ RENDER.resit = (c)=>{
     <p>Everything in the people element hangs off three activities. They are <em>not</em> standalone — they run through all of project management:</p>
     <div class="card">
       <p style="margin-bottom:8px"><strong>1. Leading successful change.</strong> Projects deliver change, which disrupts people's business-as-usual (BAU) routines and responsibilities. Leading change means understanding that impact — and when people block a change, looking at <em>how the system is affecting them</em> rather than blaming them.</p>
-      <p style="margin-bottom:8px"><strong>2. Leading successful teams.</strong> PRINCE2 7 explicitly says <em>"command and control" leadership is ineffective.</em> Lead by building capability, diversity and collaboration, tailored to the people and the project stage.</p>
-      <p style="margin-bottom:0"><strong>3. Communication.</strong> Deliberate, two-way, relationship-building communication. Without it, resistance grows as people protect the status quo. Note the <strong>"quiet phase"</strong> — keeping wider communication minimal early on, until the project is well-defined, to avoid rumours (especially on politically sensitive projects).</p>
+      <p style="margin-bottom:8px"><strong>2. Leading and managing successful teams.</strong> The courseware distinguishes <em>leadership</em> (influencing and motivating people) from <em>management</em> (organising and controlling). A temporary project leader often cannot rely on established authority, so the style must adapt. Build capability, diversity, team cohesion and collaboration across the project ecosystem.</p>
+      <p style="margin-bottom:0"><strong>3. Communication.</strong> The communication management approach defines the means and frequency of communication, and critically includes <em>receiving feedback</em> — a controlled, <strong>bidirectional</strong> flow across the project ecosystem, supporting alignment. How teams communicate also depends on whether they are co-located, remote or hybrid.</p>
     </div>
 
     <h3 class="sub">Core people concepts — know these definitions cold</h3>
@@ -2845,9 +2845,9 @@ const QUESTIONS_PEOPLE = [
 {s:"people",q:"A stakeholder is best defined as anyone who:",o:["Works on the project team","Approves the Business Case","Affects, or is affected by, the project","Funds the project"],a:2,e:"A stakeholder affects or is affected by the project."},
 {s:"people",q:"Which management product defines how people will adopt the project's outputs?",o:["Change Control Approach","Change Management Approach","Communication Management Approach","Issue Register"],a:1,e:"The Change Management Approach covers how people transition to and adopt the outputs (people element)."},
 {s:"people",q:"Change management (people element) differs from change control in that change management is about:",o:["Altering baselines after a request","Helping people adopt outputs / transition to a new state","Logging issues","Approving exceptions"],a:1,e:"Change management = people adopting the change; change control = handling changes to baselines (Issues practice)."},
-{s:"people",q:"PRINCE2 7 states that which leadership style is ineffective?",o:["Servant leadership","Command and control","Collaborative leadership","Situational leadership"],a:1,e:"PRINCE2 7 explicitly says 'command and control' approaches are ineffective for leading teams."},
+{s:"people",q:"In PRINCE2 7, how does leadership differ from management?",o:["They are identical","Leadership influences and motivates people; management organises and controls","Management inspires; leadership does paperwork","Only leadership applies to projects"],a:1,e:"The courseware distinguishes leadership (influencing/motivating people through change) from management (organising and controlling). A temporary project leader must adapt their style."},
 {s:"people",q:"In PRINCE2 7, 'people' refers to:",o:["Only the project team","Only the Project Board","Those working on the project AND those affected by it","Only external stakeholders"],a:2,e:"People covers both those working on the project and those impacted by it."},
-{s:"people",q:"The 'quiet phase' in communication refers to:",o:["Pausing the project","Keeping wider communication minimal until the project is well-defined","Stopping stakeholder engagement","A break between stages"],a:1,e:"The quiet phase keeps broad communication limited early on to avoid rumours and misinformation."},
+{s:"people",q:"Communication in PRINCE2 7 is best described as:",o:["One-way broadcasting to stakeholders","A controlled, bidirectional flow including feedback","Only needed at project closure","Handled solely by the Executive"],a:1,e:"The communication management approach defines a controlled, two-way (bidirectional) flow — sending information AND receiving feedback across the project ecosystem."},
 {s:"people",q:"Leadership differs from management in PRINCE2 7 because management is primarily about:",o:["Inspiring and influencing people","Plan, delegate, monitor and control","Setting the vision","Resolving conflict"],a:1,e:"Management = plan, delegate, monitor, control; leadership = influencing/motivating people through change."},
 {s:"people",q:"Stakeholder engagement in PRINCE2 7 should be:",o:["One-way broadcasting of decisions","Planned, two-way communication","Handled only by the Executive","Limited to project close"],a:1,e:"Stakeholder engagement is planned, two-way communication to understand and involve stakeholders."},
 {s:"people",q:"When people block a change, PRINCE2 7 advises you to:",o:["Replace them","Escalate immediately","Look at how the system is affecting them","Reduce the scope"],a:2,e:"Look at how the system/change affects them rather than seeking someone to blame."},

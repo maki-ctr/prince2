@@ -153,7 +153,7 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .q-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 30px;box-shadow:var(--shadow-lg);margin-bottom:18px}
 .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:13px;color:var(--ink-soft)}
 .q-sec-tag{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--gold)}
-.q-text{font-family:'Fraunces',serif;font-size:21px;font-weight:600;line-height:1.4;margin-bottom:22px}
+.q-text{font-family:'Fraunces',serif;font-size:21px;font-weight:600;line-height:1.4;margin-bottom:22px;white-space:pre-line}
 .opt{display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;background:var(--paper);border:1.5px solid var(--line);
   border-radius:13px;padding:15px 17px;margin-bottom:11px;cursor:pointer;font-size:15px;transition:all .14s;font-family:'Spline Sans',sans-serif;color:var(--ink)}
 .opt:hover:not(:disabled){border-color:var(--navy-2);background:var(--card)}
@@ -225,6 +225,9 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .dh-tag.dh-static{background:var(--paper-2);color:var(--ink-soft)}
 .dh-expl{font-size:14.5px;line-height:1.6;color:var(--ink);margin:14px 0 12px}
 .dh-qa{margin-top:4px}
+
+/* ---- question format badge ---- */
+.q-fmt{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:var(--navy);color:#fff;padding:2px 8px;border-radius:99px;margin-left:4px}
 
 /* ---- people ecosystem map ---- */
 .pe-diagram svg{min-width:600px}
@@ -450,7 +453,7 @@ let QUESTIONS = [
 {s:"processes",q:"Checkpoint Reports are produced in which process?",o:["Controlling a Stage","Managing Product Delivery","Managing a Stage Boundary","Closing a Project"],a:1,e:"Checkpoint Reports are produced in Managing Product Delivery (Team Manager to PM)."},
 {s:"processes",q:"The five 'Directing a Project' decision points include all EXCEPT:",o:["Authorise initiation","Authorise the project","Approve Work Packages","Authorise project closure"],a:2,e:"Work Packages are authorised in Controlling a Stage, not by the Board."},
 {s:"processes",q:"Which process focuses on the PM–Team Manager interface?",o:["Controlling a Stage","Managing Product Delivery","Managing a Stage Boundary","Initiating a Project"],a:1,e:"Managing Product Delivery formalises the PM–Team Manager link."},
-{s:"processes",q:"The Lessons Report is produced in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Closing a Project"],a:3,e:"Lessons Report is produced in Closing a Project (handed forward)."},
+{s:"processes",q:"The Lessons Report is produced in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Closing a Project"],a:3,e:"The Lessons Report is produced in Closing a Project — but note that lessons are sought, recorded, applied and shared THROUGHOUT the project (learn from experience), not only at closure. Closing a Project (handed forward)."},
 {s:"processes",q:"The minimum number of management stages in a PRINCE2 project is:",o:["1","2","3","4"],a:1,e:"Minimum two: initiation stage + at least one delivery stage."},
 {s:"processes",q:"The initiation stage is always a:",o:["Delivery stage","Management stage","Pre-project activity","Both delivery and management stage"],a:1,e:"The initiation stage is a management stage."},
 {s:"processes",q:"Premature closure is handled in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Closing a Project"],a:3,e:"Premature (early) closure is handled within Closing a Project."},
@@ -514,7 +517,7 @@ let QUESTIONS = [
 // PRINCE2 Foundation — expansion bank (questions 101-200)
 const QUESTIONS_EXT = [
 // ---------- PRINCIPLES (15) ----------
-{s:"principles",q:"How many integrated elements does PRINCE2 have in total (principles, practices, processes)?",o:["3 sets of 7","7 total","21 named items across 3 categories of 7","Variable by project"],a:2,e:"7 principles + 7 practices + 7 processes = three categories of seven."},
+{s:"principles",q:"How many principles, practices and processes does PRINCE2 7 have, respectively?",o:["5, 7, 7","7, 7, 7","7, 9, 7","3, 3, 3"],a:1,e:"Seven of each: 7 principles, 7 practices, 7 processes. (Note: the five INTEGRATED ELEMENTS are different — principles, people, practices, processes, project context.)"},
 {s:"principles",q:"A project that cannot demonstrate continued justification should:",o:["Continue to the next stage boundary","Be stopped","Reduce its scope automatically","Escalate to corporate for funding"],a:1,e:"Loss of justification is grounds to stop the project."},
 {s:"principles",q:"The principle 'learn from experience' begins:",o:["At the first stage boundary","When a problem occurs","At project start, reviewing prior lessons","Only at project close"],a:2,e:"Lessons from previous projects are reviewed at the very start (in SU)."},
 {s:"principles",q:"Which statement about PRINCE2 principles is TRUE?",o:["They are optional guidance","They can be selectively applied","They are universal and apply to every PRINCE2 project","They only apply to large projects"],a:2,e:"The principles are universal — all seven apply to every PRINCE2 project."},
@@ -568,7 +571,7 @@ const QUESTIONS_EXT = [
 {s:"processes",q:"The Project Plan is first created in:",o:["Starting up a Project","Initiating a Project","Managing a Stage Boundary","Controlling a Stage"],a:1,e:"The Project Plan is created in IP as part of the PID."},
 {s:"processes",q:"Which process is concerned with reviewing the current stage and planning the next?",o:["Controlling a Stage","Managing a Stage Boundary","Managing Product Delivery","Closing a Project"],a:1,e:"SB reviews the current stage and plans the next."},
 {s:"processes",q:"Premature closure differs from planned closure in that:",o:["It uses a different process","The project ends before all planned products are delivered","It skips the End Project Report","The Board is not involved"],a:1,e:"Premature closure (still within CP) ends the project early."},
-{s:"processes",q:"In which process are the four management approaches created?",o:["Starting up a Project","Initiating a Project","Directing a Project","Controlling a Stage"],a:1,e:"Risk, Quality, Communication and Change Control Approaches are created in IP."},
+{s:"processes",q:"In which process are the management approaches (Risk, Quality, Communication, Issue, etc.) created?",o:["Starting up a Project","Initiating a Project","Directing a Project","Controlling a Stage"],a:1,e:"The Risk, Quality, Communication and Issue Management Approaches are created in IP (among others)."},
 {s:"processes",q:"The trigger that begins the whole PRINCE2 method is the:",o:["Project Brief","Project mandate","PID","Stage Plan"],a:1,e:"The project mandate (from corporate/programme/customer) triggers SU."},
 {s:"processes",q:"Which process produces Checkpoint Reports?",o:["Controlling a Stage","Managing Product Delivery","Directing a Project","Closing a Project"],a:1,e:"Checkpoint Reports are produced in MP by the Team Manager."},
 // ---------- PRODUCTS (20) ----------
@@ -578,7 +581,7 @@ const QUESTIONS_EXT = [
 {s:"products",q:"A Product Status Account is a type of:",o:["Baseline","Record","Report","Approach"],a:2,e:"It is a report on the status of products, produced by Project Support."},
 {s:"products",q:"Which is true of the Daily Log?",o:["It is a baseline","It is a report","It behaves like a record despite being called a 'Log'","It is owned by the Executive"],a:2,e:"The Daily Log is a record (the naming is the classic trap)."},
 {s:"products",q:"The Project Brief is created in SU and:",o:["Replaces the PID","Forms the basis for the PID created in IP","Is owned by the Senior User","Is a report"],a:1,e:"The Project Brief is refined and expanded into the PID during IP."},
-{s:"products",q:"Which approach defines how the project will engage stakeholders with information?",o:["Quality Management Approach","Communication Management Approach","Change Control Approach","Risk Management Approach"],a:1,e:"The Communication Management Approach covers who needs what information, when and how."},
+{s:"products",q:"Which approach defines how the project will engage stakeholders with information?",o:["Quality Management Approach","Communication Management Approach","Issue Management Approach","Risk Management Approach"],a:1,e:"The Communication Management Approach covers who needs what information, when and how."},
 {s:"products",q:"The Issue Report is produced for:",o:["Every minor issue","Formally-managed issues","Risks only","Lessons"],a:1,e:"An Issue Report is created for formally-managed issues."},
 {s:"products",q:"Which product is updated and handed to corporate for post-project benefit measurement?",o:["End Project Report","Benefits Management Approach","Lessons Log","Risk Register"],a:1,e:"The Benefits Management Approach is handed forward for post-project measurement."},
 {s:"products",q:"A Stage Plan is produced:",o:["At project start for all stages","Near the end of the current stage, for the next stage","Only when an exception occurs","By the Team Manager"],a:1,e:"Each Stage Plan is produced near the end of the preceding stage (in SB)."},
@@ -589,7 +592,7 @@ const QUESTIONS_EXT = [
 {s:"products",q:"Which is created continuously rather than at a single point?",o:["End Stage Report","Risk Register","PID","Project Brief"],a:1,e:"The Risk Register is a record, updated continuously."},
 {s:"products",q:"Who typically maintains the Configuration Item Records day-to-day?",o:["Executive","Project Support","Senior User","Team members"],a:1,e:"Often delegated to Project Support (owned by the PM)."},
 {s:"products",q:"A baseline product is one that is:",o:["Informal and frequently changed","Approved and subject to change control","Never updated","Owned by the Team Manager"],a:1,e:"Baselines are approved and change-controlled."},
-{s:"products",q:"The Change Control Approach defines:",o:["How benefits are measured","How issues and changes will be identified, assessed and controlled","The schedule","Quality criteria"],a:1,e:"It governs how issues/changes are handled."},
+{s:"products",q:"The Issue Management Approach defines:",o:["How benefits are measured","How issues and changes will be identified, assessed and controlled","The schedule","Quality criteria"],a:1,e:"It governs how issues/changes are handled."},
 {s:"products",q:"Which two logs are started in Starting up a Project?",o:["Risk Register and Issue Register","Daily Log and Lessons Log","Quality Register and Risk Register","Issue Register and Quality Register"],a:1,e:"Daily Log and Lessons Log start in SU; the registers start in IP."},
 {s:"products",q:"The Highlight Report's audience is the:",o:["Team Manager","Project Board","Customer's customers","Suppliers"],a:1,e:"Highlight Reports go from the PM to the Project Board."},
 // ---------- ROLES (15) ----------
@@ -638,7 +641,7 @@ const QUESTIONS_DEEP = [
 {s:"practices",q:"The correct quality audit trail order is:",o:["Quality criteria → expectations → acceptance criteria","Customer's quality expectations → acceptance criteria → quality criteria → Quality Register","Acceptance criteria → expectations → records","Quality Register → expectations → criteria"],a:1,e:"Expectations (general) → acceptance criteria (whole-product, measurable) → quality criteria (per product) → Quality Register → records."},
 {s:"practices",q:"In a PRINCE2 quality review, who runs the review?",o:["Presenter","Chair","Reviewer","Administrator"],a:1,e:"The Chair runs the review; Presenter represents producers, Reviewer checks, Administrator records."},
 {s:"practices",q:"Customer's quality expectations differ from acceptance criteria because expectations are:",o:["Prioritised and measurable","A general statement of the quality wanted","Per individual product","Owned by the supplier"],a:1,e:"Expectations are general; acceptance criteria are the prioritised, measurable list."},
-{s:"practices",q:"The Quality Management Approach is produced in which process?",o:["Starting up a Project","Initiating a Project","Controlling a Stage","Managing a Stage Boundary"],a:1,e:"All four management approaches, including Quality, are produced in IP."},
+{s:"practices",q:"The Quality Management Approach is produced in which process?",o:["Starting up a Project","Initiating a Project","Controlling a Stage","Managing a Stage Boundary"],a:1,e:"The management approaches are produced in IP."},
 // ----- risk procedure (practices) -----
 {s:"practices",q:"The PRINCE2 risk management procedure is:",o:["Identify → assess → plan → implement → communicate","Assess → identify → implement","Plan → identify → close","Identify → transfer → accept"],a:0,e:"Identify, assess, plan, implement, communicate (communicate runs throughout)."},
 {s:"practices",q:"Estimating a risk's probability, impact and proximity happens in which step?",o:["Identify","Assess","Plan","Implement"],a:1,e:"Assessment estimates probability, impact and proximity, then evaluates net effect."},
@@ -648,7 +651,7 @@ const QUESTIONS_DEEP = [
 // ----- issues / change control (practices) -----
 {s:"practices",q:"The change control procedure order is:",o:["Decide → capture → implement","Capture → assess → propose → decide → implement","Propose → implement → review","Assess → implement → capture"],a:1,e:"Capture, assess, propose, decide, implement."},
 {s:"practices",q:"A risk that has now materialised should be handled as:",o:["A new risk","An issue","A dis-benefit","A tolerance"],a:1,e:"Once it has happened it is an issue, not a risk."},
-{s:"practices",q:"Which document defines the Change Authority's delegated limits?",o:["Risk Management Approach","Change Control Approach","Quality Register","Daily Log"],a:1,e:"The Change Control Approach sets out roles, limits and the change procedure."},
+{s:"practices",q:"Which document defines the Change Authority's delegated limits?",o:["Risk Management Approach","Issue Management Approach","Quality Register","Daily Log"],a:1,e:"The Issue Management Approach sets out roles, limits and the change control procedure."},
 // ----- progress / control (practices) -----
 {s:"practices",q:"Work Package tolerances are set by the:",o:["Corporate level","Project Board","Project Manager","Team Manager"],a:2,e:"The PM sets Work Package tolerances for the Team Manager; the Board sets stage tolerances for the PM."},
 {s:"practices",q:"A Checkpoint Report sent every Friday is an example of a:",o:["Event-driven control","Time-driven control","Exception","Baseline"],a:1,e:"A regular cadence makes it time-driven."},
@@ -687,13 +690,13 @@ const CARDS = [
 {deck:"Practices",front:"Organization — the four levels of organisation?",back:"1. Corporate/programme/customer (sets mandate)\n2. Directing — Project Board\n3. Managing — Project Manager\n4. Delivering — Team Managers"},
 {deck:"Practices",front:"Plans — three levels + what Exception Plan replaces?",back:"Project Plan, Stage Plan, Team Plan. Exception Plan replaces a Stage Plan or Project Plan — never a Team Plan."},
 {deck:"Practices",front:"Quality — acceptance criteria vs quality criteria?",back:"Acceptance criteria: prioritised list for the whole project product (Project Product Description, owned by Senior User). Quality criteria: per individual product (Product Description). QA is external to the project."},
-{deck:"Practices",front:"Risk — threat responses (5+1) and opportunity responses (4)?",back:"Threats: avoid, reduce, transfer, share, accept (+ prepare contingent plans). Opportunities: exploit, enhance, share, accept (reject also possible)."},
-{deck:"Practices",front:"Issues — the three types?",back:"1. Request for change\n2. Off-specification (should be delivered to standard but won't be)\n3. Problem/concern (anything else)"},
+{deck:"Practices",front:"Risk — the response options (QRG/courseware)?",back:"Avoid / Exploit · Reduce / Enhance · Transfer · Share · Accept · Prepare contingent plans. (There is no 'reject' response in PRINCE2 7.)"},
+{deck:"Practices",front:"Issues — the types (PRINCE2 7)?",back:"Change · Event external to the project · Request for change · Business opportunity · Problem/concern · Off-specification. (Six per the courseware; the QRG splits problem/concern.)"},
 {deck:"Practices",front:"Progress — the report cadences (who→whom)?",back:"Highlight: PM→Board (time-driven). Checkpoint: Team Mgr→PM. End Stage Report: at SB. End Project Report: at CP. Exception Report: event-driven on forecast breach."},
 {deck:"Processes",front:"Name the 7 processes.",back:"SU (Starting up), DP (Directing), IP (Initiating), CS (Controlling a Stage), MP (Managing Product Delivery), SB (Managing a Stage Boundary), CP (Closing a Project)."},
 {deck:"Processes",front:"SU — trigger and main output?",back:"Trigger: the project mandate. Output: the Project Brief (NOT the PID — that's IP). Also starts Daily Log + Lessons Log."},
 {deck:"Processes",front:"DP — the 5 decision points?",back:"1. Authorise initiation\n2. Authorise the project\n3. Authorise a Stage/Exception Plan\n4. Give ad hoc direction\n5. Authorise project closure"},
-{deck:"Processes",front:"IP — main output and what it contains?",back:"The PID: project definition, approach, detailed Business Case, team structure, the four approaches (Risk/Quality/Comms/Change), Project Plan, controls."},
+{deck:"Processes",front:"IP — main output and what it contains?",back:"The PID: project definition, approach, detailed Business Case, team structure, the management approaches (e.g. Risk, Quality, Communication, Issue, plus Sustainability, Commercial, Change, Digital & Data), Project Plan, controls."},
 {deck:"Processes",front:"CS vs MP — the difference?",back:"CS = PM's day-to-day stage management (authorise WPs, Highlight Reports, corrective action). MP = the PM↔Team Manager interface (accept/execute/evaluate a Work Package, then notify completion; Checkpoint Reports)."},
 {deck:"Processes",front:"SB — two triggers + key outputs?",back:"Triggers: approaching end of a stage, OR an exception. Outputs: next Stage Plan (or Exception Plan), updated Project Plan/Business Case, End Stage Report."},
 {deck:"Processes",front:"CP — purpose + key outputs?",back:"Fixed point to confirm acceptance. Outputs: End Project Report, Lessons Report, updated Benefits Management Approach. Premature closure also handled here."},
@@ -786,7 +789,7 @@ function diagLifecycle(){
 const LC_DETAIL={
   DP:{n:'Directing a Project',t:'Trigger: runs end of SU → end of CP',p:'The Board makes the 5 key decisions (authorise initiation, authorise project, authorise stage/exception plan, ad hoc direction, authorise closure).',o:'Board authorisations & direction'},
   SU:{n:'Starting up a Project',t:'Trigger: the project mandate',p:'"Do we have a viable, worthwhile project?" Appoint Exec + PM, capture lessons, outline Business Case.',o:'Project Brief · Initiation Stage Plan'},
-  IP:{n:'Initiating a Project',t:'Trigger: Board authorises initiation',p:'Build solid foundations: detailed Business Case, the four approaches, Project Plan.',o:'PID (the master baseline)'},
+  IP:{n:'Initiating a Project',t:'Trigger: Board authorises initiation',p:'Build solid foundations: detailed Business Case, the management approaches, Project Plan.',o:'PID (the master baseline)'},
   CS:{n:'Controlling a Stage',t:'Repeats through every delivery stage',p:"The PM's day-to-day: authorise Work Packages, handle issues/risks, take corrective action.",o:'Highlight Reports · escalations'},
   MP:{n:'Managing Product Delivery',t:'Runs in parallel with CS',p:'The PM↔Team Manager interface: accept, execute, evaluate a Work Package, then notify completion.',o:'Checkpoint Reports · completed products'},
   SB:{n:'Managing a Stage Boundary',t:'Trigger: near stage end OR an exception',p:'Plan the next stage, update Project Plan + Business Case, report stage end.',o:'Next Stage Plan (or Exception Plan) · End Stage Report'},
@@ -1499,7 +1502,7 @@ RENDER.processes = (c)=>courseShell(c,'processes','Part 3','The 7 Processes',
   <div class="card">
     ${pblock('SU','Starting up a Project','"Do we have a viable, worthwhile project?" Triggered by the <b>project mandate</b>. Appoints Executive + PM, captures prior lessons, builds the <b>Project Brief</b> and Initiation Stage Plan. Starts Daily Log + Lessons Log.','pre-project; produces the <em>Project Brief</em> (not the PID).')}
     ${pblock('DP','Directing a Project','The Project Board\'s accountability process — spans end of SU to end of CP. Five decision points: authorise initiation · authorise the project · authorise a Stage/Exception Plan · give ad hoc direction · authorise closure.','the 5 decision points; DP runs throughout; ad hoc direction.')}
-    ${pblock('IP','Initiating a Project','"Solid foundations" before significant spend. Refines the Business Case (→ detailed), builds the four approaches (Risk/Quality/Comms/Change), creates the Project Plan, assembles the <b>PID</b>.','PID contents; detailed Business Case lives here.')}
+    ${pblock('IP','Initiating a Project','"Solid foundations" before significant spend. Refines the Business Case (→ detailed), builds the management approaches (Risk, Quality, Communication, Issue, Sustainability, Commercial, Change, Digital & Data), creates the Project Plan, assembles the <b>PID</b>.','PID contents; detailed Business Case lives here.')}
     ${pblock('CS','Controlling a Stage','The PM\'s day-to-day: authorise Work Packages, review status, handle issues/risks, escalate, take corrective action, send <b>Highlight Reports</b> to the Board.','Work Package authorisation; Highlight cadence; where corrective action happens.')}
     ${pblock('MP','Managing Product Delivery','The PM↔Team Manager interface. Activities: accept · execute · evaluate a Work Package, then notify completion. (Evaluate replaced the old deliver term in v7.) Produces <b>Checkpoint Reports</b> (TM→PM).','three sub-processes; Checkpoint (not Highlight) Report.')}
     ${pblock('SB','Managing a Stage Boundary','Near the end of a stage (or on an exception). Plans the next stage, updates Project Plan + Business Case, produces the <b>End Stage Report</b> (or an Exception Plan).','two triggers; what gets updated; End Stage Report.')}
@@ -1535,7 +1538,7 @@ RENDER.products = (c)=>courseShell(c,'products','Part 4','Management Products',
     <tr><td>Project / Stage / Team / Exception Plan</td><td>IP / SB / SB / SB</td><td>PM / PM / Team Mgr / PM</td></tr>
     <tr><td>Product Description</td><td>as identified</td><td>Project Manager</td></tr>
     <tr><td>Project Product Description</td><td>SU</td><td>Senior User</td></tr>
-    <tr><td>Quality / Risk / Comms / Change Control Approach</td><td>IP</td><td>Project Manager</td></tr>
+    <tr><td>Quality / Risk / Comms / Issue Management Approach</td><td>IP</td><td>Project Manager</td></tr>
     <tr><td>Work Package</td><td>CS</td><td>Project Manager</td></tr>
   </table>
   <h3 class="sub">Records — working logs, updated continuously</h3>
@@ -1564,13 +1567,13 @@ RENDER.products = (c)=>courseShell(c,'products','Part 4','Management Products',
   <p>The harder questions ask what a product <em>contains</em>, not just when it's made. The essentials:</p>
   <table><tr><th>Product</th><th>Key contents</th></tr>
     <tr><td>Business Case</td><td>Reasons · business options (do nothing/minimum/something) · benefits &amp; dis-benefits · costs · timescale · investment appraisal · major risks</td></tr>
-    <tr><td>PID</td><td>Project definition · approach · detailed Business Case · team structure &amp; roles · the four approaches · Project Plan · controls · tailoring</td></tr>
+    <tr><td>PID</td><td>Project definition · approach · detailed Business Case · team structure &amp; roles · the management approaches · Project Plan · controls · tailoring</td></tr>
     <tr><td>Project Brief</td><td>Project definition · outline Business Case · Project Product Description · approach · team structure</td></tr>
     <tr><td>Project Product Description</td><td>Overall purpose · composition · acceptance criteria · acceptance method · customer's quality expectations</td></tr>
     <tr><td>Product Description</td><td>Purpose · composition · derivation · format · quality criteria · quality method · quality responsibilities</td></tr>
     <tr><td>Plan (any level)</td><td>Plan description · prerequisites · external dependencies · assumptions · lessons · the products · schedule · tolerances · controls</td></tr>
     <tr><td>Work Package</td><td>Authorisation · the Product Description(s) · techniques/standards · constraints · reporting &amp; escalation requirements · tolerances</td></tr>
-    <tr><td>The four Approaches</td><td>Each defines: the procedure · tools &amp; techniques · roles/responsibilities · timing · how the related register/record is used</td></tr>
+    <tr><td>The management Approaches</td><td>Each defines: the procedure · tools &amp; techniques · roles/responsibilities · timing · how the related register/record is used</td></tr>
     <tr><td>Highlight Report</td><td>Period covered · status · products this period &amp; next · tolerance status · key issues/risks · requests to the Board</td></tr>
     <tr><td>End Stage Report</td><td>Stage performance vs plan · products delivered · Business Case &amp; risk review · lessons · forecast for next stage</td></tr>
     <tr><td>End Project Report</td><td>Project performance vs PID · benefits achieved to date · residual benefits (to Benefits Approach) · lessons · follow-on actions</td></tr>
@@ -1834,7 +1837,7 @@ function renderDrill(){
   drill.answered=false;
   area.innerHTML=`
     <div class="q-card">
-      <div class="q-meta"><span class="q-sec-tag">${SEC_LABEL[q.s]}</span><span>${drill.idx+1} / ${drill.pool.length} · score ${drill.correct}</span></div>
+      <div class="q-meta"><span class="q-sec-tag">${SEC_LABEL[q.s]}${q.type?` · <span class="q-fmt">${q.type}</span>`:''}</span><span>${drill.idx+1} / ${drill.pool.length} · score ${drill.correct}</span></div>
       <div class="q-text">${q.q}</div>
       <div id="drillOpts">${q.o.map((o,i)=>`<button class="opt" onclick="answerDrill(${i},${gi})"><span class="ltr">${LETTERS[i]}</span><span>${o}</span></button>`).join('')}</div>
       <div class="explain" id="drillExp"></div>
@@ -1924,7 +1927,7 @@ function renderExamQ(c){
         <button class="btn btn-ghost" style="padding:8px 14px" onclick="confirmSubmit()">Submit</button></div>
     </div>
     <div class="q-card">
-      <div class="q-meta"><span class="q-sec-tag">Q${i+1}</span>
+      <div class="q-meta"><span class="q-sec-tag">Q${i+1}${q.type?` · <span class="q-fmt">${q.type}</span>`:''}</span>
         <button class="btn btn-ghost" style="padding:5px 13px;font-size:13px;${exam.flags[i]?'background:var(--gold-soft);border-color:var(--gold)':''}" onclick="toggleFlag()">${exam.flags[i]?'★ Flagged':'☆ Flag'}</button></div>
       <div class="q-text">${q.q}</div>
       <div>${q.o.map((o,j)=>`<button class="opt ${exam.answers[i]===j?'':''}" style="${exam.answers[i]===j?'border-color:var(--navy);background:var(--card)':''}" onclick="pickExam(${j})"><span class="ltr" style="${exam.answers[i]===j?'background:var(--navy);border-color:var(--navy);color:#fff':''}">${LETTERS[j]}</span><span>${o}</span></button>`).join('')}</div>
@@ -2199,7 +2202,7 @@ RENDER.practices_deep = (c)=>{
       ${diagChange()}
       <p><strong>Capture</strong> (log it) → <strong>Assess</strong> (impact on objectives, Business Case, risk) → <strong>Propose</strong> (options and recommendation) → <strong>Decide</strong> (PM, Change Authority, or Board per the limits) → <strong>Implement</strong>.</p>
       <div class="callout"><div class="tag">Daily Log vs Issue Register</div>Minor issues the PM handles informally go in the <strong>Daily Log</strong>. Anything formally managed through change control goes in the <strong>Issue Register</strong>, with an <strong>Issue Report</strong> for the detail.</div>
-      <div class="callout key"><div class="tag">Composition: Change Control Approach</div>How issues and changes are handled: the procedure, roles (incl. Change Authority and its limits), any change budget, tools, and how the Issue Register is used. Produced in IP.</div>`})}
+      <div class="callout key"><div class="tag">Composition: Issue Management Approach</div>How issues and changes are handled: the procedure, roles (incl. Change Authority and its limits), any change budget, tools, and how the Issue Register is used. Produced in IP.</div>`})}
 
     ${deepPractice({id:'progress',num:'7',name:'Progress',
       purpose:'Monitor actual vs planned achievement, forecast viability, and control unacceptable deviations.',
@@ -2317,7 +2320,7 @@ const VIDEO_MODULES = [
     ]
   },
   {
-    n:'3', id:'TB-P7wQU3n4', title:'People & the Seven Practices',
+    n:'3', id:'Y8kHabWzWCk', title:'People & the Seven Practices',
     blurb:'The v7 People element, and all seven practices with their owners and the distinctions the exam probes.',
     qa:[
       ['Why is "People" new and important in v7?','The 6th edition had no people element. v7 puts people at the centre because a temporary team, assembled across boundaries, needs active leadership. It is a pillar, not a footnote.'],
@@ -2391,7 +2394,7 @@ const VIDEO_UPCOMING = [
    complete self-test resource across all 8 modules. Shown under "Coming next". */
 const VIDEO_PENDING_QA = [
   {
-    n:'6', id:'j1SgJyws1V8', title:'The Project Environment & Roles',
+    n:'6', id:'7ep8n58RSlY', title:'The Project Environment & Roles',
     blurb:'The role structure and the authority questions the exam loves \u2014 who does what, who reports to whom, and the forbidden combinations.',
     qa:[
       ['Why do roles matter so much on the exam?','A large share of Foundation questions reduce to "who is allowed to do X?" — who owns the business case, approves the plan, signs off a change. Knowing the role structure cold answers a whole category of questions.'],
@@ -2657,6 +2660,50 @@ RENDER.diagrams = (c)=>{
 };
 
 
+// New exam-format questions: missing-word, list, negative — all four-option, one-correct.
+// type field labels the style; the engine handles them like standard questions.
+const QUESTIONS_FMT = [
+// ================= MISSING WORD =================
+{s:"principles",type:"Missing word",q:"A PRINCE2 project must have continued business [ ? ] throughout its life, or it should be stopped.",o:["justification","documentation","sponsorship","reporting"],a:0,e:"Continued business justification — the project stops if its justification is no longer valid."},
+{s:"principles",type:"Missing word",q:"Tolerances are set to establish the limits of delegated [ ? ].",o:["budget","authority","scope","resource"],a:1,e:"Tolerances define the limits of delegated authority (manage by exception)."},
+{s:"principles",type:"Missing word",q:"A PRINCE2 project is planned, monitored and controlled on a [ ? ] basis.",o:["weekly","product","stage-by-stage","risk"],a:2,e:"Manage by stages: the project is controlled stage by stage."},
+{s:"practices",type:"Missing word",q:"The [ ? ] represents the user interest and is accountable for specifying the benefits.",o:["Executive","Senior User","Senior Supplier","Project Manager"],a:1,e:"The Senior User represents users and specifies/confirms benefits."},
+{s:"practices",type:"Missing word",q:"A measurable decline resulting from an outcome, perceived as negative, is a [ ? ].",o:["risk","dis-benefit","constraint","threat"],a:1,e:"A dis-benefit is a measurable decline perceived as negative by the investing organisation."},
+{s:"practices",type:"Missing word",q:"In the value chain, outputs deliver [ ? ], which embed to create outcomes.",o:["benefits","capabilities","objectives","products"],a:1,e:"Outputs → capabilities → outcomes → benefits. Capabilities link outputs to outcomes."},
+{s:"practices",type:"Missing word",q:"A prioritized list of criteria the project product must meet before the user accepts it is the [ ? ].",o:["quality criteria","acceptance criteria","quality specifications","requirements"],a:1,e:"Acceptance criteria — the prioritized, measurable list the project product must meet for acceptance."},
+{s:"practices",type:"Missing word",q:"A risk is measured by a combination of probability and [ ? ].",o:["proximity","impact","velocity","cost"],a:1,e:"A risk is measured by the probability of occurrence and the magnitude of its impact on objectives."},
+{s:"processes",type:"Missing word",q:"The process of starting up a project produces the project [ ? ].",o:["initiation documentation","brief","plan","mandate"],a:1,e:"Starting up a project produces the project brief (not the PID — that is produced in initiating)."},
+{s:"processes",type:"Missing word",q:"The [ ? ] is an aggregation of management products used to gain authorization for the project to proceed.",o:["project brief","PID","business case","stage plan"],a:1,e:"The Project Initiation Documentation (PID) is assembled in initiating a project."},
+{s:"products",type:"Missing word",q:"A [ ? ] is a plan that follows an exception report and explains how the project will respond to the exception.",o:["stage plan","exception plan","team plan","project plan"],a:1,e:"An exception plan follows an exception report and replaces a stage or project plan."},
+{s:"people",type:"Missing word",q:"Change management is the means by which an organization transitions from the current state to the [ ? ] state.",o:["target","final","baseline","approved"],a:0,e:"Change management moves the organisation from the current state to the target state."},
+// ================= LIST =================
+{s:"principles",type:"List",q:"Which 2 statements about PRINCE2 principles are CORRECT?\n1. All seven principles must be applied.\n2. Principles can be tailored out on small projects.\n3. Principles are universal and self-validating.\n4. There are five principles.",o:["1 and 2","1 and 3","2 and 4","3 and 4"],a:1,e:"1 and 3: all seven apply and they are universal/self-validating. You cannot tailor a principle out; there are seven, not five."},
+{s:"practices",type:"List",q:"Which 2 are among the seven aspects of performance (tolerances)?\n1. Sustainability\n2. Reputation\n3. Scope\n4. Morale",o:["1 and 3","1 and 4","2 and 3","2 and 4"],a:0,e:"1 and 3: the seven are benefits, cost, time, quality, scope, sustainability, risk. Reputation and morale are not among them."},
+{s:"practices",type:"List",q:"Which 2 statements about the three project interests are CORRECT?\n1. The Executive represents the business interest.\n2. There can be more than one Executive.\n3. The Senior Supplier is accountable for product quality.\n4. The Senior User represents suppliers.",o:["1 and 3","1 and 4","2 and 3","2 and 4"],a:0,e:"1 and 3. There is only one Executive; the Senior User represents users, not suppliers."},
+{s:"processes",type:"List",q:"Which 2 are activities of Directing a Project?\n1. Authorize initiation\n2. Authorize a work package\n3. Give ongoing direction\n4. Evaluate a work package",o:["1 and 2","1 and 3","2 and 4","3 and 4"],a:1,e:"1 and 3. Authorizing and evaluating work packages are Controlling a Stage / Managing Product Delivery, not Directing."},
+{s:"processes",type:"List",q:"Which 2 statements about Managing Product Delivery are CORRECT?\n1. It is the Project Manager's process.\n2. Its activities include accept, execute, evaluate.\n3. It produces checkpoint reports.\n4. It produces the PID.",o:["1 and 4","2 and 3","1 and 3","2 and 4"],a:1,e:"2 and 3. MP is the Team Manager's interface (accept/execute/evaluate, notify completion) and produces checkpoint reports."},
+{s:"products",type:"List",q:"Which 2 are baseline management products?\n1. Risk register\n2. Project plan\n3. Highlight report\n4. PID",o:["1 and 3","2 and 4","1 and 4","2 and 3"],a:1,e:"2 and 4. Registers are records; reports are reports. The project plan and PID are baselines."},
+{s:"practices",type:"List",q:"Which 2 are valid risk responses in PRINCE2 7?\n1. Reject\n2. Transfer\n3. Enhance\n4. Ignore",o:["1 and 4","2 and 3","1 and 3","2 and 4"],a:1,e:"2 and 3. Transfer (threat) and enhance (opportunity) are valid. There is no 'reject' or 'ignore' response in v7."},
+{s:"roles",type:"List",q:"Which 2 role rules are CORRECT?\n1. The Executive can also be the Project Manager.\n2. Project Assurance must be independent of the PM.\n3. The PM may take the Project Support role on a small project.\n4. The Team Manager reports directly to the Board.",o:["1 and 4","2 and 3","1 and 3","2 and 4"],a:1,e:"2 and 3. Executive cannot be the PM; the Team Manager reports to the PM, not the Board."},
+{s:"people",type:"List",q:"Which 2 are among the people-focused themes in PRINCE2 7?\n1. Leading successful change\n2. Managing the budget\n3. Communication\n4. Writing the PID",o:["1 and 3","1 and 4","2 and 3","2 and 4"],a:0,e:"1 and 3. The people themes are leading successful change, leading/managing successful teams, and communication."},
+{s:"tailoring",type:"List",q:"Which 2 statements about tailoring are CORRECT?\n1. Tailoring is mandatory.\n2. You may tailor out a principle if documented.\n3. Tailoring decisions are recorded in the PID.\n4. Tailoring means using every product exactly as written.",o:["1 and 3","1 and 4","2 and 3","2 and 4"],a:0,e:"1 and 3. Tailoring is mandatory and recorded in the PID; principles can never be tailored out."},
+// ================= NEGATIVE =================
+{s:"principles",type:"Negative",q:"Which is NOT one of the seven PRINCE2 principles?",o:["Manage by stages","Focus on products","Deliver on time and budget","Learn from experience"],a:2,e:"'Deliver on time and budget' is not a principle. The seven are continued business justification, learn from experience, defined roles/responsibilities/relationships, manage by stages, manage by exception, focus on products, tailor to suit."},
+{s:"practices",type:"Negative",q:"Which is NOT one of the seven aspects of performance to be managed?",o:["Benefits","Reputation","Sustainability","Risk"],a:1,e:"Reputation is not one. The seven are benefits, cost, time, quality, scope, sustainability, risk."},
+{s:"processes",type:"Negative",q:"Which is NOT one of the seven PRINCE2 processes?",o:["Starting up a project","Managing product delivery","Managing risk","Closing a project"],a:2,e:"'Managing risk' is a practice, not a process. The seven processes are SU, DP, IP, CS, MP, SB, CP."},
+{s:"roles",type:"Negative",q:"Which is NOT a responsibility of the Project Manager?",o:["Authorizing work packages","Owning the business case","Reporting highlights to the Board","Taking corrective action within tolerance"],a:1,e:"The Executive owns the business case, not the PM."},
+{s:"products",type:"Negative",q:"Which is NOT a type of management product?",o:["Baseline","Record","Report","Mandate"],a:3,e:"The three types are baselines, records and reports. The mandate is an external trigger, not a management-product category."},
+{s:"practices",type:"Negative",q:"Which is NOT one of the issue types in PRINCE2 7?",o:["Request for change","Off-specification","Risk","Business opportunity"],a:2,e:"A risk is not an issue — a risk might happen; an issue has happened. The issue types include change, event external, request for change, business opportunity, problem/concern, off-specification."},
+{s:"processes",type:"Negative",q:"Which is NOT an output of Starting up a project?",o:["Project brief","Outline business case","PID","Initiation stage plan"],a:2,e:"The PID is produced in Initiating a Project, not Starting Up. SU produces the project brief and outline business case."},
+{s:"practices",type:"Negative",q:"Which is NOT a valid plan type in PRINCE2?",o:["Project plan","Stage plan","Delivery plan","Exception plan"],a:2,e:"'Delivery plan' is not a PRINCE2 plan type. The types are project, stage, team and exception plans."},
+{s:"tailoring",type:"Negative",q:"Which can NOT be tailored on a PRINCE2 project?",o:["Management products","The seven principles","Roles","Terminology"],a:1,e:"The seven principles can never be tailored out. Products, roles and terminology can be tailored."},
+{s:"people",type:"Negative",q:"Which is NOT true of a stakeholder in PRINCE2 7?",o:["Can affect the project","Can be affected by the project","Must hold a formal project role","May perceive itself to be affected"],a:2,e:"A stakeholder need not hold a formal role — key impacted people count even without one."}
+];
+
+/* merge into the main bank */
+if(typeof QUESTIONS!=='undefined' && Array.isArray(QUESTIONS)){ QUESTIONS.push(...QUESTIONS_FMT); }
+
+
 /* ---------- expose handlers (namespace + globals so all onclick styles resolve) ---------- */
 const App = { go, openNav, closeNav, bpZoom, startFc, flipFc, rateFc, startDrill, answerDrill,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
@@ -2730,7 +2777,7 @@ RENDER.resit = (c)=>{
 
     <div class="callout trap"><div class="tag">The trap that likely cost you marks</div><strong>Change management ≠ change control.</strong><br>
       <strong>Change management</strong> (people element) = helping people <em>adopt</em> the project's outputs — moving them from the current state to the target state. Its product is the <strong>Change Management Approach</strong>.<br>
-      <strong>Change control</strong> (Issues practice) = handling issues and requests for change to <em>baselines</em> after something has happened. Its product is the <strong>Change Control Approach</strong>.<br>
+      <strong>Change control</strong> (Issues practice) = handling issues and requests for change to <em>baselines</em> after something has happened. Its product is the <strong>Issue Management Approach</strong> (change control is the concept within it).<br>
       Same word "change", two completely different things. Exam questions deliberately blur them.</div>
 
     <h3 class="sub">People management products</h3>

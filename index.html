@@ -1262,7 +1262,7 @@ const STATE_VERSION = 2;
 let state = load();
 function defaults(){
   return { version:STATE_VERSION, read:{}, cards:{}, examBest:null, examHistory:[],
-           drillStats:{}, checklist:{}, recentSeen:[], lastView:'dashboard' };
+           drillStats:{}, checklist:{}, recentSeen:[], missQ:{}, lastView:'dashboard' };
 }
 function migrate(raw){
   if(!raw || typeof raw!=='object') return defaults();
@@ -1288,7 +1288,7 @@ function load(){
   catch(e){ return defaults(); }
   const merged = Object.assign(defaults(), migrate(parsed));
   // guard: ensure nested containers exist even if stored state was partial
-  ['read','cards','drillStats','checklist'].forEach(k=>{ if(!merged[k]||typeof merged[k]!=='object')merged[k]={}; });
+  ['read','cards','drillStats','checklist','missQ'].forEach(k=>{ if(!merged[k]||typeof merged[k]!=='object')merged[k]={}; });
   if(!Array.isArray(merged.examHistory))merged.examHistory=[];
   if(!Array.isArray(merged.recentSeen))merged.recentSeen=[];
   return merged;
@@ -1800,7 +1800,11 @@ RENDER.drill=(c)=>{
   c.innerHTML=`
     <div class="eyebrow">Practice</div>
     <h1 class="page">Drill by Topic</h1>
-    <p class="lede">Untimed practice with instant explanations. Pick a topic — or drill the whole bank. Questions shuffle each round.</p>
+    <p class="lede">Untimed practice with instant explanations. Pick a topic — or drill the whole bank. Questions you get wrong are re-queued and spaced, like flashcards.</p>
+    ${(()=>{const now=Date.now();const miss=state.missQ||{};const total=Object.keys(miss).length;const due=Object.keys(miss).filter(k=>(miss[k].due||0)<=now).length;
+      return total?`<div class="quiz-setup" style="margin-bottom:4px"><button class="sec-choice sel" onclick="startDrill('mistakes')" style="border-color:var(--gold);background:var(--paper-2)">
+        <h4>◎ My mistakes</h4><div class="c">${total} tracked · ${due} due now</div>
+        <div class="acc" style="color:var(--gold)">${due?'review these first':'none due — all spaced out'}</div></button></div>`:'';})()}
     <div class="quiz-setup" id="drillSetup">
       ${SECTIONS.map(s=>{
         const st=state.drillStats[s]||{seen:0,right:0};
@@ -1817,7 +1821,16 @@ RENDER.drill=(c)=>{
 };
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function startDrill(sec){
-  let pool=QUESTIONS.map((q,i)=>({q,gi:i})).filter(x=>sec==='all'||x.q.s===sec);
+  let pool;
+  if(sec==='mistakes'){
+    const miss=state.missQ||{}, now=Date.now();
+    const keys=Object.keys(miss);
+    const dueKeys=keys.filter(k=>(miss[k].due||0)<=now);
+    const useKeys=dueKeys.length?dueKeys:keys;   // if none due, review all tracked mistakes
+    pool=useKeys.map(k=>({q:QUESTIONS[+k.slice(1)],gi:+k.slice(1)})).filter(x=>x.q);
+  }else{
+    pool=QUESTIONS.map((q,i)=>({q,gi:i})).filter(x=>sec==='all'||x.q.s===sec);
+  }
   drill={pool:shuffle(pool),idx:0,correct:0,answered:false,sec};
   document.getElementById('drillSetup').classList.add('hidden');
   renderDrill();
@@ -1854,7 +1867,22 @@ function answerDrill(choice,gi){
   const ok=choice===right;
   if(ok)drill.correct++;
   // stats
-  const s=q.s; const st=state.drillStats[s]||{seen:0,right:0}; st.seen++; if(ok)st.right++; state.drillStats[s]=st; save();
+  const s=q.s; const st=state.drillStats[s]||{seen:0,right:0}; st.seen++; if(ok)st.right++; state.drillStats[s]=st;
+  // spaced re-queue of mistakes (same interval ladder as flashcards)
+  if(!state.missQ) state.missQ={};
+  const key='q'+gi;
+  const DAY=86400000, LADDER=[1,3,8,20,50];
+  const startDay=(d)=>{const t=new Date();t.setHours(0,0,0,0);return t.getTime()+Math.max(0,Math.round(d))*DAY;};
+  if(!ok){
+    // wrong: (re)start at the bottom of the ladder, due tomorrow
+    state.missQ[key]={step:0, due:startDay(LADDER[0]), last:Date.now()};
+  }else if(state.missQ[key]){
+    // right: advance one step; graduate (remove) once past the last interval
+    const step=(state.missQ[key].step||0)+1;
+    if(step>=LADDER.length){ delete state.missQ[key]; }       // mastered
+    else { state.missQ[key]={step, due:startDay(LADDER[step]), last:Date.now()}; }
+  }
+  save();
   const exp=document.getElementById('drillExp');
   exp.className='explain show '+(ok?'right':'wrong');
   exp.innerHTML=`<span class="v">${ok?'Correct':'Not quite — answer: '+LETTERS[right]}</span>${q.e}`;

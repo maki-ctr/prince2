@@ -167,6 +167,15 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 .explain{border-radius:12px;padding:15px 18px;margin-top:6px;font-size:14.5px;line-height:1.5;display:none}
 .explain.show{display:block}
 .explain.right{background:var(--green-soft);border-left:4px solid var(--green)}
+.ref-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+.ref-lbl{font-size:13px;font-weight:600;color:var(--ink-soft);margin-right:2px}
+.ref-link{font:inherit;font-size:13.5px;font-weight:600;color:var(--navy);background:transparent;border:1px solid var(--line);border-radius:99px;padding:6px 13px;cursor:pointer;text-align:left}
+.ref-link:hover{border-color:var(--navy);background:var(--card)}
+.ref-link:focus-visible,.ref-back:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.ref-link.ref-vid{color:var(--ink-soft)}
+.ref-back{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;font:inherit;font-size:14px;font-weight:600;color:#fff;background:var(--navy);border:0;border-radius:99px;padding:12px 18px;box-shadow:var(--shadow-lg);cursor:pointer}
+.ref-hit{outline:3px solid var(--gold-soft);outline-offset:4px;border-radius:10px;transition:outline-color 2s ease}
+@media (prefers-reduced-motion: reduce){.ref-hit{transition:none}}
 .explain.wrong{background:var(--red-soft);border-left:4px solid var(--red)}
 .explain .v{font-weight:700;display:block;margin-bottom:3px}
 .explain.right .v{color:var(--green)}
@@ -709,7 +718,7 @@ const CARDS = [
 {deck:"Procedures",front:"The risk management procedure — 5 steps?",back:"Identify → Assess (probability, impact, proximity) → Plan (responses) → Implement (owner + actionee) → Communicate (throughout)."},
 {deck:"Procedures",front:"The change control procedure — 5 steps?",back:"Capture → Assess → Propose → Decide → Implement."},
 {deck:"Procedures",front:"The value chain (Business Case)?",back:"Output (product) → Outcome (change from using it) → Benefit (measurable improvement). A foreseeable negative is a dis-benefit (accepted, not uncertain)."},
-{deck:"Procedures",front:"Threat responses vs opportunity responses?",back:"Threats: Avoid, Reduce, Transfer, Share, Accept (+ contingent plans). Opportunities: Exploit, Enhance, Share, Accept, Reject. Share & Accept are in both."},
+{deck:"Procedures",front:"Threat responses vs opportunity responses?",back:"Threats: Avoid, Reduce, Transfer, Share, Accept (+ contingent plans). Opportunities: Exploit, Enhance, Share, Accept. Share & Accept are in both. (No Reject in v7.)"},
 {deck:"Procedures",front:"Tolerance cascade — who sets for whom?",back:"Corporate → project tolerances. Project Board → stage tolerances (for PM). PM → Work Package tolerances (for Team Manager). Forecast breach escalates up one level."},
 {deck:"Composition",front:"What's in any Approach (Risk/Quality/Comms/Change)?",back:"Same skeleton: procedure · tools & techniques · roles/responsibilities · timing · how the related register/record is used. All produced in IP."},
 {deck:"Composition",front:"What's in a Product Description?",back:"Purpose · composition · derivation · format · quality criteria · quality method · quality responsibilities. (No investment appraisal — that's the Business Case.)"},
@@ -1327,6 +1336,7 @@ function buildNav(){
   });
 }
 function go(id){
+  { const rb=document.getElementById('refBack'); if(rb) rb.remove(); }
   state.lastView=id; save();
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.v===id));
   const c=document.getElementById('content');
@@ -2067,6 +2077,7 @@ function renderReview(){
           <div class="opt correct" style="cursor:default"><span class="ltr">${LETTERS[x.q.a]}</span><span>Correct: ${x.q.o[x.q.a]}</span></div>
         </div>
         <div class="explain show right" style="margin-top:0"><span class="v">Why</span>${x.q.e}</div>
+        ${refLinks(x.q)}
       </div>`;}).join('')
       :`<div class="card" style="text-align:center;padding:34px"><div class="serif" style="font-size:20px;font-weight:600">Nothing here ✓</div><p style="color:var(--ink-soft);margin:0">No ${reviewFilter==='wrong'?'wrong answers':'flagged questions'} this time.</p></div>`}
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
@@ -2074,6 +2085,138 @@ function renderReview(){
       <button class="btn btn-ghost" onclick="App.renderExamResult(document.getElementById('content'))">← Back to result</button>
     </div>`;
   window.scrollTo(0,0);
+}
+
+/* ---------------- STUDY REFERENCES (mock exam review) ---------------- */
+/* Each target: view to open, heading text to find on that page, label shown, keyword pattern, video module. */
+const REF_TARGETS=[
+ {v:'principles',h:'Continued business justification',re:/business justification|justif/gi,vid:2},
+ {v:'principles',h:'Learn from experience',re:/learn from experience|lessons? (log|report|learned)?/gi,vid:2},
+ {v:'principles',h:'Defined roles, responsibilities',re:/defined roles|roles, responsibilities/gi,vid:2},
+ {v:'principles',h:'Manage by stages',re:/manage by stages|management stages?|minimum (number of )?(two|2)/gi,vid:2},
+ {v:'principles',h:'Manage by exception',re:/manage by exception|management by exception/gi,vid:2},
+ {v:'principles',h:'Focus on products',re:/focus on products|product focus/gi,vid:2},
+ {v:'principles',h:'Tailor to suit the project',re:/tailor to suit/gi,vid:2},
+ {v:'principles',h:'The seven tolerances',re:/tolerances?|performance aspects?/gi,vid:2},
+
+ {v:'practices_deep',h:'The value chain',re:/outputs?\b|outcomes?|dis-?benefits?|benefits?\b|value chain/gi,vid:3},
+ {v:'practices_deep',h:"What's in the Business Case",re:/business case|investment appraisal|business options?|do nothing/gi,vid:3},
+ {v:'practices_deep',h:'Four levels of organisation',re:/levels? of (the )?organi[sz]ation|corporate|programme|directing|delivering level/gi,vid:6},
+ {v:'practices_deep',h:'The three interests',re:/three interests|business, user|user interest|supplier interest/gi,vid:6},
+ {v:'practices_deep',h:'Assurance vs Support vs Change Authority',re:/project assurance|project support|change authority/gi,vid:6},
+ {v:'practices_deep',h:'The product-based planning technique',re:/product-based planning|product breakdown|product flow|product descriptions?/gi,vid:7},
+ {v:'practices_deep',h:'Three levels + the exception',re:/project plan|stage plan|team plan|exception plan|levels? of plans?/gi,vid:7},
+ {v:'practices_deep',h:"What's in a Plan",re:/plan description|external dependenc|assumptions/gi,vid:7},
+ {v:'practices_deep',h:'The quality audit trail',re:/quality expectations|quality specifications?|quality register|quality records?|acceptance criteria|acceptance/gi,vid:7},
+ {v:'practices_deep',h:'Three quality words',re:/quality assurance|quality control|quality planning|quality criteria|quality review/gi,vid:7},
+ {v:'practices_deep',h:'The risk management procedure',re:/\brisks?\b|probability|proximity|impact|risk management/gi,vid:3},
+ {v:'practices_deep',h:'Responses',re:/\bavoid|\breduce|\btransfer|\bshare|\bexploit|\benhance|contingent|responses?\b/gi,vid:3},
+ {v:'practices_deep',h:'Owner vs actionee',re:/risk owner|actionee|action owner|risk budget/gi,vid:3},
+ {v:'practices_deep',h:'Risk vs issue',re:/unplanned event|has happened|might happen/gi,vid:3},
+ {v:'practices_deep',h:'The six issue types',re:/issue types?|request for change|off-specification|problem|concern|event external|business opportunit/gi,vid:3},
+ {v:'practices_deep',h:'The change control procedure',re:/change control|capture|recommend|baseline change|issue register|issue report/gi,vid:3},
+ {v:'practices_deep',h:'Tolerances and the cascade',re:/tolerances?|cascade|forecast/gi,vid:3},
+ {v:'practices_deep',h:'Two kinds of control',re:/time-driven|event-driven|controls?\b/gi,vid:3},
+ {v:'practices_deep',h:'Who reports what to whom',re:/highlight report|checkpoint report|end stage report|exception report|end project report/gi,vid:3},
+
+ {v:'processes',h:'Starting up a Project',re:/starting up|\bSU\b|mandate|project brief|initiation stage plan|daily log/gi,vid:4},
+ {v:'processes',h:'Directing a Project',re:/directing a project|\bDP\b|authori[sz]e (initiation|the project|project closure)|ad hoc direction|decision points?/gi,vid:4},
+ {v:'processes',h:'Initiating a Project',re:/initiating a project|\bIP\b|\bPID\b|initiation documentation|management approach/gi,vid:4},
+ {v:'processes',h:'Controlling a Stage',re:/controlling a stage|\bCS\b|authori[sz]es? (a )?work packages?|highlight report|corrective action|escalat/gi,vid:4},
+ {v:'processes',h:'Managing Product Delivery',re:/managing product delivery|\bMP\b|team managers?|accept(s|ing)? a work package|checkpoint report/gi,vid:4},
+ {v:'processes',h:'Managing a Stage Boundary',re:/stage boundary|\bSB\b|end stage report|next stage/gi,vid:4},
+ {v:'processes',h:'Closing a Project',re:/closing a project|\bCP\b|end project report|lessons report|hand(ing)? ?over|premature/gi,vid:4},
+
+ {v:'products',h:'Baselines',re:/baselines?/gi,vid:7},
+ {v:'products',h:'Records',re:/\brecords?\b|\blogs?\b|registers?/gi,vid:7},
+ {v:'products',h:'Reports',re:/\breports?\b/gi,vid:7},
+ {v:'products',h:"What's inside the core products",re:/contains?|contents|composition|includes?d?\b/gi,vid:7},
+
+ {v:'roles',h:'Who does what',re:/\bnever\b|cannot|can be combined|same person|forbidden/gi,vid:6},
+ {v:'roles',h:'The Project Board',re:/executive|senior user|senior supplier|project board|chairs?\b|accountable/gi,vid:6},
+ {v:'roles',h:'Project & delivery levels',re:/project manager|team manager/gi,vid:6},
+ {v:'roles',h:'Support & assurance',re:/project assurance|project support|change authority/gi,vid:6},
+
+ {v:'tailoring',h:'Three rules to memorise',re:/tailor(ing|ed)?|mandatory/gi,vid:5},
+ {v:'tailoring',h:'What can be tailored',re:/combined?|omit|rigou?r/gi,vid:5},
+ {v:'tailoring',h:'Embedding vs tailoring',re:/embed(ding|ded)?/gi,vid:5},
+ {v:'edition',h:'Sustainability',re:/sustainab/gi,vid:1},
+ {v:'edition',h:'"Themes" are now "Practices"',re:/\bthemes?\b|6th edition|7th edition/gi,vid:1},
+ {v:'edition',h:'Digital and data',re:/digital|\bdata\b/gi,vid:1},
+
+ {v:'resit',h:'The ecosystem map',re:/ecosystem|stakeholders?|affects?/gi,vid:3},
+ {v:'resit',h:'Change: current state',re:/current state|target state|transition|business as usual|\bBAU\b/gi,vid:3},
+ {v:'resit',h:'The three people-focused activities',re:/leading successful|people-focused|communication|leading (and managing )?(successful )?teams/gi,vid:3},
+ {v:'resit',h:'Core people concepts',re:/culture|cultural|competenc|team development|collaborat|integrated elements|five elements/gi,vid:3},
+ {v:'resit',h:'People management products',re:/change management approach|communication management approach|people management/gi,vid:3},
+];
+const REF_SEC={principles:'principles',practices_deep:'practices',processes:'processes',products:'products',roles:'roles',tailoring:'tailoring',edition:'tailoring',resit:'people'};
+const REF_FALLBACK={principles:'principles',practices:'practices',processes:'processes',products:'products',roles:'roles',tailoring:'tailoring',people:'resit'};
+const REF_FALLBACK_H={people:'People in Successful Projects'};
+const REF_SEC_VID={principles:2,practices:3,processes:4,products:7,roles:6,tailoring:5,people:3};
+
+function refFor(q){
+  const strip=s=>String(s).replace(/<[^>]+>/g,' ');
+  const stem=strip(String(q.q).split('\n')[0]), rest=strip(q.o[q.a]+' '+q.e);
+  let best=-1,bestScore=0;
+  REF_TARGETS.forEach((t,i)=>{
+    // words in the question itself count 3x; words only in the answer/explanation count 1x
+    const a=new Set((stem.match(t.re)||[]).map(x=>x.toLowerCase()));
+    const b=new Set((rest.match(t.re)||[]).map(x=>x.toLowerCase()).filter(x=>!a.has(x)));
+    let score=a.size*3+b.size; if(!score) return;
+    if(REF_SEC[t.v]===q.s) score+=0.5;
+    if(score>bestScore){best=i;bestScore=score;}
+  });
+  if(best>=0) return {i:best,t:REF_TARGETS[best]};
+  return {i:-1,t:{v:REF_FALLBACK[q.s]||'dashboard',h:REF_FALLBACK_H[q.s]||null,vid:REF_SEC_VID[q.s]}};
+}
+function refViewLabel(v){ const x=VIEWS.find(z=>z.id===v); return x?x.label:v; }
+function refLinks(q){
+  const r=refFor(q), t=r.t;
+  const where = t.h ? `${refViewLabel(t.v)} › ${t.h.replace(/^"|"$/g,'')}` : refViewLabel(t.v);
+  const main = r.i>=0
+    ? `<button class="ref-link" onclick="App.goRef(${r.i})">${where}</button>`
+    : `<button class="ref-link" onclick="App.goRefView('${t.v}','${q.s}')">${where}</button>`;
+  const vid = t.vid ? `<button class="ref-link ref-vid" onclick="App.goVid(${t.vid})">Video · Module ${t.vid}</button>` : '';
+  return `<div class="ref-row"><span class="ref-lbl">Study it</span>${main}${vid}</div>`;
+}
+
+let refReturnY=0;
+function refBackBar(){
+  const old=document.getElementById('refBack'); if(old) old.remove();
+  const b=document.createElement('button');
+  b.id='refBack'; b.className='ref-back'; b.type='button';
+  b.textContent='← Back to answer review';
+  b.onclick=backToReview;
+  document.body.appendChild(b);
+}
+function refFlash(h){
+  const c=document.getElementById('content'); if(!c||!h) return;
+  const els=[...c.querySelectorAll('h2,h3,h4,.tag')];
+  const el=els.find(e=>e.textContent.trim().startsWith(h))||els.find(e=>e.textContent.includes(h));
+  if(!el) return;
+  const box=el.closest('.pblock')||(el.classList.contains('tag')?el.closest('.callout'):null)||el;
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // offset for the sticky mobile top bar so the target isn't hidden underneath it
+  let off=20; document.querySelectorAll('body *').forEach(e=>{ if(e.id==='refBack')return; const s=getComputedStyle(e);
+    if((s.position==='sticky'||s.position==='fixed')&&s.top==='0px'&&e.offsetHeight<200&&e.offsetWidth>window.innerWidth/2&&s.display!=='none') off=Math.max(off,e.offsetHeight+16); });
+  window.scrollTo({top:box.getBoundingClientRect().top+window.scrollY-off,behavior:reduce?'auto':'smooth'});
+  box.classList.add('ref-hit'); setTimeout(()=>box.classList.remove('ref-hit'),2600);
+}
+function refJump(v,h){
+  refReturnY=window.scrollY||0;
+  go(v); window.scrollTo({top:0,behavior:'instant'}); refBackBar();
+  setTimeout(()=>refFlash(h),60);
+}
+function goRef(i){ const t=REF_TARGETS[i]; if(t) refJump(t.v,t.h); }
+function goRefView(v,s){ refJump(v,REF_FALLBACK_H[s]||null); }
+function goVid(n){ refJump('videos','Module '+n+' ·'); }
+function backToReview(){
+  const b=document.getElementById('refBack'); if(b) b.remove();
+  if(!exam||!exam.result){ go('exam'); return; }
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active', x.dataset.v==='exam'));
+  renderReview();
+  const y=refReturnY; requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));
 }
 
 /* ---------------- PRE-EXAM CHECKLIST ---------------- */
@@ -2205,7 +2348,7 @@ RENDER.practices_deep = (c)=>{
       <strong>5. Communicate</strong> — runs throughout (Highlight, End Stage, End Project reports), not just at the end.</p>
       <h4 class="sub" style="font-size:16px">Responses — memorise by category</h4>
       <p><strong>Threats:</strong> Avoid · Reduce (likelihood/impact) · Transfer (e.g. insurance) · Share · Accept · Prepare contingent plans.<br>
-      <strong>Opportunities:</strong> Exploit · Enhance · Share · Accept · Reject.<br>
+      <strong>Opportunities:</strong> Exploit · Enhance · Share · Accept. (There is no Reject response in v7.)<br>
       <em>Share</em> and <em>Accept</em> appear in both lists — a common trap.</p>
       <h4 class="sub" style="font-size:16px">Owner vs actionee, and the budget</h4>
       <p>The <strong>risk owner</strong> is accountable for managing a specific risk. The <strong>risk actionee</strong> carries out a specific response action (may be a different person). The <strong>Risk Budget</strong> is money set aside specifically for funding responses — the <strong>Project Board approves it</strong>.</p>
@@ -2735,7 +2878,8 @@ if(typeof QUESTIONS!=='undefined' && Array.isArray(QUESTIONS)){ QUESTIONS.push(.
 /* ---------- expose handlers (namespace + globals so all onclick styles resolve) ---------- */
 const App = { go, openNav, closeNav, bpZoom, startFc, flipFc, rateFc, startDrill, answerDrill,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
-  renderExamResult, reviewExam, setReviewFilter, toggleCheck, resetProgress };
+  renderExamResult, reviewExam, setReviewFilter, toggleCheck, resetProgress,
+  renderReview, goRef, goRefView, goVid, backToReview };
 if(typeof window!=='undefined'){ Object.assign(window, App); window.App=App; }
 
 /* ---------- keyboard: Escape closes mobile nav ---------- */

@@ -2267,6 +2267,7 @@ function deepPractice(o){
       <h3 class="sub" style="margin:0">${o.name}</h3>
     </div>
     <p style="font-size:14px;color:var(--ink-soft);margin-bottom:14px"><strong>Purpose:</strong> ${o.purpose}</p>
+    ${o.img?bpFigure(o.img):''}
     ${o.body}
   </div>`;
 }
@@ -2320,7 +2321,7 @@ RENDER.practices_deep = (c)=>{
       <h4 class="sub" style="font-size:16px">What's in a Plan</h4>
       <p>Plan description · prerequisites · external dependencies · planning assumptions · lessons incorporated · monitoring/control · the products (Product Descriptions) · schedule · tolerances · controls.</p>`})}
 
-    ${deepPractice({id:'quality',num:'4',name:'Quality',
+    ${deepPractice({id:'quality',img:'19-quality-trail',num:'4',name:'Quality',
       purpose:'Define and implement the means by which the project verifies products are fit for purpose.',
       body:`
       <h4 class="sub" style="font-size:16px">The quality audit trail — a five-link chain</h4>
@@ -2336,7 +2337,7 @@ RENDER.practices_deep = (c)=>{
       <div class="callout"><div class="tag">Quality review technique — the roles</div>PRINCE2's structured review uses defined roles: <strong>Chair</strong> (runs it), <strong>Presenter</strong> (represents the producers), <strong>Reviewer</strong> (checks against criteria), <strong>Administrator</strong> (records actions). Outcomes: complete / conditionally complete / incomplete.</div>
       <div class="callout key"><div class="tag">Composition: Quality Management Approach</div>How quality will be managed on this project: standards, responsibilities, the quality-control and assurance arrangements, tools, and how the Quality Register will be used. Produced in IP.</div>`})}
 
-    ${deepPractice({id:'risk',num:'5',name:'Risk',
+    ${deepPractice({id:'risk',img:'16-risk-responses',num:'5',name:'Risk',
       purpose:'Identify, assess and control uncertainty, improving the project\u2019s chance of success.',
       body:`
       <h4 class="sub" style="font-size:16px">The risk management procedure — 4 steps + communicate</h4>
@@ -2354,7 +2355,7 @@ RENDER.practices_deep = (c)=>{
       <p>The <strong>risk owner</strong> is accountable for managing a specific risk. The <strong>risk action owner</strong> carries out a specific response action (may be a different person; the 6th edition called this the risk actionee). The <strong>Risk Budget</strong> is money set aside specifically for funding responses — the <strong>Project Board approves it</strong>.</p>
       <div class="callout key"><div class="tag">Composition: Risk Management Approach</div>How risk is managed here: procedure, tools, roles/responsibilities, risk categories, scales for probability/impact/proximity, risk tolerance, the Risk Budget, and how the Risk Register is maintained. Produced in IP.</div>`})}
 
-    ${deepPractice({id:'issues',num:'6',name:'Issues',
+    ${deepPractice({id:'issues',img:'17-issue-types',num:'6',name:'Issues',
       purpose:'Identify, assess and control any unplanned events that may affect the project.',
       body:`
       <h4 class="sub" style="font-size:16px">Risk vs issue — the one-word test</h4>
@@ -2375,7 +2376,7 @@ RENDER.practices_deep = (c)=>{
       <div class="callout"><div class="tag">Daily Log vs Issue Register</div>Minor issues the PM handles informally go in the <strong>Daily Log</strong>. Anything formally managed through change control goes in the <strong>Issue Register</strong>, with an <strong>Issue Report</strong> for the detail.</div>
       <div class="callout key"><div class="tag">Composition: Issue Management Approach</div>How issues and changes are handled: the procedure, roles (incl. Change Authority and its limits), any change budget, tools, and how the Issue Register is used. Produced in IP.</div>`})}
 
-    ${deepPractice({id:'progress',num:'7',name:'Progress',
+    ${deepPractice({id:'progress',img:'18-tolerance-cascade',num:'7',name:'Progress',
       purpose:'Monitor actual vs planned achievement, forecast viability, and control unacceptable deviations.',
       body:`
       <h4 class="sub" style="font-size:16px">Tolerances and the cascade</h4>
@@ -2751,22 +2752,26 @@ RENDER.videos = (c)=>{
 /* ---------------- VISUAL BLUEPRINT (image gallery + in-context embeds) ---------------- */
 const BP_PATH = 'img/blueprint/';
 const BLUEPRINTS = [
-  {f:'00-framework-overview', t:'PRINCE2 7 Core Framework', d:'The five integrated elements, project vs operations, and the People element at a glance.'},
-  {f:'01-title-walkthrough', t:'The Meridian Relocation', d:'A PRINCE2 7 visual walkthrough — the seven processes from mandate to handover.'},
-  {f:'03-process-timeline', t:'The Project Timeline Architecture', d:'The whole lifecycle: Directing across the top, the CS↔MP engine in the middle, SU and CP at the ends.'},
-  {f:'02-org-levels', t:'The Four Organization Levels', d:'Commissioning → Directing → Managing → Delivering, mapped onto the Meridian cast.'},
-  {f:'04-starting-up', t:'Process 1 · Starting Up (SU)', d:'The mandate funnels into the Project Brief. Exam trap: SU produces the Brief, not the PID.'},
-  {f:'05-directing', t:'Process 2 · Directing a Project (DP)', d:'The Board\u2019s five decision gates over the PM\u2019s working lane. No specialist products — only decisions.'},
-  {f:'06-initiating', t:'Process 3 · Initiating a Project (IP)', d:'The PID assembled from the management approaches, Project Plan, Business Case and controls.'},
-  {f:'07-cs-mp-engine', t:'The Core Engine (CS ↔ MP)', d:'Work Packages flow down; completed products and Checkpoint Reports flow up.'},
-  {f:'08-controlling-stage', t:'Process 4 · Controlling a Stage (CS)', d:'The PM\u2019s cockpit: authorize work, monitor tolerances (incl. sustainability), take corrective action.'},
-  {f:'09-managing-product-delivery', t:'Process 5 · Managing Product Delivery (MP)', d:'Accept → Execute → Evaluate → Notify. The v7 term is evaluate, not deliver.'},
-  {f:'10-exception-trigger', t:'The £150k Surprise (Exception Trigger)', d:'A forecast breach cracks through the tolerance cascade → Exception Report → Exception Plan.'},
-  {f:'11-stage-boundary', t:'Process 6 · Managing a Stage Boundary (SB)', d:'Re-justify the project: is it still worth doing, given what we now know?'},
-  {f:'12-value-chain', t:'The Value Chain: Output vs Benefit', d:'Output → Capability → Outcome → Benefit. A project delivers outputs; benefits come later.'},
-  {f:'13-closing', t:'Process 7 · Closing a Project (CP)', d:'A clean stop: confirm acceptance, hand over, and plan benefits measurement.'},
-  {f:'14-synthesis', t:'The Complete Blueprint (Synthesis)', d:'The whole Meridian journey across all seven processes on three swimlanes.'},
-  {f:'15-process-matrix', t:'The 7 Processes · Quick Reference Matrix', d:'Process, core purpose, key output and primary owner — the one-glance summary.'}
+  {f:'00-framework-overview', t:"PRINCE2 7 at a glance", d:"The five integrated elements, project versus business as usual, the five project characteristics and the three people areas."},
+  {f:'01-title-walkthrough', t:"The Meridian relocation", d:"The running example: mandate, cast, stages, and the five moments the exam cares about."},
+  {f:'03-process-timeline', t:"The process model across the lifecycle", d:"Which process happens in which stage. A stage boundary ends every stage except the final one."},
+  {f:'02-org-levels', t:"Four levels of organization", d:"Business layer, directing, managing, delivering, plus assurance, support and change authority."},
+  {f:'04-starting-up', t:"Process 1 · Starting up a project (SU)", d:"Seven activities from mandate to project brief. Exam trap: SU produces the brief, not the PID."},
+  {f:'05-directing', t:"Process 2 · Directing a project (DP)", d:"The board’s five activities: what triggers each one and what the board decides."},
+  {f:'06-initiating', t:"Process 3 · Initiating a project (IP)", d:"Seven activities that build the PID, including all nine management approaches."},
+  {f:'07-cs-mp-engine', t:"The delivery engine (CS ↔ MP)", d:"The work package interface: the PM’s activities, the team manager’s activities, and what flows between them."},
+  {f:'08-controlling-stage', t:"Process 4 · Controlling a stage (CS)", d:"Corrective action within tolerance, an exception report beyond it. All seven tolerances."},
+  {f:'09-managing-product-delivery', t:"Process 5 · Managing product delivery (MP)", d:"Accept, execute, evaluate, notify. The v7 term is evaluate, not deliver."},
+  {f:'10-exception-trigger', t:"The £150k surprise (manage by exception)", d:"An event external to the project, forecast beyond stage tolerance: six steps from exception report to approved exception plan."},
+  {f:'11-stage-boundary', t:"Process 6 · Managing a stage boundary (SB)", d:"Next stage or exception plan, updated project plan and business case, end stage report, request to the board."},
+  {f:'12-value-chain', t:"From outputs to business objectives", d:"Output → capability → outcome → benefit (and dis-benefit) → business objective."},
+  {f:'16-risk-responses', t:"Risk: measured and managed", d:"Probability and impact versus proximity, the four-step technique, and every response type."},
+  {f:'17-issue-types', t:"Issues and change control", d:"The five issue types with examples, the five-step technique, and change control."},
+  {f:'18-tolerance-cascade', t:"Tolerances down, reports up", d:"The tolerance cascade, the reports that flow back up, and the seven tolerance types."},
+  {f:'19-quality-trail', t:"Quality: from expectations to acceptance", d:"Quality planning and quality control, from the project product description to accepted products."},
+  {f:'13-closing', t:"Process 7 · Closing a project (CP)", d:"Confirm acceptance, evaluate the project, request closure. Benefits reviews are planned, not measured."},
+  {f:'14-synthesis', t:"The whole Meridian project", d:"Every process and decision, numbered 1 to 17 across the three levels."},
+  {f:'15-process-matrix', t:"The seven processes at a glance", d:"Trigger, purpose, key outputs and who does it, for all seven processes."}
 ];
 
 /* a single blueprint figure, clickable to enlarge */

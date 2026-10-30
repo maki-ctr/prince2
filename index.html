@@ -435,7 +435,7 @@ let QUESTIONS = [
 {s:"practices",q:"Which document captures the customer's quality expectations?",o:["Quality Register", "Quality Management Approach", "Acceptance Criteria", "Project Product Description"],a:3,e:"Customer's quality expectations are captured in the Project Product Description (origin: Project Brief)."},
 {s:"practices",q:"Who owns the Business Case?",o:["Project Manager","Senior User","Executive","Project Board collectively"],a:2,e:"The Executive owns the Business Case throughout. Why not the others: The PM maintains most documents but does not own the Business Case. The Board is collectively responsible, but ownership sits with the Executive. The Senior User owns the Project Product Description."},
 {s:"practices",type:"Negative",q:"Which is NOT a response to a threat?",o:["Avoid", "Reduce", "Transfer", "Exploit"],a:3,e:"Exploit is an OPPORTUNITY response, not a threat response."},
-{s:"practices",q:"Which is a response to an opportunity?",o:["Reduce", "Avoid", "Transfer", "Enhance"],a:3,e:"Enhance is an opportunity response."},
+{s:"practices",q:"Which is a response to an opportunity?",o:["Reduce", "Avoid", "Fallback", "Enhance"],a:3,e:"Enhance is an opportunity response. Reduce and avoid are threat-only, and fallback is not a PRINCE2 7 response."},
 {s:"practices",q:"The 'outline' Business Case is produced in which process?",o:["Starting up a Project", "Initiating a Project", "Controlling a Stage", "Closing a Project"],a:0,e:"Outline Business Case is produced in Starting up a Project (SU)."},
 {s:"practices",q:"The 'detailed' Business Case is produced in which process?",o:["Initiating a Project","Starting up a Project","Directing a Project","Managing a Stage Boundary"],a:0,e:"Detailed Business Case is produced in Initiating a Project (IP)."},
 {s:"practices",q:"How many levels of plan does PRINCE2 define?",o:["2","3","4","5"],a:1,e:"Three: Project Plan, Stage Plan, Team Plan (Exception Plan replaces Stage/Project Plan)."},
@@ -451,7 +451,7 @@ let QUESTIONS = [
 {s:"practices",q:"The Project Product Description is owned by:",o:["Senior User", "Project Manager", "Executive", "Senior Supplier"],a:0,e:"Owned by the Senior User (represents the user/acceptance interest). Why not the others: The Executive owns the Business Case, not the Project Product Description, a frequent swap. The PM maintains documents but does not own this one."},
 {s:"practices",q:"Acceptance criteria are:",o:["Quality criteria for individual products","A prioritised list defining what the customer will accept","The Project Board's checklist","The project's success metrics"],a:1,e:"A prioritised, measurable list of what makes the project product acceptable. Why not the others: 'Quality criteria for individual products' describes quality criteria, which apply to individual products in their Product Descriptions. Acceptance criteria apply to the whole project product."},
 {s:"practices",q:"The Risk Budget is approved by:",o:["Project Manager","Executive","Project Board","Senior Supplier"],a:2,e:"The Project Board approves the Risk Budget. Why not the others: The Executive owns the Business Case, but the Risk Budget is approved by the Project Board as a whole. The PM manages it but does not approve it."},
-{s:"practices",q:"A risk 'owner' is:",o:["The person carrying out specific risk actions","The person accountable for the management of a risk","The Project Manager always","The risk's originator"],a:1,e:"The owner is accountable for managing the risk; the actionee carries out actions."},
+{s:"practices",q:"A risk 'owner' is:",o:["The person carrying out specific risk actions","The person accountable for the management of a risk","The Project Manager always","The risk's originator"],a:1,e:"The owner is accountable for managing the risk; the risk action owner carries out response actions."},
 // ---------- PROCESSES (36-55) ----------
 {s:"processes",q:"The PRINCE2 process that runs from end of SU to end of CP is:",o:["Directing a Project", "Controlling a Stage", "Managing Product Delivery", "Initiating a Project"],a:0,e:"Directing a Project (DP) spans the whole project for the Project Board."},
 {s:"processes",q:"The trigger for 'Starting up a Project' is:",o:["A request from the Senior User", "The PID", "A project mandate", "An approved Business Case"],a:2,e:"Receipt of the project mandate triggers SU."},
@@ -553,11 +553,11 @@ const QUESTIONS_EXT = [
 {s:"practices",q:"Quality control is concerned with:",o:["Defining fit-for-purpose","Checking products against quality criteria","Corporate governance","Approving the Business Case"],a:1,e:"Quality control checks products against their criteria as produced."},
 {s:"practices",q:"The customer's quality expectations are first captured in the:",o:["Project Brief (Project Product Description)", "Quality Register", "PID only", "End Stage Report"],a:0,e:"Captured early, in the Project Product Description within the Project Brief."},
 {s:"practices",q:"The Quality Register records:",o:["All planned and completed quality activities and results", "Risks and issues", "The Business Case", "Stakeholder contacts"],a:0,e:"It logs quality activities (reviews, tests) and their outcomes."},
-{s:"practices",q:"A risk 'actionee' is the person who:",o:["Is accountable for managing the risk", "Owns the Risk Budget", "Chairs the Board", "Carries out an assigned risk response action"],a:3,e:"The actionee carries out specific actions; the owner is accountable."},
-{s:"practices",q:"'Transfer' as a risk response is used for:",o:["Passing a threat's impact to a third party (e.g. insurance)", "Opportunities only", "Eliminating a risk entirely", "Accepting a risk"],a:0,e:"Transfer moves the financial impact of a threat to a third party."},
+{s:"practices",q:"A 'risk action owner' is the person who:",o:["Is accountable for managing the risk", "Owns the Risk Budget", "Chairs the Board", "Carries out an assigned risk response action"],a:3,e:"The risk action owner carries out specific response actions; the risk owner is accountable. The 6th edition called this role the risk actionee."},
+{s:"practices",q:"'Transfer' as a risk response is used for:",o:["Passing part of the risk to a third party (e.g. insurance)", "Opportunities only", "Eliminating a risk entirely", "Accepting a risk"],a:0,e:"Transfer passes part of the risk to a third party. In the courseware it applies to both threats and opportunities, so 'opportunities only' is wrong."},
 {s:"practices",q:"'Exploit' as a risk response means:",o:["Reducing a threat","Making the most of an opportunity so it definitely happens","Sharing pain and gain","Ignoring a risk"],a:1,e:"Exploit ensures an opportunity is realised."},
 {s:"practices",q:"'Share' as a risk response applies to:",o:["Only threats","Only opportunities","Both threats and opportunities","Neither"],a:2,e:"Share (pain/gain via agreed split) applies to both threats and opportunities."},
-{s:"practices",q:"A request for change is best handled through:",o:["The Daily Log informally", "Immediate implementation by the PM", "The End Project Report", "Change control (capture, assess, propose, decide, implement)"],a:3,e:"Requests for change follow the change control procedure."},
+{s:"practices",q:"A request for change is best handled through:",o:["The Daily Log informally", "Immediate implementation by the PM", "The End Project Report", "Change control (capture, assess, recommend, decide, implement)"],a:3,e:"Requests for change follow the change control procedure."},
 {s:"practices",q:"Where are minor issues handled informally?",o:["Issue Register", "Risk Register", "Daily Log", "Quality Register"],a:2,e:"Informally-managed issues are recorded in the Daily Log."},
 {s:"practices",q:"The Progress practice provides forecasts of:",o:["Staff morale", "Marketing reach", "Supplier profit", "The project's continued viability and objectives"],a:3,e:"Progress forecasts viability and whether objectives will be met."},
 {s:"practices",q:"A 'time-driven' control is:",o:["Produced at regular intervals (e.g. Highlight Report)", "Triggered by an event", "Only used in exceptions", "Optional"],a:0,e:"Time-driven controls occur on a regular cadence."},
@@ -658,7 +658,7 @@ const QUESTIONS_DEEP = [
 {s:"practices",q:"Which response appears in BOTH the threat and opportunity lists?",o:["Avoid", "Reduce", "Enhance", "Share"],a:3,e:"Share (and Accept) apply to both threats and opportunities."},
 {s:"practices",q:"The Risk Budget is:",o:["Part of the Stage Plan only","Money set aside to fund risk responses, approved by the Board","The cost of the Risk Register","Owned by the Team Manager"],a:1,e:"It funds responses and is approved by the Project Board."},
 // ----- issues / change control (practices) -----
-{s:"practices",q:"The change control procedure order is:",o:["Decide → capture → implement", "Propose → implement → review", "Capture → assess → propose → decide → implement", "Assess → implement → capture"],a:2,e:"Capture, assess, propose, decide, implement."},
+{s:"practices",q:"The change control procedure order is:",o:["Decide → capture → implement", "Propose → implement → review", "Capture → assess → recommend → decide → implement", "Assess → implement → capture"],a:2,e:"Capture, assess, recommend, decide, implement. Older material says propose."},
 {s:"practices",q:"A risk that has now materialised should be handled as:",o:["A new risk", "A dis-benefit", "A tolerance", "An issue"],a:3,e:"Once it has happened it is an issue, not a risk."},
 {s:"practices",q:"Which document defines the Change Authority's delegated limits?",o:["Risk Management Approach","Issue Management Approach","Quality Register","Daily Log"],a:1,e:"The Issue Management Approach sets out roles, limits and the change control procedure."},
 // ----- progress / control (practices) -----
@@ -715,15 +715,15 @@ const CARDS = [
 {deck:"Roles",front:"Who is ultimately accountable for the project?",back:"The Executive (the Project Board is collectively responsible, but the Executive is ultimately accountable and chairs the Board)."},
 {deck:"Procedures",front:"Product-based planning — the 4 steps in order?",back:"1. Project Product Description (whole-project deliverable + acceptance criteria)\n2. Product Breakdown Structure (decompose)\n3. Product Descriptions (per product)\n4. Product Flow Diagram (sequence + dependencies)"},
 {deck:"Procedures",front:"The quality audit trail — five links?",back:"Customer's quality expectations → acceptance criteria (prioritised, measurable) → quality criteria (per product) → Quality Register (activities log) → quality/acceptance records (evidence)."},
-{deck:"Procedures",front:"The risk management procedure — 5 steps?",back:"Identify → Assess (probability, impact, proximity) → Plan (responses) → Implement (owner + actionee) → Communicate (throughout)."},
-{deck:"Procedures",front:"The change control procedure — 5 steps?",back:"Capture → Assess → Propose → Decide → Implement."},
+{deck:"Procedures",front:"The risk management procedure — the steps?",back:"Identify → Assess (probability, impact, proximity) → Plan (responses) → Implement (owners + action owners), with Communicate (throughout)."},
+{deck:"Procedures",front:"The change control procedure — 5 steps?",back:"Capture → Assess → Recommend → Decide → Implement. (Older material: examine, propose.)"},
 {deck:"Procedures",front:"The value chain (Business Case)?",back:"Output (product) → Outcome (change from using it) → Benefit (measurable improvement). A foreseeable negative is a dis-benefit (accepted, not uncertain)."},
-{deck:"Procedures",front:"Threat responses vs opportunity responses?",back:"Threats: Avoid, Reduce, Transfer, Share, Accept (+ contingent plans). Opportunities: Exploit, Enhance, Share, Accept. Share & Accept are in both. (No Reject in v7.)"},
+{deck:"Procedures",front:"Threat responses vs opportunity responses?",back:"Threat only: Avoid, Reduce. Opportunity only: Exploit, Enhance. Both: Transfer, Share, Accept, Prepare contingent plans. (No Reject or Fallback in v7.)"},
 {deck:"Procedures",front:"Tolerance cascade — who sets for whom?",back:"Corporate → project tolerances. Project Board → stage tolerances (for PM). PM → Work Package tolerances (for Team Manager). Forecast breach escalates up one level."},
 {deck:"Composition",front:"What's in any Approach (Risk/Quality/Comms/Change)?",back:"Same skeleton: procedure · tools & techniques · roles/responsibilities · timing · how the related register/record is used. All produced in IP."},
 {deck:"Composition",front:"What's in a Product Description?",back:"Purpose · composition · derivation · format · quality criteria · quality method · quality responsibilities. (No investment appraisal — that's the Business Case.)"},
 {deck:"Composition",front:"What's in the Business Case?",back:"Reasons · business options (do nothing/minimum/something) · benefits & dis-benefits · costs · timescale · investment appraisal · major risks. Owned by the Executive."},
-{deck:"v7 Edition",front:"PRINCE2 7 — what were 'themes' renamed to?",back:"Practices. (Organization → Organization.) The set: Business Case, Organization, Plans, Quality, Risk, Issues, Progress."},
+{deck:"v7 Edition",front:"PRINCE2 7 — what were 'themes' renamed to?",back:"Practices. The set: Business Case, Organization, Plans, Quality, Risk, Issues, Progress."},
 {deck:"v7 Edition",front:"PRINCE2 7 — the headline new performance target?",back:"Sustainability — added in v7 as the SEVENTH performance aspect. PRINCE2 7 has seven tolerances: time, cost, scope, quality, benefits, risk, sustainability. You can set a tolerance against sustainability (per the official PeopleCert sample paper)."},
 {deck:"v7 Edition",front:"PRINCE2 7 — integrated elements + new emphasis?",back:"Principles, people, practices, processes — applied in a project context. 'People' is the newly foregrounded element vs the 6th edition."},
 {deck:"v7 Edition",front:"PRINCE2 7 — what did NOT change?",back:"7 principles (number + intent), 7 processes, and the role structure. Most learning transfers directly."}
@@ -916,7 +916,7 @@ function diagTolerance(){
 function diagChange(){
   return `<div class="diagram"><svg viewBox="0 0 720 210" ${SVGNS} role="img" aria-label="Change control procedure">
     <defs><marker id="arr3" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--navy-2)"/></marker></defs>
-    ${['Capture','Assess','Propose','Decide','Implement'].map((s,i)=>{const x=20+i*140;return `
+    ${['Capture','Assess','Recommend','Decide','Implement'].map((s,i)=>{const x=20+i*140;return `
       <rect class="dg-box cs" x="${x}" y="80" width="118" height="48" rx="10"/>
       <text x="${x+59}" y="109" class="dg-lbl">${s}</text>
       ${i<4?`<line x1="${x+118}" y1="104" x2="${x+138}" y2="104" stroke="var(--navy-2)" stroke-width="2" marker-end="url(#arr3)"/>`:''}`;}).join('')}
@@ -966,7 +966,7 @@ function diagValueChain(){
 function diagRisk(){
   return `<div class="diagram"><svg viewBox="0 0 720 150" ${SVGNS} role="img" aria-label="Risk management procedure">
     <defs><marker id="arr6" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--red)"/></marker></defs>
-    ${[['Identify','context + risks'],['Assess','probability,\nimpact, proximity'],['Plan','choose responses'],['Implement','owner + actionee']]
+    ${[['Identify','context + risks'],['Assess','probability,\nimpact, proximity'],['Plan','choose responses'],['Implement','owners + action owners']]
       .map((s,i)=>{const x=20+i*150;return `
       <rect class="dg-box risk" x="${x}" y="34" width="130" height="58" rx="10"/>
       <text x="${x+65}" y="60" class="dg-lbl">${s[0]}</text>
@@ -1492,7 +1492,7 @@ RENDER.practices = (c)=>courseShell(c,'practices','Part 2','The 7 Practices',
     ${pblock(2,'Organization','Four levels: corporate/programme/customer · directing (Board) · managing (PM) · delivering (Team Managers). Three Board interests: business, user, supplier.','the four levels; Project Assurance = oversight; Project Support = admin; combination rules.')}
     ${pblock(3,'Plans','Three levels: Project Plan, Stage Plan, Team Plan. An Exception Plan replaces a Stage or Project Plan — never a Team Plan. Product-based planning.','three levels; what an Exception Plan replaces; who approves what.')}
     ${pblock(4,'Quality','Quality planning (define fit-for-purpose) → quality control (check products) → quality assurance (external, corporate governance). Acceptance criteria = whole product (Senior User owns the Project Product Description); quality criteria = per product.','acceptance vs quality criteria; QA is <em>external</em>; Senior User owns the PPD.')}
-    ${pblock(5,'Risk','Uncertain event(s) — threat or opportunity. Threat responses: avoid, reduce, transfer, share, accept (+ contingent plans). Opportunity: exploit, enhance, share, accept. Owner is accountable; actionee acts.','threat vs opportunity responses; owner vs actionee; Risk Budget (Board approves).')}
+    ${pblock(5,'Risk','Uncertain event(s) — threat or opportunity. Paired: avoid/exploit, reduce/enhance. Transfer, share, accept and contingent plans apply to both threats and opportunities. Owner is accountable; action owner acts.','threat vs opportunity responses; owner vs action owner; Risk Budget (Board approves).')}
     ${pblock(6,'Issues','An issue is an unplanned event that has happened and needs management action (vs a risk, which might happen). The QRG names six types. Issue management encompasses change control; issues are logged in the Issue Register (project log).','the six issue types; issue management includes change control; the Issue Register.')}
     ${pblock(7,'Progress','Monitor actual vs planned; forecast viability; control deviations. Seven tolerances cascade down the levels. Reports: Highlight (PM→Board), Checkpoint (TM→PM), End Stage, End Project, Exception.','seven tolerances; who reports to whom; time-driven vs event-driven controls.')}
   </div>
@@ -2111,10 +2111,10 @@ const REF_TARGETS=[
  {v:'practices_deep',h:'Three quality words',re:/quality assurance|quality control|quality planning|quality criteria|quality review/gi,vid:7},
  {v:'practices_deep',h:'The risk management procedure',re:/\brisks?\b|probability|proximity|impact|risk management/gi,vid:'3c'},
  {v:'practices_deep',h:'Responses',re:/\bavoid|\breduce|\btransfer|\bshare|\bexploit|\benhance|contingent|responses?\b/gi,vid:'3c'},
- {v:'practices_deep',h:'Owner vs actionee',re:/risk owner|actionee|action owner|risk budget/gi,vid:'3c'},
+ {v:'practices_deep',h:'Owner vs action owner',re:/risk owner|actionee|action owner|risk budget/gi,vid:'3c'},
  {v:'practices_deep',h:'Risk vs issue',re:/unplanned event|has happened|might happen/gi,vid:3},
- {v:'practices_deep',h:'The six issue types',re:/issue types?|request for change|off-specification|problem|concern|event external|business opportunit/gi,vid:3},
- {v:'practices_deep',h:'The change control procedure',re:/change control|capture|recommend|baseline change|issue register|issue report/gi,vid:3},
+ {v:'practices_deep',h:'The six issue types',re:/issue types?|request for change|off-specification|problem|concern|event external|business opportunit/gi,vid:'3d'},
+ {v:'practices_deep',h:'The change control procedure',re:/change control|capture|recommend|baseline change|issue register|issue report/gi,vid:'3d'},
  {v:'practices_deep',h:'Tolerances and the cascade',re:/tolerances?|cascade|forecast/gi,vid:'3e'},
  {v:'practices_deep',h:'Two kinds of control',re:/time-driven|event-driven|controls?\b/gi,vid:'3e'},
  {v:'practices_deep',h:'Who reports what to whom',re:/highlight report|checkpoint report|end stage report|exception report|end project report/gi,vid:'3e'},
@@ -2339,19 +2339,19 @@ RENDER.practices_deep = (c)=>{
     ${deepPractice({id:'risk',num:'5',name:'Risk',
       purpose:'Identify, assess and control uncertainty, improving the project\u2019s chance of success.',
       body:`
-      <h4 class="sub" style="font-size:16px">The risk management procedure — 5 steps</h4>
+      <h4 class="sub" style="font-size:16px">The risk management procedure — 4 steps + communicate</h4>
       ${diagRisk()}
       <p><strong>1. Identify</strong> — context first (the Risk Management Approach), then the risks themselves; write each as cause → event → effect.<br>
       <strong>2. Assess</strong> — estimate each risk's probability, impact and proximity (when), then evaluate the net effect of all risks together.<br>
       <strong>3. Plan</strong> — choose responses.<br>
-      <strong>4. Implement</strong> — assign owners and actionees; carry out responses.<br>
-      <strong>5. Communicate</strong> — runs throughout (Highlight, End Stage, End Project reports), not just at the end.</p>
+      <strong>4. Implement</strong> — assign risk owners and risk action owners; carry out responses.<br>
+      <strong>Communicate</strong> sits at the centre and runs through all four steps (Highlight, End Stage, End Project reports), not as a final step.</p>
       <h4 class="sub" style="font-size:16px">Responses — memorise by category</h4>
-      <p><strong>Threats:</strong> Avoid · Reduce (likelihood/impact) · Transfer (e.g. insurance) · Share · Accept · Prepare contingent plans.<br>
-      <strong>Opportunities:</strong> Exploit · Enhance · Share · Accept. (There is no Reject response in v7.)<br>
-      <em>Share</em> and <em>Accept</em> appear in both lists — a common trap.</p>
-      <h4 class="sub" style="font-size:16px">Owner vs actionee, and the budget</h4>
-      <p>The <strong>risk owner</strong> is accountable for managing a specific risk. The <strong>risk actionee</strong> carries out a specific response action (may be a different person). The <strong>Risk Budget</strong> is money set aside specifically for funding responses — the <strong>Project Board approves it</strong>.</p>
+      <p><strong>Paired:</strong> Avoid (threat) / Exploit (opportunity) make the uncertain situation certain. Reduce (threat) / Enhance (opportunity) change the probability or impact.<br>
+      <strong>Both threats and opportunities:</strong> Transfer (part of the risk to a third party, e.g. insurance) · Share (pain/gain) · Accept · Prepare contingent plans. (There is no Reject or Fallback response in v7.)<br>
+      Only avoid, reduce, exploit and enhance are specific to one side — a common trap.</p>
+      <h4 class="sub" style="font-size:16px">Owner vs action owner, and the budget</h4>
+      <p>The <strong>risk owner</strong> is accountable for managing a specific risk. The <strong>risk action owner</strong> carries out a specific response action (may be a different person; the 6th edition called this the risk actionee). The <strong>Risk Budget</strong> is money set aside specifically for funding responses — the <strong>Project Board approves it</strong>.</p>
       <div class="callout key"><div class="tag">Composition: Risk Management Approach</div>How risk is managed here: procedure, tools, roles/responsibilities, risk categories, scales for probability/impact/proximity, risk tolerance, the Risk Budget, and how the Risk Register is maintained. Produced in IP.</div>`})}
 
     ${deepPractice({id:'issues',num:'6',name:'Issues',
@@ -2371,7 +2371,7 @@ RENDER.practices_deep = (c)=>{
       <div class="callout key"><div class="tag">Issue management includes change control</div>In PRINCE2 7, the Issues practice <em>encompasses change control</em>. A <strong>change</strong> is a modification to any approved product in the project baseline; a <strong>change budget</strong> funds authorised changes. Issues are logged in the <strong>Issue Register</strong> (part of the project log).</div>
       <h4 class="sub" style="font-size:16px">The change control procedure — 5 steps</h4>
       ${diagChange()}
-      <p><strong>Capture</strong> (log it) → <strong>Assess</strong> (impact on objectives, Business Case, risk) → <strong>Propose</strong> (options and recommendation) → <strong>Decide</strong> (PM, Change Authority, or Board per the limits) → <strong>Implement</strong>.</p>
+      <p><strong>Capture</strong> (log it) → <strong>Assess</strong> (impact on objectives, Business Case, risk) → <strong>Recommend</strong> (identify, evaluate and recommend options) → <strong>Decide</strong> (PM, Change Authority, or Board per the limits) → <strong>Implement</strong>.</p>
       <div class="callout"><div class="tag">Daily Log vs Issue Register</div>Minor issues the PM handles informally go in the <strong>Daily Log</strong>. Anything formally managed through change control goes in the <strong>Issue Register</strong>, with an <strong>Issue Report</strong> for the detail.</div>
       <div class="callout key"><div class="tag">Composition: Issue Management Approach</div>How issues and changes are handled: the procedure, roles (incl. Change Authority and its limits), any change budget, tools, and how the Issue Register is used. Produced in IP.</div>`})}
 
@@ -2412,7 +2412,7 @@ RENDER.edition = (c)=>{
 
     <div class="card">
       <h3 class="sub" style="margin-top:0">1. "Themes" are now "Practices"</h3>
-      <p>The seven <strong>themes</strong> of the 6th edition were renamed the seven <strong>practices</strong>. The substance is largely continuous, but the exam uses the new word — and one practice was relabelled: the old <strong>"Organization"</strong> theme is now <strong>"Organization"</strong>. The set is: Business Case, Organization, Plans, Quality, Risk, Issues, Progress.</p>
+      <p>The seven <strong>themes</strong> of the 6th edition were renamed the seven <strong>practices</strong>. The substance is largely continuous, but the exam uses the new word. The 6th-edition theme "Change" is now the <strong>Issues</strong> practice. The set is: Business Case, Organization, Plans, Quality, Risk, Issues, Progress.</p>
     </div>
 
     <div class="card">
@@ -2440,7 +2440,7 @@ RENDER.edition = (c)=>{
     <div class="callout trap"><div class="tag">Don't over-rotate</div>It's tempting to assume everything changed. It didn't. The high-yield 7th-edition facts are: <strong>themes→practices</strong>, <strong>people</strong> added as the 5th integrated element, and <strong>sustainability</strong> added as the 7th performance aspect (so seven tolerances, not six). Bank those three cleanly and you've covered most edition-specific questions.</div>
 
     <div class="recall"><div class="tag">Recall check</div><ol>
-      <li>What were "themes" renamed to, and which one's spelling/label changed?</li>
+      <li>What were "themes" renamed to, and which 6th-edition theme became the Issues practice?</li>
       <li>Name the integrated elements 7th edition emphasises — which is the newly foregrounded one?</li>
       <li>How many performance aspects does PRINCE2 7 have, and which was added? Can you set a tolerance against it?</li>
       <li>Name three things that did NOT change from the 6th edition.</li>
@@ -2475,6 +2475,7 @@ const VIDEO_MODULES = [
   {
     n:'2', id:'-UKRhG_0_sE', title:'The Seven PRINCE2 Principles',
     blurb:'The seven universal, mandatory, self-validating obligations — and the exam traps around each.',
+    note:"The video calls the principles “universal, mandatory and self-validating”. The usual PRINCE2 wording is universal, self-validating and empowering. Your courseware doesn’t list these characteristics, so don’t rely on “mandatory” as an exam answer.",
     qa:[
       ['What makes a principle different from a practice or process?','Principles are universal, mandatory and self-validating: apply all seven or it is not a PRINCE2 project. You can scale practices and streamline processes, but you can never tailor out a principle.'],
       ['Name the seven principles.','1) Ensure continued business justification, 2) Learn from experience, 3) Define roles, responsibilities and relationships, 4) Manage by stages, 5) Manage by exception, 6) Focus on products, 7) Tailor to suit the project.'],
@@ -2493,13 +2494,14 @@ const VIDEO_MODULES = [
   {
     n:'3', id:'Y8kHabWzWCk', title:'People & the Seven Practices',
     blurb:'The v7 People element, and all seven practices with their owners and the distinctions the exam probes.',
+    note:"Four points in this video are wrong. (1) Ignore the segments saying “Organization” was renamed or is retired: the 6th edition already used Organization, the courseware says “organization practice”, and the syllabus mostly says “organizing”. Both names mean the same practice. (2) “Risk actionee” is the 6th-edition term; PRINCE2 7 says risk action owner. (3) The risk technique is four steps (identify, assess, plan, implement) with communicate at the centre, not five in a row. (4) The on-screen issue-type list shows “request for change” twice. Modules 3a to 3e cover these topics correctly.",
     qa:[
       ['Why is "People" new and important in v7?','The 6th edition had no people element. v7 puts people at the centre because a temporary team, assembled across boundaries, needs active leadership. It is a pillar, not a footnote.'],
       ['What are the people-focused themes?','Leading successful change; leading and managing successful teams (cultural intelligence, competencies, team development, social cohesion); and communication.'],
       ['Change management vs change control — what is the difference?','Change management (People element) is the HUMAN side — helping people adopt the change, via the Change Management Approach. Change control (Issues practice) is about controlling changes to BASELINES. Same word, different homes.'],
       ['Is communication one-way or two-way?','Bidirectional. The Communication Management Approach defines the means and frequency of communication AND feedback — not just broadcasting at stakeholders.'],
       ['What is a "practice", and what was it called before?','An aspect of project management applied continuously, all seven in parallel. Called "themes" in the 6th edition; renamed "practices" in v7.'],
-      ['What is the correct name of the second practice?','Organization. v7 renamed the 6th-edition theme "Organization" to the practice "Organization". If an option says "Organization", that is the outdated term.'],
+      ['What is the second practice called?','Organization: the courseware calls it the organization practice, and the 6th edition used the same name. The syllabus mostly says "organizing". Both refer to the same practice, so neither name is a trap.'],
       ['What three questions does the Business Case practice answer?','Is the project Desirable (benefits vs cost/risk), Viable (can we deliver it), and Achievable (can the products produce the benefits)?'],
       ['What is the value chain, and the output-vs-benefit trap?','Outputs → Outcomes → Benefits, contributing to business objectives (a capability links an output to the outcome it enables). The classic trap is confusing an output (what you build) with a benefit (the measurable improvement).'],
       ['What is a dis-benefit?','A measurable decline resulting from an outcome, perceived as negative by one or more stakeholders — planned for, not ignored.'],
@@ -2509,7 +2511,7 @@ const VIDEO_MODULES = [
       ['What are the four plan types?','Project Plan, Stage Plan, Team Plan (optional), and Exception Plan (replaces a Stage or Project Plan — never a Team Plan).'],
       ['What are the four product-based planning steps?','Create the project product description → create the product breakdown structure → write the product descriptions → create the product flow diagram.'],
       ['Can a risk be positive? What are the paired responses?','Yes — a risk can be a threat (negative) or an opportunity (positive). Paired responses: Avoid/Exploit, Reduce/Enhance; plus Transfer, Share, Accept, and prepare contingent plans. There is no "reject" response in v7.'],
-      ['Risk owner vs risk actionee?','The risk owner manages the risk (accountable); the risk actionee carries out a specific response action.'],
+      ['Risk owner vs risk action owner?','The risk owner manages the risk (accountable); the risk action owner carries out a specific response action. The 6th edition called this the risk actionee.'],
       ['What are the six issue types in PRINCE2 7?','Problem, concern, event external to the project, business opportunity, request for change, and off-specification. Issue management also encompasses change control.'],
       ['Who decides on a change that affects a baseline?','The PM decides within delegated limits; if a baseline (business case, Project Plan) is affected, the Board or a delegated Change Authority decides. A change budget can fund changes.'],
       ['Time-driven vs event-driven controls?','Time-driven happen at regular intervals (Highlight Reports PM→Board; Checkpoint Reports team→PM). Event-driven are triggered by an event (End Stage Report at a boundary; Exception Report on a forecast breach).']
@@ -2567,6 +2569,23 @@ const VIDEO_MODULES = [
     ]
   },
   {
+    n:'3d', id:'8ewWQrIm9ng', title:"The Issues Practice and Change Control",
+    blurb:"Issue types, the project baseline, change control and the issue management technique.",
+    qa:[
+      ["What is the purpose of the issues practice?", "To collect and assess issues and to control changes to the project baseline. In PRINCE2 7, change control sits inside the issues practice."],
+      ["What is an issue, and how does it differ from a risk?", "An issue is an event relevant to the project that requires project management consideration. A risk is uncertain and might happen; when a risk occurs, it becomes an issue."],
+      ["What are the issue types?", "Event external to the project, request for change, problem or concern, business opportunity, and off-specification. The syllabus also lists change itself. Know each by name and by example rather than by count."],
+      ["Which issue types are new compared with the 6th edition?", "Event external to the project and business opportunity. The 6th edition listed only request for change, off-specification, and problem or concern."],
+      ["What is an off-specification?", "Something that should be provided by the project but is not, or will not be, provided. Example: a product that will not meet its quality specification."],
+      ["What is a change, and what is the project baseline?", "A change is a modification to an approved product in the project baseline. The baseline is the current approved versions of the management and specialist products subject to change control."],
+      ["What does change control decide?", "Whether changes that may affect the baseline are approved, rejected or deferred."],
+      ["What is a concession?", "An off-specification that is accepted without corrective action."],
+      ["Who decides on changes, and how are they funded?", "The project board, or a change authority it delegates to. A change budget is money set aside to pay for approved changes."],
+      ["What are the steps of the issue management technique?", "Capture, assess, recommend, decide, implement. Older material says examine and propose: in PRINCE2 7 the steps are assess and recommend."],
+      ["What are the three issue products?", "The issue management approach (in the PID), the issue register (in the project log), and the issue report, which describes a single issue, its impact and the recommendation."],
+    ]
+  },
+  {
     n:'3e', id:'yD_oLvdjUDg', title:"The Progress Practice",
     blurb:"Tolerances, the reporting cascade, controls, escalation and exception management.",
     qa:[
@@ -2585,6 +2604,7 @@ const VIDEO_MODULES = [
   {
     n:'4', id:'vaAoZuN8X8k', title:'The Seven PRINCE2 Processes',
     blurb:'The project timeline from mandate to close — triggers, outputs, and the boundaries the exam tests.',
+    note:"Controlling a Stage captures and assesses issues and risks. “Examines” is 6th-edition wording.",
     qa:[
       ['Process vs practice — what is the difference?','A practice is a discipline you apply continuously (e.g. Risk — every day). A process is a phase you pass through once at the right point in the lifecycle (e.g. Starting Up — at the beginning).'],
       ['Name the seven processes in lifecycle order.','Starting Up → Directing a Project → Initiating a Project → Controlling a Stage ↔ Managing Product Delivery (repeating, with Managing a Stage Boundary between stages) → Closing a Project.'],
@@ -2634,6 +2654,7 @@ const VIDEO_PENDING_QA = [
   {
     n:'6', id:'7ep8n58RSlY', title:'The Project Environment & Roles',
     blurb:'The role structure and the authority questions the exam loves \u2014 who does what, who reports to whom, and the forbidden combinations.',
+    note:"“Configuration management” under Project Support is 6th-edition wording.",
     qa:[
       ['Why do roles matter so much on the exam?','A large share of Foundation questions reduce to "who is allowed to do X?" — who owns the business case, approves the plan, signs off a change. Knowing the role structure cold answers a whole category of questions.'],
       ['What is the one mandatory role separation?','The Executive cannot also be the Project Manager. Directing and managing are different levels of accountability; collapsing them removes the check between the person spending the money and the person justifying it.'],
@@ -2668,6 +2689,7 @@ const VIDEO_PENDING_QA = [
   {
     n:'8', id:'leZ1UUYYSqg', title:'Exam Strategy, Practice Questions & Review',
     blurb:'Exam format, question types, the big recurring ideas, elimination tactics, and the 6th-edition holdovers that are now wrong answers.',
+    note:"The traps table and checklist teach “Organizing” as a wrong answer. Don’t apply this: the official syllabus itself mostly says “organizing”, and both names refer to the same practice.",
     qa:[
       ['What is the exact exam format?','60 questions, 60 minutes, 60% to pass (36/60), closed book, multiple choice. That is one minute per question on average. Note: 60%, not the retired 55%.'],
       ['How do you handle a "which is NOT" (negative) question?','Cover the word NOT, find the options that DO belong, and the leftover is your answer. Negative questions flip your brain — slow down on them.'],
@@ -2696,6 +2718,7 @@ RENDER.videos = (c)=>{
       <div class="vid-block">
         <h2 class="sec" style="border:none;margin-bottom:10px">Module ${m.n} · ${m.title}</h2>
         <p style="color:var(--ink-soft);margin-top:-4px;margin-bottom:14px">${m.blurb}</p>
+        ${m.note?`<div class="callout trap" style="margin:0 0 14px"><div class="tag">Correction</div>${m.note}</div>`:''}
         <div class="vid-frame">
           <iframe src="https://www.youtube-nocookie.com/embed/${m.id}" title="Module ${m.n}: ${m.title}"
             frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -2713,7 +2736,7 @@ RENDER.videos = (c)=>{
         </details>
       </div>`).join('')}
 
-    <div class="callout key" style="margin-top:24px"><div class="tag">Complete set</div>All eight module videos are published, each with its key Q&A. Modules 3a to 3e go deeper on People and the practices not covered elsewhere; 3d (Issues) is coming. <span style="color:var(--ink-soft)"></span></div>
+    <div class="callout key" style="margin-top:24px"><div class="tag">Complete set</div>All eight module videos are published, each with its key Q&A. Modules 3a to 3e go deeper on People and the practices not covered elsewhere. <span style="color:var(--ink-soft)"></span></div>
     <div class="callout key" style="margin-top:14px"><div class="tag">How to use these</div>Watch a module, then close your eyes and answer its Q&A dropdown from memory before opening each answer. Anything you miss, drill in <strong>Drill by Topic</strong> and review the matching framework section.</div>
 
     <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
@@ -2850,7 +2873,7 @@ const DIAGRAM_DECK = [
     {fn:'diagRisk', title:'Risk procedure', jump:'practices_deep', interactive:true,
      expl:'The risk management technique: <strong>Identify → Assess → Plan → Implement</strong>, with <strong>Communicate</strong> running throughout. A risk can be a threat or an opportunity. Tap the steps.',
      qa:[['Name the threat/opportunity paired responses.','Avoid/Exploit, Reduce/Enhance; plus transfer, share, accept, and prepare contingent plans. (No "reject" in v7.)'],
-         ['Risk owner vs risk action owner (actionee)?','The risk owner is responsible for responding to a risk; the risk action owner carries out an agreed action.']]},
+         ['Risk owner vs risk action owner?','The risk owner is responsible for responding to a risk; the risk action owner carries out an agreed action.']]},
     {fn:'diagChange', title:'Change control procedure', jump:'practices_deep', interactive:false,
      expl:'The issue & change-control path (issue management encompasses change control in v7): <strong>Capture → Assess → Recommend → Decide → Implement</strong>. Baseline changes go to the Board or a delegated Change Authority.',
      qa:[['Who decides on a change that affects a baseline?','The Board, or a delegated Change Authority within set limits. The PM decides only within delegated tolerance.'],
@@ -2921,7 +2944,7 @@ const QUESTIONS_FMT = [
 {s:"processes",type:"List",q:"Which 2 are activities of Directing a Project?\n1. Authorize initiation\n2. Authorize a work package\n3. Give ongoing direction\n4. Evaluate a work package",o:["1 and 3", "1 and 2", "2 and 4", "3 and 4"],a:0,e:"1 and 3. Authorizing and evaluating work packages are Controlling a Stage / Managing Product Delivery, not Directing."},
 {s:"processes",type:"List",q:"Which 2 statements about Managing Product Delivery are CORRECT?\n1. It is the Project Manager's process.\n2. Its activities include accept, execute, evaluate.\n3. It produces checkpoint reports.\n4. It produces the PID.",o:["1 and 4", "1 and 3", "2 and 4", "2 and 3"],a:3,e:"2 and 3. MP is the Team Manager's interface (accept/execute/evaluate, notify completion) and produces checkpoint reports."},
 {s:"products",type:"List",q:"Which 2 are baseline management products?\n1. Risk register\n2. Project plan\n3. Highlight report\n4. PID",o:["2 and 4", "1 and 3", "1 and 4", "2 and 3"],a:0,e:"2 and 4. Registers are records; reports are reports. The project plan and PID are baselines."},
-{s:"practices",type:"List",q:"Which 2 are valid risk responses in PRINCE2 7?\n1. Reject\n2. Transfer\n3. Enhance\n4. Ignore",o:["1 and 4", "1 and 3", "2 and 4", "2 and 3"],a:3,e:"2 and 3. Transfer (threat) and enhance (opportunity) are valid. There is no 'reject' or 'ignore' response in v7."},
+{s:"practices",type:"List",q:"Which 2 are valid risk responses in PRINCE2 7?\n1. Reject\n2. Transfer\n3. Enhance\n4. Ignore",o:["1 and 4", "1 and 3", "2 and 4", "2 and 3"],a:3,e:"2 and 3. Transfer (threats and opportunities) and enhance (opportunity) are valid. There is no 'reject' or 'ignore' response in v7."},
 {s:"roles",type:"List",q:"Which 2 role rules are CORRECT?\n1. The Executive can also be the Project Manager.\n2. Project Assurance must be independent of the PM.\n3. The PM may take the Project Support role on a small project.\n4. The Team Manager reports directly to the Board.",o:["2 and 3", "1 and 4", "1 and 3", "2 and 4"],a:0,e:"2 and 3. Executive cannot be the PM; the Team Manager reports to the PM, not the Board."},
 {s:"people",type:"List",q:"Which 2 are among the people-focused themes in PRINCE2 7?\n1. Leading successful change\n2. Managing the budget\n3. Communication\n4. Writing the PID",o:["1 and 3","1 and 4","2 and 3","2 and 4"],a:0,e:"1 and 3. The people themes are leading successful change, leading/managing successful teams, and communication."},
 {s:"tailoring",type:"List",q:"Which 2 statements about tailoring are CORRECT?\n1. Tailoring is mandatory.\n2. You may tailor out a principle if documented.\n3. Tailoring decisions are recorded in the PID.\n4. Tailoring means using every product exactly as written.",o:["1 and 4", "2 and 3", "1 and 3", "2 and 4"],a:2,e:"1 and 3. Tailoring is mandatory and recorded in the PID; principles can never be tailored out."},

@@ -2099,8 +2099,8 @@ const REF_TARGETS=[
  {v:'principles',h:'Tailor to suit the project',re:/tailor to suit/gi,vid:2},
  {v:'principles',h:'The seven tolerances',re:/tolerances?|performance aspects?/gi,vid:2},
 
- {v:'practices_deep',h:'The value chain',re:/outputs?\b|outcomes?|dis-?benefits?|benefits?\b|value chain/gi,vid:3},
- {v:'practices_deep',h:"What's in the Business Case",re:/business case|investment appraisal|business options?|do nothing/gi,vid:3},
+ {v:'practices_deep',h:'The value chain',re:/outputs?\b|outcomes?|dis-?benefits?|benefits?\b|value chain/gi,vid:'3b'},
+ {v:'practices_deep',h:"What's in the Business Case",re:/business case|investment appraisal|business options?|do nothing/gi,vid:'3b'},
  {v:'practices_deep',h:'Four levels of organisation',re:/levels? of (the )?organi[sz]ation|corporate|programme|directing|delivering level/gi,vid:6},
  {v:'practices_deep',h:'The three interests',re:/three interests|business, user|user interest|supplier interest/gi,vid:6},
  {v:'practices_deep',h:'Assurance vs Support vs Change Authority',re:/project assurance|project support|change authority/gi,vid:6},
@@ -2109,15 +2109,15 @@ const REF_TARGETS=[
  {v:'practices_deep',h:"What's in a Plan",re:/plan description|external dependenc|assumptions/gi,vid:7},
  {v:'practices_deep',h:'The quality audit trail',re:/quality expectations|quality specifications?|quality register|quality records?|acceptance criteria|acceptance/gi,vid:7},
  {v:'practices_deep',h:'Three quality words',re:/quality assurance|quality control|quality planning|quality criteria|quality review/gi,vid:7},
- {v:'practices_deep',h:'The risk management procedure',re:/\brisks?\b|probability|proximity|impact|risk management/gi,vid:3},
- {v:'practices_deep',h:'Responses',re:/\bavoid|\breduce|\btransfer|\bshare|\bexploit|\benhance|contingent|responses?\b/gi,vid:3},
- {v:'practices_deep',h:'Owner vs actionee',re:/risk owner|actionee|action owner|risk budget/gi,vid:3},
+ {v:'practices_deep',h:'The risk management procedure',re:/\brisks?\b|probability|proximity|impact|risk management/gi,vid:'3c'},
+ {v:'practices_deep',h:'Responses',re:/\bavoid|\breduce|\btransfer|\bshare|\bexploit|\benhance|contingent|responses?\b/gi,vid:'3c'},
+ {v:'practices_deep',h:'Owner vs actionee',re:/risk owner|actionee|action owner|risk budget/gi,vid:'3c'},
  {v:'practices_deep',h:'Risk vs issue',re:/unplanned event|has happened|might happen/gi,vid:3},
  {v:'practices_deep',h:'The six issue types',re:/issue types?|request for change|off-specification|problem|concern|event external|business opportunit/gi,vid:3},
  {v:'practices_deep',h:'The change control procedure',re:/change control|capture|recommend|baseline change|issue register|issue report/gi,vid:3},
- {v:'practices_deep',h:'Tolerances and the cascade',re:/tolerances?|cascade|forecast/gi,vid:3},
- {v:'practices_deep',h:'Two kinds of control',re:/time-driven|event-driven|controls?\b/gi,vid:3},
- {v:'practices_deep',h:'Who reports what to whom',re:/highlight report|checkpoint report|end stage report|exception report|end project report/gi,vid:3},
+ {v:'practices_deep',h:'Tolerances and the cascade',re:/tolerances?|cascade|forecast/gi,vid:'3e'},
+ {v:'practices_deep',h:'Two kinds of control',re:/time-driven|event-driven|controls?\b/gi,vid:'3e'},
+ {v:'practices_deep',h:'Who reports what to whom',re:/highlight report|checkpoint report|end stage report|exception report|end project report/gi,vid:'3e'},
 
  {v:'processes',h:'Starting up a Project',re:/starting up|\bSU\b|mandate|project brief|initiation stage plan|daily log/gi,vid:4},
  {v:'processes',h:'Directing a Project',re:/directing a project|\bDP\b|authori[sz]e (initiation|the project|project closure)|ad hoc direction|decision points?/gi,vid:4},
@@ -2144,16 +2144,16 @@ const REF_TARGETS=[
  {v:'edition',h:'"Themes" are now "Practices"',re:/\bthemes?\b|6th edition|7th edition/gi,vid:1},
  {v:'edition',h:'Digital and data',re:/digital|\bdata\b/gi,vid:1},
 
- {v:'resit',h:'The ecosystem map',re:/ecosystem|stakeholders?|affects?/gi,vid:3},
- {v:'resit',h:'Change: current state',re:/current state|target state|transition|business as usual|\bBAU\b/gi,vid:3},
- {v:'resit',h:'The three people-focused activities',re:/leading successful|people-focused|communication|leading (and managing )?(successful )?teams/gi,vid:3},
- {v:'resit',h:'Core people concepts',re:/culture|cultural|competenc|team development|collaborat|integrated elements|five elements/gi,vid:3},
- {v:'resit',h:'People management products',re:/change management approach|communication management approach|people management/gi,vid:3},
+ {v:'resit',h:'The ecosystem map',re:/ecosystem|stakeholders?|affects?/gi,vid:'3a'},
+ {v:'resit',h:'Change: current state',re:/current state|target state|transition|business as usual|\bBAU\b/gi,vid:'3a'},
+ {v:'resit',h:'The three people-focused activities',re:/leading successful|people-focused|communication|leading (and managing )?(successful )?teams/gi,vid:'3a'},
+ {v:'resit',h:'Core people concepts',re:/culture|cultural|competenc|team development|collaborat|integrated elements|five elements/gi,vid:'3a'},
+ {v:'resit',h:'People management products',re:/change management approach|communication management approach|people management/gi,vid:'3a'},
 ];
 const REF_SEC={principles:'principles',practices_deep:'practices',processes:'processes',products:'products',roles:'roles',tailoring:'tailoring',edition:'tailoring',resit:'people'};
 const REF_FALLBACK={principles:'principles',practices:'practices',processes:'processes',products:'products',roles:'roles',tailoring:'tailoring',people:'resit'};
 const REF_FALLBACK_H={people:'People in Successful Projects'};
-const REF_SEC_VID={principles:2,practices:3,processes:4,products:7,roles:6,tailoring:5,people:3};
+const REF_SEC_VID={principles:2,practices:3,processes:4,products:7,roles:6,tailoring:5,people:'3a'};
 
 function refFor(q){
   const strip=s=>String(s).replace(/<[^>]+>/g,' ');
@@ -2177,7 +2177,7 @@ function refLinks(q){
   const main = r.i>=0
     ? `<button class="ref-link" onclick="App.goRef(${r.i})">${where}</button>`
     : `<button class="ref-link" onclick="App.goRefView('${t.v}','${q.s}')">${where}</button>`;
-  const vid = t.vid ? `<button class="ref-link ref-vid" onclick="App.goVid(${t.vid})">Video · Module ${t.vid}</button>` : '';
+  const vid = t.vid ? `<button class="ref-link ref-vid" onclick="App.goVid('${t.vid}')">Video · Module ${t.vid}</button>` : '';
   return `<div class="ref-row"><span class="ref-lbl">Study it</span>${main}${vid}</div>`;
 }
 
@@ -2516,6 +2516,73 @@ const VIDEO_MODULES = [
     ]
   },
   {
+    n:'3a', id:'CZvAwYn5S-A', title:"People in Successful Projects",
+    blurb:"The People element in depth: ecosystems, change, stakeholders, culture, leading teams and communication. Your weakest section, worth 8 marks.",
+    qa:[
+      ["What are the five integrated elements of PRINCE2 7?", "Principles, people, practices, processes and the project context. People is new in PRINCE2 7: an option listing four elements without people is the 6th-edition answer."],
+      ["Who does \"people\" cover?", "Two groups: those working on the project, and those affected by it. A perfect product still fails if the people affected by it do not adopt it."],
+      ["Organizational ecosystem vs project ecosystem?", "The organizational ecosystem is the wider organization and environment the project sits in. The project ecosystem is the people and groups involved in the project and their relationships. They overlap."],
+      ["What are the three people-focused areas?", "Leading successful change, leading successful teams, and communication. They run through all of project management, not as separate stages."],
+      ["What does the change management approach do?", "It establishes the target organizational state the project needs, and how the business will move from the current state, through any interim states, to get there. It is part of the PID."],
+      ["Change management vs change control?", "Change management (people element) helps people adopt the change, from current state to target state. Change control (issues practice) approves, rejects or defers changes to the project baseline."],
+      ["What is a stakeholder?", "Any individual, group or organization that can affect, be affected by, or perceive itself to be affected by the project. Perceiving yourself to be affected is enough."],
+      ["What is culture, and can a project have its own?", "The set of shared attitudes, values, goals and ways of working of a group. A project can have its own culture, distinct from the business but aligned with the wider ecosystem."],
+      ["Leadership vs management?", "Leadership motivates people to achieve the project's objectives: building common understanding, agreeing ways of working, seeking feedback on commitment. Management instructs the execution of tasks: explaining how a task is done, following up on completion."],
+      ["Collaboration vs co-creation?", "Collaboration is people across the project ecosystem working together toward the objectives. Co-creation is a specific form of collaboration where users and key influencers help design the products and ways of working, so they are adopted."],
+      ["What is the communication management approach, and who documents it?", "It defines the means and frequency of communication with, and feedback from, the project ecosystem, so it is two-way. The project manager documents it during initiating a project, as a PID section or a stand-alone product."],
+    ]
+  },
+  {
+    n:'3b', id:'rxhO6gpzRlk', title:"The Business Case Practice",
+    blurb:"Desirable, viable, achievable: the value chain, how the business case evolves, and when benefits are confirmed.",
+    qa:[
+      ["What is the purpose of the business case practice?", "To establish mechanisms to judge whether the project is, and remains, desirable, viable and achievable. The judgement continues through the whole project."],
+      ["What is the chain from outputs to business objectives?", "Outputs deliver capabilities. Capabilities, once embedded, create outcomes. Outcomes are measured by benefits (and dis-benefits). Benefits lead to business objectives."],
+      ["Output vs outcome vs benefit, with an example?", "Output: a new banking app (the product handed over). Outcome: customers stop visiting branches for routine tasks (the result of using it). Benefit: lower branch costs (the measurable improvement)."],
+      ["Is a dis-benefit a risk?", "No. A dis-benefit is an expected negative result of an outcome, known in advance. A risk is uncertain: it might happen."],
+      ["How does the business case evolve?", "The project mandate (from the business) sets expectations and constraints. The project brief contains the outline business case, in starting up a project. The full business case is developed during initiation."],
+      ["When is the business case checked?", "The outline business case before the project, the full business case in the initiation stage, and the updated business case in each delivery stage. It is developed, then maintained."],
+      ["When are benefits confirmed?", "During the delivery stages, in the final delivery stage, and after the project has closed. Many benefits only appear once outputs are in use."],
+      ["What does the business case document?", "The business justification: expected costs against estimated benefits, offset by the associated risks, and how and when the benefits will be measured."],
+      ["What is the benefits management approach?", "It defines the management actions that ensure the project's outcomes are achieved and its benefits realized, including the forecast amount and timing of benefits and their tolerances."],
+      ["What is the sustainability management approach?", "Part of the PID. It defines the actions, reviews and controls that ensure the project's sustainability performance targets are achieved."],
+    ]
+  },
+  {
+    n:'3c', id:'7YsKQ2DitZQ', title:"The Risk Practice",
+    blurb:"How risk is measured, the key concepts, the response types, the technique and who does what.",
+    qa:[
+      ["What is a risk, and how is it measured?", "An uncertain event or set of events that, should it occur, will affect objectives: a threat or an opportunity. It is measured by a combination of probability (likelihood) and impact."],
+      ["Is proximity part of how a risk is measured?", "No. Proximity is when the risk could occur, which tells you how urgently to act. The measure is probability and impact. Proximity is estimated in the assess step."],
+      ["What is the purpose of the risk practice?", "To identify, assess and control uncertainties and, as a result, improve the ability of the project to succeed."],
+      ["Risk appetite vs risk tolerance?", "Appetite is the organization's attitude to taking risk, reflecting its risk culture. Tolerance is the threshold of risk exposure that, if exceeded, must be escalated."],
+      ["How is a risk described?", "By cause (the source), event (the uncertain thing that may happen) and effect (the impact on objectives)."],
+      ["Risk owner vs risk action owner?", "The risk owner is accountable for managing a particular risk. The risk action owner carries out a specific response, and may be a different person. The 6th edition called this the risk actionee."],
+      ["What is the risk budget?", "Money set aside within the project budget to fund risk responses. The courseware says it should be explicit and ring-fenced."],
+      ["What are the risk response types?", "Eight names in six rows. Avoid (threat) and exploit (opportunity) pair up; so do reduce and enhance. Transfer, share, accept and prepare contingent plans each apply to threats and opportunities alike. There is no reject or fallback response."],
+      ["Residual vs secondary risk?", "A residual risk is what remains after a response. A secondary risk is a new risk created by the response itself."],
+      ["What is the risk management technique?", "Identify, assess, plan, implement, with communicate running throughout. Assess estimates probability, impact and proximity, then evaluates the overall effect."],
+      ["Which decision biases does the courseware name?", "Optimism bias, loss aversion, groupthink and proximity bias (overweighting what is near in time). Do not confuse proximity bias with proximity as a risk concept."],
+      ["What are the two risk products, and who maintains the register?", "The risk management approach (in the PID) and the risk register (in the project log). The project manager maintains the risk register."],
+    ]
+  },
+  {
+    n:'3e', id:'yD_oLvdjUDg', title:"The Progress Practice",
+    blurb:"Tolerances, the reporting cascade, controls, escalation and exception management.",
+    qa:[
+      ["What is the purpose of the progress practice?", "To establish mechanisms to monitor and compare actual against planned achievement, to provide a forecast for the objectives and continued viability, and to control unacceptable deviations."],
+      ["What is an exception?", "A situation where it can be forecast that there will be a deviation beyond agreed tolerance. It is triggered by the forecast, not by an actual breach."],
+      ["What are the seven tolerance types?", "Time, cost, scope, quality, benefits, risk and sustainability. Sustainability is new in PRINCE2 7: six tolerances is the 6th-edition answer."],
+      ["How are tolerances delegated?", "The business layer sets project tolerances for the project board (project plan). The board sets stage tolerances for the project manager (stage plan). The project manager sets work package tolerances for the team manager (work package description)."],
+      ["Who sends checkpoint and highlight reports?", "Checkpoint report: team manager to project manager. Highlight report: project manager to project board. Do not swap them."],
+      ["Event-driven vs time-driven controls?", "Event-driven controls are decisions triggered by an event, such as a stage end or an exception. Time-driven controls are monitoring and reporting at set intervals, such as highlight reports."],
+      ["Does PRINCE2 7 define the format of reports?", "No. It does not define their composition, format or presentation. The frequency of reporting should reflect the level of control needed."],
+      ["How are exceptions escalated?", "Work package level: the team manager raises an issue to the project manager. Stage level: the project manager produces an issue report and an exception report for the board. Project level: the board refers it to the business layer."],
+      ["How does an exception move through the processes?", "Issue raised in managing product delivery; exception report in controlling a stage; the board asks for an exception plan in directing a project; the plan is produced in managing a stage boundary; once approved, it becomes the new stage plan."],
+      ["What five questions capture a lesson?", "What did we expect? What actually happened? What worked well and why? What did not work well and why? What should be done differently or repeated?"],
+    ]
+  },
+  {
     n:'4', id:'vaAoZuN8X8k', title:'The Seven PRINCE2 Processes',
     blurb:'The project timeline from mandate to close — triggers, outputs, and the boundaries the exam tests.',
     qa:[
@@ -2646,7 +2713,7 @@ RENDER.videos = (c)=>{
         </details>
       </div>`).join('')}
 
-    <div class="callout key" style="margin-top:24px"><div class="tag">Complete set</div>All eight module videos are now published, each with its key Q&A. <span style="color:var(--ink-soft)"></span></div>
+    <div class="callout key" style="margin-top:24px"><div class="tag">Complete set</div>All eight module videos are published, each with its key Q&A. Modules 3a to 3e go deeper on People and the practices not covered elsewhere; 3d (Issues) is coming. <span style="color:var(--ink-soft)"></span></div>
     <div class="callout key" style="margin-top:14px"><div class="tag">How to use these</div>Watch a module, then close your eyes and answer its Q&A dropdown from memory before opening each answer. Anything you miss, drill in <strong>Drill by Topic</strong> and review the matching framework section.</div>
 
     <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">

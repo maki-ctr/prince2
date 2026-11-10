@@ -322,6 +322,31 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 
 /* ---- video lessons ---- */
 .vid-block{margin:0 0 40px;padding-bottom:30px;border-bottom:1px solid var(--line)}
+.content.wide{max-width:1440px}
+.vid-split{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+@media(min-width:1180px){.vid-split{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}}
+.vv{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 12px 10px;box-shadow:var(--shadow);min-width:0}
+.vv-head{display:flex;justify-content:space-between;align-items:center;margin:0 2px 8px;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.vv-count{letter-spacing:.5px;color:var(--ink-soft);font-weight:600;text-transform:none;font-size:12.5px}
+.vv-stage{position:relative;border-radius:10px;overflow:hidden;background:var(--paper-2);cursor:zoom-in;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;outline:none}
+.vv-stage:focus-visible{box-shadow:0 0 0 3px var(--gold-soft)}
+.vv-stage img{width:100%;height:100%;object-fit:contain;display:block}
+.vv-svg{width:100%;max-height:100%;overflow:hidden;padding:8px;background:var(--card)}
+.vv-svg .diagram{margin:0}
+.vv-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:none;background:rgba(28,59,90,.86);color:#fff;font-size:27px;line-height:1;padding-bottom:3px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.vv-nav:hover{background:var(--navy)}
+.vv-nav:focus-visible,.vv-th:focus-visible{outline:3px solid var(--gold-soft);outline-offset:2px}
+.vv-nav.prev{left:8px}.vv-nav.next{right:8px}
+.vv-cap{margin:10px 2px 0;font-size:13.5px;line-height:1.45;color:var(--ink-soft)}
+.vv-cap b{display:block;color:var(--navy);font-family:'Fraunces',serif;font-size:16px;font-weight:600;margin-bottom:2px}
+.vv-hint{display:block;margin-top:3px;font-size:12px;color:var(--gold);font-weight:600}
+.vv-thumbs{display:flex;gap:6px;margin-top:10px;overflow-x:auto;padding:2px 2px 4px;scrollbar-width:thin}
+.vv-th{flex:0 0 auto;width:74px;height:42px;border-radius:6px;border:2px solid var(--line);padding:0;overflow:hidden;cursor:pointer;background:var(--card);opacity:.75}
+.vv-th:hover{opacity:1}
+.vv-th.on{border-color:var(--gold);opacity:1}
+.vv-th img{width:100%;height:100%;object-fit:cover;display:block}
+.vv-th span{display:flex;align-items:center;justify-content:center;height:100%;padding:2px 4px;font-size:9px;line-height:1.15;color:var(--navy);font-weight:600;text-align:center}
+.bp-lb-svg{width:100%;max-width:1100px;max-height:82vh;overflow:auto;background:var(--card);border-radius:10px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
 .vid-block:last-of-type{border-bottom:none}
 .vid-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);background:#000;border:1px solid var(--line)}
 .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -884,7 +909,7 @@ function diagPlanning(){
     <defs><marker id="arr2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--gold)"/></marker></defs>
     ${[['1','Project Product\nDescription','what the whole\nproject delivers'],
        ['2','Product Breakdown\nStructure','decompose into\na hierarchy'],
-       ['3','Product\nDescriptions','per product:\nquality criteria'],
+       ['3','Product\nDescriptions','per product:\nquality specifications'],
        ['4','Product Flow\nDiagram','sequence &\ndependencies']]
       .map((s,i)=>{const x=20+i*180;return `
       <rect class="dg-box plan" x="${x}" y="30" width="150" height="66" rx="10"/>
@@ -1240,7 +1265,7 @@ function diagChangeTransition(){
     <text x="610" y="66" class="dg-lbl">Target state</text><text x="610" y="84" class="dg-sub2">adopted &amp; embedded</text>
     <line x1="190" y1="70" x2="278" y2="70" stroke="var(--green)" stroke-width="2.5" marker-end="url(#ct)"/>
     <line x1="440" y1="70" x2="528" y2="70" stroke="var(--green)" stroke-width="2.5" marker-end="url(#ct)"/>
-    <text x="360" y="140" class="dg-phase">The three people themes drive the transition</text>
+    <text x="360" y="140" class="dg-phase">The three people areas drive the transition</text>
     <rect class="dg-box" x="40" y="155" width="200" height="46" rx="9" fill="#e7eef5"/>
     <text x="140" y="182" class="dg-lbl2">Leading successful change</text>
     <rect class="dg-box" x="260" y="155" width="200" height="46" rx="9" fill="#e7eef5"/>
@@ -1349,6 +1374,7 @@ function go(id){
   const c=document.getElementById('content');
   c.innerHTML=''; c.scrollTop=0; window.scrollTo(0,0);
   try{
+    c.classList.toggle('wide', id==='videos');
     (RENDER[id]||RENDER.dashboard)(c);
   }catch(e){
     c.innerHTML=`<div class="card" style="text-align:center;padding:40px">
@@ -2721,17 +2747,20 @@ RENDER.videos = (c)=>{
   c.innerHTML = `
     <div class="eyebrow">Video Lessons</div>
     <h1 class="page">Watch the Course<span class="small">module videos + key Q&A</span></h1>
-    <p class="lede">The full teaching course as videos, one per module. Under each, open the dropdown for the module's most important questions and answers — use them to self-test after watching.</p>
+    <p class="lede">The full teaching course as videos, one per module. Beside each video are the diagrams for that module: use the arrows or swipe to move through them, and tap one to enlarge it. Under each video, open the dropdown for the module's most important questions and answers, and use them to self-test after watching.</p>
 
     ${VIDEO_MODULES.concat(typeof VIDEO_PENDING_QA!=='undefined'?VIDEO_PENDING_QA:[]).map(m=>`
       <div class="vid-block">
         <h2 class="sec" style="border:none;margin-bottom:10px">Module ${m.n} · ${m.title}</h2>
         <p style="color:var(--ink-soft);margin-top:-4px;margin-bottom:14px">${m.blurb}</p>
         ${m.note?`<div class="callout trap" style="margin:0 0 14px"><div class="tag">Correction</div>${m.note}</div>`:''}
-        <div class="vid-frame">
-          <iframe src="https://www.youtube-nocookie.com/embed/${m.id}" title="Module ${m.n}: ${m.title}"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+        <div class="vid-split">
+          <div class="vid-frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/${m.id}" title="Module ${m.n}: ${m.title}"
+              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          ${vvItems(m.n).length?`<div class="vv" id="vv-${m.n}">${vvInner(m.n)}</div>`:''}
         </div>
         <details class="vid-qa">
           <summary><span class="qa-count">${m.qa.length}</span> Key questions & answers — Module ${m.n}</summary>
@@ -2822,31 +2851,106 @@ function bpBox(){
   document.body.appendChild(box);
   return box;
 }
+let bpSet=null, bpSetKey=null;
+function bpItems(){ return bpSet || BLUEPRINTS; }
 function bpRender(){
-  const box=bpBox(), n=BLUEPRINTS.length, b=BLUEPRINTS[bpIdx];
+  const box=bpBox(), set=bpItems(), n=set.length, b=set[bpIdx];
+  const media = b.f
+    ? `<img src="${BP_PATH}${b.f}.jpg" alt="${b.t.replace(/"/g,'&quot;')}">`
+    : `<div class="bp-lb-svg">${VV_FN[b.svg]()}</div>`;
+  const nav = n>1;
   box.innerHTML = `<div class="bp-lb-inner">
     <div class="bp-lb-stage">
-      <button class="bp-lb-nav prev" type="button" aria-label="Previous image" onclick="event.stopPropagation();App.bpStep(-1)">‹</button>
-      <img src="${BP_PATH}${b.f}.jpg" alt="${b.t.replace(/"/g,'&quot;')}">
-      <button class="bp-lb-nav next" type="button" aria-label="Next image" onclick="event.stopPropagation();App.bpStep(1)">›</button>
+      ${nav?`<button class="bp-lb-nav prev" type="button" aria-label="Previous image" onclick="event.stopPropagation();App.bpStep(-1)">‹</button>`:''}
+      ${media}
+      ${nav?`<button class="bp-lb-nav next" type="button" aria-label="Next image" onclick="event.stopPropagation();App.bpStep(1)">›</button>`:''}
     </div>
-    <div class="bp-lb-cap"><span class="bp-lb-count">${bpIdx+1} / ${n}</span><strong>${b.t}</strong>${b.d?' — '+b.d:''}</div>
+    <div class="bp-lb-cap"><span class="bp-lb-count">${bpSetKey?'Module '+bpSetKey+' · ':''}${bpIdx+1} / ${n}</span><strong>${b.t}</strong>${b.d?' — '+b.d:''}</div>
     <button class="bp-lb-close" type="button" aria-label="Close">✕</button>
   </div>`;
-  [1,-1].forEach(d=>{ const p=new Image(); p.src=BP_PATH+BLUEPRINTS[(bpIdx+d+n)%n].f+'.jpg'; });
+  if(nav) [1,-1].forEach(d=>{ const x=set[(bpIdx+d+n)%n]; if(x.f){ const p=new Image(); p.src=BP_PATH+x.f+'.jpg'; } });
 }
 function bpZoom(slug){
+  bpSet=null; bpSetKey=null;
   const i=BLUEPRINTS.findIndex(x=>x.f===slug);
   bpIdx = i<0 ? 0 : i;
   bpRender();
   bpBox().classList.add('show');
 }
+function bpOpenSet(items,idx,key){
+  bpSet=items; bpSetKey=key||null; bpIdx=idx||0;
+  bpRender();
+  bpBox().classList.add('show');
+}
 function bpStep(d){
-  const n=BLUEPRINTS.length;
+  const n=bpItems().length;
   bpIdx=(bpIdx+d+n)%n;
   bpRender();
 }
-function bpClose(){ const box=document.getElementById('bpLightbox'); if(box) box.classList.remove('show'); }
+function bpClose(){
+  const box=document.getElementById('bpLightbox'); if(box) box.classList.remove('show');
+  if(bpSetKey && vvIdx[bpSetKey]!==bpIdx){ vvIdx[bpSetKey]=bpIdx; vvRefresh(bpSetKey); }
+}
+
+/* ---------------- VIDEO VISUALS: diagrams beside each video ---------------- */
+const VV_FN = { diagChangeTransition, diagRisk, diagChange, diagPlanning };
+const VV_SVG = {
+  diagChangeTransition:['Change: current state to target state','How the people element moves the organization from its current state to its target state.'],
+  diagRisk:['Risk management technique','Identify, assess, plan, implement, with communicate running throughout.'],
+  diagChange:['Issue management technique','Capture, assess, recommend, decide, implement.'],
+  diagPlanning:['Product-based planning','Four steps, products first and activities second.'],
+};
+const VIDEO_VISUALS = {
+  '1': ['00-framework-overview','01-title-walkthrough','03-process-timeline'],
+  '2': ['00-framework-overview','03-process-timeline','10-exception-trigger','18-tolerance-cascade'],
+  '3': ['00-framework-overview','02-org-levels','12-value-chain','16-risk-responses','17-issue-types','18-tolerance-cascade','19-quality-trail'],
+  '3a':['00-framework-overview','diagChangeTransition'],
+  '3b':['12-value-chain','11-stage-boundary','10-exception-trigger'],
+  '3c':['16-risk-responses','diagRisk'],
+  '3d':['17-issue-types','diagChange','10-exception-trigger'],
+  '3e':['18-tolerance-cascade','08-controlling-stage','10-exception-trigger'],
+  '4': ['03-process-timeline','04-starting-up','05-directing','06-initiating','07-cs-mp-engine','08-controlling-stage','09-managing-product-delivery','11-stage-boundary','13-closing','14-synthesis','15-process-matrix'],
+  '5': ['00-framework-overview','06-initiating'],
+  '6': ['02-org-levels','07-cs-mp-engine'],
+  '7': ['diagPlanning','19-quality-trail','15-process-matrix'],
+  '8': ['14-synthesis','15-process-matrix','16-risk-responses','17-issue-types','18-tolerance-cascade'],
+};
+const vvIdx = {};
+function vvItems(n){
+  return (VIDEO_VISUALS[n]||[]).map(k=> VV_SVG[k] ? {svg:k,t:VV_SVG[k][0],d:VV_SVG[k][1]} : BLUEPRINTS.find(b=>b.f===k)).filter(Boolean);
+}
+function vvInner(n){
+  const items=vvItems(n), len=items.length;
+  const i=Math.min(vvIdx[n]||0,len-1), it=items[i];
+  const media = it.f
+    ? `<img src="${BP_PATH}${it.f}.jpg" alt="${it.t.replace(/"/g,'&quot;')}" loading="lazy">`
+    : `<div class="vv-svg">${VV_FN[it.svg]()}</div>`;
+  const nav = len>1;
+  return `
+    <div class="vv-head"><span>Visuals for this module</span><span class="vv-count">${i+1} / ${len}</span></div>
+    <div class="vv-stage" data-vv="${n}" role="button" tabindex="0" aria-label="Enlarge: ${it.t.replace(/"/g,'&quot;')}" onclick="App.vvZoom('${n}')" onkeydown="if(event.key==='Enter'){App.vvZoom('${n}')}else if(event.key==='ArrowRight'){event.preventDefault();App.vvStep('${n}',1)}else if(event.key==='ArrowLeft'){event.preventDefault();App.vvStep('${n}',-1)}">
+      ${media}
+      ${nav?`<button class="vv-nav prev" type="button" aria-label="Previous visual" onclick="event.stopPropagation();App.vvStep('${n}',-1)">‹</button>
+      <button class="vv-nav next" type="button" aria-label="Next visual" onclick="event.stopPropagation();App.vvStep('${n}',1)">›</button>`:''}
+    </div>
+    <div class="vv-cap"><b>${it.t}</b>${it.d}<span class="vv-hint">Tap to enlarge</span></div>
+    ${nav?`<div class="vv-thumbs">${items.map((x,k)=>`<button type="button" class="vv-th${k===i?' on':''}" aria-label="${x.t.replace(/"/g,'&quot;')}" onclick="App.vvGo('${n}',${k})">${x.f?`<img src="${BP_PATH}${x.f}.jpg" alt="" loading="lazy">`:`<span>${x.t}</span>`}</button>`).join('')}</div>`:''}`;
+}
+function vvRefresh(n){ const el=document.getElementById('vv-'+n); if(el) el.innerHTML=vvInner(n); }
+function vvStep(n,d){ const len=vvItems(n).length; vvIdx[n]=((vvIdx[n]||0)+d+len)%len; vvRefresh(n); }
+function vvGo(n,k){ vvIdx[n]=k; vvRefresh(n); }
+function vvZoom(n){ bpOpenSet(vvItems(n), vvIdx[n]||0, n); }
+(function(){
+  let x0=null,y0=null,st=null;
+  document.addEventListener('touchstart',e=>{ st=e.target.closest&&e.target.closest('.vv-stage'); if(st){ x0=e.touches[0].clientX; y0=e.touches[0].clientY; } },{passive:true});
+  document.addEventListener('touchend',e=>{
+    if(!st||x0===null) return;
+    const dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0, n=st.dataset.vv; x0=null; st=null;
+    if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)*1.3){ vvSwiped=Date.now(); vvStep(n, dx<0?1:-1); }
+  },{passive:true});
+  document.addEventListener('click',e=>{ if(Date.now()-vvSwiped<400 && e.target.closest&&e.target.closest('.vv-stage')){ e.stopPropagation(); e.preventDefault(); } },true);
+})();
+var vvSwiped=0;
 
 RENDER.gallery = (c)=>{
   markRead('gallery');
@@ -3021,7 +3125,7 @@ if(typeof QUESTIONS!=='undefined' && Array.isArray(QUESTIONS)){ QUESTIONS.push(.
 const App = { go, openNav, closeNav, bpZoom, startFc, flipFc, rateFc, startDrill, answerDrill,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
   renderExamResult, reviewExam, setReviewFilter, toggleCheck, resetProgress,
-  bpStep, bpClose, renderReview, goRef, goRefView, goVid, backToReview };
+  bpStep, bpClose, vvStep, vvGo, vvZoom, renderReview, goRef, goRefView, goVid, backToReview };
 if(typeof window!=='undefined'){ Object.assign(window, App); window.App=App; }
 
 /* ---------- keyboard: Escape closes mobile nav ---------- */

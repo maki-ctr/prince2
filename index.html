@@ -2174,10 +2174,10 @@ const REF_TARGETS=[
  {v:'principles',h:'The seven tolerances',re:/tolerances?|performance aspects?/gi,vid:2},
 
  {v:'practices_deep',h:'The value chain',re:/outputs?\b|outcomes?|dis-?benefits?|benefits?\b|value chain/gi,vid:'3b'},
- {v:'practices_deep',h:'The business case management technique',re:/business case management technique/gi,vid:'3b'},
- {v:'practices_deep',h:'The organizational design and development technique',re:/organizational design and development|understand the organizational ecosystem|design the project ecosystem|develop the project ecosystem|changes to the project ecosystem|transition the project into/gi,vid:6},
- {v:'practices_deep',h:'The planning technique',re:/planning technique|organizing work packages|preparing (the )?(estimates|schedule|budget)|documenting the plan|analysing risks/gi,vid:7},
- {v:'practices_deep',h:'The quality management technique',re:/quality management technique|accepting products|gathering user inputs/gi,vid:7},
+ {v:'practices_deep',h:'The business case management technique',re:/business case management technique/gi,vid:'3f'},
+ {v:'practices_deep',h:'The organizational design and development technique',re:/organizational design and development|understand the organizational ecosystem|design the project ecosystem|develop the project ecosystem|changes to the project ecosystem|transition the project into/gi,vid:'3f'},
+ {v:'practices_deep',h:'The planning technique',re:/planning technique|organizing work packages|preparing (the )?(estimates|schedule|budget)|documenting the plan|analysing risks/gi,vid:'3f'},
+ {v:'practices_deep',h:'The quality management technique',re:/quality management technique|accepting products|gathering user inputs/gi,vid:'3f'},
  {v:'practices_deep',h:"What's in the Business Case",re:/business case|investment appraisal|business options?|do nothing/gi,vid:'3b'},
  {v:'practices_deep',h:'Four levels of organisation',re:/levels? of (the )?organi[sz]ation|corporate|programme|directing|delivering level/gi,vid:6},
  {v:'practices_deep',h:'The three interests',re:/three interests|business, user|user interest|supplier interest/gi,vid:6},
@@ -2710,6 +2710,24 @@ const VIDEO_MODULES = [
     ]
   },
   {
+    n:'3f', id:'Bofp6RKABh8', title:'Four Practice Techniques',
+    blurb:'Business case management, organizational design and development, planning, and quality management: each step in order, with how the exam tests it.',
+    qa:[
+      ["What are the four steps of the business case management technique?", "Develop, check, maintain, confirm. Develop turns the mandate into the outline business case, then the full one; check tests progress, risks and issues against it; maintain is the end-of-stage update; confirm happens in benefits reviews after the project."],
+      ["A new risk is assessed against the business justification during a stage. Which step is this?", "Check. The end-of-stage update with actuals and forecasts is maintain."],
+      ["What are the five steps of the organizational design and development technique?", "Understand the organizational ecosystem, design the project ecosystem, develop the project ecosystem, manage changes to the project ecosystem, and transition the project into the organizational ecosystem."],
+      ["A new team member attends an induction and a site visit. Which step is this?", "Develop the project ecosystem. Design decides the structure, people, working practices and culture before this."],
+      ["What happens in the transition step?", "At the end of the project, products, people and learning go back to the business."],
+      ["What are the six steps of the planning technique?", "Defining and analysing products, organizing work packages, preparing estimates, preparing the schedule, preparing the budget, documenting the plan. Analysing risks runs alongside all six."],
+      ["Where does product-based planning fit in PRINCE2 7?", "Inside the first step, defining and analysing products: the project product description, product breakdown structure, product descriptions and product flow diagram."],
+      ["What makes a good work package grouping?", "At least one product each, closely related people, resources and activities, no overlap, and documented dependencies, which can be internal or external."],
+      ["In which planning step are the risk budget and change budget set?", "Preparing the budget, together with activity costs and cost tolerances."],
+      ["What are the three parts of the quality management technique?", "Quality planning, quality control and accepting products."],
+      ["What does quality planning start with?", "Gathering user inputs: the user’s quality expectations and acceptance criteria, captured in the project product description in starting up a project. Requirements are then detailed as quality specifications, and the quality management approach is described and approved by the board."],
+      ["What does accepting products do?", "It transfers ownership of, or responsibility for, a product from the project or supplier to the project board, on behalf of the user. Quality assurance is not part of this technique."],
+    ]
+  },
+  {
     n:'4', id:'vaAoZuN8X8k', title:'The Seven PRINCE2 Processes',
     blurb:'The project timeline from mandate to close — triggers, outputs, and the boundaries the exam tests.',
     note:"Controlling a Stage captures and assesses issues and risks. “Examines” is 6th-edition wording.",
@@ -2842,7 +2860,7 @@ RENDER.videos = (c)=>{
         </details>
       </div>`).join('')}
 
-    <div class="callout key" style="margin-top:24px"><div class="tag">Complete set</div>All eight module videos are published, each with its key Q&A. Modules 3a to 3e go deeper on People and the practices not covered elsewhere. <span style="color:var(--ink-soft)"></span></div>
+    <div class="callout key" style="margin-top:24px"><div class="tag">Complete set</div>All eight module videos are published, each with its key Q&A. Modules 3a to 3f go deeper on People, the practices not covered elsewhere, and the practice techniques. <span style="color:var(--ink-soft)"></span></div>
     <div class="callout key" style="margin-top:14px"><div class="tag">How to use these</div>Watch a module, then close your eyes and answer its Q&A dropdown from memory before opening each answer. Anything you miss, drill in <strong>Drill by Topic</strong> and review the matching framework section.</div>
 
     <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
@@ -2977,6 +2995,7 @@ const VIDEO_VISUALS = {
   '3c':['16-risk-responses','diagRisk'],
   '3d':['17-issue-types','diagChange','10-exception-trigger'],
   '3e':['18-tolerance-cascade','08-controlling-stage','10-exception-trigger'],
+  '3f':['diagPlanning','19-quality-trail','12-value-chain','02-org-levels'],
   '4': ['03-process-timeline','04-starting-up','05-directing','06-initiating','07-cs-mp-engine','08-controlling-stage','09-managing-product-delivery','11-stage-boundary','13-closing','14-synthesis','15-process-matrix'],
   '5': ['00-framework-overview','06-initiating'],
   '6': ['02-org-levels','07-cs-mp-engine'],

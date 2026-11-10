@@ -34,7 +34,7 @@ body{
   position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 0;
   border-right:1px solid rgba(0,0,0,.2);
 }
-.brand{padding:0 26px 22px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
+.brand{position:relative;padding:0 26px 22px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
 .brand .crest{font-family:'Fraunces',serif;font-weight:800;font-size:25px;letter-spacing:-.5px;line-height:1.05}
 .brand .crest em{color:var(--gold-soft);font-style:normal}
 .brand .sub{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#9bb0c4;margin-top:6px}
@@ -53,6 +53,17 @@ body{
 .sb-foot{padding:18px 26px 0;font-size:11.5px;color:#8ba0b4;line-height:1.5}
 
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
+.sb-hide{position:absolute;top:-6px;right:12px;width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#e8eef3;font-size:19px;line-height:1;cursor:pointer}
+.sb-hide:hover{background:rgba(255,255,255,.14);color:#fff}
+.sb-show{display:none;position:fixed;top:14px;left:14px;z-index:45;align-items:center;gap:7px;padding:8px 13px;border-radius:10px;border:none;background:var(--navy);color:#fff;font-family:'Spline Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.sb-show:hover{background:var(--navy-2)}
+.sb-hide:focus-visible,.sb-show:focus-visible{outline:3px solid var(--gold-soft);outline-offset:2px}
+@media(min-width:881px){
+  body.nav-collapsed .sidebar{display:none}
+  body.nav-collapsed .sb-show{display:flex}
+  body.nav-collapsed .content{padding-top:76px}
+}
+@media(max-width:880px){.sb-hide,.sb-show{display:none!important}}
 .topbar{
   display:none;background:var(--navy);color:#fff;padding:14px 18px;
   align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40;
@@ -419,8 +430,10 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 <a href="#content" style="position:absolute;left:-999px;top:8px;z-index:99;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none" onfocus="this.style.left='8px'" onblur="this.style.left='-999px'">Skip to content</a>
 <div class="scrim" id="scrim" onclick="closeNav()"></div>
 <div class="shell">
+  <button class="sb-show" id="sbShow" type="button" onclick="App.toggleSidebar()" aria-label="Show menu" title="Show menu">☰ <span>Menu</span></button>
   <aside class="sidebar" id="sidebar">
     <div class="brand">
+      <button class="sb-hide" type="button" onclick="App.toggleSidebar()" aria-label="Hide menu" title="Hide menu">«</button>
       <div class="crest">PR<em>IN</em>CE2</div>
       <div class="sub">Foundation · Self-Study</div>
     </div>
@@ -1396,6 +1409,13 @@ function go(id){
   if(typeof wireDiagrams==='function')wireDiagrams(c);
   closeNav();
 }
+function toggleSidebar(force){
+  const on = typeof force==='boolean' ? force : !document.body.classList.contains('nav-collapsed');
+  document.body.classList.toggle('nav-collapsed', on);
+  try{ localStorage.setItem('p2-nav-collapsed', on?'1':'0'); }catch(e){}
+  const t=document.getElementById(on?'sbShow':'sidebar'); if(t&&on) t.focus();
+}
+try{ if(localStorage.getItem('p2-nav-collapsed')==='1') document.body.classList.add('nav-collapsed'); }catch(e){}
 function openNav(){document.getElementById('sidebar').classList.add('open');document.getElementById('scrim').classList.add('show');}
 function closeNav(){document.getElementById('sidebar').classList.remove('open');document.getElementById('scrim').classList.remove('show');}
 
@@ -3122,7 +3142,7 @@ if(typeof QUESTIONS!=='undefined' && Array.isArray(QUESTIONS)){ QUESTIONS.push(.
 
 
 /* ---------- expose handlers (namespace + globals so all onclick styles resolve) ---------- */
-const App = { go, openNav, closeNav, bpZoom, startFc, flipFc, rateFc, startDrill, answerDrill,
+const App = { go, openNav, closeNav, toggleSidebar, bpZoom, startFc, flipFc, rateFc, startDrill, answerDrill,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
   renderExamResult, reviewExam, setReviewFilter, toggleCheck, resetProgress,
   bpStep, bpClose, vvStep, vvGo, vvZoom, renderReview, goRef, goRefView, goVid, backToReview };

@@ -334,8 +334,12 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 /* ---- video lessons ---- */
 .vid-block{margin:0 0 40px;padding-bottom:30px;border-bottom:1px solid var(--line)}
 .content.wide{max-width:1440px}
-.vid-split{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
-@media(min-width:1180px){.vid-split{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}}
+.vid-split{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"video" "vis" "qa";gap:16px;align-items:start}
+.vid-split>.vid-frame{grid-area:video}
+.vid-split>.vv{grid-area:vis}
+.vid-split>.vid-qa{grid-area:qa;margin-top:0}
+@media(min-width:1180px){.vid-split{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"video vis" "qa vis"}}
+@media(min-width:1700px){.content.wide{max-width:1780px}}
 .vv{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 12px 10px;box-shadow:var(--shadow);min-width:0}
 .vv-head{display:flex;justify-content:space-between;align-items:center;margin:0 2px 8px;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
 .vv-count{letter-spacing:.5px;color:var(--ink-soft);font-weight:600;text-transform:none;font-size:12.5px}
@@ -2581,10 +2585,10 @@ const VIDEO_MODULES = [
   },
   {
     n:'2', id:'-UKRhG_0_sE', title:'The Seven PRINCE2 Principles',
-    blurb:'The seven universal, mandatory, self-validating obligations — and the exam traps around each.',
+    blurb:'The seven principles: what each one means, why none can be tailored away, and the exam traps around each.',
     note:"The video calls the principles “universal, mandatory and self-validating”. The usual PRINCE2 wording is universal, self-validating and empowering. Your courseware doesn’t list these characteristics, so don’t rely on “mandatory” as an exam answer.",
     qa:[
-      ['What makes a principle different from a practice or process?','Principles are universal, mandatory and self-validating: apply all seven or it is not a PRINCE2 project. You can scale practices and streamline processes, but you can never tailor out a principle.'],
+      ['What makes a principle different from a practice or process?','Principles are universal and self-validating, and all seven must be applied: if any is missing, it is not a PRINCE2 project. You can scale practices and streamline processes, but you can never tailor out a principle.'],
       ['Name the seven principles.','1) Ensure continued business justification, 2) Learn from experience, 3) Define roles, responsibilities and relationships, 4) Manage by stages, 5) Manage by exception, 6) Focus on products, 7) Tailor to suit the project.'],
       ['Who owns the business case, and what does "continued" mean?','The Executive owns it. "Continued" means justification must stay valid and be actively rechecked throughout — not written once and filed. If justification dies, the project should stop.'],
       ['When does "learn from experience" happen?','Before (review prior lessons at the start), During (record in the Lessons Log), and After (hand lessons to the organisation). A lesson only counts if it is acted on, not just logged.'],
@@ -2847,7 +2851,6 @@ RENDER.videos = (c)=>{
               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
           </div>
           ${vvItems(m.n).length?`<div class="vv" id="vv-${m.n}">${vvInner(m.n)}</div>`:''}
-        </div>
         <details class="vid-qa">
           <summary><span class="qa-count">${m.qa.length}</span> Key questions & answers — Module ${m.n}</summary>
           <div class="qa-body">
@@ -2858,6 +2861,7 @@ RENDER.videos = (c)=>{
               </details>`).join('')}
           </div>
         </details>
+        </div>
       </div>`).join('')}
 
     <div class="callout key" style="margin-top:24px"><div class="tag">Complete set</div>All eight module videos are published, each with its key Q&A. Modules 3a to 3f go deeper on People, the practices not covered elsewhere, and the practice techniques. <span style="color:var(--ink-soft)"></span></div>

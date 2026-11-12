@@ -2878,7 +2878,8 @@ RENDER.videos = (c)=>{
 /* ---------------- VISUAL BLUEPRINT (image gallery + in-context embeds) ---------------- */
 const BP_PATH = 'img/blueprint/';
 const BLUEPRINTS = [
-  {f:'00-framework-overview', t:"PRINCE2 7 at a glance", d:"The five integrated elements, project versus business as usual, the five project characteristics and the three people areas."},
+  {f:'00-framework-overview', t:"PRINCE2 7 at a glance", d:"The five integrated elements and how they link through people, project versus business as usual, the five project characteristics and the three people areas."},
+  {f:'20-how-it-connects', t:"How it all connects", d:"Each principle, the practice that puts it into action, and the processes where it shows up."},
   {f:'01-title-walkthrough', t:"The Meridian relocation", d:"The running example: mandate, cast, stages, and the five moments the exam cares about."},
   {f:'03-process-timeline', t:"The process model across the lifecycle", d:"Which process happens in which stage. A stage boundary ends every stage except the final one."},
   {f:'02-org-levels', t:"Four levels of organization", d:"Business layer, directing, managing, delivering, plus assurance, support and change authority."},
@@ -2991,8 +2992,8 @@ const VV_SVG = {
   diagPlanning:['Product-based planning','Four steps, products first and activities second.'],
 };
 const VIDEO_VISUALS = {
-  '1': ['00-framework-overview','01-title-walkthrough','03-process-timeline'],
-  '2': ['00-framework-overview','03-process-timeline','10-exception-trigger','18-tolerance-cascade'],
+  '1': ['00-framework-overview','20-how-it-connects','01-title-walkthrough','03-process-timeline'],
+  '2': ['20-how-it-connects','00-framework-overview','03-process-timeline','10-exception-trigger','18-tolerance-cascade'],
   '3': ['00-framework-overview','02-org-levels','12-value-chain','16-risk-responses','17-issue-types','18-tolerance-cascade','19-quality-trail'],
   '3a':['00-framework-overview','diagChangeTransition'],
   '3b':['12-value-chain','11-stage-boundary','10-exception-trigger'],

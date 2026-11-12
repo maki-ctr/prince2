@@ -317,7 +317,39 @@ tr:nth-child(even) td{background:rgba(0,0,0,.015)}
 /* lightbox */
 .bp-lightbox{position:fixed;inset:0;z-index:200;background:rgba(14,22,33,.9);display:none;align-items:center;justify-content:center;padding:20px;animation:fade .2s}
 .bp-lightbox.show{display:flex}
-.bp-lb-inner{position:relative;max-width:1200px;width:100%;max-height:92vh;display:flex;flex-direction:column;align-items:center}
+.bp-lb-inner{position:relative;max-width:1200px;width:100%;max-height:94vh;display:flex;flex-direction:column;align-items:center;overflow-y:auto;overscroll-behavior:contain}
+.bpq{width:100%;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-align:left}
+.bpq.dark{max-width:900px;flex-shrink:0}
+.bp-lb-main{width:100%;display:flex;flex-direction:column;align-items:center;min-width:0}
+.bp-lb-side{width:100%;max-width:900px}
+@media(min-width:1100px){
+  .bp-lb-inner.with-q{max-width:1560px;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:18px;align-items:start;overflow:visible}
+  .bp-lb-inner.with-q .bp-lb-side{margin-top:44px;max-height:calc(90vh - 44px);overflow-y:auto;overscroll-behavior:contain;border-radius:12px}
+  .bp-lb-inner.with-q .bpq{margin-top:0}
+  .bp-lb-inner.with-q .bp-lb-nav.next{right:8px}
+  .bp-lb-inner.with-q .bp-lb-nav.prev{left:8px}
+}
+.bpq>summary{cursor:pointer;padding:11px 14px;font-weight:600;font-size:14px;color:var(--navy);list-style:none;display:flex;align-items:center;gap:9px}
+.bpq>summary::-webkit-details-marker{display:none}
+.bpq>summary::after{content:'▾';margin-left:auto;color:var(--gold);font-size:13px;transition:transform .2s}
+.bpq[open]>summary::after{transform:rotate(180deg)}
+.bpq>summary:hover{background:var(--paper-2)}
+.bpq-body{padding:4px 14px 14px;border-top:1px solid var(--line)}
+.bpq-item{padding:12px 0;border-bottom:1px dashed var(--line)}
+.bpq-q{margin:0 0 8px;font-size:14.5px;line-height:1.45;color:var(--ink)}
+.bpq-opts{display:grid;gap:6px}
+.bpq-opt{display:flex;gap:9px;align-items:flex-start;text-align:left;font:inherit;font-size:14px;line-height:1.4;padding:8px 11px;border-radius:9px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.bpq-opt:hover:not(:disabled){border-color:var(--navy)}
+.bpq-opt:disabled{cursor:default}
+.bpq-opt.right{background:var(--green-soft);border-color:var(--green)}
+.bpq-opt.wrong{background:var(--red-soft);border-color:var(--red)}
+.bpq-opt:focus-visible{outline:3px solid var(--gold-soft);outline-offset:2px}
+.bpq-l{flex-shrink:0;width:20px;height:20px;border-radius:5px;background:var(--navy);color:#fff;font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
+.bpq-exp{margin-top:8px;font-size:13.5px;line-height:1.5;padding:9px 11px;border-radius:9px;background:var(--red-soft);color:var(--ink)}
+.bpq-exp.ok{background:var(--green-soft)}
+.bpq-note{display:block;margin-top:4px;font-size:12.5px;color:var(--ink-soft)}
+.bpq-score{margin-top:10px;font-size:13.5px;font-weight:600;color:var(--navy)}
+.bp-card-q{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--gold)}
 .bp-lb-inner img{max-width:100%;max-height:82vh;object-fit:contain;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
 .bp-lb-cap{color:#e8eef3;font-size:14px;margin-top:12px;text-align:center;max-width:70ch;line-height:1.5}
 .bp-lb-cap strong{color:var(--gold-soft)}
@@ -2950,13 +2982,17 @@ function bpRender(){
     ? `<img src="${BP_PATH}${b.f}.jpg" alt="${b.t.replace(/"/g,'&quot;')}">`
     : `<div class="bp-lb-svg">${VV_FN[b.svg]()}</div>`;
   const nav = n>1;
-  box.innerHTML = `<div class="bp-lb-inner">
+  const hasQ = !!(b.f && bpqItems(b.f).length);
+  box.innerHTML = `<div class="bp-lb-inner${hasQ?' with-q':''}">
+    <div class="bp-lb-main">
     <div class="bp-lb-stage">
       ${nav?`<button class="bp-lb-nav prev" type="button" aria-label="Previous image" onclick="event.stopPropagation();App.bpStep(-1)">‹</button>`:''}
       ${media}
       ${nav?`<button class="bp-lb-nav next" type="button" aria-label="Next image" onclick="event.stopPropagation();App.bpStep(1)">›</button>`:''}
     </div>
     <div class="bp-lb-cap"><span class="bp-lb-count">${bpSetKey?'Module '+bpSetKey+' · ':''}${bpIdx+1} / ${n}</span><strong>${b.t}</strong>${b.d?' — '+b.d:''}</div>
+    </div>
+    ${hasQ?`<div class="bp-lb-side">${bpqHTML(b.f,true)}</div>`:''}
     <button class="bp-lb-close" type="button" aria-label="Close">✕</button>
   </div>`;
   if(nav) [1,-1].forEach(d=>{ const x=set[(bpIdx+d+n)%n]; if(x.f){ const p=new Image(); p.src=BP_PATH+x.f+'.jpg'; } });
@@ -2981,6 +3017,177 @@ function bpStep(d){
 function bpClose(){
   const box=document.getElementById('bpLightbox'); if(box) box.classList.remove('show');
   if(bpSetKey && vvIdx[bpSetKey]!==bpIdx){ vvIdx[bpSetKey]=bpIdx; vvRefresh(bpSetKey); }
+}
+
+
+/* ---------------- EXAM QUESTIONS PER BLUEPRINT IMAGE ---------------- */
+const BP_QUIZ = {
+ "00-framework-overview": [
+  "How many integrated elements does PRINCE2 7 have, and what i",
+  "Which is one of the five characteristics that distinguish a ",
+  "Which integrated element describes the environment in which ",
+  "Why is the people element described as 'integrated'?"
+ ],
+ "20-how-it-connects": [
+  "Which principle requires the project to stop if it is no lon",
+  "Which principle establishes limits of delegated authority?",
+  "Which principle drives the use of Product Descriptions?",
+  "Which principle CANNOT be tailored away?"
+ ],
+ "01-title-walkthrough": [
+  "The Project Mandate is:",
+  "Corrective action within tolerance is taken in:",
+  "A year after the project closed, the business reviews whethe",
+  "Work Package tolerances are set by the:"
+ ],
+ "03-process-timeline": [
+  "Which process never runs during a delivery stage?",
+  "Which process runs only once, during the initiation stage?",
+  "'Managing a Stage Boundary' is triggered by:",
+  "Which process is performed by the Project Board, not the Pro"
+ ],
+ "02-org-levels": [
+  "Project Assurance is independent of:",
+  "The Project Support role:",
+  "The Senior Supplier is accountable for:",
+  "If Project Assurance and the Project Manager were the same p"
+ ],
+ "04-starting-up": [
+  "The trigger for 'Starting up a Project' is:",
+  "The main output of 'Starting up a Project' is:",
+  "Which two roles are appointed during Starting up a Project?",
+  "Which is NOT an output of Starting up a project?"
+ ],
+ "05-directing": [
+  "The five 'Directing a Project' decision points include all E",
+  "Which 2 are activities of Directing a Project?\n1. Authorize ",
+  "The Project Board authorises the project at the end of:",
+  "During which process does the Project Board give ad hoc dire"
+ ],
+ "06-initiating": [
+  "The main output of 'Initiating a Project' is:",
+  "In which process are the management approaches (Risk, Qualit",
+  "How is the PID best characterised in terms of its make-up?",
+  "Who documents the communication management approach, and in "
+ ],
+ "07-cs-mp-engine": [
+  "Which process authorises a Work Package?",
+  "A Work Package is accepted by the Team Manager in:",
+  "Checkpoint Reports go from:",
+  "Which process focuses on the PM–Team Manager interface?"
+ ],
+ "08-controlling-stage": [
+  "Corrective action within tolerance is taken in:",
+  "Which is NOT a tolerance area in PRINCE2 7?",
+  "Which type of control is a Highlight Report?",
+  "The Highlight Report's audience is the:"
+ ],
+ "09-managing-product-delivery": [
+  "What is the correct PRINCE2 7 sequence of Managing Product D",
+  "In PRINCE2 7, the third Managing Product Delivery activity i",
+  "A Work Package contains:",
+  "Which 2 statements about Managing Product Delivery are CORRE"
+ ],
+ "10-exception-trigger": [
+  "The Exception Report is produced by:",
+  "An Exception Plan replaces:",
+  "A [ ? ] is a plan that follows an exception report and expla",
+  "Which process is triggered by an Exception Plan request?"
+ ],
+ "11-stage-boundary": [
+  "The End Stage Report is produced in:",
+  "'Managing a Stage Boundary' is triggered by:",
+  "Which document is updated at every stage boundary?",
+  "An End Stage Report is best classified as a/an:"
+ ],
+ "12-value-chain": [
+  "In the value chain, outputs deliver [ ? ], which embed to cr",
+  "A 'dis-benefit' is:",
+  "A 'benefit' in PRINCE2 is:",
+  "In the value chain, an 'output' becomes a 'benefit' only via"
+ ],
+ "16-risk-responses": [
+  "A risk is measured by a combination of probability and [ ? ]",
+  "Estimating a risk's probability, impact and proximity happen",
+  "'Transfer' as a risk response is used for:",
+  "A 'risk action owner' is the person who:"
+ ],
+ "17-issue-types": [
+  "An 'off-specification' issue is:",
+  "An unanticipated upside the project could capture is classif",
+  "The change control procedure order is:",
+  "A request for change is best handled through:"
+ ],
+ "18-tolerance-cascade": [
+  "Tolerances are set for the Project Manager by:",
+  "Checkpoint Reports go from:",
+  "A Checkpoint Report sent every Friday is an example of a:",
+  "How many tolerance areas (performance aspects) does PRINCE2 "
+ ],
+ "19-quality-trail": [
+  "Acceptance criteria are:",
+  "The Quality Register records:",
+  "Quality assurance in PRINCE2 is:",
+  "Users confirm that a tested product meets its acceptance cri"
+ ],
+ "13-closing": [
+  "Which process produces the End Project Report?",
+  "Premature (early) closure of a project is handled within whi",
+  "Premature closure differs from planned closure in that:",
+  "Realising benefits after project closure is the responsibili"
+ ],
+ "14-synthesis": [
+  "Which process produces the Project Brief?",
+  "Which process produces the PID?",
+  "Which process is triggered by an Exception Plan request?",
+  "Which process produces the End Project Report?"
+ ],
+ "15-process-matrix": [
+  "Which process produces Checkpoint Reports?",
+  "The End Stage Report is produced in:",
+  "Which process confirms the prerequisites for initiation are ",
+  "In which process are the management approaches (Risk, Qualit"
+ ]
+};
+let bpqOpen=false;
+function bpqItems(f){ return (BP_QUIZ[f]||[]).map(s=>{const gi=QUESTIONS.findIndex(q=>q.q.startsWith(s));return gi<0?null:{gi,q:QUESTIONS[gi]};}).filter(Boolean); }
+function bpqHTML(f, dark){
+  const items=bpqItems(f); if(!items.length) return '';
+  const L='ABCD';
+  const open = bpqOpen || (dark && window.innerWidth>=1100);
+  return `<details class="bpq${dark?' dark':''}" ${open?'open':''} ontoggle="if(!(this.classList.contains('dark')&&window.innerWidth>=1100))bpqOpen=this.open" onclick="event.stopPropagation()">
+    <summary><span class="qa-count">${items.length}</span> Test yourself · exam questions on this diagram</summary>
+    <div class="bpq-body">${items.map((x,n)=>`
+      <div class="bpq-item" data-gi="${x.gi}">
+        <p class="bpq-q"><b>Q${n+1}.</b> ${String(x.q.q).replace(/\n/g,'<br>')}</p>
+        <div class="bpq-opts">${x.q.o.map((o,k)=>`<button type="button" class="bpq-opt" onclick="event.stopPropagation();App.bpqAnswer(this,${x.gi},${k})"><span class="bpq-l">${L[k]}</span>${o}</button>`).join('')}</div>
+        <div class="bpq-exp" hidden></div>
+      </div>`).join('')}
+      <div class="bpq-score" hidden></div>
+    </div></details>`;
+}
+function bpqTrack(gi,ok){
+  if(!state.missQ) state.missQ={};
+  const key='q'+gi, DAY=86400000, LADDER=[1,3,8,20,50];
+  const startDay=(d)=>{const t=new Date();t.setHours(0,0,0,0);return t.getTime()+Math.max(0,Math.round(d))*DAY;};
+  if(!ok){ state.missQ[key]={step:0, due:startDay(LADDER[0]), last:Date.now()}; }
+  else if(state.missQ[key]){ const step=(state.missQ[key].step||0)+1;
+    if(step>=LADDER.length) delete state.missQ[key]; else state.missQ[key]={step, due:startDay(LADDER[step]), last:Date.now()}; }
+  save();
+}
+function bpqAnswer(btn,gi,k){
+  const item=btn.closest('.bpq-item'); if(!item||item.dataset.done) return;
+  item.dataset.done='1';
+  const q=QUESTIONS[gi], ok=k===q.a;
+  item.querySelectorAll('.bpq-opt').forEach((b,j)=>{ b.disabled=true; if(j===q.a) b.classList.add('right'); else if(j===k) b.classList.add('wrong'); });
+  const ex=item.querySelector('.bpq-exp'); ex.hidden=false;
+  ex.innerHTML=`<b>${ok?'Correct.':'Not quite.'}</b> ${q.e}${ok?'':' <span class="bpq-note">Added to “My mistakes” for review.</span>'}`;
+  ex.classList.toggle('ok',ok);
+  bpqTrack(gi,ok);
+  const body=item.closest('.bpq-body'), all=body.querySelectorAll('.bpq-item'), done=body.querySelectorAll('.bpq-item[data-done]');
+  const sc=body.querySelector('.bpq-score');
+  const nRight=[...done].filter(it=>!it.querySelector('.bpq-opt.wrong')).length;
+  sc.hidden=false; sc.textContent=`${nRight} / ${done.length} correct so far`+(done.length===all.length?' · all answered':'');
 }
 
 /* ---------------- VIDEO VISUALS: diagrams beside each video ---------------- */
@@ -3026,6 +3233,7 @@ function vvInner(n){
       <button class="vv-nav next" type="button" aria-label="Next visual" onclick="event.stopPropagation();App.vvStep('${n}',1)">›</button>`:''}
     </div>
     <div class="vv-cap"><b>${it.t}</b>${it.d}<span class="vv-hint">Tap to enlarge</span></div>
+    ${it.f?bpqHTML(it.f,false):''}
     ${nav?`<div class="vv-thumbs">${items.map((x,k)=>`<button type="button" class="vv-th${k===i?' on':''}" aria-label="${x.t.replace(/"/g,'&quot;')}" onclick="App.vvGo('${n}',${k})">${x.f?`<img src="${BP_PATH}${x.f}.jpg" alt="" loading="lazy">`:`<span>${x.t}</span>`}</button>`).join('')}</div>`:''}`;
 }
 function vvRefresh(n){ const el=document.getElementById('vv-'+n); if(el) el.innerHTML=vvInner(n); }
@@ -3058,6 +3266,7 @@ RENDER.gallery = (c)=>{
           <div class="bp-card-body">
             <h4>${b.t}</h4>
             <p>${b.d}</p>
+            ${bpqItems(b.f).length?`<span class="bp-card-q">✎ ${bpqItems(b.f).length} exam questions · tap to open</span>`:''}
           </div>
         </div>`).join('')}
     </div>
@@ -3217,7 +3426,7 @@ if(typeof QUESTIONS!=='undefined' && Array.isArray(QUESTIONS)){ QUESTIONS.push(.
 const App = { go, openNav, closeNav, toggleSidebar, bpZoom, startFc, flipFc, rateFc, startDrill, answerDrill,
   startExam, pickExam, toggleFlag, examGo, confirmSubmit, submitExam,
   renderExamResult, reviewExam, setReviewFilter, toggleCheck, resetProgress,
-  bpStep, bpClose, vvStep, vvGo, vvZoom, renderReview, goRef, goRefView, goVid, backToReview };
+  bpStep, bpClose, vvStep, vvGo, vvZoom, bpqAnswer, renderReview, goRef, goRefView, goVid, backToReview };
 if(typeof window!=='undefined'){ Object.assign(window, App); window.App=App; }
 
 /* ---------- keyboard: Escape closes mobile nav ---------- */

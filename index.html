@@ -2832,26 +2832,27 @@ const VIDEO_MODULES = [
     ]
   },
   {
-    n:'4', id:'vaAoZuN8X8k', title:'The Seven PRINCE2 Processes',
-    blurb:'The project timeline from mandate to close — triggers, outputs, and the boundaries the exam tests.',
-    note:"Controlling a Stage captures and assesses issues and risks. “Examines” is 6th-edition wording.",
+    n:'4', id:'X5euoFr_L5g', title:'The Seven PRINCE2 Processes',
+    blurb:'Purpose, objectives, activities and outputs of all seven processes, with the v7 activity names.',
     qa:[
-      ['Process vs practice — what is the difference?','A practice is a discipline you apply continuously (e.g. Risk — every day). A process is a phase you pass through once at the right point in the lifecycle (e.g. Starting Up — at the beginning).'],
-      ['Name the seven processes in lifecycle order.','Starting Up → Directing a Project → Initiating a Project → Controlling a Stage ↔ Managing Product Delivery (repeating, with Managing a Stage Boundary between stages) → Closing a Project.'],
-      ['What question does Starting Up answer, and what triggers it?','"Do we have a viable AND worthwhile project?" Triggered by a project mandate from the business layer.'],
-      ['What is the main output of Starting Up?','The Project Brief (plus outline Business Case, initiation stage plan, Daily Log, Lessons Log). NOT the PID — remember: SU = Brief, IP = PID.'],
-      ['Who is appointed during Starting Up?','The Executive and the Project Manager. The full Project Board does not exist yet.'],
-      ['What are the five activities of Directing a Project?','Authorize initiation; authorize the project; authorize a stage or exception plan; give ongoing direction; authorize project closure.'],
-      ['Does Directing a Project create specialist products?','No — it produces decisions and authorizations only. The Board directs; it does not do. An option with the Board writing a plan or building a product is wrong.'],
-      ['What is the main output of Initiating a Project?','The PID (Project Initiation Documentation) — the package of information compiled in initiation: project definition and approach, full business case, team structure and role descriptions, the management approaches, project plan and tailoring. Think of it as the agreed basis between the Board and the PM.'],
-      ['SU → IP → DP: how do they relate?','SU produces the Brief; IP produces the PID; the Board authorizes the project using that PID in Directing a Project. Three processes, one chain.'],
-      ['In which process is a Work Package AUTHORIZED?','Controlling a Stage — this is the PM\u2019s action. (The team then accepts/executes/evaluates it in Managing Product Delivery.)'],
-      ['What are the Managing Product Delivery activities?','Accept a Work Package → Execute it → Evaluate it → Notify Work Package completion. The v7 verb is "evaluate" — NOT the old 6th-edition "deliver".'],
-      ['What is the CS/MP boundary the exam tests?','The PM authorizes a Work Package (Controlling a Stage); the team accepts, executes and evaluates it, then notifies completion (Managing Product Delivery). Same Work Package, two sides of one door.'],
-      ['What triggers Managing a Stage Boundary?','Either the current stage nearing its end, OR an exception where the Board has asked for an exception plan. Two triggers.'],
-      ['What happens at a Stage Boundary?','Plan the next stage, update the Project Plan and Business Case, and produce the End Stage Report (or an Exception Plan). This is where "continued business justification" is enforced, stage after stage.'],
-      ['Why does Closing a Project PLAN benefits measurement rather than DO it?','Most benefits only appear once the products have been in use for a while — after the project ends. CP plans how and when they will be measured; the Senior User carries that forward.'],
-      ['Does Closing a Project handle early (premature) closure?','Yes. If the Board stops the project early, CP still runs — documenting why, handing over anything usable, and updating records. A stopped project still closes properly.']
+      ["How are the processes tested?", "Nine questions, testing each process's purpose, objectives and context: where it sits and what triggers it."],
+      ["What is the purpose of starting up a project?", "To make sure only viable projects are initiated, doing the minimum needed to decide whether initiation is worthwhile. Triggered by the project mandate."],
+      ["What are the starting up activities?", "Appoint the executive and the project manager; assess previous lessons; appoint the project management team; prepare the outline business case; select the project approach; assemble the project brief; plan the initiation stage."],
+      ["What does starting up produce?", "The project brief and the initiation stage plan. Not the PID: starting up produces the brief, initiating produces the PID."],
+      ["What is the purpose of directing a project?", "To let the board be accountable for success by making key decisions and exercising overall control, while delegating day-to-day management to the project manager."],
+      ["What are the five directing a project activities?", "Authorize initiation; authorize the project; authorize a stage or exception plan; give ongoing direction (formal direction and informal advice); authorize project closure."],
+      ["Does the board need regular progress meetings?", "No. It manages by exception: it monitors through reports and controls through a small number of decision points."],
+      ["What is the purpose of initiating a project?", "To establish solid foundations, so the business understands the work before committing significant spend. Output: the PID."],
+      ["What are the initiating activities?", "Agree tailoring requirements; agree the management approaches; establish project controls; prepare the project plan; prepare the full business case; assemble the PID."],
+      ["What is the purpose of controlling a stage?", "To assign and monitor work, handle issues, report progress to the board and take corrective action so the stage stays within tolerance."],
+      ["What are the three groups of controlling a stage activities?", "Managing work packages (authorize, evaluate status, receive completed); monitoring and reporting (evaluate stage status, report highlights); managing issues and risks (capture and assess, escalate, take corrective action)."],
+      ["Corrective action or exception report?", "Within tolerance, the project manager takes corrective action. If the stage is forecast to go beyond tolerance, the project manager escalates with an exception report to the board."],
+      ["What are the managing product delivery activities?", "Accept a work package (agree it, create a team plan); execute it (produce products, quality checks, approval); evaluate it (review progress, send checkpoint reports); notify work package completion."],
+      ["What is the purpose of managing a stage boundary?", "To give the board enough information to review the stage, approve the next stage plan, review the updated project plan and confirm continued business justification and acceptable risk."],
+      ["When is managing a stage boundary used?", "From initiating a project (to plan the first delivery stage) and from controlling a stage (near a stage end or when an exception plan is needed). Never after the final stage."],
+      ["Is a board decision to stop at a stage boundary a failure?", "No. Giving the board too little information to decide would be."],
+      ["What is the purpose of closing a project?", "A fixed point where acceptance of the project product is confirmed and the objectives are recognized as achieved, or the project has nothing more to contribute."],
+      ["What does closing a project produce, and is it used for early closure?", "The end project report (performance against the PID used to authorize the project) and the lessons report. Yes: it is also used for premature closure, so the project closes in an orderly way."]
     ]
   },
   {
@@ -2875,21 +2876,22 @@ const VIDEO_MODULES = [
 /* Modules 6–8 (kept as a separate list for history; rendered with the others). */
 const VIDEO_PENDING_QA = [
   {
-    n:'6', id:'7ep8n58RSlY', title:'The Project Environment & Roles',
-    blurb:'The role structure and the authority questions the exam loves \u2014 who does what, who reports to whom, and the forbidden combinations.',
-    note:"“Configuration management” under Project Support is 6th-edition wording: in v7, project support keeps the project log and must stay separate from project assurance. The video says the senior user does not realise benefits after closure. The official sample paper rationale says the senior user is responsible for the continued realization of benefits after the project has closed.",
+    n:'6', id:'zNyw5KxcGLE', title:'Organizing: The Project Environment & Roles',
+    blurb:'The three interests, the four levels, every role and which can be combined, the organizing products, and the five steps of organizational design.',
     qa:[
-      ['Why do roles matter so much on the exam?','A large share of Foundation questions reduce to "who is allowed to do X?" — who owns the business case, approves the plan, signs off a change. Knowing the role structure cold answers a whole category of questions.'],
-      ['Which role separations must hold?','The Executive cannot also be the Project Manager (directing and managing stay separate). Project assurance must be independent of the Project Manager and kept separate from project support. Combining senior user and senior supplier is not recommended.'],
-      ['What is the recommended separation around assurance?','Project Assurance should be independent of the Project Manager, and Project Support should be kept separate from Assurance so assurance stays genuinely independent. The PM may do Support on a small project, but never Assurance.'],
-      ['Who is the Executive and what do they do?','The single point of accountability for the whole project. Owns the business case, chairs the Board, ensures value for money. There is only ONE Executive; the role cannot be delegated or combined with the PM.'],
-      ['What does the Senior User do?','Represents those who will use the products; specifies the benefits and confirms they are on track; ensures products are fit for purpose; commits user resources. There can be more than one.'],
-      ['What does the Senior Supplier do?','Represents those who design, build and deliver; accountable for the quality and technical integrity of the products; commits supplier resources. There can be more than one.'],
-      ['What does the Project Manager NOT do?','Does not own the business case (the Executive does), does not approve their own plans (the Board does), does not act beyond delegated tolerances (they escalate), and does not direct the Board.'],
-      ['What does the Team Manager do?','Accepts Work Packages, builds products to the quality specifications, reports to the PM via Checkpoint Reports, raises issues to the PM. Does not deal directly with the Board — everything escalates through the PM.'],
-      ['Project Assurance vs Project Support?','Assurance = independent confidence FOR the Board (business, user, supplier assurance), never done by the PM. Support = administrative: the project log, registers, templates, tools; can be the PM on a small project, never the same person as assurance.'],
-      ['What is a stakeholder in PRINCE2 7?','Any individual, group or organisation that can affect, be affected by, or PERCEIVE itself to be affected by the project. Perception alone makes someone a stakeholder to manage.'],
-      ['How is stakeholder engagement run?','Through the Communication Management Approach (built in Initiating): who needs what information, when, how, and from whom — a controlled, bidirectional flow.']
+      ["What does the organizing practice do?", "Defines the roles and responsibilities the project management team needs, makes sure the business, user and supplier interests are represented, and designs and develops the project organization."],
+      ["What are the three interests?", "Business (the executive), user (the senior user) and supplier (the senior supplier), all brought together on the project board."],
+      ["What are the four levels?", "Commissioning (the business layer: corporate, programme management or the customer), directing (the project board), managing (the project manager) and delivering (team managers and teams)."],
+      ["What does the business layer do?", "Provides the mandate, identifies the executive, sets project tolerances, and decides whether to authorize any forecast breach of a project tolerance."],
+      ["What does the executive do?", "Is ultimately accountable and responsible for the business case. There is only one executive."],
+      ["What does the senior user do?", "Specifies user needs, quality expectations and acceptance criteria, and ensures ongoing user commitment so benefits are realized after closure."],
+      ["Which board roles may be combined?", "On smaller projects the executive can be combined with the senior user or the senior supplier. Combining senior user and senior supplier is not recommended (conflict of interest). The executive and project manager stay separate."],
+      ["Who can be team manager?", "The project manager, for example on a small project, or a separate person accountable to the project manager."],
+      ["Who does project assurance, and who stays accountable?", "A board member, someone inside the organization or an external party. If it is delegated, the board members remain accountable. Never the project manager."],
+      ["What does project support do?", "Administrative help: the project log and registers, document control, tools and planning support. It must be kept separate from project assurance."],
+      ["Which organizing products are in the PID?", "The project management team structure, role descriptions (including accountability for sustainability targets) and the commercial management approach."],
+      ["What is a work breakdown structure?", "A hierarchy of the work to be done, usually visual, most useful when there are several work packages."],
+      ["What are the five steps of organizational design and development?", "Understand the organizational ecosystem; design the project ecosystem; develop the project ecosystem; manage changes to it; transition the project into the organizational ecosystem."]
     ]
   },
   {
